@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index
+{% endblock %}
+
+{% block body %}
+	<h1>Article index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Slug</th>
+				<th>Summary</th>
+                <th>Content</th>
+                <th>Image</th>
+				<th>PublishedAt</th>
+				<th>IsVerified</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for article in articles %}
+				<tr>
+					<td>{{ article.id }}</td>
+					<td>{{ article.title }}</td>
+					<td>{{ article.slug }}</td>
+					<td>{{ article.summary }}</td>
+					<td>{{ article.content }}</td>
+					<td>
+						{% if article.image %}
+							<img src="{{ asset('uploads/images/' ~ article.image) }}" alt="{{ article.title }}" width="100">
+						{% else %}
+							No image
+						{% endif %}
+					</td>
+					<td>{{ article.publishedAt ? article.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ article.isVerified ? 'Yes' : 'No' }}</td>
+					{% if is_granted('ROLE_ADMIN') %}
+					<td>
+						<a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+						<a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+					</td>
+					{% endif %}
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="8">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_article_new') }}">Create new</a>
+{% endblock %}

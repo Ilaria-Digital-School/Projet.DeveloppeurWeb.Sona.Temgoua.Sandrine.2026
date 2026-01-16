@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+  <h1>{{articles_id.title}}</h1>
+  <h4>Category:
+    {{ articles_id.cathegory.name }}</h4>
+  <td>
+    {% if articles_id.image %}
+      <img src="{{ asset('uploads/images/' ~ articles_id.image) }}" alt="{{ articles_id.title }}" width="100">
+    {% else %}
+      No image
+    {% endif %}
+  </td>
+  <p>{{ articles_id.summary }}</p>
+  <p>{{ articles_id.content }}</p>
+  <p>Published at:
+    {{ articles_id.publishedAt ? articles_id.publishedAt|date('Y-m-d H:i:s') : 'Not published yet' }}</p>
+  <p>Verified:
+    {{ articles_id.isVerified ? 'Yes' : 'No' }}</p>
+  <a href="{{ path('app_home') }}">Back to list</a>
+
+{% endblock %}

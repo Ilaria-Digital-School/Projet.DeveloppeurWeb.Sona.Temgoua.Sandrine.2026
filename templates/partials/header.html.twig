@@ -1,0 +1,134 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="{{path('app_home')}}">Shareo</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Accueil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Acheter</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Louer</a>
+				</li>
+                				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Don</a>
+				</li>
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{path('app_user_index')}}">Users</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{path('app_author_index')}}">Authors</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{path('app_cathegory_index')}}">Categories</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{path('app_article_index')}}">Articles</a>
+					</li>
+				{% endif %}
+
+				{% if is_granted('ROLE_USER') %}
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{path('app_article_index')}}">Articles</a>
+					</li>
+				{% endif %}
+			</ul>
+			{# SEARCH #}
+			<form class="d-flex me-3" role="search">
+				<input class="form-control form-control-sm me-2" type="search" placeholder="Search">
+				<button class="btn btn-outline-success" type="submit">
+					Search
+				</button>
+
+			</form>
+
+			{# LANGUE #}
+            <!-- Sélecteur de langue -->
+            <div class="dropdown me-3">
+              <button
+                class="btn btn-outline-light btn-sm dropdown-toggle language-selector"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                <span class="fi fi-fr fis me-2"></span>
+                <span data-translate="language">Français</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="changeLanguage('fr')"
+                  >
+                    <span class="fi fi-fr fis me-2"></span> Français
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="changeLanguage('en')"
+                  >
+                    <span class="fi fi-gb fis me-2"></span> English
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="changeLanguage('es')"
+                  >
+                    <span class="fi fi-es fis me-2"></span> Español
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="changeLanguage('it')"
+                  >
+                    <span class="fi fi-it fis me-2"></span> Italiano
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="changeLanguage('de')"
+                  >
+                    <span class="fi fi-de fis me-2"></span> Deutsch
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="changeLanguage('zh')"
+                  >
+                    <span class="fi fi-cn fis me-2"></span> 中文
+                  </a>
+                </li>
+              </ul>
+            </div>
+			{% if app.user == false %}
+				<ul>
+					<a href="{{ path('app_register') }}" class="btn btn-outline-warning mt-3" style="width:100px" type="button">Register</a>
+				</ul>
+				<ul>
+					<a href="{{ path('app_login') }}" class="btn btn-outline-primary mt-3" style="width:100px" type="button">Login</a>
+				</ul>
+			{% else %}
+				<ul>
+					<a href="{{ path('app_logout') }}" class="btn btn-outline-primary mt-3" style="width:100px" type="button">Logout</a>
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+</nav>

@@ -3,18 +3,42 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello! ✅</h1>
+  <h1>Welcome to the Home Page</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/sandrine/Documents/PROJETS/SYMFONY/E-commerce/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/home/sandrine/Documents/PROJETS/SYMFONY/E-commerce/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+  <div class="container mt-4">
+    <div class="row">
+      {% for article in articles %}
+        <div class="col-md-3 mb-3 d-flex">
+          <div class="card shadow-sm d-flex flex-column h-100" style="width: 14rem;">
+
+            {% if article.image %}
+              <img src="{{ asset('uploads/images/' ~ article.image) }}" class="card-img-top img-fluid" alt="{{ article.title }}">
+            {% else %}
+              <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:150px;">
+                <span class="text-muted">No image</span>
+              </div>
+            {% endif %}
+
+            <div class="card-body flex-grow-1">
+              <h6 class="card-title">{{ article.title }}</h6>
+              {% if article.summary %}
+                <p class="card-text small">{{ article.summary|slice(0, 30) }}...</p>
+              {% endif %}
+              <p class="card-text small">{{ article.content|slice(0, 50) }}...</p>
+            </div>
+
+            <div class="card-footer mt-auto text-center">
+              <a href="{{ path('app_article_detail', {'id': article.id}) }}" class="btn btn-primary w-100">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="col-12">
+          <div class="alert alert-warning text-center">No article found</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
 {% endblock %}

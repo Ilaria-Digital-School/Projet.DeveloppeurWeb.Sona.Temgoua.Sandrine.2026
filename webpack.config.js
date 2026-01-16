@@ -71,6 +71,26 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+    
+Encore.addRule({
+    test: /\.(png|jpe?g|gif|svg)$/i,
+    use: [
+        {
+            loader: 'file-loader',
+            options: {
+                name: 'images/[name].[hash:8].[ext]',
+            },
+        },
+        {
+            loader: 'image-webpack-loader',
+            options: {
+                mozjpeg: { progressive: true, quality: 75 }, // qualité JPEG
+                pngquant: { quality: [0.65, 0.90], speed: 4 }, // compression PNG
+                gifsicle: { interlaced: false },
+                svgo: { plugins: [{ removeViewBox: false }] }
+            },
+        },
+    ],
+    });
 ;
-
 module.exports = Encore.getWebpackConfig();
