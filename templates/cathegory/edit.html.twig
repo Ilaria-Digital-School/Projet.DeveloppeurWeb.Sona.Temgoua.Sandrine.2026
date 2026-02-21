@@ -1,13 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Cathegory{% endblock %}
+{% block title %}Edit Category{% endblock %}
 
 {% block body %}
-    <h1>Edit Cathegory</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-    {{ include('cathegory/_form.html.twig', {'button_label': 'Update'}) }}
+            <div class="card shadow-sm">
+                <div class="card-body">
 
-    <a href="{{ path('app_cathegory_index') }}">back to list</a>
+                    <h1 class="h3 mb-4 text-success">Edit Category</h1>
 
-    {{ include('cathegory/_delete_form.html.twig') }}
+                    {{ include('cathegory/_form.html.twig', {'button_label': 'Update'}) }}
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ path('app_cathegory_index') }}" class="btn btn-outline-success">
+                            ← Back to list
+                        </a>
+
+                        {{ include('cathegory/_delete_form.html.twig') }}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}

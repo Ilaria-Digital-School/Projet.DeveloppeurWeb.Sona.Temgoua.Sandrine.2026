@@ -1,25 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6 col-lg-5">
 
-    <h1>Register</h1>
+				{% for flash_error in app.flashes('verify_email_error') %}
+					<div class="alert alert-danger">
+						{{ flash_error }}
+					</div>
+				{% endfor %}
 
-    {{ form_errors(registrationForm) }}
+				<div class="card shadow-sm">
+					<div class="card-body">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+						<h1 class="h4 text-center mb-4">Créer un compte</h1>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+						{{ form_start(registrationForm) }}
+
+						<div class="mb-3">
+							{{ form_row(registrationForm.firstname, {
+                                attr: { class: 'form-control focus-ring focus-ring-success border-success' }
+                            }) }}
+						</div>
+
+						<div class="mb-3">
+							{{ form_row(registrationForm.lastname, {
+                                attr: { class: 'form-control focus-ring focus-ring-success border-success' }
+                            }) }}
+						</div>
+
+						<div class="mb-3">
+							{{ form_row(registrationForm.email, {
+                                attr: { class: 'form-controlfocus-ring focus-ring-success border-success' }
+                            }) }}
+						</div>
+
+						<div class="mb-3">
+							{{ form_row(registrationForm.plainPassword, {
+                                label: 'Mot de passe',
+                                attr: { class: 'form-control focus-ring focus-ring-success border-success' }
+                            }) }}
+						</div>
+
+						<div class="form-check mb-3">
+							{{ form_widget(registrationForm.agreeTerms, {
+                                attr: { class: 'form-check-input' }
+                            }) }}
+							{{ form_label(registrationForm.agreeTerms, null, {
+                                label_attr: { class: 'form-check-label' }
+                            }) }}
+						</div>
+
+						<button type="submit" class="btn btn-success w-100">
+							S’inscrire
+						</button>
+
+						{{ form_end(registrationForm) }}
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 {% endblock %}

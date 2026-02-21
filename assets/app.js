@@ -1,10 +1,18 @@
-//import './stimulus_bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
-import './styles/app.scss';
+// assets/app.js
+import './styles/app.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Carousel } from 'bootstrap';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+document.addEventListener('DOMContentLoaded', () => {
+    const heroCarousel = document.querySelector('#carouselPromo');
+
+    if (heroCarousel) {
+        new Carousel(heroCarousel, {
+            interval: 4000,   // 4 secondes entre chaque slide
+            ride: 'carousel',
+            pause: false,     // continue même au hover
+            wrap: true        // boucle infinie
+        });
+    }
+});
+

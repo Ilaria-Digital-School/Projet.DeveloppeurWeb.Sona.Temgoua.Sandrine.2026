@@ -1,134 +1,174 @@
+<!-- templates/partials/header.html.twig -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" />
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="{{path('app_home')}}">Shareo</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+		<a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success"
+		   href="{{ path('app_home') }}">
+			<i class="bi bi-share-fill fs-4"></i>
+			<span>Shareo</span>
+		</a>
+
+		<button class="navbar-toggler" type="button"
+		        data-bs-toggle="collapse"
+		        data-bs-target="#navbarSupportedContent">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+			<!-- NAV LINKS -->
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Accueil</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}"
+					   href="{{ path('app_home') }}">Accueil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Acheter</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_acheter' ? 'active' : '' }}"
+					   href="{{ path('app_acheter') }}">Acheter</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Louer</a>
-				</li>
-                				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Don</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_louer' ? 'active' : '' }}"
+					   href="{{ path('app_louer') }}">Louer</a>
 				</li>
 
-				{% if is_granted('ROLE_ADMIN') %}
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{path('app_user_index')}}">Users</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{path('app_author_index')}}">Authors</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{path('app_cathegory_index')}}">Categories</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{path('app_article_index')}}">Articles</a>
-					</li>
-				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_brocante' ? 'active' : '' }}"
+					   href="{{ path('app_brocante') }}">Brocante</a>
+				</li>
 
-				{% if is_granted('ROLE_USER') %}
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{path('app_article_index')}}">Articles</a>
-					</li>
-				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_don' ? 'active' : '' }}"
+					   href="{{ path('app_don') }}">Don</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'about' ? 'active' : '' }}"
+					   href="{{ path('about') }}">À propos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}"
+					   href="{{ path('contact') }}">Contact</a>
+				</li>
 			</ul>
-			{# SEARCH #}
-			<form class="d-flex me-3" role="search">
-				<input class="form-control form-control-sm me-2" type="search" placeholder="Search">
-				<button class="btn btn-outline-success" type="submit">
-					Search
-				</button>
 
-			</form>
-
-			{# LANGUE #}
-            <!-- Sélecteur de langue -->
-            <div class="dropdown me-3">
-              <button
-                class="btn btn-outline-light btn-sm dropdown-toggle language-selector"
-                type="button"
-                data-bs-toggle="dropdown"
-              >
-                <span class="fi fi-fr fis me-2"></span>
-                <span data-translate="language">Français</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="changeLanguage('fr')"
-                  >
-                    <span class="fi fi-fr fis me-2"></span> Français
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="changeLanguage('en')"
-                  >
-                    <span class="fi fi-gb fis me-2"></span> English
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="changeLanguage('es')"
-                  >
-                    <span class="fi fi-es fis me-2"></span> Español
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="changeLanguage('it')"
-                  >
-                    <span class="fi fi-it fis me-2"></span> Italiano
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="changeLanguage('de')"
-                  >
-                    <span class="fi fi-de fis me-2"></span> Deutsch
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="changeLanguage('zh')"
-                  >
-                    <span class="fi fi-cn fis me-2"></span> 中文
-                  </a>
-                </li>
-              </ul>
-            </div>
-			{% if app.user == false %}
-				<ul>
-					<a href="{{ path('app_register') }}" class="btn btn-outline-warning mt-3" style="width:100px" type="button">Register</a>
-				</ul>
-				<ul>
-					<a href="{{ path('app_login') }}" class="btn btn-outline-primary mt-3" style="width:100px" type="button">Login</a>
-				</ul>
-			{% else %}
-				<ul>
-					<a href="{{ path('app_logout') }}" class="btn btn-outline-primary mt-3" style="width:100px" type="button">Logout</a>
+			<!-- ADMIN LINKS -->
+			{% if is_granted('ROLE_ADMIN') %}
+				<ul class="navbar-nav mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_user_index' ? 'active' : '' }}"
+						   href="{{ path('app_user_index') }}">Users</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_author_index' ? 'active' : '' }}"
+						   href="{{ path('app_author_index') }}">Authors</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_cathegory_index' ? 'active' : '' }}"
+						   href="{{ path('app_cathegory_index') }}">Categories</a>
+					</li>
 				</ul>
 			{% endif %}
-		</div>
-	</div>
+
+			{% if is_granted('ROLE_USER') %}
+				<ul class="navbar-nav mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_article_index' ? 'active' : '' }}"
+						   href="{{ path('app_article_index') }}">Articles</a>
+					</li>
+				</ul>
+			{% endif %}
+
+			<!-- SEARCH -->
+			<form class="d-flex me-3" role="search">
+				<input class="form-control form-control-sm me-2" type="search" placeholder="Search">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+
+			<!-- LANGUE -->
+			
+			{# <div class="dropdown me-3">
+				<button class="btn btn-outline-secondary dropdown-toggle" 
+						type="button" 
+						data-bs-toggle="dropdown"
+						data-bs-auto-close="true"
+						aria-expanded="false">
+					<i class="fi fi-fr"></i> FR
+				</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="#"><i class="fi fi-fr"></i> Français</a></li>
+					<li><a class="dropdown-item" href="#"><i class="fi fi-gb"></i> English</a></li>
+					<li><a class="dropdown-item" href="#"><i class="fi fi-es"></i> Español</a></li>
+				</ul>
+
+				{% for locale in locales %}
+					{% if locale != app.request.locale %}
+						<a href="{{ path('app_changer_langue', {'locale': locale}) }}">{{ locale }}</a>
+					{% endif %}
+				{% endfor %}
+			</div> #}
+
+			<div class="dropdown">
+
+				<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2"
+						type="button"
+						data-bs-toggle="dropdown"
+						data-bs-auto-close="true"
+						aria-expanded="false">
+
+					{# LANGUE ACTIVE #}
+					{% if app.request.locale == 'fr' %}
+						<i class="fi fi-fr"></i> FR
+					{% elseif app.request.locale == 'en' %}
+						<i class="fi fi-gb"></i> EN
+					{% elseif app.request.locale == 'es' %}
+						<i class="fi fi-es"></i> ES
+					{% elseif app.request.locale == 'it' %}
+						<i class="fi fi-it"></i> IT
+					{% else %}
+						{{ app.request.locale|upper }}
+					{% endif %}
+				</button>
+
+				<ul class="dropdown-menu dropdown-menu-end shadow rounded-3">
+
+					{% for locale in locales %}
+						{% if locale != app.request.locale %}
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2"
+								href="{{ path('app_changer_langue', {'locale': locale}) }}">
+
+									{% if locale == 'fr' %}
+										<i class="fi fi-fr"></i> Français
+									{% elseif locale == 'en' %}
+										<i class="fi fi-gb"></i> English
+									{% elseif locale == 'es' %}
+										<i class="fi fi-es"></i> Español
+									{% elseif locale == 'it' %}
+										<i class="fi fi-it"></i> Italiano
+									{% else %}
+										{{ locale|upper }}
+									{% endif %}
+
+								</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+
+				</ul>
+
+			</div>
+			<!-- BOUTONS -->
+    {% if app.user == false %}
+        <a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
+            Register
+        </a>
+        <a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
+            Login
+        </a>
+    {% else %}
+        <a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
+            Logout
+        </a>
+    {% endif %}
+</div>
 </nav>

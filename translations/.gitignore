@@ -1,0 +1,7 @@
+translations/
+├── messages.fr.yaml
+├── messages.en.yaml
+├── messages.es.yaml
+├── messages.it.yaml
+├── messages.de.yaml
+└── messages.zh.yaml

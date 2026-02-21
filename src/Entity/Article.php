@@ -36,11 +36,13 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Cathegory $cathegory = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?Author $author = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+    #[ORM\Column(length: 20)]
+    private ?string $transactionType = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?User $author = null;
 
     public function getId(): ?int
     {
@@ -130,18 +132,6 @@ class Article
 
         return $this;
     }
-
-    public function getAuthor(): ?Author
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?Author $author): static
-    {
-        $this->author = $author;
-
-        return $this;
-    }
     
     #[ORM\PrePersist]
     public function setPublishedAtValue(): void
@@ -160,4 +150,28 @@ class Article
 
         return $this;
     }
+    public function getTransactionType(): ?string
+{
+    return $this->transactionType;
+}
+
+public function setTransactionType(string $transactionType): static
+{
+    $this->transactionType = $transactionType;
+
+    return $this;
+}
+
+public function getAuthor(): ?User
+{
+    return $this->author;
+}
+
+public function setAuthor(?User $author): static
+{
+    $this->author = $author;
+
+    return $this;
+}
+
 }

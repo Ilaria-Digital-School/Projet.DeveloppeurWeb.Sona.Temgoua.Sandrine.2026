@@ -1,0 +1,53 @@
+/* ===== TABLE HEADER PREMIUM ===== */
+.modern-table thead {
+    background: linear-gradient(90deg, #198754, #20c997);
+    color: white;
+}
+
+.modern-table thead th {
+    padding: 16px;
+    font-weight: 600;
+    border: none;
+}
+
+/* ===== ROW HOVER EFFECT ===== */
+.modern-table tbody tr {
+    transition: all 0.25s ease;
+}
+
+.modern-table tbody tr:hover {
+    background-color: rgba(25, 135, 84, 0.05);
+    transform: scale(1.01);
+}
+
+/* ===== SEARCH BAR SaaS ===== */
+.dt-search input {
+    border-radius: 50px !important;
+    padding: 8px 16px !important;
+    border: 1px solid #e5e7eb !important;
+    transition: 0.3s;
+}
+
+.dt-search input:focus {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 4px rgba(25,135,84,0.15) !important;
+}
+
+/* ===== PAGINATION PREMIUM ===== */
+.dt-paging .pagination .page-link {
+    border-radius: 50px !important;
+    margin: 0 3px;
+    border: none;
+    color: #198754;
+}
+
+.dt-paging .pagination .page-item.active .page-link {
+    background: linear-gradient(90deg, #198754, #20c997);
+    color: white;
+    box-shadow: 0 4px 10px rgba(25,135,84,0.3);
+}
+
+/* ===== CARD EFFECT ===== */
+.card {
+    backdrop-filter: blur(10px);
+}

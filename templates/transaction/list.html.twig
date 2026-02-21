@@ -1,0 +1,54 @@
+
+
+<section id="products" class="py-5">
+    <div class="container">
+
+        {% if pageTitle is not null %}
+            <h2 class="text-center mb-4">{{ pageTitle }}</h2>
+        {% endif %}
+
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-3 mb-4 d-flex">
+                    <div class="card product-card shadow-sm h-100">
+
+                        {% if article.image %}
+                            <img
+                                src="{{ asset('images/' ~ article.image) }}"
+                                class="card-img-top product-image"
+                                alt="{{ article.title }}">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h6 class="card-title">{{ article.title }}</h6>
+                            <p class="card-text small text-muted">
+                                {{ article.content|slice(0, 60) }}...
+                            </p>
+
+                            <p style="font-weight: bold;">
+                                <span class="badge rounded-pill px-3 py-2 bg-success">
+                                    {{ article.transactionType|upper }}
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-white border-0">
+                            <a href="{{ path('app_article_detail', { id: article.id }) }}"
+                               class="btn btn-success w-100">
+                                Voir le produit
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-warning text-center">
+                        Aucun produit disponible
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>

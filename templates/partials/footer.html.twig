@@ -1,15 +1,18 @@
+
 <!-- Footer -->
 <footer class="bg-dark text-light mt-5 pt-4">
-	<div class="container">
-		<div class="row">
+
+	<div class="container-fluid">
+		<a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success" href="{{ path('app_home') }}">
+			<i class="bi bi-share-fill fs-4"></i>
+			<span>Shareo</span>
+		</a>
+		<div class="row py-4">
 			<div class="col-md-4 mb-3">
-				<h5>
-					<i class="fas fa-share-alt"></i>
-					<span data-i18n="siteName">Shareo</span>
-				</h5>
+				<h5 data-i18n="footerAboutUs">À propos de Shareo</h5>
 				<p data-i18n="footerDescription">
 					La plateforme innovante de location et d'achat de produits.
-					              Économique, écologique, pratique.
+										              Économique, écologique, pratique.
 				</p>
 				<div class="social-icons mt-3">
 					<a href="#" class="text-light me-3">
@@ -26,20 +29,22 @@
 					</a>
 				</div>
 			</div>
+
+			<!-- Liens rapides, Service client, Newsletter -->
 			<div class="col-md-2 mb-3">
 				<h5 data-i18n="footerQuickLinks">Liens rapides</h5>
 				<ul class="list-unstyled">
 					<li>
-						<a href="#accueil" class="text-light" data-i18n="home">Accueil</a>
+						<a href="#accueil" class="text-light text-decoration-none" data-i18n="home">Accueil</a>
 					</li>
 					<li>
-						<a href="#produits" class="text-light" data-i18n="products">Produits</a>
+						<a href="#produits" class="text-light text-decoration-none" data-i18n="products">Produits</a>
 					</li>
 					<li>
-						<a href="#louer" class="text-light" data-i18n="rent">Louer</a>
+						<a href="#louer" class="text-light text-decoration-none" data-i18n="rent">Louer</a>
 					</li>
 					<li>
-						<a href="#acheter" class="text-light" data-i18n="buy">Acheter</a>
+						<a href="#acheter" class="text-light text-decoration-none" data-i18n="buy">Acheter</a>
 					</li>
 				</ul>
 			</div>
@@ -47,16 +52,16 @@
 				<h5 data-i18n="footerCustomer">Service client</h5>
 				<ul class="list-unstyled">
 					<li>
-						<a href="#" class="text-light" data-i18n="footerHelp">Aide & FAQ</a>
+						<a href="#" class="text-light text-decoration-none" data-i18n="footerHelp">Aide & FAQ</a>
 					</li>
 					<li>
-						<a href="#" class="text-light" data-i18n="footerTracking">Suivi de commande</a>
+						<a href="#" class="text-light text-decoration-none" data-i18n="footerTracking">Suivi de commande</a>
 					</li>
 					<li>
-						<a href="#" class="text-light" data-i18n="footerReturns">Retours & Remboursements</a>
+						<a href="#" class="text-light text-decoration-none" data-i18n="footerReturns">Retours & Remboursements</a>
 					</li>
 					<li>
-						<a href="#" class="text-light" data-i18n="footerContact">Contactez-nous</a>
+						<a href="#" class="text-light text-decoration-none" data-i18n="footerContact">Contactez-nous</a>
 					</li>
 				</ul>
 			</div>
@@ -67,16 +72,17 @@
 				</p>
 				<div class="input-group">
 					<input type="email" class="form-control" data-i18n-placeholder="emailPlaceholder" placeholder="Votre email"/>
-					<button class="btn btn-primary" type="button" data-i18n="subscribeButton">
+					<button class="btn btn-success" type="button" data-i18n="subscribeButton">
 						S'inscrire
 					</button>
 				</div>
 			</div>
 		</div>
-
+		
+<!-- Bas de page -->
 		<div class="border-top pt-3 mt-3 text-center">
 			<p>
-				&copy; 2024
+				&copy; 2026
 				<strong data-i18n="siteName">Shareo</strong>.
 				<span data-i18n="footerRights">Tous droits réservés.</span>
 			</p>

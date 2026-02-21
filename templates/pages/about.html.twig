@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos de Shareo{% endblock %}
+
+{% block body %}
+
+<!-- Hero About -->
+<section class="about-hero py-5 text-center">
+    <div class="container">
+
+        <h1 class="display-5 fw-bold hero-title">
+            Nos <span class="text-success">valeurs</span>
+        </h1>
+
+        <p class="lead mt-4 hero-text">
+            <strong>
+                Ce qui guide Shareo au quotidien : Offrir des solutions modernes et accessibles 
+                pour transformer notre manière de consommer. Shareo est né d’une conviction simple : 
+                consommer autrement est possible. 
+                Nous croyons en un modèle plus responsable, plus humain et plus durable.
+            </strong>
+        </p>
+
+    </div>
+</section>
+
+<!-- VALEURS -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-sm flex-fill text-center p-4">
+                    <div class="display-4 mb-3">🌱</div>
+                    <h5 class="fw-bold">Écologie</h5>
+                    <p class="text-muted">
+                        Encourager le partage pour réduire la surconsommation
+                        et préserver notre environnement.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-sm flex-fill text-center p-4">
+                    <div class="display-4 mb-3">🤝</div>
+                    <h5 class="fw-bold">Solidarité</h5>
+                    <p class="text-muted">
+                        Créer une communauté basée sur l’entraide
+                        et la confiance.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-sm flex-fill text-center p-4">
+                    <div class="display-4 mb-3">💡</div>
+                    <h5 class="fw-bold">Innovation</h5>
+                    <p class="text-muted">
+                        Proposer des solutions simples et modernes
+                        pour consommer autrement.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features py-5 bg-light">
+  <div class="container">
+    <div class="row text-center">
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-box p-4 h-100">
+          <h5 class="text-success">🌱 Écologique</h5>
+          <p class="small">
+            Réduisez votre impact environnemental en partageant des produits.
+          </p>
+        </div>
+      </div>
+<div class="col-md-4 mb-4">
+        <div class="feature-box p-4 h-100">
+          <h5 class="text-success">🤝 Collaboratif</h5>
+          <p class="small">
+            Une communauté basée sur la confiance et le partage.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature-box p-4 h-100">
+          <h5 class="text-success">💰 Économique</h5>
+          <p class="small">
+            Louez ou achetez au meilleur prix, sans gaspillage.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

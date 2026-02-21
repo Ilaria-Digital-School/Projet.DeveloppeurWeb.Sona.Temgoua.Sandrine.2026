@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact
+{% endblock %}
+
+{% block body %}
+
+	<div
+		class="container py-5">
+
+		<!-- Header -->
+		<div class="row justify-content-center mb-5">
+			<div class="col-lg-8 text-center">
+				<h2 class="fw-bold mb-3">Un projet en tête ?</h2>
+				<p class="text-muted">
+					Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.
+				</p>
+			</div>
+		</diAv>
+
+  <!-- Formulaire -->
+		<div class="container py-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-7 col-md-9">
+					<div class="card shadow border-0">
+						<div class="card-header bg-light text-center py-4">
+
+							<p class="text-muted mb-0">
+								Laissez-nous vos coordonnées, nous vous recontacterons rapidement.
+							</p>
+						</div>
+
+						<div class="card-body p-4">
+
+							<form>
+
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<label class="form-label">Nom complet *</label>
+										<input type="text" class="form-control" required>
+									</div>
+
+									<div class="col-md-6">
+										<label class="form-label">Adresse email *</label>
+										<input type="email" class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<label class="form-label">
+											Téléphone
+											<span class="text-muted">(optionnel)</span>
+										</label>
+										<input type="tel" class="form-control">
+									</div>
+
+									<div class="col-md-6">
+										<label class="form-label">
+											Site web
+											<span class="text-muted">(optionnel)</span>
+										</label>
+										<input type="url" class="form-control">
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<label class="form-label">
+										Adresse postale
+										<span class="text-muted">(optionnel)</span>
+									</label>
+									<input type="text" class="form-control">
+								</div>
+
+								<div class="mb-4">
+									<label class="form-label">Message *</label>
+									<textarea class="form-control" rows="4" required></textarea>
+								</div>
+
+								<div class="d-grid">
+									<button class="btn btn-success">
+										Envoyer le message
+									</button>
+								</div>
+
+							</form>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Google Map -->
+		<div class="contact-map">
+    <iframe
+        src="https://www.google.com/maps?q=1+allée+des+mimosas+33600+Pessac+France&output=embed"
+        loading="lazy">
+    </iframe>
+</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}

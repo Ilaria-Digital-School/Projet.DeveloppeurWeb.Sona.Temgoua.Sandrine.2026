@@ -50,9 +50,11 @@ final class CathegoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_cathegory_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Cathegory $cathegory, EntityManagerInterface $entityManager): Response
+    #[Route('/{slug}/edit', name: 'app_cathegory_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, $slug, EntityManagerInterface $entityManager, CathegoryRepository $cathegoryRepository): Response
     {
+        $cathegory = $cathegoryRepository->findOneBy(['slug' => $slug]);
+
         $form = $this->createForm(CathegoryType::class, $cathegory);
         $form->handleRequest($request);
 

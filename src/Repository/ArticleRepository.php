@@ -40,4 +40,15 @@ class ArticleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findByTransactionType(string $type): array
+{
+    return $this->createQueryBuilder('a')
+        ->andWhere('a.transactionType = :type')
+        ->setParameter('type', $type)
+        ->orderBy('a.publishedAt', 'DESC')
+        ->getQuery()
+        ->getResult();
 }
+
+}
+

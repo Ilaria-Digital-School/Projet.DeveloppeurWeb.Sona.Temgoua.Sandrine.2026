@@ -4,22 +4,61 @@
 
 {% block body %}
 
-  <h1>{{articles_id.title}}</h1>
-  <h4>Category:
-    {{ articles_id.cathegory.name }}</h4>
-  <td>
+<div class="container my-5">
+
+  <h1 class="mb-3 text-success fw-bold">{{articles_id.title}}</h1>
+
+  <h4 class="mb-3 text-muted">
+    Category:
+    <span class="badge bg-success">
+      {{ articles_id.cathegory.name }}
+    </span>
+  </h4>
+
+  <td class="d-block mb-3">
     {% if articles_id.image %}
-      <img src="{{ asset('uploads/images/' ~ articles_id.image) }}" alt="{{ articles_id.title }}" width="100">
+      <img src="{{ asset('images/' ~ articles_id.image) }}"
+           alt="{{ articles_id.title }}"
+           width="100"
+           class="img-fluid rounded shadow-sm">
     {% else %}
-      No image
+      <span class="text-muted fst-italic">No image</span>
     {% endif %}
   </td>
-  <p>{{ articles_id.summary }}</p>
-  <p>{{ articles_id.content }}</p>
-  <p>Published at:
-    {{ articles_id.publishedAt ? articles_id.publishedAt|date('Y-m-d H:i:s') : 'Not published yet' }}</p>
-  <p>Verified:
-    {{ articles_id.isVerified ? 'Yes' : 'No' }}</p>
-  <a href="{{ path('app_home') }}">Back to list</a>
+
+  <p class="lead">
+    {{ articles_id.summary }}
+  </p>
+
+  <p class="mb-4">
+    {{ articles_id.content }}
+  </p>
+
+  <p style="font-weight: bold;"> 
+    <span class="badge rounded-pill px-3 py-2 bg-success">
+        {{ articles_id.transactionType|upper }}
+    </span>
+  </p>
+
+  <p class="text-muted">
+    <strong>Published at:</strong>
+    {{ articles_id.publishedAt ? articles_id.publishedAt|date('Y-m-d H:i:s') : 'Not published yet' }}
+  </p>
+
+  <p>
+    <strong>Verified:</strong>
+    {% if articles_id.isVerified %}
+      <span class="badge bg-success">Yes</span>
+    {% else %}
+      <span class="badge bg-secondary">No</span>
+    {% endif %}
+  </p>
+
+  <a href="{{ path('app_home') }}"
+     class="btn btn-outline-success mt-3">
+     Back to list
+  </a>
+
+</div>
 
 {% endblock %}

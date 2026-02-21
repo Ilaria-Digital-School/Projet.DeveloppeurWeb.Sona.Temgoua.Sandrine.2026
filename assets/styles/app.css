@@ -1,3 +1,206 @@
+
+
+:root {
+  --bs-success: forestgreen;
+  --bs-success-rgb: 34, 139, 34;
+}
+
 body {
-    background-color: hsl(213, 71%, 73%);
+  background-color: whitesmoke;
+}
+/* Register & Login section */
+
+.form-control:hover {
+    border-color: forestgreen;
+}
+
+.form-control:focus {
+    border-color: forestgreen;
+    box-shadow: 0 0 0 0.25rem rgba(34, 139, 34, 0.25);
+}
+/* Fin Register & Login section */
+
+/* Navlink */
+
+/* Couleur par défaut */
+.navbar .nav-link {
+	color: #fff;
+	transition: color 0.2s ease;
+}
+
+/* Hover */
+.navbar .nav-link:hover {
+	color: forestgreen;
+}
+
+/* Lien de la page active */
+.navbar .nav-link.active {
+	color: forestgreen;
+	font-weight: 700; /* optionnel */
+}
+  .navbar-nav {
+  display: flex;
+	gap: 1rem;
+
+}
+
+/* HERO */
+.about-hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Apparition titre */
+.hero-title {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeSlideDown 1s ease forwards;
+}
+
+/* Soulignement animé */
+.hero-title span {
+    position: relative;
+}
+
+.hero-title span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 3px;
+    background-color: forestgreen;
+    border-radius: 2px;
+    animation: underlineGrow 0.8s ease forwards;
+    animation-delay: 0.8s;
+}
+
+/* Apparition paragraphe */
+.hero-text {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 1.2s;
+}
+
+/* Animations */
+@keyframes fadeSlideDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes underlineGrow {
+    to {
+        width: 100%;
+    }
+}
+
+
+/* Hero accueil (index.html.twig) section */
+.hero-carousel {
+  height: 70vh;
+}
+
+.hero-carousel .carousel,
+.hero-carousel .carousel-inner,
+.hero-carousel .carousel-item {
+  height: 100%;
+}
+
+.hero-carousel img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-carousel h1,
+.hero-carousel p {
+  text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+/* Fin Hero accueil (index.html.twig) section */
+
+/* Section Cards accueil (index.html.twig) */
+
+.product-image {
+  background-color: #f8f9fa;
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .product-image {
+    height: 220px;
+  }
+}
+
+.product-card img {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+/* Fin Section Cards accueil (index.html.twig) */
+
+/* Contact section (contact.html.twig) */
+
+.contact-page {
+    overflow-x: hidden;
+}
+
+/* Google Map full width */
+.contact-map {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+    display: block;
+}
+.contact-page h2 {
+    letter-spacing: 0.5px;
+}
+
+.contact-page .card {
+    border-radius: 12px;
+}
+
+.contact-page .btn-success {
+    padding: 12px;
+    font-weight: 600;
+}
+.contact-page .btn-success:hover {
+    background-color: forestgreen;
+    border-color: forestgreen;
+    box-shadow: 0 4px 15px rgba(34, 139, 34, 0.25);
+}
+/* Fin Contact section (contact.html.twig) */
+
+/* Footer section (footer.html.twig) */
+footer a {
+	text-decoration: none;
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.2s ease;
+}
+
+footer a:hover {
+	border-bottom-color: currentColor;
+}
+footer .social-icons a {
+  font-size: 1.5rem;
+  color: #333;
+  transition: color 0.2s ease;
 }

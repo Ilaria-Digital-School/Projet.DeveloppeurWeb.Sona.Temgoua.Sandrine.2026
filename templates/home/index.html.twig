@@ -1,44 +1,138 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Shareo||Plateforme de location & d'achat{% endblock %}
+
 
 {% block body %}
 
-  <h1>Welcome to the Home Page</h1>
 
-  <div class="container mt-4">
+{% set slides = [
+    {
+        image: 'images/slide1.avif',
+       
+    },
+    {
+        image: 'images/slide2.avif',
+        
+    },
+    {
+        image: 'images/slide3.avif',
+        
+    },
+    {
+        image: 'images/slide4.avif',
+        
+    },
+    {
+        image: 'images/slide5.avif',
+        
+    },
+    {
+        image: 'images/slide6.avif',
+        
+    }
+] %}
+
+
+<!-- HERO CAROUSEL SECTION -->
+
+<section class="hero-carousel position-relative">
+
+    <!-- pour avoir le texte superposé -->
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white z-3 px-3">
+        <h1 class="display-4 fw-bold">
+            Bienvenue sur <span class="text-success">Shareo</span>
+        </h1>
+
+        <p class="lead mt-3">
+            <strong>La plateforme innovante de location et d'achat de produits.<br>
+            Économique, écologique et pratique.</strong>
+        </p>
+
+        <a href="{{ path('about') }}" class="btn btn-success btn-lg mt-3">
+            Découvrez la mission de Shareo
+        </a>
+    </div>
+
+<!-- Overlay -->
+  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+    
+    <!-- CAROUSEL -->
+    <div id="carouselPromo" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            {% for slide in slides %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <img src="{{ slide.image }}" class="d-block w-100" alt="Slide {{ loop.index }}">
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- BOUTON PREVIOUS -->
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#carouselPromo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+
+        <!-- BOUTON NEXT -->
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#carouselPromo" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS SECTION -->
+<section class="products py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Produits récents</h2>
+
     <div class="row">
       {% for article in articles %}
-        <div class="col-md-3 mb-3 d-flex">
-          <div class="card shadow-sm d-flex flex-column h-100" style="width: 14rem;">
+        <div class="col-md-3 mb-4 d-flex">
+          <div class="card product-card shadow-sm h-100">
 
             {% if article.image %}
-              <img src="{{ asset('uploads/images/' ~ article.image) }}" class="card-img-top img-fluid" alt="{{ article.title }}">
-            {% else %}
-              <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:150px;">
-                <span class="text-muted">No image</span>
-              </div>
+              <img src="{{ asset('images/' ~ article.image) }}" class="card-img-top" alt="{{ article.title }}" height="200" width="200" style="object-fit: cover;">
             {% endif %}
 
-            <div class="card-body flex-grow-1">
+            <div class="card-body">
               <h6 class="card-title">{{ article.title }}</h6>
-              {% if article.summary %}
-                <p class="card-text small">{{ article.summary|slice(0, 30) }}...</p>
-              {% endif %}
-              <p class="card-text small">{{ article.content|slice(0, 50) }}...</p>
+              <p class="card-text small text-muted">
+                {{ article.content|slice(0, 60) }}...
+              </p>
+
+              {% set type = article.transactionType|upper %}
+
+              <span class="badge rounded-pill px-3 py-2 bg-success">
+                  
+                  {{ type }}
+              </span>
             </div>
 
-            <div class="card-footer mt-auto text-center">
-              <a href="{{ path('app_article_detail', {'id': article.id}) }}" class="btn btn-primary w-100">Go somewhere</a>
+            <div class="card-footer bg-white border-0">
+              <a href="{{ path('app_article_detail', {'id': article.id}) }}"
+                 class="btn btn-success w-100">
+                Voir le produit
+              </a>
             </div>
+
           </div>
         </div>
       {% else %}
         <div class="col-12">
-          <div class="alert alert-warning text-center">No article found</div>
+          <div class="alert alert-warning text-center">
+            Aucun article disponible
+          </div>
         </div>
       {% endfor %}
     </div>
   </div>
-
+</section>
 {% endblock %}

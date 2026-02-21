@@ -9,12 +9,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\User;
 use App\Entity\Article;
+
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-       /*
+        /*
         $user = new User();
 		$user->setFirstname('admin');
         $user->setLastname('system');
@@ -37,11 +38,23 @@ final class HomeController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 */
-     $article = $entityManager->getRepository(Article::class)->findAll();
+        $article = $entityManager->getRepository(Article::class)->findAll();
 
         return $this->render('home/index.html.twig', [
-           // 'controller_name' => 'HomeController',
+            // 'controller_name' => 'HomeController',
             'articles' => $article,
         ]);
     }
+
+    #[Route('/contact', name: 'contact')] public function contact(): Response
+    {
+        return $this->render('pages/contact.html.twig');
+    }
+
+    #[Route('/about', name: 'about')]
+    public function about(): Response
+    {
+        return $this->render('pages/about.html.twig');
+    }
+
 }

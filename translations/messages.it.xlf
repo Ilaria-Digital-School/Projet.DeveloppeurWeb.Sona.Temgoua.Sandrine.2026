@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="it" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="aAwTO5r" resname="Liste auteurs">
+        <source>Liste auteurs</source>
+        <target>Lista autori</target>
+      </trans-unit>
+      <trans-unit id="zFYA6AH" resname="Noms">
+        <source>Noms</source>
+        <target>Nomi</target>
+      </trans-unit>
+      <trans-unit id="vTJ6qcF" resname="Minibio">
+        <source>Minibio</source>
+        <target>Minibio</target>
+      </trans-unit>
+      <trans-unit id="W3yX.Gj" resname="actions">
+        <source>actions</source>
+        <target>Azioni</target>
+      </trans-unit>
+      <trans-unit id="VMdY0Io" resname="Afficher">
+        <source>Afficher</source>
+        <target>Mostra</target>
+      </trans-unit>
+      <trans-unit id="QuAljRH" resname="Editer">
+        <source>Editer</source>
+        <target>Modifica</target>
+      </trans-unit>
+      <trans-unit id="K50NCrz" resname="Pas d'enregistrements">
+        <source>Pas d'enregistrements</source>
+        <target>Nessun record trovato</target>
+      </trans-unit>
+      <trans-unit id="2UYDUHm" resname="Créer un nouvel auteur">
+        <source>Créer un nouvel auteur</source>
+        <target>Crea un nuovo autore</target>
+      </trans-unit>
+      <trans-unit id="RRZu87f" resname="Articles">
+        <source>Articles</source>
+        <target>Articoli</target>
+      </trans-unit>
+      <trans-unit id=".zZzsFp" resname="Title">
+        <source>Title</source>
+        <target>Titolo</target>
+      </trans-unit>
+      <trans-unit id="62P9Pbf" resname="Résumé">
+        <source>Résumé</source>
+        <target>Riassunto</target>
+      </trans-unit>
+      <trans-unit id="o8N02ol" resname="Contenu">
+        <source>Contenu</source>
+        <target>Contenuto</target>
+      </trans-unit>
+      <trans-unit id="VKrWoPi" resname="Image">
+        <source>Image</source>
+        <target>Immagine</target>
+      </trans-unit>
+      <trans-unit id="TwAjjcI" resname="Date publication">
+        <source>Date publication</source>
+        <target>Data pubblicazione</target>
+      </trans-unit>
+      <trans-unit id="1E6yh8r" resname="Vérifié">
+        <source>Vérifié</source>
+        <target>Verificato</target>
+      </trans-unit>
+      <trans-unit id="1_MZEgP" resname="Actions">
+        <source>Actions</source>
+        <target>Azioni</target>
+      </trans-unit>
+      <trans-unit id="qh2mgfr" resname="Oui">
+        <source>Oui</source>
+        <target>Sì</target>
+      </trans-unit>
+      <trans-unit id="F0oL3Vn" resname="Non">
+        <source>Non</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="UcvUUXS" resname="Supprimer">
+        <source>Supprimer</source>
+        <target>Cancella</target>
+      </trans-unit>
+      <trans-unit id="zexOQ5S" resname="Catégories">
+        <source>Catégories</source>
+        <target>__Catégories</target>
+      </trans-unit>
+      <trans-unit id="xE8xYu5" resname="Nom">
+        <source>Nom</source>
+        <target>__Nom</target>
+      </trans-unit>
+      <trans-unit id="gXWo4h9" resname="Connexion">
+        <source>Connexion</source>
+        <target>__Connexion</target>
+      </trans-unit>
+      <trans-unit id="uo16Si7" resname="Connecté en tant que">
+        <source>Connecté en tant que</source>
+        <target>__Connecté en tant que</target>
+      </trans-unit>
+      <trans-unit id="ilYcweS" resname="Se déconnecter">
+        <source>Se déconnecter</source>
+        <target>__Se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="X3hZGl4" resname="Se connecter">
+        <source>Se connecter</source>
+        <target>__Se connecter</target>
+      </trans-unit>
+      <trans-unit id="JZi_tm0" resname="Email">
+        <source>Email</source>
+        <target>__Email</target>
+      </trans-unit>
+      <trans-unit id="uhLPWhY" resname="Mot de passe">
+        <source>Mot de passe</source>
+        <target>__Mot de passe</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

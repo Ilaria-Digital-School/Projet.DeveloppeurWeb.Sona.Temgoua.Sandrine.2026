@@ -13,7 +13,6 @@ class CathegoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug')
         ;
     }
 
