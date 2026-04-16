@@ -1,12 +1,15 @@
+{# On hérite du template principal du site pour garder la même structure (header, footer, etc.) #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Shareo||Plateforme de location & d'achat{% endblock %}
-
+{# Bloc qui définit le titre de la page dans l'onglet du navigateur #}
+{% block title %}
+	{% trans %}Shareo||Plateforme de location & d'achat{% endtrans %}
+{% endblock %}
 
 {% block body %}
 
-
-{% set slides = [
+	{# Tableau contenant les images utilisées dans le carousel d'accueil #}
+	{% set slides = [
     {
         image: 'images/slide1.avif',
        
@@ -34,105 +37,232 @@
 ] %}
 
 
-<!-- HERO CAROUSEL SECTION -->
+	<!-- HERO CAROUSEL SECTION -->
+	{# Section principale de la page d'accueil contenant le carousel d'images #}
 
-<section class="hero-carousel position-relative">
+		<section
+		class="hero-carousel position-relative"> <!-- Texte placé au centre du carousel -->
+		<div
+			class="position-absolute top-50 start-50 translate-middle text-center text-white z-3 px-3">
 
-    <!-- pour avoir le texte superposé -->
-    <div class="position-absolute top-50 start-50 translate-middle text-center text-white z-3 px-3">
-        <h1 class="display-4 fw-bold">
-            Bienvenue sur <span class="text-success">Shareo</span>
-        </h1>
+			{# Titre principal de la plateforme #}
+			<h1 class="display-4 fw-bold">
+				{% trans %}Bienvenue sur{% endtrans %}
+				<span class="text-success">Shareo</span>
+			</h1>
 
-        <p class="lead mt-3">
-            <strong>La plateforme innovante de location et d'achat de produits.<br>
-            Économique, écologique et pratique.</strong>
-        </p>
+			{# Phrase descriptive de la plateforme #}
+			<p class="lead mt-3">
+				<strong>{% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.{% endtrans %}</strong>
+			</p>
 
-        <a href="{{ path('about') }}" class="btn btn-success btn-lg mt-3">
-            Découvrez la mission de Shareo
-        </a>
-    </div>
+			{# Bouton qui redirige vers la page expliquant la mission du site #}
+			<a href="{{ path('about') }}" class="btn btn-success btn-lg rounded-pill px-5">
+				{% trans %}Découvrez la mission de Shareo{% endtrans %}
+			</a>
+			{# Bouton qui redirige vers la page register si visiteur non connecté #}
+			{% if app.user %}
+				<a href="{{ path('app_article_new') }}" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
+					{% trans %}Publier une annonce{% endtrans %}
+				</a>
+			{% else %}
+				<a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
+					{% trans %}Publier une annonce{% endtrans %}
+				</a>
+			{% endif %}
 
-<!-- Overlay -->
-  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-    
-    <!-- CAROUSEL -->
-    <div id="carouselPromo" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
+			{# Bouton qui redirige vers le bas de page expliquant les avantages de Shareo #}
+			<a href="#why-shareo" class="btn btn-light btn-lg rounded-pill px-5 mt-3">
+				{% trans %}Pourquoi choisir Shareo ?{% endtrans %}
+			</a>
+		</div>
 
-            {% for slide in slides %}
-                <div class="carousel-item {% if loop.first %}active{% endif %}">
-                    <img src="{{ slide.image }}" class="d-block w-100" alt="Slide {{ loop.index }}">
-                </div>
-            {% endfor %}
+		<!-- Overlay -->
+		{# Couche sombre placée au-dessus des images pour améliorer la lisibilité du texte #}
+		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-        </div>
+		<!-- CAROUSEL -->
+		{# Carousel Bootstrap permettant de faire défiler les images automatiquement #}
+		<div id="carouselPromo" class="carousel slide carousel-fade" data-bs-ride="carousel">
+			<div
+				class="carousel-inner">
 
-        <!-- BOUTON PREVIOUS -->
-        <button class="carousel-control-prev" type="button"
-                data-bs-target="#carouselPromo" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Précédent</span>
-        </button>
+				{# Boucle qui parcourt le tableau "slides" pour afficher chaque image #}
+				{% for slide in slides %}
+					<div
+						class="carousel-item {% if loop.first %}active{% endif %}">
+						{# loop.first permet d'activer la première image du carousel #}
+						<img src="{{ slide.image }}" class="d-block w-100" alt="{% trans %}Slide{% endtrans %} {{ loop.index }}">
+					</div>
+				{% endfor %}
 
-        <!-- BOUTON NEXT -->
-        <button class="carousel-control-next" type="button"
-                data-bs-target="#carouselPromo" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Suivant</span>
-        </button>
+			</div>
 
-    </div>
+			<!-- BOUTON PREVIOUS -->
+			{# Bouton permettant de revenir à l'image précédente #}
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselPromo" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">{% trans %}Précédent{% endtrans %}</span>
+			</button>
 
+			<!-- BOUTON NEXT -->
+			{# Bouton permettant d'aller à l'image suivante #}
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselPromo" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">{% trans %}Suivant{% endtrans %}</span>
+			</button>
+
+		</div>
+
+	</section>
+
+
+	<!-- PRODUCTS SECTION -->
+	{# Section qui affiche les produits récents récupérés depuis la base de données #}
+
+	<section class="products py-5">
+		<div
+			class="container">
+
+			{# Titre de la section #}
+			<h2 class="text-center mb-4">{% trans %}Produits récents{% endtrans %}</h2>
+
+			<div
+				class="row">
+
+				{# Boucle qui parcourt les articles envoyés par le contrôleur #}
+				{% for article in articles %}
+					<div class="col-md-3 mb-4 d-flex">
+						<div
+							class="card product-card shadow-sm h-100">
+
+							{# Affichage de l'image du produit si elle existe #}
+							{% if article.image %}
+								<img src="{{ asset('images/' ~ article.image) }}" class="card-img-top" alt="{{ article.title }}" height="200" width="200" style="object-fit: cover;">
+							{% endif %}
+
+							<div
+								class="card-body">
+
+								{# Titre du produit #}
+								<h6 class="card-title">{{ article.title }}</h6>
+
+								{# Aperçu du contenu de l'article limité à 60 caractères #}
+								<p class="card-text small text-muted">
+									{{ article.content|slice(0, 60) }}...
+								</p>
+
+								{# On récupère le type de transaction (achat ou location) en majuscules #}
+								{% set type = article.transactionType|upper %}
+
+								{# Badge indiquant le type de transaction #}
+								<span class="badge rounded-pill px-3 py-2 bg-success">
+									{{ type }}
+								</span>
+							</div>
+
+							<div
+								class="card-footer bg-white border-0">
+
+								{# Bouton permettant d'accéder à la page détaillée du produit #}
+								<a href="{{ path('app_article_show', {'slug': article.slug}) }}" class="btn btn-success w-100">
+									{% trans %}Voir le produit{% endtrans %}
+								</a>
+								{# Bouton permettant de démarrer une conversation avec le vendeur s'il le user est connecté sinon redirigé vers la page de connexion #}
+								{% if app.user %}
+									<a href="{{ path('app_conversation_start', {'articleId': article.id}) }}" class="btn btn-outline-success w-100 mt-2">
+										{% trans %}Contacter le vendeur{% endtrans %}
+									</a>
+								{% else %}
+									<a href="{{ path('app_register', { from: 'contact', articleId: article.id }) }}" class="btn btn-outline-success w-100 mt-2">
+										{% trans %}Contacter le vendeur{% endtrans %}
+									</a>
+								{% endif %}
+							</a>
+
+						</div>
+
+					</div>
+				</div>
+
+			{% else %}
+
+				{# Message affiché si aucun article n'est disponible #}
+				<div class="col-12">
+					<div class="alert alert-warning text-center">
+						{% trans %}Aucun article disponible{% endtrans %}
+					</div>
+				</div>
+
+			{% endfor %}
+
+			{# Pagination permettant de naviguer entre les pages d'articles #}
+			<div class="d-flex justify-content-center mt-4">
+				{{ knp_pagination_render(articles) }}
+			</div>
+
+		</div>
+	</div>
 </section>
 
+<!-- WHY SHAREO SECTION -->
+<section id="why-shareo" class="py-5 bg-light">
+	<div class="container">
 
-<!-- PRODUCTS SECTION -->
-<section class="products py-5">
-  <div class="container">
-    <h2 class="text-center mb-4">Produits récents</h2>
+		<h2 class="text-center mb-5 fw-bold">
+			{% trans %}Pourquoi choisir Shareo ?{% endtrans %}
+		</h2>
 
-    <div class="row">
-      {% for article in articles %}
-        <div class="col-md-3 mb-4 d-flex">
-          <div class="card product-card shadow-sm h-100">
+		<div
+			class="row text-center">
 
-            {% if article.image %}
-              <img src="{{ asset('images/' ~ article.image) }}" class="card-img-top" alt="{{ article.title }}" height="200" width="200" style="object-fit: cover;">
-            {% endif %}
+			<!-- Argument 1 -->
+			<div class="col-md-4 mb-4">
+				<div class="p-4 shadow-sm h-100 rounded bg-white">
+					<i class="bi bi-cash-coin display-5 text-success"></i>
+					<h5 class="mt-3 fw-bold">
+						{% trans %}Des prix avantageux{% endtrans %}
+					</h5>
+					<p class="text-muted">
+						{% trans %}Achetez ou louez à des prix bien plus bas que le marché traditionnel.{% endtrans %}
+					</p>
+				</div>
+			</div>
 
-            <div class="card-body">
-              <h6 class="card-title">{{ article.title }}</h6>
-              <p class="card-text small text-muted">
-                {{ article.content|slice(0, 60) }}...
-              </p>
+			<!-- Argument 2 -->
+			<div class="col-md-4 mb-4">
+				<div class="p-4 shadow-sm h-100 rounded bg-white">
+					<i class="bi bi-recycle display-5 text-success"></i>
+					<h5 class="mt-3 fw-bold">
+						{% trans %}Un geste écologique{% endtrans %}
+					</h5>
+					<p class="text-muted">
+						{% trans %}Donnez une seconde vie aux produits et réduisez le gaspillage.{% endtrans %}
+					</p>
+				</div>
+			</div>
 
-              {% set type = article.transactionType|upper %}
+			<!-- Argument 3 -->
+			<div class="col-md-4 mb-4">
+				<div class="p-4 shadow-sm h-100 rounded bg-white">
+					<i class="bi bi-lightning-charge display-5 text-success"></i>
+					<h5 class="mt-3 fw-bold">
+						{% trans %}Simple et rapide{% endtrans %}
+					</h5>
+					<p class="text-muted">
+						{% trans %}Trouvez ce dont vous avez besoin en quelques clics seulement.{% endtrans %}
+					</p>
+				</div>
+			</div>
 
-              <span class="badge rounded-pill px-3 py-2 bg-success">
-                  
-                  {{ type }}
-              </span>
-            </div>
+		</div>
 
-            <div class="card-footer bg-white border-0">
-              <a href="{{ path('app_article_detail', {'id': article.id}) }}"
-                 class="btn btn-success w-100">
-                Voir le produit
-              </a>
-            </div>
+		<!-- <div class="text-center mt-4">
+					      <a href="{{ path('app_article_index') }}" class="btn btn-success btn-lg rounded-pill px-5">
+					        {% trans %}Explorer les produits{% endtrans %}
+					      </a>
+					    </div> -->
 
-          </div>
-        </div>
-      {% else %}
-        <div class="col-12">
-          <div class="alert alert-warning text-center">
-            Aucun article disponible
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endblock %}
+
+	</div>
+</section>{% endblock %}

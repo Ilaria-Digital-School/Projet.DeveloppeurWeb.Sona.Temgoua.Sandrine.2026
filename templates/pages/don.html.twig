@@ -1,43 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Donner sur shareo{% endblock %}
+{% block title %}
+	{% trans %}Donner sur Shareo{% endtrans %}
+{% endblock %}
 
 {% block body %}
 
-<!-- HERO -->
-<section
-  class="position-relative text-white py-5"
-  style="
-    background-image: url('{{ asset('images/donhero.jpg') }}');
-    background-size: cover;
-    background-position: center;
-  "
->
-  <!-- Overlay -->
-  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+	<!-- HERO -->
+	<section
+		class="position-relative text-white py-5" style="
+			    background-image: url('{{ asset('images/donhero.jpg') }}');
+			    background-size: cover;
+			    background-position: center;
+			  ">
+		<!-- Overlay -->
+		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-  <!-- Contenu -->
-  <div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
-    <div class="col-lg-8">
-      <h1 class="fw-bold mb-4">
-        Faites un don, changez des vies
-      </h1>
+		<!-- Contenu -->
+		<div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
+			<div class="col-lg-8">
+				<h1 class="fw-bold mb-4">
+					{% trans %}Faites un don, changez des vies{% endtrans %}
+				</h1>
 
-      <p class="lead mb-4">
-       <strong>Découvrez les objets déjà offerts par la communauté Shareo
-                et donnez une seconde vie à ce que vous n’utilisez plus.</strong>
-      </p>
+				<p class="lead mb-4">
+					<strong>{% trans %}Découvrez les objets déjà offerts par la communauté Shareo et donnez une seconde vie à ce que vous n'utilisez plus.{% endtrans %}</strong>
+				</p>
 
-      <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <a href="#products" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
-          Voir les dons disponibles
-        </a>
-        <a href="#how-it-works" class="btn btn-outline-light btn-lg rounded-pill px-5">
-          Déposer un don
-        </a>
-      </div>
-    </div>
-  </div>
+				<div class="d-flex justify-content-center gap-3 flex-wrap">
+					<a href="#products" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
+						{% trans %}Voir les dons disponibles{% endtrans %}
+					</a>
+
+					{# Bouton qui redirige vers la page register si visiteur non connecté #}
+					{% if app.user %}
+						<a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+							{% trans %}Publier une annonce{% endtrans %}
+						</a>
+					{% else %}
+						<a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+							{% trans %}Publier une annonce{% endtrans %}
+						</a>
+					{% endif %}
+
+				</a>
+				<a href="#how-it-works" class="btn btn-outline-light btn-lg rounded-pill px-5">
+					{% trans %}Comment ça marche ?{% endtrans %}
+				</a>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- PRODUITS À DONNER -->
@@ -46,19 +58,111 @@
     pageTitle: null
 } %}
 
-<!-- CTA -->
-<section class="py-5 bg-dark text-white text-center">
-    <div class="container">
-        <h2 class="fw-bold mb-3">
-            Vous aussi, proposez un don
-        </h2>
-        <p class="mb-4">
-            Un objet inutilisé peut faire le bonheur de quelqu’un d’autre.
-        </p>
-        <a href="#" class="btn btn-outline-warning btn-lg rounded-pill px-5">
-            Déposer un don
-        </a>
-    </div>
+<!-- HOW IT WORKS DON -->
+<section id="how-it-works" class="py-5 bg-light">
+	<div class="container">
+		<h2 class="fw-bold text-center text-dark mb-5">
+			{% trans %}Comment donner sur Shareo ?{% endtrans %}
+		</h2>
+
+		<div class="row g-4 text-center">
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<h1 class="fw-bold text-success">1</h1>
+						<h5>{% trans %}Publiez gratuitement{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Ajoutez votre objet à donner avec photos et description, en quelques clics.{% endtrans %}
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<h1 class="fw-bold text-success">2</h1>
+						<h5>{% trans %}Entrez en contact{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Échangez avec des personnes intéressées près de chez vous.{% endtrans %}
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card border-0 h-100">
+					<div class="card-body">
+						<h1 class="fw-bold text-success">3</h1>
+						<h5>{% trans %}Transmettez{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Remettez votre objet en main propre et offrez-lui une seconde vie.{% endtrans %}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
-{% endblock %}
+<!-- AVANTAGES DON -->
+<section class="py-5 bg-light">
+	<div class="container">
+		<h2 class="fw-bold text-center text-dark mb-5">
+			{% trans %}Pourquoi donner sur Shareo ?{% endtrans %}
+		</h2>
+
+		<div class="row g-4 text-center">
+			<div class="col-md-4">
+				<div class="card h-100 border-0 shadow-sm">
+					<div class="card-body">
+						<i class="fas fa-hand-holding-heart fa-2x text-success mb-3"></i>
+						<h5 class="fw-bold">{% trans %}Solidaire{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Aidez des personnes près de chez vous en donnant ce dont vous n'avez plus besoin.{% endtrans %}
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card h-100 border-0 shadow-sm">
+					<div class="card-body">
+						<i class="fas fa-recycle fa-2x text-success mb-3"></i>
+						<h5 class="fw-bold">{% trans %}Écologique{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Réduisez le gaspillage en offrant une seconde vie à vos objets.{% endtrans %}
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card h-100 border-0 shadow-sm">
+					<div class="card-body">
+						<i class="fas fa-smile fa-2x text-success mb-3"></i>
+						<h5 class="fw-bold">{% trans %}Simple & Humain{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Un geste simple, gratuit et local qui crée du lien dans votre communauté.{% endtrans %}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- CTA -->
+<section class="py-5  bg-dark text-white text-center">
+	<div class="container">
+		<h2 class="fw-bold mb-3">
+			{% trans %}Vous aussi, proposez un don{% endtrans %}
+		</h2>
+		<p class="mb-4">
+			{% trans %}Un objet inutilisé peut faire le bonheur de quelqu'un d'autre.{% endtrans %}
+		</p>
+		<a href="#" class="btn btn-outline-warning btn-lg rounded-pill px-5">
+			{% trans %}Déposer un don{% endtrans %}
+		</a>
+	</div>
+</section>{% endblock %}

@@ -1,110 +1,183 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact
+{% block title %}{% trans %}Contact{% endtrans %}
 {% endblock %}
 
 {% block body %}
 
-	<div
-		class="container py-5">
+<!-- header -->
+<div class="contact-header py-4">
+    <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-12 text-center">
 
-		<!-- Header -->
-		<div class="row justify-content-center mb-5">
-			<div class="col-lg-8 text-center">
-				<h2 class="fw-bold mb-3">Un projet en tête ?</h2>
-				<p class="text-muted">
-					Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.
-				</p>
-			</div>
-		</diAv>
+                <h2 class="fw-bold mb-3 fs-3">
+                    {% trans %}Un projet en tête ? Une question ? Besoin d'aide ? Nous sommes là pour vous !{% endtrans %}
+                </h2>
 
-  <!-- Formulaire -->
-		<div class="container py-5">
-			<div class="row justify-content-center">
-				<div class="col-lg-7 col-md-9">
-					<div class="card shadow border-0">
-						<div class="card-header bg-light text-center py-4">
+                <p class="text-muted fs-5">
+                    <strong>
+                        {% trans %}Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.{% endtrans %}
+                    </strong>
+                </p>
 
-							<p class="text-muted mb-0">
-								Laissez-nous vos coordonnées, nous vous recontacterons rapidement.
-							</p>
-						</div>
-
-						<div class="card-body p-4">
-
-							<form>
-
-								<div class="row mb-3">
-									<div class="col-md-6">
-										<label class="form-label">Nom complet *</label>
-										<input type="text" class="form-control" required>
-									</div>
-
-									<div class="col-md-6">
-										<label class="form-label">Adresse email *</label>
-										<input type="email" class="form-control" required>
-									</div>
-								</div>
-
-								<div class="row mb-3">
-									<div class="col-md-6">
-										<label class="form-label">
-											Téléphone
-											<span class="text-muted">(optionnel)</span>
-										</label>
-										<input type="tel" class="form-control">
-									</div>
-
-									<div class="col-md-6">
-										<label class="form-label">
-											Site web
-											<span class="text-muted">(optionnel)</span>
-										</label>
-										<input type="url" class="form-control">
-									</div>
-								</div>
-
-								<div class="mb-3">
-									<label class="form-label">
-										Adresse postale
-										<span class="text-muted">(optionnel)</span>
-									</label>
-									<input type="text" class="form-control">
-								</div>
-
-								<div class="mb-4">
-									<label class="form-label">Message *</label>
-									<textarea class="form-control" rows="4" required></textarea>
-								</div>
-
-								<div class="d-grid">
-									<button class="btn btn-success">
-										Envoyer le message
-									</button>
-								</div>
-
-							</form>
-
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-
-		<!-- Google Map -->
-		<div class="contact-map">
-    <iframe
-        src="https://www.google.com/maps?q=1+allée+des+mimosas+33600+Pessac+France&output=embed"
-        loading="lazy">
-    </iframe>
+            </div>
+        </div>
+    </div>
 </div>
 
-				</div>
-			</div>
-		</div>
+<!-- SECTION CONTACT -->
+<div class="container-fluid py-5 bg-success bg-opacity-10">
 
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+
+                <div class="card border-0 shadow-lg rounded-4">
+
+                    <!-- HEADER -->
+                    <div class="card-header bg-success bg-opacity-10 text-center py-4 rounded-top-4 border-0">
+
+                        <h2 class="fw-bold text-success mb-2">
+                            {% trans %}Contactez-nous{% endtrans %}
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            {% trans %}Une question ? Une suggestion ? Notre équipe vous répond rapidement.{% endtrans %}
+                        </p>
+
+                    </div>
+
+                    <!-- BODY -->
+                    <div class="card-body p-5">
+
+                        <form>
+
+                            <!-- NOM + EMAIL -->
+                            <div class="row g-3 mb-3">
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        {% trans %}Nom complet *{% endtrans %}
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control rounded-pill shadow-sm"
+                                           placeholder="Jean Dupont"
+                                           required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        {% trans %}Adresse email *{% endtrans %}
+                                    </label>
+
+                                    <input type="email"
+                                           class="form-control rounded-pill shadow-sm"
+                                           placeholder="jean@email.com"
+                                           required>
+                                </div>
+
+                            </div>
+
+                            <!-- TELEPHONE + SITE -->
+                            <div class="row g-3 mb-3">
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        {% trans %}Téléphone{% endtrans %}
+                                        <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
+                                    </label>
+
+                                    <input type="tel"
+                                           class="form-control rounded-pill shadow-sm"
+                                           placeholder="+33 6 12 34 56 78">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        {% trans %}Site web{% endtrans %}
+                                        <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
+                                    </label>
+
+                                    <input type="url"
+                                           class="form-control rounded-pill shadow-sm"
+                                           placeholder="https://">
+                                </div>
+
+                            </div>
+
+                            <!-- ADRESSE -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">
+                                    {% trans %}Adresse postale{% endtrans %}
+                                    <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
+                                </label>
+
+                                <input type="text"
+                                       class="form-control rounded-pill shadow-sm"
+                                       placeholder="Ville, pays">
+                            </div>
+
+                            <!-- MESSAGE -->
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    {% trans %}Message *{% endtrans %}
+                                </label>
+
+                                <textarea class="form-control shadow-sm"
+                                          rows="4"
+                                          placeholder="{% trans %}Votre message...{% endtrans %}"
+                                          required></textarea>
+
+                            </div>
+
+                            <!-- BOUTON -->
+                            <div class="d-grid">
+
+                                <button class="btn btn-success btn-lg rounded-pill shadow">
+
+                                    ✉ {% trans %}Envoyer le message{% endtrans %}
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Adresse physique -->
+<div class="container my-4">
+	<div class="card border-0 shadow-sm rounded-4">
+		<div class="card-body text-center">
+			<h5 class="fw-bold mb-3">
+				{% trans %}Vous pouvez également nous rejoindre dans nos locaux{% endtrans %}
+			</h5>
+			<p class="mb-0">
+				<i class="bi bi-geo-alt-fill text-success me-2"></i>
+				1 Allée des Mimosas, Résidence Saige Formanoir<br>
+				33600 Pessac, France
+			</p>
+		</div>
 	</div>
+</div>
+
+<!-- Google Map -->
+<div class="contact-map">
+	<iframe class="w-100 rounded-4 shadow-sm" height="300" style="border:0;" src="https://www.google.com/maps?q=1+allée+des+mimosas+33600+Pessac+France&output=embed" loading="lazy"></iframe>
+</div>
 
 {% endblock %}

@@ -1,8 +1,22 @@
-{# pass an array argument to get the messages of those types #}
+{# 
+Ce template affiche les messages flash de Symfony.
+
+Les messages flash sont des messages temporaires stockés en session,
+souvent utilisés après une action (inscription, login, formulaire, etc.).
+
+On parcourt ici les types de messages : success, error, info, danger.
+Chaque message est affiché avec une classe Bootstrap adaptée.
+#}
+
 {% for type, messages in app.flashes(['success', 'error', 'info', 'danger']) %}
   {% for message in messages %}
-    <div role="alert" class="alert alert-{{ type }}">
+
+    {# Conversion du type "error" en "danger" pour Bootstrap #}
+    {% set bootstrapClass = type == 'error' ? 'danger' : type %}
+
+    <div role="alert" class="alert alert-{{ bootstrapClass }} text-center shadow-sm">
       {{ message }}
     </div>
+
   {% endfor %}
 {% endfor %}

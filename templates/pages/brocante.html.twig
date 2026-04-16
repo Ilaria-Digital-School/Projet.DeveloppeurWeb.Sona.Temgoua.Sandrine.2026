@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Brocante{% endtrans %}{% endblock %}
+
+{% block body %}
+
+
+<!-- HERO -->
+
+<section
+  class="position-relative text-white py-5"
+  style="
+    background-image: url('{{ asset('images/brocante.jpg') }}');
+    background-size: cover;
+    background-position: center;
+  "
+<!-- Overlay -->
+  <!-- Overlay -->
+<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+<!-- Contenu -->
+<div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
+  <div class="col-lg-8">
+    <h1 class="fw-bold mb-4">
+      {% trans %}Vendez en gros, libérez votre espace, faites une bonne action{% endtrans %}
+    </h1>
+
+    <p class="lead mb-4">
+      <strong>{% trans %}Débarrassez-vous de vos encombrants sans bouger de chez vous. Une simple annonce sur Shareo et tout part en lots ! Faites du bien autour de vous et gagnez de la place sans tracasseries.{% endtrans %}</strong>
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="#products" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
+        {% trans %}Parcourir les annonces{% endtrans %}
+      </a>
+      
+      {# Bouton qui redirige vers la page register si visiteur non connecté #}
+			{% if app.user %}
+    <a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+        {% trans %}Publier une annonce{% endtrans %}
+    </a>
+{% else %}
+    <a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+        {% trans %}Publier une annonce{% endtrans %}
+    </a>
+{% endif %}
+
+      <a href="#how-it-works" class="btn btn-outline-light btn-lg rounded-pill px-5">
+        {% trans %}Comment ça marche ?{% endtrans %}
+      </a>
+    </div>
+  </div>
+</div>
+</section>
+
+ 
+<!-- PRODUITS À LOUER -->
+
+{% include 'transaction/list.html.twig' with {
+    articles: articles,
+    pageTitle: null
+} %}
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold text-center text-dark mb-5">
+            {% trans %}Comment organiser votre vide-grenier sur Shareo ?{% endtrans %}
+        </h2>
+
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="card border-0 h-100">
+                    <div class="card-body">
+                        <h1 class="fw-bold text-success">1</h1>
+                        <h5 class="fw-bold">{% trans %}Publiez en lot{% endtrans %}</h5>
+                        <p class="text-muted">
+                            {% trans %}Mettez en ligne plusieurs articles à la fois : vêtements, meubles, objets déco ou équipements.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-0 h-100">
+                    <div class="card-body">
+                        <h1 class="fw-bold text-success">2</h1>
+                        <h5 class="fw-bold">{% trans %}Attirez les acheteurs{% endtrans %}</h5>
+                        <p class="text-muted">
+                            {% trans %}Partagez votre vide-grenier sur les réseaux sociaux et trouvez rapidement des acheteurs intéressés.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-0 h-100">
+                    <div class="card-body">
+                        <h1 class="fw-bold text-success">3</h1>
+                        <h5 class="fw-bold">{% trans %}Vendez en quantité{% endtrans %}</h5>
+                        <p class="text-muted">
+                            {% trans %}Écoulez plusieurs articles en une seule opération et libérez de l'espace chez vous.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AVANTAGES VIDE GRENIER -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold text-center text-dark mb-5">
+            {% trans %}Pourquoi choisir Shareo pour votre vide-grenier ?{% endtrans %}
+        </h2>
+
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-boxes fa-2x text-success mb-3"></i>
+                        <h5 class="fw-bold">{% trans %}Vente en masse{% endtrans %}</h5>
+                        <p class="text-muted">
+                            {% trans %}Vendez plusieurs objets en même temps sans créer une annonce pour chaque article.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-bolt fa-2x text-success mb-3"></i>
+                        <h5 class="fw-bold">{% trans %}Rapide & Efficace{% endtrans %}</h5>
+                        <p class="text-muted">
+                            {% trans %}Organisez votre vide-grenier en ligne et trouvez preneur plus rapidement.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-home fa-2x text-success mb-3"></i>
+                        <h5 class="fw-bold">{% trans %}Faites de la place{% endtrans %}</h5>
+                        <p class="text-muted">
+                            {% trans %}Désencombrez votre intérieur tout en générant des revenus supplémentaires.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

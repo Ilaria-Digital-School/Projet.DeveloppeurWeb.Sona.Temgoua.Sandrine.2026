@@ -1,25 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Article{% endblock %}
+{% block title %}Modifier {{ article.title }}{% endblock %}
 
 {% block body %}
 <div class="container py-5">
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-lg-10">
 
-            <div class="card shadow-sm">
-                <div class="card-body">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-5">
 
-                    <h1 class="h3 mb-4 text-success">Edit Article</h1>
+                    <h1 class="fw-bold mb-4">✏ Modifier l'article</h1>
 
-                    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+                    {# FORMULAIRE #}
+                    {{ include('article/_form.html.twig', {
+                        form: form,
+                        button_label: 'Mettre à jour'
+                    }) }}
 
+                    {# IMAGES #}
+                    {{ include('article/_images.html.twig', {
+                        article: article
+                    }) }}
+
+                    {# ACTIONS #}
                     <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ path('app_article_index') }}" class="btn btn-outline-success">
-                            ← Back to list
+
+                        <a href="{{ path('app_article_index') }}"
+                           class="btn btn-outline-secondary rounded-pill px-4">
+                            ← Retour
                         </a>
 
                         {{ include('article/_delete_form.html.twig') }}
+
                     </div>
 
                 </div>
@@ -27,5 +41,45 @@
 
         </div>
     </div>
+
 </div>
+
+{# ======================= #}
+{# JS DELETE AJAX          #}
+{# ======================= #}
+<script>
+document.querySelectorAll('.delete-image-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (!confirm("Supprimer cette image ?")) return;
+
+        const url = this.action;
+        const formData = new FormData(this);
+        const card = this.closest('.image-card');
+
+        fetch(url, {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                card.remove();
+                showFlash("Image supprimée ✅", "success");
+            }
+        });
+    });
+});
+
+function showFlash(message, type) {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} position-fixed top-0 end-0 m-4`;
+    alert.innerText = message;
+    document.body.appendChild(alert);
+
+    setTimeout(() => alert.remove(), 3000);
+}
+</script>
+
 {% endblock %}

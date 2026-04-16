@@ -68,6 +68,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'author')]
     private Collection $articles;
+    // Conversations where user participates
+    #[ORM\ManyToMany(targetEntity: Conversation::class, mappedBy: 'participants')]
+    private Collection $conversations;
+
+    // Messages written by user
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Message::class)]
+    private Collection $messages;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
@@ -75,6 +82,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->conversations = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+    }
+
+    public function getConversations(): Collection
+    {
+        return $this->conversations;
+    }
+
+    public function getMessages(): Collection
+    {
+        return $this->messages;
     }
 
     public function getId(): ?int
@@ -137,7 +156,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         //$this->password = $password;
-        $this->password = password_hash($password, PASSWORD_BCRYPT); //$password;
+        $this->password = $password; //$password;
 
         return $this;
     }

@@ -1,0 +1,38 @@
+{% if article.images|length > 0 %}
+<div class="mt-5">
+
+    <h5 class="fw-semibold mb-3">Images actuelles</h5>
+
+    <div class="row g-3">
+
+        {% for image in article.images %}
+        <div class="col-md-3 image-card">
+
+            <div class="position-relative">
+
+                <img src="{{ asset('images/' ~ image.image) }}"
+                     class="img-fluid rounded-3 shadow-sm"
+                     style="height:150px; width:100%; object-fit:cover;">
+
+                <form method="post"
+                      action="{{ path('app_image_delete', {'id': image.id}) }}"
+                      class="delete-image-form position-absolute top-0 end-0 m-2">
+
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+
+                    <button class="btn btn-danger btn-sm"
+                            onclick="return confirm('Supprimer cette image ?')">
+                        ✖
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endif %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Acheter sur Shareo{% endblock %}
+{% block title %}{% trans %}Acheter sur Shareo{% endtrans %}{% endblock %}
 
 {% block body %}
 
@@ -19,20 +19,31 @@
   <div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
     <div class="col-lg-8">
       <h1 class="fw-bold mb-4">
-        Achetez malin, achetez responsable
+        {% trans %}Achetez malin, achetez responsable{% endtrans %}
       </h1>
 
       <p class="lead mb-4">
-        <strong>Découvrez notre marketplace de produits d’occasion vérifiés.
-        Jusqu’à 70% d’économies tout en consommant mieux.</strong>
+        <strong>{% trans %}Découvrez notre marketplace de produits d'occasion vérifiés.
+        Jusqu'à 70% d'économies tout en consommant mieux.{% endtrans %}</strong>
       </p>
 
       <div class="d-flex justify-content-center gap-3 flex-wrap">
         <a href="#products" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
-          Voir les produits
+          {% trans %}Parcourir les produits{% endtrans %}
         </a>
+        {# Bouton qui redirige vers la page register si visiteur non connecté #}
+			{% if app.user %}
+    <a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+        {% trans %}Publier une annonce{% endtrans %}
+    </a>
+{% else %}
+    <a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+        {% trans %}Publier une annonce{% endtrans %}
+    </a>
+{% endif %}
+
         <a href="#how-it-works" class="btn btn-outline-light btn-lg rounded-pill px-5">
-          Comment ça marche ?
+          {% trans %}Comment ça marche ?{% endtrans %}
         </a>
       </div>
     </div>
@@ -50,7 +61,7 @@
 <section id="how-it-works" class="py-5 bg-light">
     <div class="container">
         <h2 class="fw-bold text-center text-dark mb-5">
-            Comment acheter sur Shareo ?
+            {% trans %}Comment acheter sur Shareo ?{% endtrans %}
         </h2>
 
         <div class="row g-4 text-center">
@@ -58,21 +69,21 @@
                 <div class="card border-0">
                     <div class="card-body">
                         <h1 class="fw-bold text-success">1</h1>
-                        <h5>Trouvez</h5>
+                        <h5 class="fw-bold">{% trans %}Trouvez{% endtrans %}</h5>
                         <p class="text-muted">
-                            Parcourez les produits disponibles
+                            {% trans %}Parcourez les produits disponibles{% endtrans %}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
+ <div class="col-md-4">
                 <div class="card border-0">
                     <div class="card-body">
                         <h1 class="fw-bold text-success">2</h1>
-                        <h5>Vérifiez</h5>
+                        <h5 class="fw-bold">{% trans %}Vérifiez{% endtrans %}</h5>
                         <p class="text-muted">
-                            Consultez les détails et avis
+                            {% trans %}Consultez les détails et avis sur le vendeur{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -82,9 +93,9 @@
                 <div class="card border-0">
                     <div class="card-body">
                         <h1 class="fw-bold text-success">3</h1>
-                        <h5>Achetez</h5>
+                        <h5 class="fw-bold">{% trans %}Achetez{% endtrans %}</h5>
                         <p class="text-muted">
-                            Paiement sécurisé et livraison rapide
+                            {% trans %}Paiement sécurisé et livraison rapide{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -97,7 +108,7 @@
 <section class="py-5 bg-light">
     <div class="container">
         <h2 class="fw-bold text-center text-dark mb-5">
-            Pourquoi acheter sur Shareo ?
+            {% trans %}Pourquoi acheter sur Shareo ?{% endtrans %}
         </h2>
 
         <div class="row g-4 text-center">
@@ -105,9 +116,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-shield-alt fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">Produits vérifiés</h5>
+                        <h5 class="fw-bold">{% trans %}Produits vérifiés{% endtrans %}</h5>
                         <p class="text-muted">
-                            Chaque produit est inspecté avant la vente
+                            {% trans %}Nous demandons à nos vendeurs de vérifier leurs produits avant la vente{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -117,9 +128,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-euro-sign fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">Économies</h5>
+                        <h5 class="fw-bold">{% trans %}Économies{% endtrans %}</h5>
                         <p class="text-muted">
-                            Jusqu’à 70% moins cher que le neuf
+                            {% trans %}Vous réalisez jusqu’à 70% moins cher que le neuf{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -129,9 +140,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-leaf fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">Écologique</h5>
+                        <h5 class="fw-bold">{% trans %}Écologique{% endtrans %}</h5>
                         <p class="text-muted">
-                            Une consommation plus durable
+                            {% trans %}Une consommation plus durable{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -141,9 +152,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-undo fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">Garantie 30 jours</h5>
+                        <h5 class="fw-bold">{% trans %}Garantie 30 jours{% endtrans %}</h5>
                         <p class="text-muted">
-                            Satisfait ou remboursé
+                            {% trans %}Satisfait ou remboursé{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -151,6 +162,5 @@
         </div>
     </div>
 </section>
-
 
 {% endblock %}

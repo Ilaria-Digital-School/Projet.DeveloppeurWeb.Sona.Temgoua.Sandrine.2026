@@ -1,103 +1,125 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}À propos de Shareo{% endblock %}
+{% block title %}{% trans %}À propos de Shareo{% endtrans %}
+{% endblock %}
 
 {% block body %}
 
-<!-- Hero About -->
-<section class="about-hero py-5 text-center">
-    <div class="container">
+	<!-- Hero About -->
+	<section class="about-hero py-5 text-center">
+		<div class="container">
 
-        <h1 class="display-5 fw-bold hero-title">
-            Nos <span class="text-success">valeurs</span>
-        </h1>
+			<h1 class="display-5 fw-bold hero-title">
+				{% trans %}Nos{% endtrans %}
+				<span class="text-success">{% trans %}valeurs{% endtrans %}</span>
+			</h1>
 
-        <p class="lead mt-4 hero-text">
-            <strong>
-                Ce qui guide Shareo au quotidien : Offrir des solutions modernes et accessibles 
-                pour transformer notre manière de consommer. Shareo est né d’une conviction simple : 
-                consommer autrement est possible. 
-                Nous croyons en un modèle plus responsable, plus humain et plus durable.
-            </strong>
-        </p>
+			<p class="lead mt-4 hero-text">
+				<strong>
+					{% trans %}Shareo est né d’une conviction simple : révolutionner la manière dont nous consommons. 
+					        Nous croyons fermement que le partage est la clé pour construire un avenir plus durable, plus solidaire et plus innovant.
+					   Notre mission : permettre à chacun de donner, louer ou acheter facilement, tout en réduisant le gaspillage et en créant des liens.{% endtrans %}
+				</strong>
+			</p>
 
-    </div>
-</section>
+			<!-- valeurs badges -->
+			<p class="text-center mt-4 fs-5 valeurs">
 
-<!-- VALEURS -->
-<section class="py-5">
-    <div class="container">
-        <div class="row g-4">
+				<span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
+					🟢 {% trans %}Partager{% endtrans %}
+				</span>
 
-            <div class="col-md-4 d-flex">
-                <div class="card shadow-sm flex-fill text-center p-4">
-                    <div class="display-4 mb-3">🌱</div>
-                    <h5 class="fw-bold">Écologie</h5>
-                    <p class="text-muted">
-                        Encourager le partage pour réduire la surconsommation
-                        et préserver notre environnement.
-                    </p>
-                </div>
-            </div>
+				<span class="mx-2 text-muted separator v2">✦</span>
 
-            <div class="col-md-4 d-flex">
-                <div class="card shadow-sm flex-fill text-center p-4">
-                    <div class="display-4 mb-3">🤝</div>
-                    <h5 class="fw-bold">Solidarité</h5>
-                    <p class="text-muted">
-                        Créer une communauté basée sur l’entraide
-                        et la confiance.
-                    </p>
-                </div>
-            </div>
+				<span class="badge rounded-pill bg-warning text-dark fs-6 px-3 py-2 valeur v3">
+					🟡 {% trans %}Réutiliser{% endtrans %}
+				</span>
 
-            <div class="col-md-4 d-flex">
-                <div class="card shadow-sm flex-fill text-center p-4">
-                    <div class="display-4 mb-3">💡</div>
-                    <h5 class="fw-bold">Innovation</h5>
-                    <p class="text-muted">
-                        Proposer des solutions simples et modernes
-                        pour consommer autrement.
-                    </p>
-                </div>
-            </div>
+				<span class="mx-2 text-muted separator v4">✦</span>
 
-        </div>
-    </div>
-</section>
+				<span class="badge rounded-pill bg-primary fs-6 px-3 py-2 valeur v5">
+					🔵 {% trans %}Créer des liens{% endtrans %}
+				</span>
 
-<!-- FEATURES -->
-<section class="features py-5 bg-light">
-  <div class="container">
-    <div class="row text-center">
+			</p>
+		</div>
+	</section>
 
-      <div class="col-md-4 mb-4">
-        <div class="feature-box p-4 h-100">
-          <h5 class="text-success">🌱 Écologique</h5>
-          <p class="small">
-            Réduisez votre impact environnemental en partageant des produits.
-          </p>
-        </div>
-      </div>
-<div class="col-md-4 mb-4">
-        <div class="feature-box p-4 h-100">
-          <h5 class="text-success">🤝 Collaboratif</h5>
-          <p class="small">
-            Une communauté basée sur la confiance et le partage.
-          </p>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="feature-box p-4 h-100">
-          <h5 class="text-success">💰 Économique</h5>
-          <p class="small">
-            Louez ou achetez au meilleur prix, sans gaspillage.
-          </p>
-        </div>
-      </div>
+	<!-- Vision -->
+	<section class="py-5">
+		<div class="container">
+			<div class="row g-4">
 
-    </div>
-  </div>
-</section>
+				<div class="col-md-4 d-flex">
+					<div class="card shadow-sm flex-fill text-center p-4">
+						<div class="display-4 mb-3">🌱</div>
+						<h5 class="fw-bold">{% trans %}Écologie{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Encourager le partage pour réduire la surconsommation
+							                        et préserver notre environnement.{% endtrans %}
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-4 d-flex">
+					<div class="card shadow-sm flex-fill text-center p-4">
+						<div class="display-4 mb-3">🤝</div>
+						<h5 class="fw-bold">{% trans %}Entraide{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Créer une communauté basée sur l’entraide
+							                        et la confiance.{% endtrans %}
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-4 d-flex">
+					<div class="card shadow-sm flex-fill text-center p-4">
+						<div class="display-4 mb-3">💡</div>
+						<h5 class="fw-bold">{% trans %}Innovation{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Proposer des solutions simples et modernes
+							                        pour consommer autrement.{% endtrans %}
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- FEATURES -->
+	<section class="features py-5 bg-light">
+		<div class="container">
+			<div class="row text-center">
+
+				<div class="col-md-4 mb-4">
+					<div class="feature-box p-4 h-100">
+						<h5 class="fw-bold">🌱 {% trans %}Écologique{% endtrans %}</h5>
+						<p class="fs-6">
+							{% trans %}Réduisez votre impact environnemental en partageant des produits.{% endtrans %}
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="feature-box p-4 h-100">
+						<h5 class="fw-bold">🤝 {% trans %}Collaboratif{% endtrans %}</h5>
+						<p class="fs-6">
+							{% trans %}Une communauté basée sur la confiance et le partage.{% endtrans %}
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="feature-box p-4 h-100">
+						<h5 class="fw-bold">💰 {% trans %}Économique{% endtrans %}</h5>
+						<p class="fs-6">
+							{% trans %}Louez ou achetez au meilleur prix, sans gaspillage.{% endtrans %}
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
 
 {% endblock %}

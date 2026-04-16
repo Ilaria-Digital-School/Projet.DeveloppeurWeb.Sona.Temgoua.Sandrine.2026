@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="zexOQ5S" resname="Catégories">
+        <source>Catégories</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="xE8xYu5" resname="Nom">
+        <source>Nom</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="W3yX.Gj" resname="actions">
+        <source>actions</source>
+        <target>actions</target>
+      </trans-unit>
+      <trans-unit id="VMdY0Io" resname="Afficher">
+        <source>Afficher</source>
+        <target>Afficher</target>
+      </trans-unit>
+      <trans-unit id="QuAljRH" resname="Editer">
+        <source>Editer</source>
+        <target>Editer</target>
+      </trans-unit>
+      <trans-unit id="K50NCrz" resname="Pas d'enregistrements">
+        <source>Pas d'enregistrements</source>
+        <target>Pas d'enregistrements</target>
+      </trans-unit>
+      <trans-unit id="qhAe2Je" resname="Créer une nouvelle catégorie">
+        <source>Créer une nouvelle catégorie</source>
+        <target>Créer une nouvelle catégorie</target>
+      </trans-unit>
+      <trans-unit id="aAwTO5r" resname="Liste auteurs">
+        <source>Liste auteurs</source>
+        <target>Liste auteurs</target>
+      </trans-unit>
+      <trans-unit id="zFYA6AH" resname="Noms">
+        <source>Noms</source>
+        <target>Noms</target>
+      </trans-unit>
+      <trans-unit id="vTJ6qcF" resname="Minibio">
+        <source>Minibio</source>
+        <target>Minibio</target>
+      </trans-unit>
+      <trans-unit id="2UYDUHm" resname="Créer un nouvel auteur">
+        <source>Créer un nouvel auteur</source>
+        <target>Créer un nouvel auteur</target>
+      </trans-unit>
+      <trans-unit id="gXWo4h9" resname="Connexion">
+        <source>Connexion</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="uo16Si7" resname="Connecté en tant que">
+        <source>Connecté en tant que</source>
+        <target>Connecté en tant que</target>
+      </trans-unit>
+      <trans-unit id="ilYcweS" resname="Se déconnecter">
+        <source>Se déconnecter</source>
+        <target>Se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="X3hZGl4" resname="Se connecter">
+        <source>Se connecter</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="JZi_tm0" resname="Email">
+        <source>Email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="uhLPWhY" resname="Mot de passe">
+        <source>Mot de passe</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="UcvUUXS" resname="Supprimer">
+        <source>Supprimer</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="tU4Tmv1" resname="← Back to list">
+        <source>← Back to list</source>
+        <target>← Back to list</target>
+      </trans-unit>
+      <trans-unit id="YoCtTqS" resname="← Back to home">
+        <source>← Back to home</source>
+        <target>← Back to home</target>
+      </trans-unit>
+      <trans-unit id="RRZu87f" resname="Articles">
+        <source>Articles</source>
+        <target>Articles</target>
+      </trans-unit>
+      <trans-unit id=".zZzsFp" resname="Title">
+        <source>Title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="62P9Pbf" resname="Résumé">
+        <source>Résumé</source>
+        <target>Résumé</target>
+      </trans-unit>
+      <trans-unit id="o8N02ol" resname="Contenu">
+        <source>Contenu</source>
+        <target>Contenu</target>
+      </trans-unit>
+      <trans-unit id="VKrWoPi" resname="Image">
+        <source>Image</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="TwAjjcI" resname="Date publication">
+        <source>Date publication</source>
+        <target>Date publication</target>
+      </trans-unit>
+      <trans-unit id="1E6yh8r" resname="Vérifié">
+        <source>Vérifié</source>
+        <target>Vérifié</target>
+      </trans-unit>
+      <trans-unit id="1_MZEgP" resname="Actions">
+        <source>Actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="qh2mgfr" resname="Oui">
+        <source>Oui</source>
+        <target>Oui</target>
+      </trans-unit>
+      <trans-unit id="F0oL3Vn" resname="Non">
+        <source>Non</source>
+        <target>Non</target>
+      </trans-unit>
+      <trans-unit id="YNZdbtH" resname="Create new">
+        <source>Create new</source>
+        <target>Create new</target>
+      </trans-unit>
+      <trans-unit id="J7363If" resname="À propos de Shareo">
+        <source>À propos de Shareo</source>
+        <target>À propos de Shareo</target>
+      </trans-unit>
+      <trans-unit id="wWT4zf4" resname="Nos">
+        <source>Nos</source>
+        <target>Nos</target>
+      </trans-unit>
+      <trans-unit id="GK8Z5Ff" resname="valeurs">
+        <source>valeurs</source>
+        <target>valeurs</target>
+      </trans-unit>
+      <trans-unit id="zubkF96" resname="Shareo est né d’une conviction simple : révolutionner la manière dont nous consommons. &#10;&#9;&#9;&#9;&#9;&#9;        Nous croyons fermement que le partage est la clé pour construire un avenir plus durable, plus solidaire et plus innovant.&#10;&#9;&#9;&#9;&#9;&#9;   Notre mission : permettre à chacun de donner, louer ou acheter facilement, tout en réduisant le gaspillage et en créant des liens.">
+        <source>Shareo est né d’une conviction simple : révolutionner la manière dont nous consommons. 
+					        Nous croyons fermement que le partage est la clé pour construire un avenir plus durable, plus solidaire et plus innovant.
+					   Notre mission : permettre à chacun de donner, louer ou acheter facilement, tout en réduisant le gaspillage et en créant des liens.</source>
+        <target>Shareo est né d’une conviction simple : révolutionner la manière dont nous consommons. 
+					        Nous croyons fermement que le partage est la clé pour construire un avenir plus durable, plus solidaire et plus innovant.
+					   Notre mission : permettre à chacun de donner, louer ou acheter facilement, tout en réduisant le gaspillage et en créant des liens.</target>
+      </trans-unit>
+      <trans-unit id="iSyBN7r" resname="Partager">
+        <source>Partager</source>
+        <target>Partager</target>
+      </trans-unit>
+      <trans-unit id="JFKsY.H" resname="Réutiliser">
+        <source>Réutiliser</source>
+        <target>Réutiliser</target>
+      </trans-unit>
+      <trans-unit id="A8Le87L" resname="Créer des liens">
+        <source>Créer des liens</source>
+        <target>Créer des liens</target>
+      </trans-unit>
+      <trans-unit id="Y51YxdI" resname="Écologie">
+        <source>Écologie</source>
+        <target>Écologie</target>
+      </trans-unit>
+      <trans-unit id="imQCe1m" resname="Encourager le partage pour réduire la surconsommation&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;                        et préserver notre environnement.">
+        <source>Encourager le partage pour réduire la surconsommation
+							                        et préserver notre environnement.</source>
+        <target>Encourager le partage pour réduire la surconsommation
+							                        et préserver notre environnement.</target>
+      </trans-unit>
+      <trans-unit id="SybtEgj" resname="Entraide">
+        <source>Entraide</source>
+        <target>Entraide</target>
+      </trans-unit>
+      <trans-unit id="58elWXA" resname="Créer une communauté basée sur l’entraide&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;                        et la confiance.">
+        <source>Créer une communauté basée sur l’entraide
+							                        et la confiance.</source>
+        <target>Créer une communauté basée sur l’entraide
+							                        et la confiance.</target>
+      </trans-unit>
+      <trans-unit id="NjtMlBd" resname="Innovation">
+        <source>Innovation</source>
+        <target>Innovation</target>
+      </trans-unit>
+      <trans-unit id="IOiThyG" resname="Proposer des solutions simples et modernes&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;                        pour consommer autrement.">
+        <source>Proposer des solutions simples et modernes
+							                        pour consommer autrement.</source>
+        <target>Proposer des solutions simples et modernes
+							                        pour consommer autrement.</target>
+      </trans-unit>
+      <trans-unit id="AnevMVY" resname="Écologique">
+        <source>Écologique</source>
+        <target>Écologique</target>
+      </trans-unit>
+      <trans-unit id="R6.U8zL" resname="Réduisez votre impact environnemental en partageant des produits.">
+        <source>Réduisez votre impact environnemental en partageant des produits.</source>
+        <target>Réduisez votre impact environnemental en partageant des produits.</target>
+      </trans-unit>
+      <trans-unit id="rMrkHNi" resname="Collaboratif">
+        <source>Collaboratif</source>
+        <target>Collaboratif</target>
+      </trans-unit>
+      <trans-unit id="CU97Qqe" resname="Une communauté basée sur la confiance et le partage.">
+        <source>Une communauté basée sur la confiance et le partage.</source>
+        <target>Une communauté basée sur la confiance et le partage.</target>
+      </trans-unit>
+      <trans-unit id="cTspjcL" resname="Économique">
+        <source>Économique</source>
+        <target>Économique</target>
+      </trans-unit>
+      <trans-unit id="RNWjOYx" resname="Louez ou achetez au meilleur prix, sans gaspillage.">
+        <source>Louez ou achetez au meilleur prix, sans gaspillage.</source>
+        <target>Louez ou achetez au meilleur prix, sans gaspillage.</target>
+      </trans-unit>
+      <trans-unit id="KPlP7iq" resname="Acheter sur Shareo">
+        <source>Acheter sur Shareo</source>
+        <target>Acheter sur Shareo</target>
+      </trans-unit>
+      <trans-unit id="rmfXdTk" resname="Achetez malin, achetez responsable">
+        <source>Achetez malin, achetez responsable</source>
+        <target>Achetez malin, achetez responsable</target>
+      </trans-unit>
+      <trans-unit id="zLnyrKz" resname="Découvrez notre marketplace de produits d'occasion vérifiés.&#10;        Jusqu'à 70% d'économies tout en consommant mieux.">
+        <source>Découvrez notre marketplace de produits d'occasion vérifiés.
+        Jusqu'à 70% d'économies tout en consommant mieux.</source>
+        <target>Découvrez notre marketplace de produits d'occasion vérifiés.
+        Jusqu'à 70% d'économies tout en consommant mieux.</target>
+      </trans-unit>
+      <trans-unit id="YgVHHFB" resname="Parcourir les produits">
+        <source>Parcourir les produits</source>
+        <target>Parcourir les produits</target>
+      </trans-unit>
+      <trans-unit id="X9BXrCY" resname="Publier une annonce">
+        <source>Publier une annonce</source>
+        <target>Publier une annonce</target>
+      </trans-unit>
+      <trans-unit id="LqZNPYk" resname="Comment ça marche ?">
+        <source>Comment ça marche ?</source>
+        <target>Comment ça marche ?</target>
+      </trans-unit>
+      <trans-unit id="6jRr1A2" resname="Comment acheter sur Shareo ?">
+        <source>Comment acheter sur Shareo ?</source>
+        <target>Comment acheter sur Shareo ?</target>
+      </trans-unit>
+      <trans-unit id="uXo1T3q" resname="Trouvez">
+        <source>Trouvez</source>
+        <target>Trouvez</target>
+      </trans-unit>
+      <trans-unit id="XEtvsh5" resname="Parcourez les produits disponibles">
+        <source>Parcourez les produits disponibles</source>
+        <target>Parcourez les produits disponibles</target>
+      </trans-unit>
+      <trans-unit id="_u4fKKm" resname="Vérifiez">
+        <source>Vérifiez</source>
+        <target>Vérifiez</target>
+      </trans-unit>
+      <trans-unit id="007lBxQ" resname="Consultez les détails et avis sur le vendeur">
+        <source>Consultez les détails et avis sur le vendeur</source>
+        <target>Consultez les détails et avis sur le vendeur</target>
+      </trans-unit>
+      <trans-unit id="qqbcSMe" resname="Achetez">
+        <source>Achetez</source>
+        <target>Achetez</target>
+      </trans-unit>
+      <trans-unit id="4JUulKW" resname="Paiement sécurisé et livraison rapide">
+        <source>Paiement sécurisé et livraison rapide</source>
+        <target>Paiement sécurisé et livraison rapide</target>
+      </trans-unit>
+      <trans-unit id="A1qxeW1" resname="Pourquoi acheter sur Shareo ?">
+        <source>Pourquoi acheter sur Shareo ?</source>
+        <target>Pourquoi acheter sur Shareo ?</target>
+      </trans-unit>
+      <trans-unit id="kOjmrQT" resname="Produits vérifiés">
+        <source>Produits vérifiés</source>
+        <target>Produits vérifiés</target>
+      </trans-unit>
+      <trans-unit id="bkoj4mA" resname="Nous demandons à nos vendeurs de vérifier leurs produits avant la vente">
+        <source>Nous demandons à nos vendeurs de vérifier leurs produits avant la vente</source>
+        <target>Nous demandons à nos vendeurs de vérifier leurs produits avant la vente</target>
+      </trans-unit>
+      <trans-unit id="LRxtrwb" resname="Économies">
+        <source>Économies</source>
+        <target>Économies</target>
+      </trans-unit>
+      <trans-unit id="mF0pHlg" resname="Vous réalisez jusqu’à 70% moins cher que le neuf">
+        <source>Vous réalisez jusqu’à 70% moins cher que le neuf</source>
+        <target>Vous réalisez jusqu’à 70% moins cher que le neuf</target>
+      </trans-unit>
+      <trans-unit id="PBmcSoN" resname="Une consommation plus durable">
+        <source>Une consommation plus durable</source>
+        <target>Une consommation plus durable</target>
+      </trans-unit>
+      <trans-unit id="wDjcrDL" resname="Garantie 30 jours">
+        <source>Garantie 30 jours</source>
+        <target>Garantie 30 jours</target>
+      </trans-unit>
+      <trans-unit id="dC2bXCJ" resname="Satisfait ou remboursé">
+        <source>Satisfait ou remboursé</source>
+        <target>Satisfait ou remboursé</target>
+      </trans-unit>
+      <trans-unit id="nHko5cP" resname="Donner sur Shareo">
+        <source>Donner sur Shareo</source>
+        <target>Donner sur Shareo</target>
+      </trans-unit>
+      <trans-unit id="af0XucM" resname="Faites un don, changez des vies">
+        <source>Faites un don, changez des vies</source>
+        <target>Faites un don, changez des vies</target>
+      </trans-unit>
+      <trans-unit id="rzQ8Mz6" resname="Découvrez les objets déjà offerts par la communauté Shareo et donnez une seconde vie à ce que vous n'utilisez plus.">
+        <source>Découvrez les objets déjà offerts par la communauté Shareo et donnez une seconde vie à ce que vous n'utilisez plus.</source>
+        <target>Découvrez les objets déjà offerts par la communauté Shareo et donnez une seconde vie à ce que vous n'utilisez plus.</target>
+      </trans-unit>
+      <trans-unit id="J3g4syI" resname="Voir les dons disponibles">
+        <source>Voir les dons disponibles</source>
+        <target>Voir les dons disponibles</target>
+      </trans-unit>
+      <trans-unit id="z9byE2a" resname="Déposer un don">
+        <source>Déposer un don</source>
+        <target>Déposer un don</target>
+      </trans-unit>
+      <trans-unit id="Zni0U6d" resname="Comment donner sur Shareo ?">
+        <source>Comment donner sur Shareo ?</source>
+        <target>Comment donner sur Shareo ?</target>
+      </trans-unit>
+      <trans-unit id="jHt3lKQ" resname="Publiez gratuitement">
+        <source>Publiez gratuitement</source>
+        <target>Publiez gratuitement</target>
+      </trans-unit>
+      <trans-unit id="E97SxAN" resname="Ajoutez votre objet à donner avec photos et description, en quelques clics.">
+        <source>Ajoutez votre objet à donner avec photos et description, en quelques clics.</source>
+        <target>Ajoutez votre objet à donner avec photos et description, en quelques clics.</target>
+      </trans-unit>
+      <trans-unit id="H0MObR3" resname="Entrez en contact">
+        <source>Entrez en contact</source>
+        <target>Entrez en contact</target>
+      </trans-unit>
+      <trans-unit id="eJUg80D" resname="Échangez avec des personnes intéressées près de chez vous.">
+        <source>Échangez avec des personnes intéressées près de chez vous.</source>
+        <target>Échangez avec des personnes intéressées près de chez vous.</target>
+      </trans-unit>
+      <trans-unit id="qDVp4mp" resname="Transmettez">
+        <source>Transmettez</source>
+        <target>Transmettez</target>
+      </trans-unit>
+      <trans-unit id="HHldl4t" resname="Remettez votre objet en main propre et offrez-lui une seconde vie.">
+        <source>Remettez votre objet en main propre et offrez-lui une seconde vie.</source>
+        <target>Remettez votre objet en main propre et offrez-lui une seconde vie.</target>
+      </trans-unit>
+      <trans-unit id="FMysTcN" resname="Pourquoi donner sur Shareo ?">
+        <source>Pourquoi donner sur Shareo ?</source>
+        <target>Pourquoi donner sur Shareo ?</target>
+      </trans-unit>
+      <trans-unit id="sAx2BNK" resname="Solidaire">
+        <source>Solidaire</source>
+        <target>Solidaire</target>
+      </trans-unit>
+      <trans-unit id="i6LPOdn" resname="Aidez des personnes près de chez vous en donnant ce dont vous n'avez plus besoin.">
+        <source>Aidez des personnes près de chez vous en donnant ce dont vous n'avez plus besoin.</source>
+        <target>Aidez des personnes près de chez vous en donnant ce dont vous n'avez plus besoin.</target>
+      </trans-unit>
+      <trans-unit id="bNvkFA3" resname="Réduisez le gaspillage en offrant une seconde vie à vos objets.">
+        <source>Réduisez le gaspillage en offrant une seconde vie à vos objets.</source>
+        <target>Réduisez le gaspillage en offrant une seconde vie à vos objets.</target>
+      </trans-unit>
+      <trans-unit id="XVMefib" resname="Simple &amp; Humain">
+        <source>Simple &amp; Humain</source>
+        <target><![CDATA[Simple & Humain]]></target>
+      </trans-unit>
+      <trans-unit id="Cp.iSDH" resname="Un geste simple, gratuit et local qui crée du lien dans votre communauté.">
+        <source>Un geste simple, gratuit et local qui crée du lien dans votre communauté.</source>
+        <target>Un geste simple, gratuit et local qui crée du lien dans votre communauté.</target>
+      </trans-unit>
+      <trans-unit id="iZc_fdN" resname="Vous aussi, proposez un don">
+        <source>Vous aussi, proposez un don</source>
+        <target>Vous aussi, proposez un don</target>
+      </trans-unit>
+      <trans-unit id="YzLx.gW" resname="Un objet inutilisé peut faire le bonheur de quelqu'un d'autre.">
+        <source>Un objet inutilisé peut faire le bonheur de quelqu'un d'autre.</source>
+        <target>Un objet inutilisé peut faire le bonheur de quelqu'un d'autre.</target>
+      </trans-unit>
+      <trans-unit id="3DTrGnR" resname="Brocante">
+        <source>Brocante</source>
+        <target>Brocante</target>
+      </trans-unit>
+      <trans-unit id="9cnLmZb" resname="Vendez en gros, libérez votre espace, faites une bonne action">
+        <source>Vendez en gros, libérez votre espace, faites une bonne action</source>
+        <target>Vendez en gros, libérez votre espace, faites une bonne action</target>
+      </trans-unit>
+      <trans-unit id="EJkg.i8" resname="Débarrassez-vous de vos encombrants sans bouger de chez vous. Une simple annonce sur Shareo et tout part en lots ! Faites du bien autour de vous et gagnez de la place sans tracasseries.">
+        <source>Débarrassez-vous de vos encombrants sans bouger de chez vous. Une simple annonce sur Shareo et tout part en lots ! Faites du bien autour de vous et gagnez de la place sans tracasseries.</source>
+        <target>Débarrassez-vous de vos encombrants sans bouger de chez vous. Une simple annonce sur Shareo et tout part en lots ! Faites du bien autour de vous et gagnez de la place sans tracasseries.</target>
+      </trans-unit>
+      <trans-unit id="gMuTCgQ" resname="Parcourir les annonces">
+        <source>Parcourir les annonces</source>
+        <target>Parcourir les annonces</target>
+      </trans-unit>
+      <trans-unit id="rEwWa2M" resname="Comment organiser votre vide-grenier sur Shareo ?">
+        <source>Comment organiser votre vide-grenier sur Shareo ?</source>
+        <target>Comment organiser votre vide-grenier sur Shareo ?</target>
+      </trans-unit>
+      <trans-unit id="_aZswLq" resname="Publiez en lot">
+        <source>Publiez en lot</source>
+        <target>Publiez en lot</target>
+      </trans-unit>
+      <trans-unit id="p3N6x5q" resname="Mettez en ligne plusieurs articles à la fois : vêtements, meubles, objets déco ou équipements.">
+        <source>Mettez en ligne plusieurs articles à la fois : vêtements, meubles, objets déco ou équipements.</source>
+        <target>Mettez en ligne plusieurs articles à la fois : vêtements, meubles, objets déco ou équipements.</target>
+      </trans-unit>
+      <trans-unit id="16LKdk4" resname="Attirez les acheteurs">
+        <source>Attirez les acheteurs</source>
+        <target>Attirez les acheteurs</target>
+      </trans-unit>
+      <trans-unit id="SlFs2Ob" resname="Partagez votre vide-grenier sur les réseaux sociaux et trouvez rapidement des acheteurs intéressés.">
+        <source>Partagez votre vide-grenier sur les réseaux sociaux et trouvez rapidement des acheteurs intéressés.</source>
+        <target>Partagez votre vide-grenier sur les réseaux sociaux et trouvez rapidement des acheteurs intéressés.</target>
+      </trans-unit>
+      <trans-unit id="5rZb0wn" resname="Vendez en quantité">
+        <source>Vendez en quantité</source>
+        <target>Vendez en quantité</target>
+      </trans-unit>
+      <trans-unit id="szvuMxh" resname="Écoulez plusieurs articles en une seule opération et libérez de l'espace chez vous.">
+        <source>Écoulez plusieurs articles en une seule opération et libérez de l'espace chez vous.</source>
+        <target>Écoulez plusieurs articles en une seule opération et libérez de l'espace chez vous.</target>
+      </trans-unit>
+      <trans-unit id="J.JN6L3" resname="Pourquoi choisir Shareo pour votre vide-grenier ?">
+        <source>Pourquoi choisir Shareo pour votre vide-grenier ?</source>
+        <target>Pourquoi choisir Shareo pour votre vide-grenier ?</target>
+      </trans-unit>
+      <trans-unit id="Aj3MF.B" resname="Vente en masse">
+        <source>Vente en masse</source>
+        <target>Vente en masse</target>
+      </trans-unit>
+      <trans-unit id="OrO5knK" resname="Vendez plusieurs objets en même temps sans créer une annonce pour chaque article.">
+        <source>Vendez plusieurs objets en même temps sans créer une annonce pour chaque article.</source>
+        <target>Vendez plusieurs objets en même temps sans créer une annonce pour chaque article.</target>
+      </trans-unit>
+      <trans-unit id="UoyIYLD" resname="Rapide &amp; Efficace">
+        <source>Rapide &amp; Efficace</source>
+        <target><![CDATA[Rapide & Efficace]]></target>
+      </trans-unit>
+      <trans-unit id="96zyHXY" resname="Organisez votre vide-grenier en ligne et trouvez preneur plus rapidement.">
+        <source>Organisez votre vide-grenier en ligne et trouvez preneur plus rapidement.</source>
+        <target>Organisez votre vide-grenier en ligne et trouvez preneur plus rapidement.</target>
+      </trans-unit>
+      <trans-unit id="d7nnodT" resname="Faites de la place">
+        <source>Faites de la place</source>
+        <target>Faites de la place</target>
+      </trans-unit>
+      <trans-unit id="a_is1_9" resname="Désencombrez votre intérieur tout en générant des revenus supplémentaires.">
+        <source>Désencombrez votre intérieur tout en générant des revenus supplémentaires.</source>
+        <target>Désencombrez votre intérieur tout en générant des revenus supplémentaires.</target>
+      </trans-unit>
+      <trans-unit id="w3d1ngc" resname="Louer sur Shareo">
+        <source>Louer sur Shareo</source>
+        <target>Louer sur Shareo</target>
+      </trans-unit>
+      <trans-unit id="XFgQwm_" resname="Louez ce dont vous avez besoin, quand vous en avez besoin">
+        <source>Louez ce dont vous avez besoin, quand vous en avez besoin</source>
+        <target>Louez ce dont vous avez besoin, quand vous en avez besoin</target>
+      </trans-unit>
+      <trans-unit id="EuLEuE8" resname="Accédez à une large gamme de produits à louer, Économisez de l'argent et de l'espace grâce à la location.">
+        <source>Accédez à une large gamme de produits à louer, Économisez de l'argent et de l'espace grâce à la location.</source>
+        <target>Accédez à une large gamme de produits à louer, Économisez de l'argent et de l'espace grâce à la location.</target>
+      </trans-unit>
+      <trans-unit id="WgFcifI" resname="Parcourir les locations">
+        <source>Parcourir les locations</source>
+        <target>Parcourir les locations</target>
+      </trans-unit>
+      <trans-unit id="YVoCKoJ" resname="Comment louer sur Shareo ?">
+        <source>Comment louer sur Shareo ?</source>
+        <target>Comment louer sur Shareo ?</target>
+      </trans-unit>
+      <trans-unit id="JPyfWT." resname="Choisissez">
+        <source>Choisissez</source>
+        <target>Choisissez</target>
+      </trans-unit>
+      <trans-unit id="lehZ61k" resname="Sélectionnez votre produit et la durée">
+        <source>Sélectionnez votre produit et la durée</source>
+        <target>Sélectionnez votre produit et la durée</target>
+      </trans-unit>
+      <trans-unit id="b55RAp1" resname="Réservez">
+        <source>Réservez</source>
+        <target>Réservez</target>
+      </trans-unit>
+      <trans-unit id="qXKMwKX" resname="Paiement sécurisé et contrat en ligne">
+        <source>Paiement sécurisé et contrat en ligne</source>
+        <target>Paiement sécurisé et contrat en ligne</target>
+      </trans-unit>
+      <trans-unit id="r8ssP6D" resname="Profitez">
+        <source>Profitez</source>
+        <target>Profitez</target>
+      </trans-unit>
+      <trans-unit id="Fx.1OOH" resname="Livraison ou retrait selon votre choix">
+        <source>Livraison ou retrait selon votre choix</source>
+        <target>Livraison ou retrait selon votre choix</target>
+      </trans-unit>
+      <trans-unit id="SLduvwV" resname="Pourquoi louer sur Shareo ?">
+        <source>Pourquoi louer sur Shareo ?</source>
+        <target>Pourquoi louer sur Shareo ?</target>
+      </trans-unit>
+      <trans-unit id="xqA0bcB" resname="Payez uniquement le temps d'utilisation, jusqu'à 80% moins cher que l'achat.">
+        <source>Payez uniquement le temps d'utilisation, jusqu'à 80% moins cher que l'achat.</source>
+        <target>Payez uniquement le temps d'utilisation, jusqu'à 80% moins cher que l'achat.</target>
+      </trans-unit>
+      <trans-unit id="IAfibnJ" resname="Moins de surconsommation, plus de partage et moins de déchets.">
+        <source>Moins de surconsommation, plus de partage et moins de déchets.</source>
+        <target>Moins de surconsommation, plus de partage et moins de déchets.</target>
+      </trans-unit>
+      <trans-unit id="lblylIc" resname="Pratique">
+        <source>Pratique</source>
+        <target>Pratique</target>
+      </trans-unit>
+      <trans-unit id="O4Sc05K" resname="Accédez à des produits spécialisés sans engagement.">
+        <source>Accédez à des produits spécialisés sans engagement.</source>
+        <target>Accédez à des produits spécialisés sans engagement.</target>
+      </trans-unit>
+      <trans-unit id="4iRtdnb" resname="Contact">
+        <source>Contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="mM9b8DT" resname="Un projet en tête ? Une question ? Besoin d'aide ? Nous sommes là pour vous !">
+        <source>Un projet en tête ? Une question ? Besoin d'aide ? Nous sommes là pour vous !</source>
+        <target>Un projet en tête ? Une question ? Besoin d'aide ? Nous sommes là pour vous !</target>
+      </trans-unit>
+      <trans-unit id="Wki9Y8V" resname="Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.">
+        <source>Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.</source>
+        <target>Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.</target>
+      </trans-unit>
+      <trans-unit id="zxWHnHm" resname="Contactez-nous">
+        <source>Contactez-nous</source>
+        <target>Contactez-nous</target>
+      </trans-unit>
+      <trans-unit id="pjCtDqd" resname="Une question ? Une suggestion ? Notre équipe vous répond rapidement.">
+        <source>Une question ? Une suggestion ? Notre équipe vous répond rapidement.</source>
+        <target>Une question ? Une suggestion ? Notre équipe vous répond rapidement.</target>
+      </trans-unit>
+      <trans-unit id="XiKlZgD" resname="Nom complet *">
+        <source>Nom complet *</source>
+        <target>Nom complet *</target>
+      </trans-unit>
+      <trans-unit id="3CwL1H3" resname="Adresse email *">
+        <source>Adresse email *</source>
+        <target>Adresse email *</target>
+      </trans-unit>
+      <trans-unit id="aHcBT8F" resname="Téléphone">
+        <source>Téléphone</source>
+        <target>Téléphone</target>
+      </trans-unit>
+      <trans-unit id="GygO614" resname="optionnel">
+        <source>optionnel</source>
+        <target>optionnel</target>
+      </trans-unit>
+      <trans-unit id="dzywWHk" resname="Site web">
+        <source>Site web</source>
+        <target>Site web</target>
+      </trans-unit>
+      <trans-unit id="0t.K1yi" resname="Adresse postale">
+        <source>Adresse postale</source>
+        <target>Adresse postale</target>
+      </trans-unit>
+      <trans-unit id="Nu69N.i" resname="Message *">
+        <source>Message *</source>
+        <target>Message *</target>
+      </trans-unit>
+      <trans-unit id="tceWYSf" resname="Votre message...">
+        <source>Votre message...</source>
+        <target>Votre message...</target>
+      </trans-unit>
+      <trans-unit id="jKpmfZA" resname="Envoyer le message">
+        <source>Envoyer le message</source>
+        <target>Envoyer le message</target>
+      </trans-unit>
+      <trans-unit id="tJvePrn" resname="Vous pouvez également nous rejoindre dans nos locaux">
+        <source>Vous pouvez également nous rejoindre dans nos locaux</source>
+        <target>Vous pouvez également nous rejoindre dans nos locaux</target>
+      </trans-unit>
+      <trans-unit id="JCa531T" resname="Contacter le vendeur">
+        <source>Contacter le vendeur</source>
+        <target>Contacter le vendeur</target>
+      </trans-unit>
+      <trans-unit id="anADEz0" resname="La plateforme innovante de location et d'achat de produits.&#10;                    Économique, écologique, pratique.">
+        <source>La plateforme innovante de location et d'achat de produits.
+                    Économique, écologique, pratique.</source>
+        <target>La plateforme innovante de location et d'achat de produits.
+                    Économique, écologique, pratique.</target>
+      </trans-unit>
+      <trans-unit id=".kpKYdX" resname="Liens rapides">
+        <source>Liens rapides</source>
+        <target>Liens rapides</target>
+      </trans-unit>
+      <trans-unit id="3PMa7CE" resname="Accueil">
+        <source>Accueil</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="aWnhHeg" resname="Acheter">
+        <source>Acheter</source>
+        <target>Acheter</target>
+      </trans-unit>
+      <trans-unit id="jvfcya9" resname="Louer">
+        <source>Louer</source>
+        <target>Louer</target>
+      </trans-unit>
+      <trans-unit id="96WWbQV" resname="Don">
+        <source>Don</source>
+        <target>Don</target>
+      </trans-unit>
+      <trans-unit id="wyP_AIR" resname="Service client">
+        <source>Service client</source>
+        <target>Service client</target>
+      </trans-unit>
+      <trans-unit id="cZlKoA5" resname="Aide &amp; FAQ">
+        <source>Aide &amp; FAQ</source>
+        <target><![CDATA[Aide & FAQ]]></target>
+      </trans-unit>
+      <trans-unit id="FQ9AlBH" resname="Suivi de commande">
+        <source>Suivi de commande</source>
+        <target>Suivi de commande</target>
+      </trans-unit>
+      <trans-unit id="wzeEjPL" resname="Retours &amp; Remboursements">
+        <source>Retours &amp; Remboursements</source>
+        <target><![CDATA[Retours & Remboursements]]></target>
+      </trans-unit>
+      <trans-unit id="t.2lNTs" resname="À propos">
+        <source>À propos</source>
+        <target>À propos</target>
+      </trans-unit>
+      <trans-unit id="s2yo9Sc" resname="Newsletter">
+        <source>Newsletter</source>
+        <target>Newsletter</target>
+      </trans-unit>
+      <trans-unit id="4QXvZ2L" resname="Inscrivez-vous pour recevoir nos offres exclusives">
+        <source>Inscrivez-vous pour recevoir nos offres exclusives</source>
+        <target>Inscrivez-vous pour recevoir nos offres exclusives</target>
+      </trans-unit>
+      <trans-unit id="krmW8mA" resname="Votre email">
+        <source>Votre email</source>
+        <target>Votre email</target>
+      </trans-unit>
+      <trans-unit id="7iDc8QC" resname="S'inscrire">
+        <source>S'inscrire</source>
+        <target>S'inscrire</target>
+      </trans-unit>
+      <trans-unit id="eAkVWDn" resname="Tous droits réservés.">
+        <source>Tous droits réservés.</source>
+        <target>Tous droits réservés.</target>
+      </trans-unit>
+      <trans-unit id="R3ZwJe4" resname="Conditions générales">
+        <source>Conditions générales</source>
+        <target>Conditions générales</target>
+      </trans-unit>
+      <trans-unit id="MiQ0Vs2" resname="Politique de confidentialité">
+        <source>Politique de confidentialité</source>
+        <target>Politique de confidentialité</target>
+      </trans-unit>
+      <trans-unit id="Rr.A5n1" resname="Mentions légales">
+        <source>Mentions légales</source>
+        <target>Mentions légales</target>
+      </trans-unit>
+      <trans-unit id="BCGjfox" resname="Users">
+        <source>Users</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="wmlL5M4" resname="Categories">
+        <source>Categories</source>
+        <target>Categories</target>
+      </trans-unit>
+      <trans-unit id="SdNWA5t" resname="Search">
+        <source>Search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="X.UQqCk" resname="Français">
+        <source>Français</source>
+        <target>Français</target>
+      </trans-unit>
+      <trans-unit id="NR2RdXC" resname="English">
+        <source>English</source>
+        <target>English</target>
+      </trans-unit>
+      <trans-unit id="Asuv.ui" resname="Español">
+        <source>Español</source>
+        <target>Español</target>
+      </trans-unit>
+      <trans-unit id="w62hgbT" resname="Italiano">
+        <source>Italiano</source>
+        <target>Italiano</target>
+      </trans-unit>
+      <trans-unit id="fGfBzt6" resname="Register">
+        <source>Register</source>
+        <target>Register</target>
+      </trans-unit>
+      <trans-unit id="4f3WEva" resname="Login">
+        <source>Login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="JKl2Twv" resname="Logout">
+        <source>Logout</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="GHLJT4." resname="S’inscrire">
+        <source>S’inscrire</source>
+        <target>S’inscrire</target>
+      </trans-unit>
+      <trans-unit id="6O3nWZM" resname="Hi! Please confirm your email!">
+        <source>Hello ! Active ton compte en confirmant ton e-mail!</source>
+        <target>Hello ! Active ton compte en confirmant ton e-mail!</target>
+      </trans-unit>
+      <trans-unit id="wClX3S1" resname="Shareo||Plateforme de location &amp; d'achat">
+        <source>Shareo||Plateforme de location &amp; d'achat</source>
+        <target><![CDATA[Shareo||Plateforme de location & d'achat]]></target>
+      </trans-unit>
+      <trans-unit id="b.gZrOW" resname="Bienvenue sur">
+        <source>Bienvenue sur</source>
+        <target>Bienvenue sur</target>
+      </trans-unit>
+      <trans-unit id="ct.GUg." resname="La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.">
+        <source>La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.</source>
+        <target>La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.</target>
+      </trans-unit>
+      <trans-unit id="8tVE8Iz" resname="Découvrez la mission de Shareo">
+        <source>Découvrez la mission de Shareo</source>
+        <target>Découvrez la mission de Shareo</target>
+      </trans-unit>
+      <trans-unit id="SFRf.in" resname="Slide">
+        <source>Slide</source>
+        <target>Slide</target>
+      </trans-unit>
+      <trans-unit id="OHrkz6P" resname="Précédent">
+        <source>Précédent</source>
+        <target>Précédent</target>
+      </trans-unit>
+      <trans-unit id="TxfNY1f" resname="Suivant">
+        <source>Suivant</source>
+        <target>Suivant</target>
+      </trans-unit>
+      <trans-unit id="w_v6arz" resname="Produits récents">
+        <source>Produits récents</source>
+        <target>Produits récents</target>
+      </trans-unit>
+      <trans-unit id="ma_KHEF" resname="Voir le produit">
+        <source>Voir le produit</source>
+        <target>Voir le produit</target>
+      </trans-unit>
+      <trans-unit id="5PK6Y1h" resname="Aucun article disponible">
+        <source>Aucun article disponible</source>
+        <target>Aucun article disponible</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

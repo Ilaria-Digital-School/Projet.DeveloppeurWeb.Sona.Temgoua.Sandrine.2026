@@ -1,0 +1,47 @@
+{# templates/article/_pagination.html.twig #}
+
+{% if totalPages > 1 %}
+<div class="flex items-center justify-between flex-wrap gap-4">
+    <div class="text-sm text-gray-700">
+        Page <span class="font-medium">{{ currentPage }}</span> sur <span class="font-medium">{{ totalPages }}</span>
+    </div>
+    <div class="flex space-x-1">
+        {% if currentPage > 1 %}
+            <a href="#" class="pagination-link px-3 py-1 border rounded hover:bg-gray-100" data-page="{{ currentPage - 1 }}">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+        {% endif %}
+        
+        {% set start = max(1, currentPage - 2) %}
+        {% set end = min(totalPages, currentPage + 2) %}
+        
+        {% if start > 1 %}
+            <a href="#" class="pagination-link px-3 py-1 border rounded hover:bg-gray-100" data-page="1">1</a>
+            {% if start > 2 %}
+                <span class="px-3 py-1">...</span>
+            {% endif %}
+        {% endif %}
+        
+        {% for page in start..end %}
+            {% if page == currentPage %}
+                <span class="px-3 py-1 bg-blue-600 text-white rounded">{{ page }}</span>
+            {% else %}
+                <a href="#" class="pagination-link px-3 py-1 border rounded hover:bg-gray-100" data-page="{{ page }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        
+        {% if end < totalPages %}
+            {% if end < totalPages - 1 %}
+                <span class="px-3 py-1">...</span>
+            {% endif %}
+            <a href="#" class="pagination-link px-3 py-1 border rounded hover:bg-gray-100" data-page="{{ totalPages }}">{{ totalPages }}</a>
+        {% endif %}
+        
+        {% if currentPage < totalPages %}
+            <a href="#" class="pagination-link px-3 py-1 border rounded hover:bg-gray-100" data-page="{{ currentPage + 1 }}">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

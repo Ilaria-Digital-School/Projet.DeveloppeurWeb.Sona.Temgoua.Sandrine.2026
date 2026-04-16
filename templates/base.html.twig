@@ -15,7 +15,7 @@
 		<!-- Favicon avec fallback pour différents formats -->
 		<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
 		<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon/favicon-32x32.png') }}">
-		<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon/favicon-16x16.png') }}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon/favicon.ico') }}">
 		<link rel="manifest" href="{{ asset('images/favicon/site.webmanifest') }}">
 		
 
@@ -33,7 +33,7 @@
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 		{% endblock %}
 	</head>
-	<body>
+	<body class="d-flex flex-column min-vh-100">
 		{% block header %}
 			{% include 'partials/header.html.twig' %}
 		{% endblock %}
@@ -42,7 +42,9 @@
 			{% include 'partials/flash_message.html.twig' %}
 		{% endblock %}
 
-		{% block body %}{% endblock %}
+		<main class="flex-grow-1">
+    {% block body %}{% endblock %}
+</main>
 
 		{% block footer %}
 			{% include 'partials/footer.html.twig' %}

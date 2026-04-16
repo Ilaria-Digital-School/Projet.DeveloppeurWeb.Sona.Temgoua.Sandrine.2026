@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Louer sur Shareo{% endblock %}
+{% block title %}{% trans %}Louer sur Shareo{% endtrans %}{% endblock %}
 
 {% block body %}
 
@@ -22,19 +22,30 @@
   <div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
     <div class="col-lg-8">
       <h1 class="fw-bold mb-4">
-        Louez ce dont vous avez besoin, quand vous en avez besoin
+        {% trans %}Louez ce dont vous avez besoin, quand vous en avez besoin{% endtrans %}
       </h1>
 
       <p class="lead mb-4">
-       <strong>Accédez à une large gamme de produits à louer,Économisez de l’argent et de l’espace grâce à la location.</strong>
+       <strong>{% trans %}Accédez à une large gamme de produits à louer, Économisez de l'argent et de l'espace grâce à la location.{% endtrans %}</strong>
       </p>
 
       <div class="d-flex justify-content-center gap-3 flex-wrap">
         <a href="#products" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
-          Parcourir les locations
+          {% trans %}Parcourir les locations{% endtrans %}
         </a>
+        {# Bouton qui redirige vers la page register si visiteur non connecté #}
+			{% if app.user %}
+    <a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+        {% trans %}Publier une annonce{% endtrans %}
+    </a>
+{% else %}
+    <a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+        {% trans %}Publier une annonce{% endtrans %}
+    </a>
+{% endif %}
+
         <a href="#how-it-works" class="btn btn-outline-light btn-lg rounded-pill px-5">
-          Comment ça marche ?
+          {% trans %}Comment ça marche ?{% endtrans %}
         </a>
       </div>
     </div>
@@ -52,7 +63,7 @@
 <section id="how-it-works" class="py-5 bg-light">
     <div class="container">
         <h2 class="fw-bold text-center text-dark mb-5">
-            Comment louer sur Shareo ?
+            {% trans %}Comment louer sur Shareo ?{% endtrans %}
         </h2>
 
         <div class="row g-4 text-center">
@@ -60,9 +71,9 @@
                 <div class="card border-0 h-100">
                     <div class="card-body">
                         <h1 class="fw-bold text-success">1</h1>
-                        <h5>Choisissez</h5>
+                        <h5 class="fw-bold">{% trans %}Choisissez{% endtrans %}</h5>
                         <p class="text-muted">
-                            Sélectionnez votre produit et la durée
+                            {% trans %}Sélectionnez votre produit et la durée{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -72,9 +83,9 @@
                 <div class="card border-0 h-100">
                     <div class="card-body">
                         <h1 class="fw-bold text-success">2</h1>
-                        <h5>Réservez</h5>
+                        <h5 class="fw-bold">{% trans %}Réservez{% endtrans %}</h5>
                         <p class="text-muted">
-                            Paiement sécurisé et contrat en ligne
+                            {% trans %}Paiement sécurisé et contrat en ligne{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -84,9 +95,9 @@
                 <div class="card border-0 h-100">
                     <div class="card-body">
                         <h1 class="fw-bold text-success">3</h1>
-                        <h5>Profitez</h5>
+                        <h5 class="fw-bold">{% trans %}Profitez{% endtrans %}</h5>
                         <p class="text-muted">
-                            Livraison ou retrait selon votre choix
+                            {% trans %}Livraison ou retrait selon votre choix{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -99,7 +110,7 @@
 <section class="py-5 bg-light">
     <div class="container">
         <h2 class="fw-bold text-center text-dark mb-5">
-            Pourquoi louer sur Shareo ?
+            {% trans %}Pourquoi louer sur Shareo ?{% endtrans %}
         </h2>
 
         <div class="row g-4 text-center">
@@ -107,10 +118,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-euro-sign fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">Économique</h5>
+                        <h5 class="fw-bold">{% trans %}Économique{% endtrans %}</h5>
                         <p class="text-muted">
-                            Payez uniquement le temps d’utilisation,
-                            jusqu’à 80% moins cher que l’achat.
+                            {% trans %}Payez uniquement le temps d'utilisation, jusqu'à 80% moins cher que l'achat.{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -120,10 +130,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-leaf fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">Écologique</h5>
+                        <h5 class="fw-bold">{% trans %}Écologique{% endtrans %}</h5>
                         <p class="text-muted">
-                            Moins de surconsommation,
-                            plus de partage et moins de déchets.
+                            {% trans %}Moins de surconsommation, plus de partage et moins de déchets.{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -133,10 +142,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-tools fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">Pratique</h5>
+                        <h5 class="fw-bold">{% trans %}Pratique{% endtrans %}</h5>
                         <p class="text-muted">
-                            Accédez à des produits spécialisés
-                            sans engagement.
+                            {% trans %}Accédez à des produits spécialisés sans engagement.{% endtrans %}
                         </p>
                     </div>
                 </div>

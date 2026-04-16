@@ -1,6 +1,51 @@
-{{ form_start(form, {'attr': {'class': 'card p-4 shadow-sm'}}) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success mt-3">
-        {{ button_label|default('Save') }}
+{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+
+{{ form_errors(form) }}
+
+<div class="row g-3">
+
+    <div class="col-12">
+        {{ form_row(form.title) }}
+    </div>
+
+    <div class="col-12">
+        {{ form_row(form.summary) }}
+    </div>
+
+    <div class="col-12">
+        {{ form_row(form.content) }}
+    </div>
+
+    {# ✅ AJOUT OBLIGATOIRE #}
+    <div class="col-md-6">
+        {{ form_row(form.cathegory) }}
+    </div>
+
+    <div class="col-md-6">
+        {{ form_row(form.transactionType) }}
+    </div>
+
+    {# Image principale #}
+    <div class="col-12">
+        {{ form_row(form.image) }}
+    </div>
+
+    {# Upload images #}
+    <div class="col-12 mt-3">
+        <label class="form-label fw-semibold">📸 Ajouter des images</label>
+        {{ form_widget(form.images, {'attr': {'multiple': true}}) }}
+    </div>
+
+</div>
+
+{{ form_rest(form) }}
+
+<div class="d-flex justify-content-end mt-4">
+    <button class="btn btn-success rounded-pill px-4">
+        {{ button_label|default('Enregistrer') }}
     </button>
+</div>
+
+
 {{ form_end(form) }}
+

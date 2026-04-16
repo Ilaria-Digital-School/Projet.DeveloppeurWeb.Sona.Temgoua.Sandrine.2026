@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,8 +32,8 @@ class Article
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $publishedAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $isVerified = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isVerified = false;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Cathegory $cathegory = null;
@@ -43,6 +45,17 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $author = null;
+
+    /**
+     * @var Collection<int, Image>
+     */
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'article')]
+    private Collection $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -132,7 +145,7 @@ class Article
 
         return $this;
     }
-    
+
     #[ORM\PrePersist]
     public function setPublishedAtValue(): void
     {
@@ -151,27 +164,56 @@ class Article
         return $this;
     }
     public function getTransactionType(): ?string
-{
-    return $this->transactionType;
-}
+    {
+        return $this->transactionType;
+    }
 
-public function setTransactionType(string $transactionType): static
-{
-    $this->transactionType = $transactionType;
+    public function setTransactionType(string $transactionType): static
+    {
+        $this->transactionType = $transactionType;
 
-    return $this;
-}
+        return $this;
+    }
 
-public function getAuthor(): ?User
-{
-    return $this->author;
-}
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
 
-public function setAuthor(?User $author): static
-{
-    $this->author = $author;
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
 
-    return $this;
-}
+        return $this;
+    }
 
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getArticle() === $this) {
+                $image->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
 }

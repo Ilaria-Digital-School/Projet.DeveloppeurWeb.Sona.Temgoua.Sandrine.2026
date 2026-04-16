@@ -1,74 +1,135 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
 <div class="container py-5">
+
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-lg-10">
 
-            <div class="card shadow-sm">
-                <div class="card-body">
+            {# ===================== #}
+            {# CARD PRINCIPALE       #}
+            {# ===================== #}
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
 
-                    <h1 class="h3 mb-4 text-success">Article Details</h1>
+                {# ===================== #}
+                {# SLIDER IMAGES        #}
+                {# ===================== #}
+                {% if article.images|length > 0 %}
+                <div id="articleCarousel" class="carousel slide" data-bs-ride="carousel">
 
-                    <table class="table table-bordered table-striped align-middle">
-                        <tbody>
-                            <tr>
-                                <th class="w-25">Id</th>
-                                <td>{{ article.id }}</td>
-                            </tr>
-                            <tr>
-                                <th>Title</th>
-                                <td>{{ article.title }}</td>
-                            </tr>
-                            <tr>
-                                <th>Slug</th>
-                                <td>{{ article.slug }}</td>
-                            </tr>
-                            <tr>
-                                <th>Summary</th>
-                                <td>{{ article.summary }}</td>
-                            </tr>
-                            <tr>
-                                <th>Content</th>
-                                <td>{{ article.content }}</td>
-                            </tr>
-                            <tr>
-                                <th>Published At</th>
-                                <td>{{ article.publishedAt ? article.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Verified</th>
-                                <td>
-                                    {% if article.isVerified %}
-                                        <span class="badge bg-success">Yes</span>
-                                    {% else %}
-                                        <span class="badge bg-secondary">No</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="carousel-inner">
 
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ path('app_article_index') }}" class="btn btn-outline-success">
-                            ← Back to list
-                        </a>
+                        {% for image in article.images %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            
+                            <div class="position-relative">
 
-                        <div class="d-flex gap-2">
-                            <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success">
-                                ✏ Edit
-                            </a>
+                                <img src="{{ asset('images/' ~ image.image) }}"
+                                     class="d-block w-100"
+                                     style="height: 400px; object-fit: cover;">
 
-                            {{ include('article/_delete_form.html.twig') }}
+                                {# 🔥 BOUTON SUPPRIMER SUR IMAGE (OWNER ONLY) #}
+                                {% if is_granted('ARTICLE_DELETE', article) %}
+                                    <form method="post"
+                                          action="{{ path('app_image_delete', {'id': image.id}) }}"
+                                          class="position-absolute top-0 end-0 m-3">
+
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+
+                                        <button class="btn btn-danger btn-sm shadow">
+                                            🗑 Supprimer
+                                        </button>
+                                    </form>
+                                {% endif %}
+
+                            </div>
+
                         </div>
+                        {% endfor %}
+
                     </div>
 
+                    {# CONTROLS #}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#articleCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#articleCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+
                 </div>
+                {% endif %}
+
+                {# ===================== #}
+                {# CONTENU ARTICLE      #}
+                {# ===================== #}
+                <div class="card-body p-5">
+
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h1 class="fw-bold">{{ article.title }}</h1>
+
+                        {% if article.isVerified %}
+                            <span class="badge bg-success">✔ Verified</span>
+                        {% endif %}
+                    </div>
+
+                    <p class="text-muted mb-4">
+                        {{ article.publishedAt ? article.publishedAt|date('d M Y à H:i') : '' }}
+                    </p>
+
+                    <h5 class="fw-semibold">Résumé</h5>
+                    <p class="text-muted">{{ article.summary }}</p>
+
+                    <hr>
+
+                    <h5 class="fw-semibold">Contenu</h5>
+                    <p style="line-height: 1.8;">
+                        {{ article.content }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {# ============================= #}
+            {# ACTIONS                      #}
+            {# ============================= #}
+            <div class="d-flex justify-content-between mt-4">
+
+                {% if app.user %}
+                    <a href="{{ path('app_article_index') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                        ← Retour
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_home') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                        ← Accueil
+                    </a>
+                {% endif %}
+
+                {% if app.user %}
+                <div class="d-flex gap-2">
+
+                    {% if is_granted('ARTICLE_EDIT', article) %}
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}"
+                           class="btn btn-success rounded-pill px-4">
+                            ✏ Modifier
+                        </a>
+                    {% endif %}
+
+                    {% if is_granted('ARTICLE_DELETE', article) %}
+                        {{ include('article/_delete_form.html.twig') }}
+                    {% endif %}
+
+                </div>
+                {% endif %}
+
             </div>
 
         </div>
     </div>
+
 </div>
 {% endblock %}

@@ -1,56 +1,113 @@
 <?php
+// src/Form/ArticleType.php
 
 namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Cathegory;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Image;
 
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('summary')
-            ->add('content')
-            /*  ->add('publishedAt', null, [
-                'widget' => 'single_text',
-            ]) */
-            //->add('isVerified')
+            ->add('title', TextType::class, [
+                'label' => 'Titre de l\'article',
+                'attr' => [
+                    'class' => 'form-input',
+                    'placeholder' => 'Entrez un titre accrocheur...'
+                ]
+            ])
+           
+            ->add('summary', TextareaType::class, [
+                'label' => 'Résumé',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-textarea',
+                    'rows' => 3,
+                    'placeholder' => 'Un bref résumé de votre article...'
+                ]
+            ])
+            
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu',
+                'attr' => [
+                    'class' => 'form-textarea rich-editor',
+                    'rows' => 15,
+                    'placeholder' => 'Rédigez votre article ici...'
+                ]
+            ])
             ->add('cathegory', EntityType::class, [
                 'class' => Cathegory::class,
                 'choice_label' => 'name',
+                'label' => 'Catégorie',
+                'attr' => ['class' => 'form-select']
             ])
-
             ->add('transactionType', ChoiceType::class, [
                 'label' => 'Type de transaction',
                 'choices' => [
                     'Acheter' => 'acheter',
-                    'Brocante' => 'brocante',
                     'Louer' => 'louer',
-                    'Donner' => 'donner',
+                    'Brocante' => 'brocante',
+                    'Don' => 'don',
                 ],
-                'placeholder' => 'Choisir une option',
+                'attr' => ['class' => 'form-select']
             ])
-
             ->add('image', FileType::class, [
-                'label' => 'Add Image',
+                'label' => 'Image principale',
                 'mapped' => false,
                 'required' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '5M',
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, WEBP, AVIF)'
+                    ])
+                ],
+                'attr' => [
+                    'class' => 'form-file',
+                    'accept' => 'image/*'
+                ]
             ])
-        ;
+            ->add('images', FileType::class, [
+                'label' => 'Images supplémentaires',
+                'mapped' => false,
+                'required' => false,
+                'multiple' => true,
+                'constraints' => [
+                    new All([
+                        'constraints' => [
+                            new Image([
+                                'maxSize' => '5M',
+                                'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
+                                'mimeTypesMessage' => 'Veuillez uploader des images valides (JPEG, PNG, WEBP, AVIF)'
+                            ])
+                        ]
+                    ])
+                ],
+                'attr' => [
+                    'class' => 'form-file',
+                    'accept' => 'image/*',
+                    'multiple' => 'multiple'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Article::class,
+            'csrf_protection' => true
         ]);
     }
 }

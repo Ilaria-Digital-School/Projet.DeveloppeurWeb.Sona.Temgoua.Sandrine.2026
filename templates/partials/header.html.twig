@@ -1,53 +1,45 @@
 <!-- templates/partials/header.html.twig -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 	<div class="container-fluid">
 
-		<a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success"
-		   href="{{ path('app_home') }}">
+		<a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success" href="{{ path('app_home') }}">
 			<i class="bi bi-share-fill fs-4"></i>
 			<span>Shareo</span>
 		</a>
 
-		<button class="navbar-toggler" type="button"
-		        data-bs-toggle="collapse"
-		        data-bs-target="#navbarSupportedContent">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div
+			class="collapse navbar-collapse" id="navbarSupportedContent">
 
 			<!-- NAV LINKS -->
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}"
-					   href="{{ path('app_home') }}">Accueil</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">{% trans %}Accueil{% endtrans %}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_acheter' ? 'active' : '' }}"
-					   href="{{ path('app_acheter') }}">Acheter</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_acheter' ? 'active' : '' }}" href="{{ path('app_acheter') }}">{% trans %}Acheter{% endtrans %}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_louer' ? 'active' : '' }}"
-					   href="{{ path('app_louer') }}">Louer</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_louer' ? 'active' : '' }}" href="{{ path('app_louer') }}">{% trans %}Louer{% endtrans %}</a>
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_brocante' ? 'active' : '' }}"
-					   href="{{ path('app_brocante') }}">Brocante</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_brocante' ? 'active' : '' }}" href="{{ path('app_brocante') }}">{% trans %}Brocante{% endtrans %}</a>
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_don' ? 'active' : '' }}"
-					   href="{{ path('app_don') }}">Don</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_don' ? 'active' : '' }}" href="{{ path('app_don') }}">{% trans %}Don{% endtrans %}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.attributes.get('_route') == 'about' ? 'active' : '' }}"
-					   href="{{ path('about') }}">À propos</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'about' ? 'active' : '' }}" href="{{ path('about') }}">{% trans %}À propos{% endtrans %}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}"
-					   href="{{ path('contact') }}">Contact</a>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">{% trans %}Contact{% endtrans %}</a>
 				</li>
 			</ul>
 
@@ -55,16 +47,11 @@
 			{% if is_granted('ROLE_ADMIN') %}
 				<ul class="navbar-nav mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_user_index' ? 'active' : '' }}"
-						   href="{{ path('app_user_index') }}">Users</a>
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_user_index' ? 'active' : '' }}" href="{{ path('app_user_index') }}">{% trans %}Users{% endtrans %}</a>
 					</li>
+					
 					<li class="nav-item">
-						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_author_index' ? 'active' : '' }}"
-						   href="{{ path('app_author_index') }}">Authors</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_cathegory_index' ? 'active' : '' }}"
-						   href="{{ path('app_cathegory_index') }}">Categories</a>
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_cathegory_index' ? 'active' : '' }}" href="{{ path('app_cathegory_index') }}">{% trans %}Categories{% endtrans %}</a>
 					</li>
 				</ul>
 			{% endif %}
@@ -72,58 +59,39 @@
 			{% if is_granted('ROLE_USER') %}
 				<ul class="navbar-nav mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_article_index' ? 'active' : '' }}"
-						   href="{{ path('app_article_index') }}">Articles</a>
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_article_index' ? 'active' : '' }}" href="{{ path('app_article_index') }}">{% trans %}Articles{% endtrans %}</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_conversation_list' ? 'active' : '' }}" href="{{ path('app_conversation_list') }}">{% trans %}Messages{% endtrans %}</a>
 					</li>
 				</ul>
 			{% endif %}
 
 			<!-- SEARCH -->
 			<form class="d-flex me-3" role="search">
-				<input class="form-control form-control-sm me-2" type="search" placeholder="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<input class="form-control form-control-sm me-2" type="search" placeholder="{% trans %}Search{% endtrans %}">
+				<button class="btn btn-outline-success" type="submit">{% trans %}Search{% endtrans %}</button>
 			</form>
 
 			<!-- LANGUE -->
-			
-			{# <div class="dropdown me-3">
-				<button class="btn btn-outline-secondary dropdown-toggle" 
-						type="button" 
-						data-bs-toggle="dropdown"
-						data-bs-auto-close="true"
-						aria-expanded="false">
-					<i class="fi fi-fr"></i> FR
-				</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#"><i class="fi fi-fr"></i> Français</a></li>
-					<li><a class="dropdown-item" href="#"><i class="fi fi-gb"></i> English</a></li>
-					<li><a class="dropdown-item" href="#"><i class="fi fi-es"></i> Español</a></li>
-				</ul>
-
-				{% for locale in locales %}
-					{% if locale != app.request.locale %}
-						<a href="{{ path('app_changer_langue', {'locale': locale}) }}">{{ locale }}</a>
-					{% endif %}
-				{% endfor %}
-			</div> #}
 
 			<div class="dropdown">
 
-				<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2"
-						type="button"
-						data-bs-toggle="dropdown"
-						data-bs-auto-close="true"
-						aria-expanded="false">
+				<button
+					class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
 
-					{# LANGUE ACTIVE #}
 					{% if app.request.locale == 'fr' %}
-						<i class="fi fi-fr"></i> FR
+						<i class="fi fi-fr"></i>
+						FR
 					{% elseif app.request.locale == 'en' %}
-						<i class="fi fi-gb"></i> EN
+						<i class="fi fi-gb"></i>
+						EN
 					{% elseif app.request.locale == 'es' %}
-						<i class="fi fi-es"></i> ES
+						<i class="fi fi-es"></i>
+						ES
 					{% elseif app.request.locale == 'it' %}
-						<i class="fi fi-it"></i> IT
+						<i class="fi fi-it"></i>
+						IT
 					{% else %}
 						{{ app.request.locale|upper }}
 					{% endif %}
@@ -134,17 +102,20 @@
 					{% for locale in locales %}
 						{% if locale != app.request.locale %}
 							<li>
-								<a class="dropdown-item d-flex align-items-center gap-2"
-								href="{{ path('app_changer_langue', {'locale': locale}) }}">
+								<a class="dropdown-item d-flex align-items-center gap-2" href="{{ path('app_changer_langue', {'locale': locale}) }}">
 
 									{% if locale == 'fr' %}
-										<i class="fi fi-fr"></i> Français
+										<i class="fi fi-fr"></i>
+										{% trans %}Français{% endtrans %}
 									{% elseif locale == 'en' %}
-										<i class="fi fi-gb"></i> English
+										<i class="fi fi-gb"></i>
+										{% trans %}English{% endtrans %}
 									{% elseif locale == 'es' %}
-										<i class="fi fi-es"></i> Español
+										<i class="fi fi-es"></i>
+										{% trans %}Español{% endtrans %}
 									{% elseif locale == 'it' %}
-										<i class="fi fi-it"></i> Italiano
+										<i class="fi fi-it"></i>
+										{% trans %}Italiano{% endtrans %}
 									{% else %}
 										{{ locale|upper }}
 									{% endif %}
@@ -157,18 +128,19 @@
 				</ul>
 
 			</div>
+
 			<!-- BOUTONS -->
-    {% if app.user == false %}
-        <a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
-            Register
-        </a>
-        <a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
-            Login
-        </a>
-    {% else %}
-        <a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
-            Logout
-        </a>
-    {% endif %}
-</div>
-</nav>
+			{% if not app.user %}
+				<a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
+					{% trans %}Register{% endtrans %}
+				</a>
+				<a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
+					{% trans %}Login{% endtrans %}
+				</a>
+			{% else %}
+				<a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
+					{% trans %}Logout{% endtrans %}
+				</a>
+			{% endif %}
+		</div>
+	</nav>

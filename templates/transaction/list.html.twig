@@ -33,10 +33,21 @@
                         </div>
 
                         <div class="card-footer bg-white border-0">
-                            <a href="{{ path('app_article_detail', { id: article.id }) }}"
+                            <a href="{{ path('app_article_show', { slug: article.slug }) }}"
                                class="btn btn-success w-100">
                                 Voir le produit
                             </a>
+                            {# Bouton permettant de démarrer une conversation avec le vendeur s'il le user est connecté sinon redirigé vers la page de connexion #}
+								{% if app.user %}
+									<a href="{{ path('app_conversation_start', {'articleId': article.id}) }}" class="btn btn-outline-success w-100 mt-2">
+										{% trans %}Contacter le vendeur{% endtrans %}
+									</a>
+								{% else %}
+									<a href="{{ path('app_register', { from: 'contact', articleId: article.id }) }}" class="btn btn-outline-success w-100 mt-2">
+										{% trans %}Contacter le vendeur{% endtrans %}
+									</a>
+								{% endif %}
+							</a>
                         </div>
 
                     </div>
@@ -48,6 +59,12 @@
                     </div>
                 </div>
             {% endfor %}
+
+                
+                </div> 
+        <div class="d-flex justify-content-center mt-4">
+            {{ knp_pagination_render(articles) }}
+        </div>
         </div>
 
     </div>

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<style>
+.conv-container {
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+.conv-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 12px;
+    background: white;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.conv-item:hover {
+    background: #f1f5f9;
+}
+
+.conv-title {
+    font-weight: bold;
+}
+
+.conv-last {
+    font-size: 13px;
+    color: #64748b;
+}
+</style>
+
+<div class="conv-container">
+
+<h2>💬 Mes conversations</h2>
+
+{% for conversation in conversations %}
+
+    {% set otherUser = conversation.buyer == app.user ? conversation.seller : conversation.buyer %}
+    {% set lastMessage = conversation.messages|last %}
+
+    <a href="{{ path('app_conversation_show', {id: conversation.id}) }}" class="conv-item">
+
+        <div>
+            <div class="conv-title">
+                {{ otherUser.email }}
+            </div>
+
+            <div class="conv-last">
+                {{ lastMessage ? lastMessage.content|slice(0,40) : 'Aucun message' }}
+            </div>
+        </div>
+
+        {% if lastMessage and lastMessage.sender != app.user and not lastMessage.readAt %}
+            <span style="color:green;">●</span>
+        {% endif %}
+
+    </a>
+
+{% else %}
+    <p>Aucune conversation</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}
