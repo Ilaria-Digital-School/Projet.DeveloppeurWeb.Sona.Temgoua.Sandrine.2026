@@ -119,15 +119,16 @@ class ArticleController extends AbstractController
 
             $images = $form->get('images')->getData();
             if ($images) {
-                dump('Nombre d\'images reçues : ' . count($images));
+                ('Nombre d\'images reçues : ' . count($images));
                 foreach ($images as $img) {
-                    dump('Image : ' . $img->getClientOriginalName());
+                ('Image : ' . $img->getClientOriginalName());
                 }
             } else {
-                dump('AUCUNE IMAGE REÇUE');
+                ('AUCUNE IMAGE REÇUE');
             }
             
-            $article->setSlug(uniqid('',true)); // Génération d'un slug unique simple
+            $article->setSlug(uniqid('',true)); 
+            // Génération d'un slug unique simple
             // Gestion de l'image principale
             $mainImageFile = $form->get('image')->getData();
             if ($mainImageFile) {
@@ -176,8 +177,9 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            dd($form->isValid(), $form->getErrors(true, false), $form->getData());
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
             // Gestion de la nouvelle image principale
             $mainImageFile = $form->get('image')->getData();
             if ($mainImageFile) {

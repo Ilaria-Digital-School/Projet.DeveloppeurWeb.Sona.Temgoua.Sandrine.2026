@@ -261,6 +261,36 @@ box-shadow: 0 6px 15px rgba(0,0,0,0.15);
     border-color:#198754;
 }
 
+/* dropzone */
+
+#dropzone {
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#dropzone:hover {
+    background: #f8f9fa;
+    border-color: #198754;
+}
+
+
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.remove-btn {
+    z-index: 10;
+}
+
+.loader {
+    z-index: 5;
+}
+
 
 
 

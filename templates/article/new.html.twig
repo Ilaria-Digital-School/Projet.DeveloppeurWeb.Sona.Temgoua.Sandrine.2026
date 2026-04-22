@@ -100,9 +100,9 @@
                         </div>
                         
 
-                        {# ================== #}
+                        
                         {# DROPZONE          #}
-                        {# ================== #}
+                        
                         <div class="col-12">
 
                             <div id="dropzone"
@@ -110,7 +110,7 @@
 
                                 <p class="fw-semibold mb-2">📸 Glissez vos images ici</p>
                                 <p class="text-muted small">ou cliquez pour sélectionner</p>
-                                <p class="text-muted small">Type : avif, png, jpeg, jpg / Taille : moins de 2Mo</p>
+                                <p class="text-muted small">Type : avif, png, jpeg, jpg / Taille : moins de 5Mo</p>
                               
 
                                 {{ form_widget(form.images, {
@@ -148,9 +148,9 @@
 
 </div>
 
-{# ============================= #}
+
 {# SCRIPT UNIQUE CORRIGÉ         #}
-{# ============================= #}
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -163,9 +163,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const MAX_FILES = 5;
     let filesArray = [];
 
-    // =========================
+    
     // COMPTEUR
-    // =========================
+    
     const counter = document.createElement('p');
     counter.className = "text-muted mt-2";
     dropzone.appendChild(counter);
@@ -174,9 +174,9 @@ document.addEventListener("DOMContentLoaded", function () {
         counter.innerText = `${filesArray.length} / ${MAX_FILES} images`;
     }
 
-    // =========================
+    
     // PREVIEW
-    // =========================
+    
     function renderPreview() {
         preview.innerHTML = "";
 
@@ -221,9 +221,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // =========================
+    
     // AJOUT FICHIERS
-    // =========================
+    
     function handleFiles(newFiles) {
 
         Array.from(newFiles).forEach(file => {
