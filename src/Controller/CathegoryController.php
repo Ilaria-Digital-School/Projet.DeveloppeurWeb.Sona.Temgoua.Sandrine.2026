@@ -74,16 +74,15 @@ final class CathegoryController extends AbstractController
     }
 
     # Route permettant d'afficher le détail d'une catégorie
-    #[Route('/{id}', name: 'app_cathegory_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_cathegory_show', methods: ['GET'])]
     public function show(Cathegory $cathegory): Response
     {
-        # Symfony récupère automatiquement la catégorie correspondant à l'id
         return $this->render('cathegory/show.html.twig', [
             'cathegory' => $cathegory,
         ]);
     }
 
-    # Route permettant de modifier une catégorie en utilisant son slug
+    
     #[Route('/{slug}/edit', name: 'app_cathegory_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, $slug, EntityManagerInterface $entityManager, CathegoryRepository $cathegoryRepository): Response
     {

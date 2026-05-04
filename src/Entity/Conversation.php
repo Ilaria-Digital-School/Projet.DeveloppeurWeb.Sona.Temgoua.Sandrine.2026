@@ -8,6 +8,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
+#[ORM\Table(
+    name: 'conversation',
+    uniqueConstraints: [
+        new ORM\UniqueConstraint(
+            name: 'unique_conversation',
+            columns: ['buyer_id', 'seller_id']
+        )
+    ]
+)]
 class Conversation
 {
 
@@ -26,6 +35,7 @@ class Conversation
 
     // Article concerné par la conversation
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?Article $article = null;
 
     // Acheteur potentiel
@@ -39,6 +49,21 @@ class Conversation
     // Messages appartenant à la conversation
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: Message::class)]
     private Collection $messages;
+    
+
+    #[ORM\Column(type: 'boolean')]
+private bool $isDeleted = false;
+
+public function isDeleted(): bool
+{
+    return $this->isDeleted;
+}
+
+public function setIsDeleted(bool $isDeleted): static
+{
+    $this->isDeleted = $isDeleted;
+    return $this;
+}
 
     public function __construct()
     {
@@ -104,5 +129,24 @@ class Conversation
     {
         return $this->messages;
     }
+    public function addMessage(Message $message): static
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setConversation($this);
+        }
 
+        return $this;
+    }
+
+    public function removeMessage(Message $message): static
+    {
+        if ($this->messages->removeElement($message)) {
+            if ($message->getConversation() === $this) {
+                $message->setConversation(null);
+            }
+        }
+
+        return $this;
+    }
 }

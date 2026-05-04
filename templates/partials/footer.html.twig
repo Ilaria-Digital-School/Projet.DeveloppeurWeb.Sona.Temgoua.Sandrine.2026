@@ -1,108 +1,79 @@
+
 <!-- Footer -->
 <footer class="bg-dark text-light mt-5 pt-4">
-    <div class="container-fluid">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success" href="{{ path('app_home') }}">
-            <i class="bi bi-share-fill fs-4"></i>
-            <span>Shareo</span>
-        </a>
-        
-        <!-- LIGNE PRINCIPALE avec TOUTES les colonnes -->
-        <div class="row py-4">
-            <!-- Colonne 1: À propos (4 colonnes) -->
-            <div class="col-md-4 mb-3">
-                <h5 data-i18n="footerAboutUs">{% trans %}À propos de Shareo{% endtrans %}</h5>
-                <p data-i18n="footerDescription">
-                    {% trans %}La plateforme innovante de location et d'achat de produits.
-                    Économique, écologique, pratique.{% endtrans %}
-                </p>
-                <div class="social-icons mt-3">
-                    <a href="#" class="text-light me-3">
-                        <i class="fab fa-facebook fa-lg"></i>
-                    </a>
-                    <a href="#" class="text-light me-3">
-                        <i class="fab fa-twitter fa-lg"></i>
-                    </a>
-                    <a href="#" class="text-light me-3">
-                        <i class="fab fa-instagram fa-lg"></i>
-                    </a>
-                    <a href="#" class="text-light">
-                        <i class="fab fa-linkedin fa-lg"></i>
-                    </a>
-                </div>
-            </div>
+	<div class="container-fluid px-4 px-lg-5">
 
-            <!-- Colonne 2: Liens rapides (2 colonnes) -->
-            <div class="col-md-2 mb-3">
-                <h5 data-i18n="footerQuickLinks">{% trans %}Liens rapides{% endtrans %}</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="{{ path('app_home') }}" class="text-light text-decoration-none" data-i18n="home">{% trans %}Accueil{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_acheter') }}" class="text-light text-decoration-none" data-i18n="products">{% trans %}Acheter{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_louer') }}" class="text-light text-decoration-none" data-i18n="rent">{% trans %}Louer{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_brocante') }}" class="text-light text-decoration-none" data-i18n="buy">{% trans %}Brocante{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_don') }}" class="text-light text-decoration-none" data-i18n="buy">{% trans %}Don{% endtrans %}</a>
-                    </li>
-                </ul>
-            </div>
+		<!-- Logo -->
+		<a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success" href="{{ path('app_home') }}">
+			<i class="bi bi-share-fill fs-4"></i>
+			<span>Shareo</span>
+		</a>
 
-            <!-- Colonne 3: Service client (3 colonnes) -->
-            <div class="col-md-3 mb-3">
-                <h5 data-i18n="footerCustomer">{% trans %}Service client{% endtrans %}</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#" class="text-light text-decoration-none" data-i18n="footerHelp">{% trans %}Aide & FAQ{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-light text-decoration-none" data-i18n="footerTracking">{% trans %}Suivi de commande{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-light text-decoration-none" data-i18n="footerReturns">{% trans %}Retours & Remboursements{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('contact') }}" class="text-light text-decoration-none" data-i18n="footerContact">{% trans %}Contactez-nous{% endtrans %}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('about') }}" class="text-light text-decoration-none" data-i18n="footerAbout">{% trans %}À propos{% endtrans %}</a>
-                    </li>
-                </ul>
-            </div>
+		<!-- LIGNE PRINCIPALE avec TOUTES les colonnes -->
+		<div class="row py-4">
+			<!-- Colonne 1: À propos -->
+			<div class="col-12 col-sm-6 col-lg-4">
+				<h5 data-i18n="footerAboutUs">{% trans %}À propos de Shareo{% endtrans %}</h5>
+				<p data-i18n="footerDescription">
+					{% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique, pratique.{% endtrans %}
+				</p>
+				<div class="social-icons mt-3">
+					<a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+					<a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+					<a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+					<a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
+				</div>
+			</div>
 
-            <!-- Colonne 4: Newsletter (3 colonnes) -->
-            <div class="col-md-3 mb-3">
-                <h5 data-i18n="footerNewsletter">{% trans %}Newsletter{% endtrans %}</h5>
-                <p data-i18n="footerNewsletterText">
-                    {% trans %}Inscrivez-vous pour recevoir nos offres exclusives{% endtrans %}
-                </p>
-                <div class="input-group">
-                    <input type="email" class="form-control" data-i18n-placeholder="emailPlaceholder" placeholder="{% trans %}Votre email{% endtrans %}"/>
-                    <a href="{{ path('app_register') }}" class="btn btn-success" data-i18n="subscribeButton">
-                        {% trans %}S'inscrire{% endtrans %}
-                    </a>
-                </div>
-            </div>
-        </div>
+			<!-- Colonne 2: Liens rapides -->
+			<div class="col-12 col-sm-6 col-lg-3">
+				<h5 data-i18n="footerQuickLinks">{% trans %}Liens rapides{% endtrans %}</h5>
+				<ul class="list-unstyled">
+					<li><a href="{{ path('app_home') }}" class="text-light text-decoration-none" data-i18n="home">{% trans %}Accueil{% endtrans %}</a></li>
+					<li><a href="{{ path('app_acheter') }}" class="text-light text-decoration-none" data-i18n="products">{% trans %}Acheter{% endtrans %}</a></li>
+					<li><a href="{{ path('app_louer') }}" class="text-light text-decoration-none" data-i18n="rent">{% trans %}Louer{% endtrans %}</a></li>
+					<li><a href="{{ path('app_brocante') }}" class="text-light text-decoration-none" data-i18n="buy">{% trans %}Brocante{% endtrans %}</a></li>
+					<li><a href="{{ path('app_don') }}" class="text-light text-decoration-none" data-i18n="buy">{% trans %}Don{% endtrans %}</a></li>
+				</ul>
+			</div>
 
-        <!-- Bas de page -->
-        <div class="border-top pt-3 mt-3 text-center">
-            <p>
-                &copy; 2026
-                <strong data-i18n="siteName">Shareo</strong>.
-                <span data-i18n="footerRights">{% trans %}Tous droits réservés.{% endtrans %}</span>
-            </p>
-            <p class="small">
-                <a href="#" class="text-light me-3" data-i18n="legal_terms">{% trans %}Conditions générales{% endtrans %}</a>
-                <a href="#" class="text-light me-3" data-i18n="legal_privacy">{% trans %}Politique de confidentialité{% endtrans %}</a>
-                <a href="#" class="text-light" data-i18n="legal_notice">{% trans %}Mentions légales{% endtrans %}</a>
-            </p>
-        </div>
-    </div>
+			<!-- Service client + Newsletter -->
+			<div class="col-12 col-lg-5">
+				<div class="row">
+					<!-- Service client -->
+					<div class="col-12 col-sm-6 mb-4 mb-sm-0">
+						<h5 data-i18n="footerCustomer">{% trans %}Service client{% endtrans %}</h5>
+						<ul class="list-unstyled">
+							<li><a href="#" class="text-light text-decoration-none" data-i18n="footerHelp">{% trans %}Aide & FAQ{% endtrans %}</a></li>
+							<li><a href="{{ path('contact') }}" class="text-light text-decoration-none" data-i18n="footerContact">{% trans %}Contactez-nous{% endtrans %}</a></li>
+							<li><a href="{{ path('about') }}" class="text-light text-decoration-none" data-i18n="footerAbout">{% trans %}À propos{% endtrans %}</a></li>
+						</ul>
+					</div>
+					<!-- Newsletter -->
+					<div class="col-12 col-sm-6">
+						<h5 data-i18n="footerNewsletter">{% trans %}Newsletter{% endtrans %}</h5>
+						<p data-i18n="footerNewsletterText">{% trans %}Inscrivez-vous pour recevoir nos offres exclusives{% endtrans %}</p>
+						<div class="input-group">
+							<input type="email" class="form-control" data-i18n-placeholder="emailPlaceholder" placeholder="{% trans %}Votre email{% endtrans %}"/>
+							<a href="{{ path('app_register') }}" class="btn btn-success" data-i18n="subscribeButton">{% trans %}S'inscrire{% endtrans %}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Bas de page -->
+		<div class="border-top pt-4 mt-4 pb-4">
+			<div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+				<p class="mb-0 text-center text-md-start">
+					&copy; 2026 <strong>Shareo</strong>. Tous droits réservés.
+				</p>
+				<p class="mb-0 text-center text-md-end">
+					<a href="#" class="text-light me-3">Conditions générales</a>
+					<a href="#" class="text-light me-3">Politique de confidentialité</a>
+					<a href="#" class="text-light">Mentions légales</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </footer>

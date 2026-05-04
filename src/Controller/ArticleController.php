@@ -6,155 +6,89 @@ use App\Entity\Article;
 use App\Entity\Image;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Security\ArticleVoter;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
-    public function index(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $entityManager): Response
-    {
-        $page = $request->query->getInt('page', 1);
-        $search = $request->query->get('search', '');
-        
-        $paginatedData = $articleRepository->findPaginatedArticles(
-            $page,
-            10,
-            $search,
-            $this->getUser()
-        );
-        
-        return $this->render('article/index.html.twig', [
-            'articles' => $paginatedData['items'],
-            'currentPage' => $paginatedData['currentPage'],
-            'totalPages' => $paginatedData['totalPages'],
-            'total' => $paginatedData['total'],
-            'search' => $search,
-            'stats' => $this->getArticleStats($entityManager)
-        ]);
-    }
-    
-    #[Route('/search-articles', name: 'app_article_search_ajax', methods: ['GET'])]
-    public function searchAjax(Request $request, ArticleRepository $articleRepository): Response
+    public function index(Request $request, ArticleRepository $repo, PaginatorInterface $paginator): Response
     {
         $search = $request->query->get('search', '');
-        $page = $request->query->getInt('page', 1);
-        
-        $paginatedData = $articleRepository->findPaginatedArticles(
-            $page,
-            10,
-            $search,
-            $this->getUser()
+
+        $qb = $repo->createQueryBuilder('a');
+
+        if ($search) {
+            $qb->andWhere('a.title LIKE :search OR a.summary LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        $qb->orderBy('a.publishedAt', 'DESC');
+
+        $articles = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            10
         );
-        
-        $html = $this->renderView('article/_table_rows.html.twig', [
-            'articles' => $paginatedData['items']
-        ]);
-        
-        $paginationHtml = $this->renderView('article/_pagination.html.twig', [
-            'currentPage' => $paginatedData['currentPage'],
-            'totalPages' => $paginatedData['totalPages'],
-            'search' => $search
-        ]);
-        
-        return $this->json([
-            'html' => $html,
-            'paginationHtml' => $paginationHtml,
-            'total' => $paginatedData['total'],
-            'currentPage' => $paginatedData['currentPage'],
-            'totalPages' => $paginatedData['totalPages']
-        ]);
-    }
-    
-    #[Route('/article/stats', name: 'app_article_stats', methods: ['GET'])]
-    public function getStats(EntityManagerInterface $entityManager): Response
-    {
-        return $this->json($this->getArticleStat($entityManager));
-    }
-    
-    private function getArticleStat(EntityManagerInterface $entityManager): array
-    {
-        $repo = $entityManager->getRepository(Article::class);
-        
-        $total = $repo->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-            
-        $published = $repo->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->where('a.isVerified = true')
-            ->getQuery()
-            ->getSingleScalarResult();
-            
-        $drafts = $repo->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->where('a.isVerified = false')
-            ->getQuery()
-            ->getSingleScalarResult();
-            
-        return [
-            'total' => $total,
-            'published' => $published,
-            'drafts' => $drafts
+
+        // 🔥 AJOUT DES STATS (propre)
+        $stats = [
+            'total' => $repo->count([]),
+            'published' => $repo->count(['isVerified' => true]),
+            'drafts' => $repo->count(['isVerified' => false]),
         ];
+
+        return $this->render('article/index.html.twig', [
+            'articles' => $articles,
+            'search' => $search,
+            'stats' => $stats, // ✅ on envoie à Twig
+        ]);
     }
 
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
+    #[IsGranted('ROLE_USER')]
+    public function new(Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         $article = new Article();
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //dd($form->isValid(), $form->getErrors(true, false), $form->getData());
+            $imageFiles = $form->get('images')->getData();
 
-            $images = $form->get('images')->getData();
-            if ($images) {
-                ('Nombre d\'images reçues : ' . count($images));
-                foreach ($images as $img) {
-                ('Image : ' . $img->getClientOriginalName());
-                }
-            } else {
-                ('AUCUNE IMAGE REÇUE');
-            }
-            
-            $article->setSlug(uniqid('',true)); 
-            // Génération d'un slug unique simple
-            // Gestion de l'image principale
-            $mainImageFile = $form->get('image')->getData();
-            if ($mainImageFile) {
-                $mainImageFileName = $fileUploader->upload($mainImageFile);
-                $article->setImage($mainImageFileName);
-            }
+            if ($imageFiles) {
+                foreach ($imageFiles as $imageFile) {
+                    $fileName = $fileUploader->upload($imageFile);
 
-            // Gestion des images supplémentaires
-            $additionalImages = $form->get('images')->getData();
-            if ($additionalImages) {
-                foreach ($additionalImages as $imageFile) {
-                    $imageFileName = $fileUploader->upload($imageFile);
                     $image = new Image();
-                    $image->setImage($imageFileName);
-                    $image->setArticle($article);
-                    $entityManager->persist($image);
+                    $image->setImage($fileName);
+
+                    $article->addImage($image);
+
+                    $em->persist($image);
                 }
+                
             }
-
             $article->setAuthor($this->getUser());
-            $article->setIsVerified(false);
 
-            $entityManager->persist($article);
-            $entityManager->flush();
+            $article->setPublishedAt(new \DateTimeImmutable());
+            $article->setIsVerified(true);
 
-            $this->addFlash('success', 'Article créé avec succès !');
+            $em->persist($article);
+        
+            $this->addFlash('success', 'Article publié avec succès !');
+
             return $this->redirectToRoute('app_article_index');
         }
 
@@ -163,51 +97,51 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
     #[Route('/{slug}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    public function show(string $slug, ArticleRepository $repo): Response
     {
+
+        $article = $repo->findOneBy(['slug' => $slug]);
+
+        if (!$article) {
+            throw $this->createNotFoundException('Article non trouvé');
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
     }
 
+
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Article $article, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted(ArticleVoter::EDIT, subject: 'article')]
+    public function edit(Request $request, Article $article, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $imageFiles = $form->get('images')->getData();
 
-            // Gestion de la nouvelle image principale
-            $mainImageFile = $form->get('image')->getData();
-            if ($mainImageFile) {
-                // Supprimer l'ancienne image si nécessaire
-                if ($article->getImage()) {
-                    $oldImagePath = $fileUploader->getTargetDirectory() . '/' . $article->getImage();
-                    if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath);
-                    }
-                }
-                $mainImageFileName = $fileUploader->upload($mainImageFile);
-                $article->setImage($mainImageFileName);
-            }
+            if ($imageFiles) {
+                foreach ($imageFiles as $imageFile) {
+                    $fileName = $fileUploader->upload($imageFile);
 
-            // Gestion des nouvelles images supplémentaires
-            $additionalImages = $form->get('images')->getData();
-            if ($additionalImages) {
-                foreach ($additionalImages as $imageFile) {
-                    $imageFileName = $fileUploader->upload($imageFile);
                     $image = new Image();
-                    $image->setImage($imageFileName);
-                    $image->setArticle($article);
-                    $entityManager->persist($image);
-                }
-            }
+                    $image->setImage($fileName);
 
-            $entityManager->flush();
+                    $article->addImage($image);
+                    $em->persist($image);
+                }
+                $em->flush();
+            }
+            
             $this->addFlash('success', 'Article mis à jour avec succès !');
+
+
             return $this->redirectToRoute('app_article_index');
         }
 
@@ -217,71 +151,18 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
-    public function delete(
-        Request $request,
-        Article $article,
-        EntityManagerInterface $entityManager,
-        FileUploader $fileUploader
-    ): Response {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+    #[Route('/{id}/delete', name: 'app_article_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted(ArticleVoter::DELETE, subject: 'article')]
 
-            // Image principale
-            if (!empty($article->getImage())) {
-                $imagePath = $fileUploader->getTargetDirectory() . '/' . $article->getImage();
+    public function delete(Request $request, Article $article, EntityManagerInterface $em): Response
 
-                if (file_exists($imagePath)) {
-                    unlink($imagePath);
-                }
-            }
-
-            // Images associées
-            foreach ($article->getImages() as $image) {
-                $imagePath = $fileUploader->getTargetDirectory() . '/' . $image->getImage();
-
-                if (file_exists($imagePath)) {
-                    unlink($imagePath);
-                }
-
-                $entityManager->remove($image); // 🔥 important
-            }
-
-            $entityManager->remove($article);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Article supprimé avec succès !');
+    {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
+            $em->remove($article);
+            $em->flush();
         }
 
         return $this->redirectToRoute('app_article_index');
-    }
-
-    #[Route('/image/{id}/delete', name: 'app_image_delete', methods: ['POST'])]
-    public function deleteImage(Image $image, EntityManagerInterface $entityManager, FileUploader $fileUploader): JsonResponse
-    {
-        try {
-            $imagePath = $fileUploader->getTargetDirectory() . '/' . $image->getImage();
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-            
-            $entityManager->remove($image);
-            $entityManager->flush();
-            
-            return new JsonResponse(['success' => true]);
-
-        } catch (\Exception $e) {
-            return new JsonResponse(['success' => false, 'error' => $e->getMessage()], 500);
-        }
-    }
-
-    private function getArticleStats(EntityManagerInterface $entityManager): array
-    {
-        $articles = $entityManager->getRepository(Article::class)->findAll();
-        
-        return [
-            'total' => count($articles),
-            'published' => count(array_filter($articles, fn($a) => $a->isVerified())),
-            'drafts' => count(array_filter($articles, fn($a) => !$a->isVerified())),
-        ];
     }
 }

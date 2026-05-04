@@ -60,6 +60,8 @@ public function register(
         $user->setPassword(
             $userPasswordHasher->hashPassword($user, $plainPassword)
         );
+        $slug = $slugger->slug($user->getEmail())->lower();
+$user->setSlug($slug);
 
         // Sauvegarde
         $entityManager->persist($user);

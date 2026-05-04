@@ -1,183 +1,139 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}Contact{% endtrans %}
+{% block title %}
+    {% trans %}Contact{% endtrans %}
 {% endblock %}
 
 {% block body %}
 
-<!-- header -->
-<div class="contact-header py-4">
-    <div class="container">
-        <div class="row justify-content-center mb-4">
-            <div class="col-lg-12 text-center">
+<!-- Header -->
+<section
+  class="position-relative text-white py-5"
+  style="
+    background-image: url('{{ asset('images/contacthero.png') }}');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <!-- Contenu -->
+  <div class="container min-vh-60 position-relative d-flex align-items-center justify-content-center text-center">
+    <div class="col-lg-8">
+      <h1 class="fw-bold mb-2">
+        {% trans %}Un projet en tête ? Une question ? Nous sommes là pour vous !{% endtrans %}
+      </h1>
 
-                <h2 class="fw-bold mb-3 fs-3">
-                    {% trans %}Un projet en tête ? Une question ? Besoin d'aide ? Nous sommes là pour vous !{% endtrans %}
-                </h2>
+      <p class="lead mb-4">
+       <strong>{% trans %}Parlons-en ! Décrivez-nous votre idée et voyons ensemble <br> comment la concrétiser.{% endtrans %}</strong>
+      </p>
+       </div>
+</div> 
+</section>
 
-                <p class="text-muted fs-5">
-                    <strong>
-                        {% trans %}Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.{% endtrans %}
-                    </strong>
-                </p>
+<div class="container my-3">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="card border-0 shadow-lg rounded-4 p-4 p-lg-5 contact-card">
+                <div class="card-body p-0">
 
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- SECTION CONTACT -->
-<div class="container-fluid py-5 bg-success bg-opacity-10">
-
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-lg-7 col-md-9">
-
-                <div class="card border-0 shadow-lg rounded-4">
-
-                    <!-- HEADER -->
-                    <div class="card-header bg-success bg-opacity-10 text-center py-4 rounded-top-4 border-0">
-
-                        <h2 class="fw-bold text-success mb-2">
-                            {% trans %}Contactez-nous{% endtrans %}
-                        </h2>
-
-                        <p class="text-muted mb-0">
-                            {% trans %}Une question ? Une suggestion ? Notre équipe vous répond rapidement.{% endtrans %}
-                        </p>
-
+                    <!-- Header du formulaire -->
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="d-flex align-items-center px-3 py-2 bg-light bg-gradient rounded-3 shadow-sm">
+                         <i class="fa-solid fa-comments text-success me-2"></i>
+                            <p class="text-muted fs-6 mb-3">
+                                <strong>{% trans %}Contactez-nous, notre équipe vous répond rapidement.{% endtrans %}</strong>
+                            </p>
+                        </div>
                     </div>
 
-                    <!-- BODY -->
-                    <div class="card-body p-5">
-
-                        <form>
-
-                            <!-- NOM + EMAIL -->
-                            <div class="row g-3 mb-3">
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">
-                                        {% trans %}Nom complet *{% endtrans %}
-                                    </label>
-
-                                    <input type="text"
-                                           class="form-control rounded-pill shadow-sm"
-                                           placeholder="Jean Dupont"
-                                           required>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">
-                                        {% trans %}Adresse email *{% endtrans %}
-                                    </label>
-
-                                    <input type="email"
-                                           class="form-control rounded-pill shadow-sm"
-                                           placeholder="jean@email.com"
-                                           required>
-                                </div>
-
-                            </div>
-
-                            <!-- TELEPHONE + SITE -->
-                            <div class="row g-3 mb-3">
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">
-                                        {% trans %}Téléphone{% endtrans %}
-                                        <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
-                                    </label>
-
-                                    <input type="tel"
-                                           class="form-control rounded-pill shadow-sm"
-                                           placeholder="+33 6 12 34 56 78">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">
-                                        {% trans %}Site web{% endtrans %}
-                                        <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
-                                    </label>
-
-                                    <input type="url"
-                                           class="form-control rounded-pill shadow-sm"
-                                           placeholder="https://">
-                                </div>
-
-                            </div>
-
-                            <!-- ADRESSE -->
-                            <div class="mb-3">
+                    <!-- Formulaire -->
+                    <form>
+      <div class="row g-4 mb-3">
+                            <div class="col-md-6">
                                 <label class="form-label fw-semibold">
-                                    {% trans %}Adresse postale{% endtrans %}
+                                    <i class="bi bi-person-fill me-1 text-success"></i> {% trans %}Nom complet *{% endtrans %}
+                                </label>
+                                <input type="text" class="form-control rounded-pill py-2 px-4 shadow-sm" placeholder="Jean Dupont" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-envelope-fill me-1 text-success"></i> {% trans %}Adresse email *{% endtrans %}
+                                </label>
+                                <input type="email" class="form-control rounded-pill py-2 px-4 shadow-sm" placeholder="jean@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-telephone-fill me-1 text-success"></i> {% trans %}Téléphone{% endtrans %}
                                     <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
                                 </label>
-
-                                <input type="text"
-                                       class="form-control rounded-pill shadow-sm"
-                                       placeholder="Ville, pays">
+                                <input type="tel" class="form-control rounded-pill py-2 px-4 shadow-sm" placeholder="+33 6 12 34 56 78">
                             </div>
-
-                            <!-- MESSAGE -->
-                            <div class="mb-4">
-
+                            <div class="col-md-6">
                                 <label class="form-label fw-semibold">
-                                    {% trans %}Message *{% endtrans %}
+                                    <i class="bi bi-globe me-1 text-success"></i> {% trans %}Site web{% endtrans %}
+                                    <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
                                 </label>
-
-                                <textarea class="form-control shadow-sm"
-                                          rows="4"
-                                          placeholder="{% trans %}Votre message...{% endtrans %}"
-                                          required></textarea>
-
+                                <input type="url" class="form-control rounded-pill py-2 px-4 shadow-sm" placeholder="https://">
                             </div>
+                        </div>
 
-                            <!-- BOUTON -->
-                            <div class="d-grid">
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                <i class="bi bi-house-door-fill me-1 text-success"></i> {% trans %}Adresse postale{% endtrans %}
+                                <small class="text-muted">({% trans %}optionnel{% endtrans %})</small>
+                            </label>
+                            <input type="text" class="form-control rounded-pill py-2 px-4 shadow-sm" placeholder="Ville, pays">
+                        </div>
 
-                                <button class="btn btn-success btn-lg rounded-pill shadow">
+                        <div class="mb-5">
+                            <label class="form-label fw-semibold">
+                                <i class="bi bi-pencil-square me-1 text-success"></i> {% trans %}Message *{% endtrans %}
+                            </label>
+                            <textarea class="form-control rounded-4 py-3 px-4 shadow-sm" rows="5" placeholder="{% trans %}Votre message...{% endtrans %}" required></textarea>
+                        </div>
 
-                                    ✉ {% trans %}Envoyer le message{% endtrans %}
-
-                                </button>
-
-                            </div>
-
-                        </form>
-
-                    </div>
-
+                        <div class="d-grid">
+                            <button class="btn btn-success btn-lg rounded-pill py-3 fw-semibold btn-premium">
+                                <i class="bi bi-send-fill me-2"></i> {% trans %}Envoyer le message{% endtrans %}
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
             </div>
         </div>
-
     </div>
-
 </div>
 
-
-<!-- Adresse physique -->
-<div class="container my-4">
-	<div class="card border-0 shadow-sm rounded-4">
-		<div class="card-body text-center">
-			<h5 class="fw-bold mb-3">
-				{% trans %}Vous pouvez également nous rejoindre dans nos locaux{% endtrans %}
-			</h5>
-			<p class="mb-0">
-				<i class="bi bi-geo-alt-fill text-success me-2"></i>
-				1 Allée des Mimosas, Résidence Saige Formanoir<br>
-				33600 Pessac, France
-			</p>
-		</div>
-	</div>
+<!-- Carte adresse physique -->
+<div class="container my-5">
+    <div class="card border-0 shadow-sm rounded-4 contact-card text-center">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-3">
+                <i class="bi bi-building text-success me-2"></i>
+                {% trans %}Vous pouvez également nous rejoindre dans nos locaux{% endtrans %}
+            </h5>
+            <p class="mb-0 fs-5">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                1 Allée des Mimosas, Résidence Saige Formanoir<br>
+                33600 Pessac, France
+            </p>
+        </div>
+    </div>
 </div>
 
 <!-- Google Map -->
-<div class="contact-map">
-	<iframe class="w-100 rounded-4 shadow-sm" height="300" style="border:0;" src="https://www.google.com/maps?q=1+allée+des+mimosas+33600+Pessac+France&output=embed" loading="lazy"></iframe>
+<div class="container mb-5">
+    <div class="map-wrapper rounded-4 overflow-hidden shadow-lg">
+        <iframe 
+            class="w-100" 
+            height="350" 
+            style="border:0;" 
+            src="https://www.google.com/maps?q=1+allée+des+mimosas+33600+Pessac+France&output=embed" 
+            loading="lazy">
+        </iframe>
+    </div>
 </div>
 
 {% endblock %}

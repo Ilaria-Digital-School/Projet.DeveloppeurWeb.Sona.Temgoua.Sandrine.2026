@@ -20,7 +20,7 @@ class Article
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 25, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -34,6 +34,10 @@ class Article
 
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
+
+    // Article.php
+    #[ORM\Column(type: 'boolean')]
+    private bool $isDeleted = false;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Cathegory $cathegory = null;
@@ -49,8 +53,24 @@ class Article
     /**
      * @var Collection<int, Image>
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'article')]
+
+    #[ORM\OneToMany(
+        targetEntity: Image::class,
+        mappedBy: 'article',
+        cascade: ['remove'],
+        orphanRemoval: true
+    )]
     private Collection $images;
+    public function isDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): static
+    {
+        $this->isDeleted = $isDeleted;
+        return $this;
+    }
 
     public function __construct()
     {
@@ -150,6 +170,14 @@ class Article
     public function setPublishedAtValue(): void
     {
         $this->publishedAt = new \DateTimeImmutable();
+    }
+
+    #[ORM\PrePersist]
+    public function generateSlug(): void
+    {
+        if (empty($this->slug)) {
+            $this->slug = uniqid('', true);
+        }
     }
 
     public function getImage(): ?string

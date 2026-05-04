@@ -1,71 +1,67 @@
-
-
 <section id="products" class="py-5">
-    <div class="container">
+	<div class="container">
 
-        {% if pageTitle is not null %}
-            <h2 class="text-center mb-4">{{ pageTitle }}</h2>
-        {% endif %}
+		{% if pageTitle is not null %}
+			<h2 class="text-center mb-4">{{ pageTitle }}</h2>
+		{% endif %}
 
-        <div class="row">
-            {% for article in articles %}
-                <div class="col-md-3 mb-4 d-flex">
-                    <div class="card product-card shadow-sm h-100">
+		<div class="row">
+			{% for article in articles %}
+				<div class="col-md-3 mb-4 d-flex">
+					<div class="card product-card shadow-sm h-100">
 
-                        {% if article.image %}
-                            <img
-                                src="{{ asset('images/' ~ article.image) }}"
-                                class="card-img-top product-image"
-                                alt="{{ article.title }}">
-                        {% endif %}
+						{% if article.image %}
+							<img src="{{ asset('images/' ~ article.image) }}" class="card-img-top product-image" alt="{{ article.title }}">
+						{% endif %}
 
-                        <div class="card-body">
-                            <h6 class="card-title">{{ article.title }}</h6>
-                            <p class="card-text small text-muted">
-                                {{ article.content|slice(0, 60) }}...
-                            </p>
+						<div class="card-body">
+							<h6 class="card-title">{{ article.title }}</h6>
+							<p class="card-text small text-muted">
+								{{ article.content|slice(0, 60) }}...
+							</p>
 
-                            <p style="font-weight: bold;">
-                                <span class="badge rounded-pill px-3 py-2 bg-success">
-                                    {{ article.transactionType|upper }}
-                                </span>
-                            </p>
-                        </div>
+							<p style="font-weight: bold;">
+								<span class="badge rounded-pill px-3 py-2 bg-success">
+									{{ article.transactionType|upper }}
+								</span>
+							</p>
+						</div>
 
-                        <div class="card-footer bg-white border-0">
-                            <a href="{{ path('app_article_show', { slug: article.slug }) }}"
-                               class="btn btn-success w-100">
-                                Voir le produit
-                            </a>
-                            {# Bouton permettant de démarrer une conversation avec le vendeur s'il le user est connecté sinon redirigé vers la page de connexion #}
-								{% if app.user %}
-									<a href="{{ path('app_conversation_start', {'articleId': article.id}) }}" class="btn btn-outline-success w-100 mt-2">
-										{% trans %}Contacter le vendeur{% endtrans %}
-									</a>
-								{% else %}
-									<a href="{{ path('app_register', { from: 'contact', articleId: article.id }) }}" class="btn btn-outline-success w-100 mt-2">
-										{% trans %}Contacter le vendeur{% endtrans %}
-									</a>
-								{% endif %}
-							</a>
-                        </div>
+						<div class="card-footer bg-white border-0">
 
-                    </div>
-                </div>
-            {% else %}
-                <div class="col-12">
-                    <div class="alert alert-warning text-center">
-                        Aucun produit disponible
-                    </div>
-                </div>
-            {% endfor %}
+							{% if article.slug %}
+								<a href="{{ path('app_article_show', { slug: article.slug }) }}" class="btn btn-success w-100">
+									Voir le produit
+								</a>
+							{% else %}
+								<span class="text-danger">Produit indisponible</span>
+							{% endif %}
+							{# Bouton permettant de démarrer une conversation avec le vendeur s'il le user est connecté sinon redirigé vers la page de connexion #}
+							{% if app.user %}
+								<a href="{{ path('app_conversation_start', {'articleId': article.id}) }}" class="btn btn-outline-success w-100 mt-2">
+									{% trans %}Contacter le vendeur{% endtrans %}
+								</a>
+							{% else %}
+								<a href="{{ path('app_register', { from: 'contact', articleId: article.id }) }}" class="btn btn-outline-success w-100 mt-2">
+									{% trans %}Contacter le vendeur{% endtrans %}
+								</a>
+							{% endif %}
+						</a>
+					</div>
 
-                
-                </div> 
-        <div class="d-flex justify-content-center mt-4">
-            {{ knp_pagination_render(articles) }}
-        </div>
-        </div>
+				</div>
+			</div>
+		{% else %}
+			<div class="col-12">
+				<div class="alert alert-warning text-center">
+					Aucun produit disponible
+				</div>
+			</div>
+		{% endfor %}
 
-    </div>
-</section>
+
+	</div>
+	<div class="d-flex justify-content-center mt-4">
+		{{ knp_pagination_render(articles) }}
+	</div>
+</div></div></section>

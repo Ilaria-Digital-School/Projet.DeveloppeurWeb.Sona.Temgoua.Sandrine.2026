@@ -37,7 +37,7 @@ class Message
     // Doctrine et par les contrôleurs pour manipuler les données avant leur
     // enregistrement ou leur récupération depuis la base de données.
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'sentMessages')]
     private ?User $sender = null;
 
     #[ORM\Column(nullable: true)]
@@ -55,6 +55,33 @@ class Message
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $readAt = null;
 
+    #[ORM\Column(type: 'boolean')]
+private bool $isDeleted = false;
+
+//#[ORM\ManyToOne(targetEntity: Article::class, nullable: true)]
+private ?Article $article = null;
+
+public function getArticle(): ?Article
+{
+    return $this->article;
+}
+
+public function setArticle(?Article $article): static
+{
+    $this->article = $article;
+    return $this;
+}
+
+public function isDeleted(): bool
+{
+    return $this->isDeleted;
+}
+
+public function setIsDeleted(bool $isDeleted): static
+{
+    $this->isDeleted = $isDeleted;
+    return $this;
+}
 
     public function getId(): ?int
     {

@@ -8,6 +8,7 @@
 parameters:
     images_directory: '%kernel.project_dir%/public/images'
     app.locales: [fr, en, es, it]
+    uploads_directory: '%kernel.project_dir%/public/uploads'
 
 
 services:

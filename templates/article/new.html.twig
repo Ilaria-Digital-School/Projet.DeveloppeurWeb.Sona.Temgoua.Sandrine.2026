@@ -3,275 +3,38 @@
 {% block title %}Créer un article{% endblock %}
 
 {% block body %}
-
-<style>
-#dropzone {
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-#dropzone:hover {
-    background: #f8f9fa;
-    border-color: #198754;
-}
-
-
-</style>
-
-<style>
-.fade-in {
-    animation: fadeIn 0.4s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.remove-btn {
-    z-index: 10;
-}
-
-.loader {
-    z-index: 5;
-}
-</style>
-
 <div class="container py-5">
 
     <div class="row justify-content-center">
         <div class="col-lg-10">
 
-            {# HEADER #}
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <h1 class="fw-bold mb-1">📝 Nouvel article</h1>
-                    <p class="text-muted mb-0">
-                        Rédigez et publiez un nouvel article avec des images
-                    </p>
-                </div>
-
-                <a href="{{ path('app_article_index') }}"
-                   class="btn btn-outline-secondary rounded-pill px-4">
-                    ← Retour
-                </a>
-            </div>
-
-            {# CARD #}
+            {# CARD PRINCIPALE (comme show) #}
             <div class="card border-0 shadow-lg rounded-4">
+
                 <div class="card-body p-5">
 
-                    {{ form_start(form, {
-                        'attr': {
-                            'enctype': 'multipart/form-data'
-                        }
+                    {# HEADER aligné avec ton style #}
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h1 class="fw-bold mb-0">📝 Nouvel article</h1>
+
+                        <a href="{{ path('app_article_index') }}"
+                           class="btn btn-outline-secondary rounded-pill px-4">
+                            ← Retour
+                        </a>
+                    </div>
+
+                    {# FORM #}
+                    {{ include('article/_form.html.twig', {
+                        form: form,
+                        button_label: 'Publier'
                     }) }}
 
-                    <div class="row g-4">
-
-                        {# TITLE #}
-                        <div class="col-12">
-                            <label class="form-label fw-semibold">Titre</label>
-                            {{ form_widget(form.title, {
-                                'attr': {
-                                    'class': 'form-control form-control-lg'
-                                }
-                            }) }}
-                        </div>
-
-                        {# SUMMARY #}
-                        <div class="col-12">
-                            <label class="form-label fw-semibold">Résumé</label>
-                            {{ form_widget(form.summary, {
-                                'attr': {
-                                    'class': 'form-control'
-                                }
-                            }) }}
-                        </div>
-
-                        {# CONTENT #}
-                        <div class="col-12">
-                            <label class="form-label fw-semibold">Contenu</label>
-                            {{ form_widget(form.content, {
-                                'attr': {
-                                    'class': 'form-control'
-                                }
-                            }) }}
-                        </div>
-                        
-
-                        
-                        {# DROPZONE          #}
-                        
-                        <div class="col-12">
-
-                            <div id="dropzone"
-                                 class="border border-2 border-dashed rounded-4 p-5 text-center bg-light position-relative">
-
-                                <p class="fw-semibold mb-2">📸 Glissez vos images ici</p>
-                                <p class="text-muted small">ou cliquez pour sélectionner</p>
-                                <p class="text-muted small">Type : avif, png, jpeg, jpg / Taille : moins de 5Mo</p>
-                              
-
-                                {{ form_widget(form.images, {
-                                    'attr': {
-                                        'multiple': true,
-                                        'id': 'fileInput',
-                                        'class': 'position-absolute top-0 start-0 w-100 h-100 opacity-0'
-                                    }
-                                }) }}
-
-                            </div>
-
-                            {# PREVIEW #}
-                            <div id="preview" class="row mt-4 g-3"></div>
-
-                        </div>
-
-                    </div>
-
-                    {{ form_rest(form) }}
-
-                    <div class="d-flex justify-content-end mt-5">
-                        <button class="btn btn-success btn-lg rounded-pill px-5" type="submit">
-                            🚀 Publier
-                        </button>
-                    </div>
-
-                    {{ form_end(form) }}
-
                 </div>
+
             </div>
 
         </div>
     </div>
 
 </div>
-
-
-{# SCRIPT UNIQUE CORRIGÉ         #}
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const input = document.getElementById('fileInput') 
-        || document.querySelector('input[type="file"]');
-
-    const preview = document.getElementById('preview');
-    const dropzone = document.getElementById('dropzone');
-
-    const MAX_FILES = 5;
-    let filesArray = [];
-
-    
-    // COMPTEUR
-    
-    const counter = document.createElement('p');
-    counter.className = "text-muted mt-2";
-    dropzone.appendChild(counter);
-
-    function updateCounter() {
-        counter.innerText = `${filesArray.length} / ${MAX_FILES} images`;
-    }
-
-    
-    // PREVIEW
-    
-    function renderPreview() {
-        preview.innerHTML = "";
-
-        filesArray.forEach((file, index) => {
-
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-
-                const col = document.createElement('div');
-                col.className = "col-md-3 fade-in";
-
-                col.innerHTML = `
-                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative">
-
-                        <img src="${e.target.result}" 
-                             class="img-fluid"
-                             style="height:150px; object-fit:cover;">
-
-                        <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 remove-btn">
-                            ✖
-                        </button>
-
-                        <div class="loader position-absolute top-50 start-50 translate-middle d-none">
-                            <div class="spinner-border text-light"></div>
-                        </div>
-
-                    </div>
-                `;
-
-                // SUPPRESSION
-                col.querySelector('.remove-btn').addEventListener('click', () => {
-                    filesArray.splice(index, 1);
-                    renderPreview();
-                    updateCounter();
-                });
-
-                preview.appendChild(col);
-            };
-
-            reader.readAsDataURL(file);
-        });
-    }
-
-    
-    // AJOUT FICHIERS
-    
-    function handleFiles(newFiles) {
-
-        Array.from(newFiles).forEach(file => {
-
-            if (!file.type.startsWith('image/')) return;
-
-            if (filesArray.length >= MAX_FILES) {
-                alert("Maximum 5 images");
-                return;
-            }
-
-            filesArray.push(file);
-        });
-
-        // MAJ input (important Symfony)
-        const dataTransfer = new DataTransfer();
-        filesArray.forEach(file => dataTransfer.items.add(file));
-        input.files = dataTransfer.files;
-
-        renderPreview();
-        updateCounter();
-    }
-
-    // INPUT
-    input.addEventListener('change', function () {
-        handleFiles(this.files);
-    });
-
-    // DRAG OVER
-    dropzone.addEventListener('dragover', e => {
-        e.preventDefault();
-        dropzone.classList.add('border-success');
-    });
-
-    dropzone.addEventListener('dragleave', () => {
-        dropzone.classList.remove('border-success');
-    });
-
-    // DROP
-    dropzone.addEventListener('drop', e => {
-        e.preventDefault();
-        dropzone.classList.remove('border-success');
-
-        handleFiles(e.dataTransfer.files);
-    });
-
-    updateCounter();
-});
-</script>
-
 {% endblock %}

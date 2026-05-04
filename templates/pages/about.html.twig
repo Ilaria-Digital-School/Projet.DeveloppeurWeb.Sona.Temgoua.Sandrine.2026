@@ -1,125 +1,247 @@
-
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}À propos de Shareo{% endtrans %}
+{% block title %}
+	{% trans %}À propos de Shareo{% endtrans %}
 {% endblock %}
 
 {% block body %}
 
 	<!-- Hero About -->
-	<section class="about-hero py-5 text-center">
-		<div class="container">
+<section
+  class="position-relative text-white py-5"
+  style="
+    background-image: url('{{ asset('images/abouthero1.png') }}');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <!-- Contenu -->
+  <div class="container min-vh-60 position-relative d-flex align-items-center justify-content-center text-center">
+    <div class="col-lg-8">
 
-			<h1 class="display-5 fw-bold hero-title">
+        <h1 class="display-5 fw-bold hero-title">
+            {% trans %}Notre{% endtrans %}
+            <span class="text-success">{% trans %}Vision{% endtrans %}
+        </h1>
+
+        <p class="lead mt-4 hero-text">
+            <strong>
+                {% trans %}Shareo est né d’une conviction simple : révolutionner la manière dont nous consommons.<br> 
+                Nous croyons fermement que le partage est la clé pour construire un avenir plus durable.<br>
+                Notre mission : faciliter le don, la location et l’achat, pour réduire le gaspillage et renforcer les liens.{% endtrans %}
+            </strong>
+        </p>
+
+        <!-- valeurs badges -->
+        <p class="text-center mt-4 fs-5 valeurs">
+
+            <span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
+                🟢 {% trans %}Partager{% endtrans %}
+            </span>
+
+            <span class="mx-2 text-muted separator v2">✦</span>
+
+            <span class="badge rounded-pill bg-warning text-dark fs-6 px-3 py-2 valeur v3">
+                🟡 {% trans %}Réutiliser{% endtrans %}
+            </span>
+
+            <span class="mx-2 text-muted separator v4">✦</span>
+
+            <span class="badge rounded-pill bg-primary fs-6 px-3 py-2 valeur v5">
+                🔵 {% trans %}Créer des liens{% endtrans %}
+            </span>
+
+        </p>
+
+    </div>
+  </div>
+
+</section>
+		<!-- Team section -->
+
+		<section class="pt-2 pb-5 team-section">
+			<div class="container text-center">
+
+				<h2 class="display-5 fw-bold hero-title">
+					{% trans %}Notre{% endtrans %}
+					<span class="text-success">{% trans %}Équipe{% endtrans %}</span>
+				</h2>
+				<p class="lead mt-4 hero-text">
+					<strong>
+						{% trans %}
+						Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rendre le partage accessible à tous.{% endtrans %}</strong>
+				</p>
+				<div
+					class="row g-4">
+
+					<!-- Sandrine -->
+					<div class="col-12 col-sm-6 col-md-3">
+						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/Sandrine.jpg') }}');">
+
+							<div class="overlay"></div>
+
+							<div class="team-content text-center">
+								<img src="{{ asset('images/Sandrine.jpg') }}" class="rounded-circle mb-3 team-img" alt="Sandrine">
+								<h5 class="fw-bold text-white">Sandrine</h5>
+								<p class="text-success small mb-2">{% trans %}Fondatrice & Développeuse{% endtrans %}</p>
+
+								<div class="social-icons">
+									<a href="#">
+										<i class="fab fa-facebook"></i>
+									</a>
+									<a href="#">
+										<i class="bi bi-twitter"></i>
+									</a>
+									<a href="#">
+										<i class="bi bi-github"></i>
+									</a>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Christian -->
+					<div class="col-12 col-sm-6 col-md-3">
+						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/Christian.jpg') }}');">
+
+							<div class="overlay"></div>
+
+							<div class="team-content text-center">
+								<img src="{{ asset('images/Christian.jpg') }}" class="rounded-circle mb-3 team-img" alt="Christian">
+								<h5 class="fw-bold text-white">Christian</h5>
+								<p class="text-primary small mb-2">{% trans %}Administrateur virtuel{% endtrans %}</p>
+
+								<div class="social-icons">
+									<a href="#">
+										<i class="bi bi-linkedin"></i>
+									</a>
+									<a href="#">
+										<i class="bi bi-twitter"></i>
+									</a>
+									<a href="#">
+										<i class="bi bi-instagram"></i>
+									</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Sophie -->
+					<div class="col-12 col-sm-6 col-md-3">
+						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/imgSofie.png') }}');">
+
+							<div class="overlay"></div>
+
+							<div class="team-content text-center">
+								<img src="{{ asset('images/imgSofie.png') }}" class="rounded-circle mb-3 team-img" alt="Sophie">
+								<h5 class="fw-bold text-white">Sophie</h5>
+								<p class="text-warning small mb-2">{% trans %}Relation client{% endtrans %}</p>
+
+								<div class="social-icons">
+									<a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer">
+										<i class="bi bi-linkedin"></i>
+									</a>
+									<a href="https://twitter.com/tonprofil" target="_blank" rel="noopener noreferrer">
+										<i class="bi bi-twitter"></i>
+									</a>
+									<a href="https://instagram.com/tonprofil" target="_blank" rel="noopener noreferrer">
+										<i class="bi bi-instagram"></i>
+									</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- David -->
+					<div class="col-12 col-sm-6 col-md-3">
+						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/David.jpg') }}');">
+
+							<div class="overlay"></div>
+
+							<div class="team-content text-center">
+								<img src="{{ asset('images/David.jpg') }}" class="rounded-circle mb-3 team-img" alt="David">
+								<h5 class="fw-bold text-white">David</h5>
+								<p class="text-danger small mb-2">{% trans %}Chef de projet{% endtrans %}</p>
+
+								<div class="social-icons">
+									<a href="#">
+										<i class="bi bi-linkedin"></i>
+									</a>
+									<a href="#">
+										<i class="bi bi-twitter"></i>
+									</a>
+									<a href="#">
+										<i class="bi bi-instagram"></i>
+									</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- Section Features -->
+	<section class="py-5">
+		<div class="container text-center">
+			<h3 class="display-5 fw-bold hero-title">
 				{% trans %}Nos{% endtrans %}
-				<span class="text-success">{% trans %}valeurs{% endtrans %}</span>
-			</h1>
-
+				<span class="text-success">{% trans %}Valeurs{% endtrans %}</span>
+			</h3>
 			<p class="lead mt-4 hero-text">
+
 				<strong>
-					{% trans %}Shareo est né d’une conviction simple : révolutionner la manière dont nous consommons. 
-					        Nous croyons fermement que le partage est la clé pour construire un avenir plus durable, plus solidaire et plus innovant.
-					   Notre mission : permettre à chacun de donner, louer ou acheter facilement, tout en réduisant le gaspillage et en créant des liens.{% endtrans %}
+					{% trans %}Des valeurs qui nous rassemblent et donnent une âme à tout ce que nous construisons.{% endtrans %}
 				</strong>
 			</p>
-
-			<!-- valeurs badges -->
-			<p class="text-center mt-4 fs-5 valeurs">
-
-				<span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
-					🟢 {% trans %}Partager{% endtrans %}
-				</span>
-
-				<span class="mx-2 text-muted separator v2">✦</span>
-
-				<span class="badge rounded-pill bg-warning text-dark fs-6 px-3 py-2 valeur v3">
-					🟡 {% trans %}Réutiliser{% endtrans %}
-				</span>
-
-				<span class="mx-2 text-muted separator v4">✦</span>
-
-				<span class="badge rounded-pill bg-primary fs-6 px-3 py-2 valeur v5">
-					🔵 {% trans %}Créer des liens{% endtrans %}
-				</span>
-
-			</p>
-		</div>
-	</section>
-
-	<!-- Vision -->
-	<section class="py-5">
-		<div class="container">
 			<div class="row g-4">
-
-				<div class="col-md-4 d-flex">
-					<div class="card shadow-sm flex-fill text-center p-4">
-						<div class="display-4 mb-3">🌱</div>
-						<h5 class="fw-bold">{% trans %}Écologie{% endtrans %}</h5>
+				<div class="col-12 col-sm-6 col-md-3 d-flex">
+					<div class="card feature-card border-0 shadow-sm flex-fill text-center p-4">
+						<div class="display-4 mb-3">💰</div>
+						<h5 class="fw-bold">{% trans %}Économique{% endtrans %}</h5>
 						<p class="text-muted">
-							{% trans %}Encourager le partage pour réduire la surconsommation
-							                        et préserver notre environnement.{% endtrans %}
-						</p>
-					</div>
-				</div>
-
-				<div class="col-md-4 d-flex">
-					<div class="card shadow-sm flex-fill text-center p-4">
-						<div class="display-4 mb-3">🤝</div>
-						<h5 class="fw-bold">{% trans %}Entraide{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Créer une communauté basée sur l’entraide
-							                        et la confiance.{% endtrans %}
-						</p>
-					</div>
-				</div>
-
-				<div class="col-md-4 d-flex">
-					<div class="card shadow-sm flex-fill text-center p-4">
-						<div class="display-4 mb-3">💡</div>
-						<h5 class="fw-bold">{% trans %}Innovation{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Proposer des solutions simples et modernes
-							                        pour consommer autrement.{% endtrans %}
-						</p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
-	<!-- FEATURES -->
-	<section class="features py-5 bg-light">
-		<div class="container">
-			<div class="row text-center">
-
-				<div class="col-md-4 mb-4">
-					<div class="feature-box p-4 h-100">
-						<h5 class="fw-bold">🌱 {% trans %}Écologique{% endtrans %}</h5>
-						<p class="fs-6">
-							{% trans %}Réduisez votre impact environnemental en partageant des produits.{% endtrans %}
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 mb-4">
-					<div class="feature-box p-4 h-100">
-						<h5 class="fw-bold">🤝 {% trans %}Collaboratif{% endtrans %}</h5>
-						<p class="fs-6">
-							{% trans %}Une communauté basée sur la confiance et le partage.{% endtrans %}
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 mb-4">
-					<div class="feature-box p-4 h-100">
-						<h5 class="fw-bold">💰 {% trans %}Économique{% endtrans %}</h5>
-						<p class="fs-6">
 							{% trans %}Louez ou achetez au meilleur prix, sans gaspillage.{% endtrans %}
 						</p>
 					</div>
 				</div>
 
-			</div>
-		</div>
-	</section>
+				<div class="col-12 col-sm-6 col-md-3 d-flex">
+					<div class="card feature-card border-0 shadow-sm flex-fill text-center p-4">
+						<div class="display-4 mb-3">🌱</div>
+						<h5 class="fw-bold">{% trans %}Écologie{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Encourager le partage pour réduire la surconsommation et préserver notre environnement.{% endtrans %}
+						</p>
+					</div>
+				</div>
 
-{% endblock %}
+				<div class="col-12 col-sm-6 col-md-3 d-flex">
+					<div class="card feature-card border-0 shadow-sm flex-fill text-center p-4">
+						<div class="display-4 mb-3">🤝</div>
+						<h5 class="fw-bold">{% trans %}Entraide{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Créer une communauté basée sur l’entraide et la confiance.{% endtrans %}
+						</p>
+					</div>
+				</div>
+
+				<div class="col-12 col-sm-6 col-md-3 d-flex">
+					<div class="card feature-card border-0 shadow-sm flex-fill text-center p-4">
+						<div class="display-4 mb-3">💡</div>
+						<h5 class="fw-bold">{% trans %}Innovation{% endtrans %}</h5>
+						<p class="text-muted">
+							{% trans %}Proposer des solutions simples et modernes pour consommer autrement.{% endtrans %}
+						</p>
+					</div>
+				</div>
+			</p>
+		</div>
+	</div>
+</section>{% endblock %}

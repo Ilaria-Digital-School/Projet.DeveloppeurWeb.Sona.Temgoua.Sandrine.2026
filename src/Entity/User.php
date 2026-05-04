@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -62,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $minibio = null;
+    
 
     /**
      * @var Collection<int, Article>
@@ -73,8 +75,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $conversations;
 
     // Messages written by user
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Message::class)]
-    private Collection $messages;
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class)]
+private Collection $sentMessages;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
@@ -83,23 +85,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->articles = new ArrayCollection();
         $this->conversations = new ArrayCollection();
-        $this->messages = new ArrayCollection();
+        
+        $this->sentMessages = new ArrayCollection();
     }
 
     public function getConversations(): Collection
     {
         return $this->conversations;
     }
+    
 
-    public function getMessages(): Collection
-    {
-        return $this->messages;
-    }
+public function getSentMessages(): Collection
+{
+    return $this->sentMessages;
+}
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+public function getId(): ?int
+{
+    return $this->id;
+}
 
     public function getEmail(): ?string
     {

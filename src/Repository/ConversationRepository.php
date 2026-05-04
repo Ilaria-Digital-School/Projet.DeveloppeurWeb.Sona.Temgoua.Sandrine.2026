@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Conversation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,6 +16,16 @@ class ConversationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Conversation::class);
     }
+
+    public function findOneByUsers(User $user1, User $user2): ?Conversation
+{
+    return $this->createQueryBuilder('c')
+        ->where('c.buyer = :user1 AND c.seller = :user2')
+        ->setParameter('user1', $user1)
+        ->setParameter('user2', $user2)
+        ->getQuery()
+        ->getOneOrNullResult();
+}
 
     //    /**
     //     * @return Conversation[] Returns an array of Conversation objects

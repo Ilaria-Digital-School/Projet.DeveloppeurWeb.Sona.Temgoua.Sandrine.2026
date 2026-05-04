@@ -1,9 +1,9 @@
 security:
-    # Hash des mots de passe
+    # 🔐 Hash des mots de passe
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
-    # Provider utilisateur
+    # 👤 Provider utilisateur
     providers:
         app_user_provider:
             entity:
@@ -19,7 +19,6 @@ security:
             lazy: true
             provider: app_user_provider
 
-            # 🔥 Authenticator personnalisé uniquement
             custom_authenticator: App\Security\UserAuthenticator
             entry_point: App\Security\UserAuthenticator
 
@@ -27,14 +26,36 @@ security:
                 path: app_logout
                 target: app_home
 
-            # switch_user: true
-
+    # 🧠 Hiérarchie des rôles
     role_hierarchy:
-     ROLE_ADMIN: [ROLE_USER, ROLE_AUTHOR]
+        ROLE_ADMIN: [ROLE_USER, ROLE_AUTHOR]
+
     access_control:
+        # 🔓 PUBLIC
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+
+        # 📦 ARTICLES (lecture publique)
+        - { path: ^/articles$, roles: PUBLIC_ACCESS, methods: [GET] }
+        - { path: ^/articles/\d+$, roles: PUBLIC_ACCESS, methods: [GET] }
+        - { path: ^/article/\d+/edit, roles: ROLE_USER }
+
+        # 👤 USERS
+        - { path: ^/users$, roles: ROLE_ADMIN }         # voir tous les users
+        - { path: ^/users/\d+$, roles: ROLE_USER }      # profil (à affiner avec voter)
+
+        # 📦 ARTICLES (modification)
+        - { path: ^/articles, roles: ROLE_USER, methods: [POST, PUT, DELETE] }
+
+        # 💬 CONVERSATIONS
+        - { path: ^/conversations/create, roles: ROLE_USER }
+        - { path: ^/conversations/\d+, roles: ROLE_USER }
+
+        # 🔐 ADMIN & AUTHOR (tes routes existantes)
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/author, roles: ROLE_AUTHOR }
-        - { path: ^/user, roles: ROLE_USER }
+
+        
 
 when@test:
     security:
