@@ -6,6 +6,7 @@ use App\Repository\ConversationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\OneToMany;
 
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
 #[ORM\Table(
@@ -13,7 +14,7 @@ use Doctrine\Common\Collections\Collection;
     uniqueConstraints: [
         new ORM\UniqueConstraint(
             name: 'unique_conversation',
-            columns: ['buyer_id', 'seller_id']
+            columns: ['buyer_id', 'seller_id', 'article_id']
         )
     ]
 )]
@@ -47,30 +48,35 @@ class Conversation
     private ?User $seller = null;
 
     // Messages appartenant à la conversation
-    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: Message::class)]
-    private Collection $messages;
-    
+    #[OneToMany(targetEntity: Message::class, mappedBy: 'conversation', cascade: ['remove'], orphanRemoval: true)]
+private Collection $messages;
+
 
     #[ORM\Column(type: 'boolean')]
-private bool $isDeleted = false;
+    private bool $isDeleted = false;
 
-public function isDeleted(): bool
-{
-    return $this->isDeleted;
-}
+    public function isDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
 
-public function setIsDeleted(bool $isDeleted): static
-{
-    $this->isDeleted = $isDeleted;
-    return $this;
-}
+    public function setIsDeleted(bool $isDeleted): static
+    {
+        $this->isDeleted = $isDeleted;
+        return $this;
+    }
 
     public function __construct()
     {
         $this->messages = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
-
+    #[ORM\PreUpdate]
+    public function updateTimestamps(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
     public function getId(): ?int
     {
         return $this->id;

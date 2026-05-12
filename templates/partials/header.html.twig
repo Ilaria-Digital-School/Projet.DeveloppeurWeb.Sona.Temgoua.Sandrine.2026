@@ -3,11 +3,19 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
 
-        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success" href="{{ path('app_home') }}">
-            <i class="bi bi-share-fill fs-4"></i>
-            <span>Shareo</span>
-        </a>
+        <a class="navbar-brand d-flex align-items-center gap-2"
+   href="{{ path('app_home') }}">
 
+    <img src="{{ asset('images/favicon/logosaraka.png') }}"
+         alt="Saraka Logo"
+         width="50"
+         height="50"
+         class="rounded-circle">
+
+    <span class="saraka-brand">
+    <span class="s-letter">𝒮</span>araka
+</span>
+</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,12 +44,13 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">{% trans %}Contact{% endtrans %}</a>
-                </li>
+                </li>   
             </ul>
 
             <!-- Bloc droite : recherche, langue, boutons (alignés à droite sur desktop) -->
             <div class="d-flex align-items-center gap-2 flex-lg-row flex-column nav-actions">
 
+               
                 <!-- Liens ADMIN (si présents, ils seront aussi à droite, mais vous pouvez les laisser à gauche si besoin) -->
                 {% if is_granted('ROLE_ADMIN') %}
                     <ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
@@ -55,11 +64,15 @@
                 {% endif %}
 
                 <!-- Liens USER (connecté) -->
-                {% if is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_article_index' ? 'active' : '' }}" href="{{ path('app_article_index') }}">{% trans %}Articles{% endtrans %}</a>
+                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_my_articles' ? 'active' : '' }}" href="{{ path('app_my_articles') }}">{% trans %}Mes articles{% endtrans %}</a>
                         </li>
+                    </ul>
+                {% endif %}
+                
+                        {% if is_granted('ROLE_USER') %}
                         <li class="nav-item">
                             <a class="nav-link {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">
                                 {% trans %}Mon compte{% endtrans %}
@@ -118,14 +131,14 @@
                 <div class="d-flex gap-2 flex-lg-row flex-column">
                     {% if not app.user %}
                         <a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
-                            {% trans %}Register{% endtrans %}
+                            {% trans %}S'inscrire{% endtrans %}
                         </a>
                         <a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
-                            {% trans %}Login{% endtrans %}
+                            {% trans %}Se connecter{% endtrans %}
                         </a>
                     {% else %}
                         <a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
-                            {% trans %}Logout{% endtrans %}
+                            {% trans %}Se déconnecter{% endtrans %}
                         </a>
                     {% endif %}
                 </div>

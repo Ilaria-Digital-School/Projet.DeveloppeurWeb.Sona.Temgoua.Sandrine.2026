@@ -1,0 +1,93 @@
+{# templates/admin/conversation/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des conversations{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Gestion des conversations</h1>
+
+    {# Flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {# Barre de recherche simple #}
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Rechercher par titre d'article, acheteur, vendeur..." value="{{ app.request.query.get('search') }}">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+            {% if app.request.query.get('search') %}
+                <a href="{{ path('app_admin_conversation_list') }}" class="btn btn-secondary">Réinitialiser</a>
+            {% endif %}
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Article</th>
+                    <th>Acheteur</th>
+                    <th>Vendeur</th>
+                    <th>Nb messages</th>
+                    <th>Dernier message</th>
+                    <th>Mis à jour</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for conv in conversations %}
+                    <tr>
+                        <td>{{ conv.id }}</td>
+                        <td>
+                            {% if conv.article %}
+    <a href="{{ path('app_article_show', {slug: conv.article.slug}) }}" target="_blank">
+        {{ conv.article.title|slice(0, 50) }}
+    </a>
+{% else %}
+    <span class="text-muted">Article supprimé</span>
+{% endif %}
+                        </td>
+                        <td>{{ conv.buyer.fullName ?? conv.buyer.email }}</td>
+                        <td>{{ conv.seller.fullName ?? conv.seller.email }}</td>
+                        <td>{{ conv.messages|length }}</td>
+                        <td>
+                            {% if conv.messages|length > 0 %}
+                                {{ conv.messages.last.content|slice(0, 50) }}…
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td>{{ conv.updatedAt ? conv.updatedAt|date('d/m/Y H:i') : '-' }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ path('app_admin_conversation_show', {id: conv.id}) }}" class="btn btn-outline-primary">Voir</a>
+                                <form method="post" action="{{ path('app_admin_conversation_delete', {id: conv.id}) }}" onsubmit="return confirm('Supprimer définitivement cette conversation et tous ses messages ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('admin_delete_conversation_' ~ conv.id) }}">
+                                    <button class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center">Aucune conversation trouvée.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {# Pagination #}
+    <div class="navigation d-flex justify-content-center">
+        {{ knp_pagination_render(conversations) }}
+    </div>
+</div>
+{% endblock %}

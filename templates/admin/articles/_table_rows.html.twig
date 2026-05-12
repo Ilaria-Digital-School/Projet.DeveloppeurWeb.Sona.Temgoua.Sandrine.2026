@@ -1,0 +1,64 @@
+{# templates/admin/articles/_table_rows.html.twig #}
+{% for article in articles %}
+<tr>
+    <td>{{ article.id }}</td>
+    <td>
+        <strong>{{ article.title|slice(0, 60) }}</strong><br>
+        <small class="text-muted">{{ article.summary|slice(0, 80) }}…</small>
+    </td>
+    <td>{{ article.author.email }}</td>
+    <td>
+        {% set type = article.transactionType|lower %}
+        {% if type == 'acheter' %}
+            <span class="badge rounded-pill bg-danger px-3 py-2">ACHETER</span>
+        {% elseif type == 'louer' %}
+            <span class="badge rounded-pill bg-primary px-3 py-2">LOUER</span>
+        {% elseif type == 'brocante' %}
+            <span class="badge rounded-pill bg-orange px-3 py-2">BROCANTE</span>
+        {% elseif type == 'don' %}
+            <span class="badge rounded-pill bg-success px-3 py-2">DON</span>
+        {% else %}
+            <span class="badge rounded-pill bg-secondary px-3 py-2">{{ article.transactionType|upper }}</span>
+        {% endif %}
+    </td>
+    <td>
+        {% if article.images|length > 0 %}
+            <div class="d-flex flex-wrap gap-2">
+                {% for image in article.images %}
+                    <div class="position-relative">
+                        <img src="{{ asset('uploads/' ~ image.image) }}" alt="miniature" style="width: 50px; height: 50px; object-fit: cover;" class="rounded border">
+                        <form method="post" action="{{ path('app_admin_image_delete', {id: image.id}) }}" style="position: absolute; top: -8px; right: -8px;" onsubmit="return confirm('Supprimer cette image ?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_image_' ~ image.id) }}">
+                            <button type="submit" class="btn btn-sm btn-danger rounded-circle p-0" style="width: 20px; height: 20px; font-size: 12px;">✕</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <span class="text-muted">—</span>
+        {% endif %}
+    </td>
+    <td>
+        {% if article.isVerified %}
+            <span class="badge bg-success">Validé</span>
+        {% else %}
+            <span class="badge bg-warning text-dark">En attente</span>
+        {% endif %}
+    </td>
+    <td>{{ article.publishedAt ? article.publishedAt|date('d/m/Y H:i') : '-' }}</td>
+    <td>
+        <div class="btn-group btn-group-sm">
+            <a href="{{ path('app_article_show', {slug: article.slug}) }}" class="btn btn-outline-info" target="_blank">👁️</a>
+            <a href="{{ path('app_admin_article_edit', {id: article.id}) }}" class="btn btn-outline-warning">✏️</a>
+            <form method="post" action="{{ path('app_admin_article_delete', {id: article.id}) }}" onsubmit="return confirm('Supprimer définitivement cet article ? Cette action supprimera aussi ses images.')">
+                <input type="hidden" name="_token" value="{{ csrf_token('admin_delete_article_' ~ article.id) }}">
+                <button class="btn btn-outline-danger">🗑️</button>
+            </form>
+        </div>
+    </td>
+</tr>
+{% else %}
+<tr>
+    <td colspan="8" class="text-center text-muted">Aucun article trouvé.</td>
+</tr>
+{% endfor %}

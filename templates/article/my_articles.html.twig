@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes annonces{% endblock %}
+
+{% block body %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">
+            Mes annonces
+        </h2>
+
+        <a href="{{ path('app_article_new') }}"
+           class="btn btn-success rounded-pill">
+
+            + Nouvelle annonce
+
+        </a>
+
+    </div>
+
+    {% if articles|length > 0 %}
+
+        <div class="row">
+
+            {% for article in articles %}
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="card shadow-sm border-0 h-100">
+
+                       {% if article.images|length > 0 %}
+
+    <img src="{{ asset('images/' ~ article.images.first.image) }}"
+         class="card-img-top"
+         alt="{{ article.title }}">
+
+{% endif %}
+
+                      
+{# Contenu de la carte avec résumé et type de transaction #}
+<div class="card-body">
+  <h6 class="card-title">{{ article.title }}</h6>
+
+  <p class="card-text small text-muted">
+    {{ article.content|slice(0, 60) }}...
+  </p>
+
+  {% set type = article.transactionType|lower %}
+
+  {# Choix de la classe de couleur selon le type #}
+  {% if type == 'acheter' %}
+    {% set badgeClass = 'bg-danger' %}
+  {% elseif type == 'louer' %}
+    {% set badgeClass = 'bg-primary' %}
+  {% elseif type == 'brocante' %}
+    {% set badgeClass = 'bg-orange' %} {# classe personnalisée pour brocante #}
+  {% elseif type == 'don' %}
+    {% set badgeClass = 'bg-success' %}
+  {% else %}
+    {% set badgeClass = 'bg-success' %} {# valeur par défaut #}
+  {% endif %}
+
+  <span class="badge rounded-pill px-3 py-2 {{ badgeClass }}">
+    {{ article.transactionType|upper }}
+  </span>
+</div>
+
+{# Footer de la carte avec bouton pour voir le produit et contacter le vendeur #}
+                        <div class="card-footer bg-white border-0">
+
+
+                            <a href="{{ path('app_article_show', {'slug': article.slug}) }}"
+                               class="btn btn-outline-light btn-sm">
+
+                                Voir
+
+                            </a>
+
+                            <a href="{{ path('app_article_edit', {'id': article.id}) }}"
+                               class="btn btn-success btn-sm">
+
+                                Modifier
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info rounded-4">
+
+            Vous n’avez encore publié aucune annonce.
+
+        </div>
+
+    {% endif %} 
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/app.js') }}"></script>
+{% endblock %}
+
+
+

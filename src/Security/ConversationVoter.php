@@ -29,7 +29,7 @@ class ConversationVoter extends Voter
             return true;
         }
 
-        // 🔥 logique clé : vérifier participation
+        //  logique clé : vérifier participation
         return $conversation->getSeller() === $user
     || $conversation->getBuyer() === $user;
     }

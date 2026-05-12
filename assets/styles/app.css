@@ -21,11 +21,28 @@ main {
 }
 
 /* NAV CONTAINER */
+
+/*.saraka-brand*/
+.saraka-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: forestgreen;
+}
+
+.s-letter {
+    font-family: 'font-family: 'Poppins', sans-serif;';
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.2em;
+}
+
 .navbar {
     display: flex;
     align-items: center;
     flex-wrap: nowrap; /* On empêche les retours à la ligne */
     position: relative;/* ✅ nécessaire pour le dropdown */
+    z-index: 1000; /* ✅ s'assure que le dropdown est au-dessus du contenu */
 }
 
 /* NAV LINKS WRAPPER */
@@ -44,6 +61,14 @@ main {
     text-align: center;
     min-width: 70px; /* Taille minimale uniforme */
     padding: 0.4rem 0.6rem;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav {
+    align-items: center;
 }
 
 /* HOVER */
@@ -120,7 +145,7 @@ main {
 /* RÉDUCTION DE GAP SI NÉCESSAIRE */
 @media (max-width: 1200px) {
     .navbar-nav {
-        gap: 0.5rem;
+        gap: 0.2em;
     }
 }
 
@@ -180,23 +205,11 @@ main {
     }
 }
 
-/* Section team (about.html.twig) */
-
-.sections-wrapper {
-     background:  #ffffff;
-}
-
-/* Section Header (contact.html.twig) */
-.sections-wrapper {
-    padding: 0px 0;
-}
-
-
-
-
 /* Hero accueil (index.html.twig) section */
 .hero-carousel {
-    height: 70vh;
+    height: 80vh;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-carousel .carousel,
@@ -438,13 +451,13 @@ footer a:hover {
 .team-card {
     position: relative;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: visible;
     height: 320px;
     background-size: cover;
     background-position: top center;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     display: flex;
-    align-items: flex-end; /* 👈 pousse le contenu en bas */
+    align-items: flex-end; /* pousse le contenu en bas */
 }
 
 /* Overlay sombre */
@@ -495,7 +508,7 @@ footer a:hover {
 }
 
 .social-icons a:hover {
-    color: #00ff88;
+    color: #1e58d4;
     transform: scale(1.2);
 }
 
@@ -514,7 +527,9 @@ footer a:hover {
 
 
 .team-card:hover .team-img {
-    transform: scale(1.1);
+    transform: scale(2.2) translateY(-35px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    border-radius: 20px;
 }
 
 /* Animation au chargement */
@@ -672,4 +687,24 @@ footer a:hover {
     }
 }
 
-/* Pour les messages flash existants, pas nécessaire de modifier */
+/* CSS personnalisé pour le badge orange de brocante*/
+.bg-orange {
+  background-color: #ff8c00 !important; /* orange */
+  color: white;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* pousse le footer vers le bas si le contenu est court */
+}
+footer {
+    flex-shrink: 0; /* empêche le footer de rétrécir */
+}

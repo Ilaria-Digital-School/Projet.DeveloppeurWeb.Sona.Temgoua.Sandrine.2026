@@ -1,68 +1,72 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{% trans %}À propos de Shareo{% endtrans %}
+	{% trans %}À propos de saraka{% endtrans %}
 {% endblock %}
 
 {% block body %}
 
 	<!-- Hero About -->
-<section
-  class="position-relative text-white py-5"
-  style="
-    background-image: url('{{ asset('images/abouthero1.png') }}');
-    background-size: cover;
-    background-position: center;
-  "
->
-  <!-- Contenu -->
-  <div class="container min-vh-60 position-relative d-flex align-items-center justify-content-center text-center">
-    <div class="col-lg-8">
+	<section
+		class="position-relative text-white py-5" style="
+			    background-image: url('{{ asset('images/partageheroabout.png') }}');
+			    background-size: cover;
+			    background-position: center;
+				height: 60vh;
+			"
+	>	
+			
+		<!-- Overlay -->
+		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-        <h1 class="display-5 fw-bold hero-title">
-            {% trans %}Notre{% endtrans %}
-            <span class="text-success">{% trans %}Vision{% endtrans %}
-        </h1>
+		<!-- Contenu -->
+		<div class="container min-vh-60 position-relative d-flex align-items-center justify-content-center text-center">
+			<div class="col-lg-8">
 
-        <p class="lead mt-4 hero-text">
-            <strong>
-                {% trans %}Shareo est né d’une conviction simple : révolutionner la manière dont nous consommons.<br> 
-                Nous croyons fermement que le partage est la clé pour construire un avenir plus durable.<br>
-                Notre mission : faciliter le don, la location et l’achat, pour réduire le gaspillage et renforcer les liens.{% endtrans %}
-            </strong>
-        </p>
+				<h1 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+					{% trans %}Notre{% endtrans %}
+					<span class="text-success">{% trans %}Vision{% endtrans %}
+					</h1>
 
-        <!-- valeurs badges -->
-        <p class="text-center mt-4 fs-5 valeurs">
+					<p class="lead text-center mt-4 fs-4 fw-bold lh-sm text-light px-3 px-md-5 font-monospace ">
+						{% trans %}Un monde où le partage est au cœur de notre quotidien, où chaque objet trouve une seconde vie, et où les liens humains se tissent à travers la générosité et la confiance.{% endtrans %}
+					</p>	
 
-            <span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
-                🟢 {% trans %}Partager{% endtrans %}
-            </span>
+					<!-- valeurs badges -->
+					<p class="text-center mt-4 fs-5 valeurs">
 
-            <span class="mx-2 text-muted separator v2">✦</span>
+						<span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
+							🟢
+							{% trans %}Partager{% endtrans %}
+						</span>
 
-            <span class="badge rounded-pill bg-warning text-dark fs-6 px-3 py-2 valeur v3">
-                🟡 {% trans %}Réutiliser{% endtrans %}
-            </span>
+						<span class="mx-2 text-muted separator v2">✦</span>
 
-            <span class="mx-2 text-muted separator v4">✦</span>
+						<span class="badge rounded-pill bg-warning text-dark fs-6 px-3 py-2 valeur v3">
+							🟡
+							{% trans %}Réutiliser{% endtrans %}
+						</span>
 
-            <span class="badge rounded-pill bg-primary fs-6 px-3 py-2 valeur v5">
-                🔵 {% trans %}Créer des liens{% endtrans %}
-            </span>
+						<span class="mx-2 text-muted separator v4">✦</span>
 
-        </p>
+						<span class="badge rounded-pill bg-primary fs-6 px-3 py-2 valeur v5">
+							🔵
+							{% trans %}Créer des liens{% endtrans %}
+						</span>
 
-    </div>
-  </div>
+					</p>
 
-</section>
-		<!-- Team section -->
+				</div>
+			</div>
+
+		</section>
+
+		<!-- team section -->
 
 		<section class="pt-2 pb-5 team-section">
 			<div class="container text-center">
 
-				<h2 class="display-5 fw-bold hero-title">
+				<h2 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
 					{% trans %}Notre{% endtrans %}
 					<span class="text-success">{% trans %}Équipe{% endtrans %}</span>
 				</h2>
@@ -191,7 +195,7 @@
 	<!-- Section Features -->
 	<section class="py-5">
 		<div class="container text-center">
-			<h3 class="display-5 fw-bold hero-title">
+			<h3 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
 				{% trans %}Nos{% endtrans %}
 				<span class="text-success">{% trans %}Valeurs{% endtrans %}</span>
 			</h3>

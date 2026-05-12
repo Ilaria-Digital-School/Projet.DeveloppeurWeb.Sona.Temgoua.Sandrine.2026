@@ -1,79 +1,91 @@
-
 <!-- Footer -->
-<footer class="bg-dark text-light mt-5 pt-4">
-	<div class="container-fluid px-4 px-lg-5">
+<footer class="bg-dark text-light footer-responsive mt-md-5 mt-3 pt-md-4 pt-2" style="overflow-x: visible; width: 100%;">
+    <div class="container px-3 px-md-4">
 
-		<!-- Logo -->
-		<a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-success" href="{{ path('app_home') }}">
-			<i class="bi bi-share-fill fs-4"></i>
-			<span>Shareo</span>
-		</a>
+    <div class="text-center text-lg-start mb-2 mt-0">
+		<a class="navbar-brand d-flex align-items-center gap-2"
+   href="{{ path('app_home') }}">
 
-		<!-- LIGNE PRINCIPALE avec TOUTES les colonnes -->
-		<div class="row py-4">
-			<!-- Colonne 1: À propos -->
-			<div class="col-12 col-sm-6 col-lg-4">
-				<h5 data-i18n="footerAboutUs">{% trans %}À propos de Shareo{% endtrans %}</h5>
-				<p data-i18n="footerDescription">
-					{% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique, pratique.{% endtrans %}
-				</p>
-				<div class="social-icons mt-3">
-					<a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
-					<a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
-					<a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
-					<a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
-				</div>
-			</div>
+    <img src="{{ asset('images/favicon/logosaraka.png') }}"
+         alt="Saraka Logo"
+         width="50"
+         height="50"
+         class="rounded-circle">
 
-			<!-- Colonne 2: Liens rapides -->
-			<div class="col-12 col-sm-6 col-lg-3">
-				<h5 data-i18n="footerQuickLinks">{% trans %}Liens rapides{% endtrans %}</h5>
-				<ul class="list-unstyled">
-					<li><a href="{{ path('app_home') }}" class="text-light text-decoration-none" data-i18n="home">{% trans %}Accueil{% endtrans %}</a></li>
-					<li><a href="{{ path('app_acheter') }}" class="text-light text-decoration-none" data-i18n="products">{% trans %}Acheter{% endtrans %}</a></li>
-					<li><a href="{{ path('app_louer') }}" class="text-light text-decoration-none" data-i18n="rent">{% trans %}Louer{% endtrans %}</a></li>
-					<li><a href="{{ path('app_brocante') }}" class="text-light text-decoration-none" data-i18n="buy">{% trans %}Brocante{% endtrans %}</a></li>
-					<li><a href="{{ path('app_don') }}" class="text-light text-decoration-none" data-i18n="buy">{% trans %}Don{% endtrans %}</a></li>
-				</ul>
-			</div>
+    <span class="saraka-brand">
+    <span class="s-letter">𝒮</span>araka
+</span>
+</a>
+        </div>
 
-			<!-- Service client + Newsletter -->
-			<div class="col-12 col-lg-5">
-				<div class="row">
-					<!-- Service client -->
-					<div class="col-12 col-sm-6 mb-4 mb-sm-0">
-						<h5 data-i18n="footerCustomer">{% trans %}Service client{% endtrans %}</h5>
-						<ul class="list-unstyled">
-							<li><a href="#" class="text-light text-decoration-none" data-i18n="footerHelp">{% trans %}Aide & FAQ{% endtrans %}</a></li>
-							<li><a href="{{ path('contact') }}" class="text-light text-decoration-none" data-i18n="footerContact">{% trans %}Contactez-nous{% endtrans %}</a></li>
-							<li><a href="{{ path('about') }}" class="text-light text-decoration-none" data-i18n="footerAbout">{% trans %}À propos{% endtrans %}</a></li>
-						</ul>
-					</div>
-					<!-- Newsletter -->
-					<div class="col-12 col-sm-6">
-						<h5 data-i18n="footerNewsletter">{% trans %}Newsletter{% endtrans %}</h5>
-						<p data-i18n="footerNewsletterText">{% trans %}Inscrivez-vous pour recevoir nos offres exclusives{% endtrans %}</p>
-						<div class="input-group">
-							<input type="email" class="form-control" data-i18n-placeholder="emailPlaceholder" placeholder="{% trans %}Votre email{% endtrans %}"/>
-							<a href="{{ path('app_register') }}" class="btn btn-success" data-i18n="subscribeButton">{% trans %}S'inscrire{% endtrans %}</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <!-- LIGNE PRINCIPALE : réduction des gaps verticaux -->
+        <div class="row gy-md- py-md-2 py-1">
 
-		<!-- Bas de page -->
-		<div class="border-top pt-4 mt-4 pb-4">
-			<div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-				<p class="mb-0 text-center text-md-start">
-					&copy; 2026 <strong>Shareo</strong>. Tous droits réservés.
-				</p>
-				<p class="mb-0 text-center text-md-end">
-					<a href="#" class="text-light me-3">Conditions générales</a>
-					<a href="#" class="text-light me-3">Politique de confidentialité</a>
-					<a href="#" class="text-light">Mentions légales</a>
-				</p>
-			</div>
-		</div>
-	</div>
+            <!-- Colonne 1 -->
+            <div class="col-12 col-sm-6 col-lg-4">
+                <h5 data-i18n="footerAboutUs">{% trans %}À propos de <strong>Saraka</strong>{% endtrans %}</h5>
+                <p data-i18n="footerDescription" class="mb-2">
+                    {% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique, pratique.{% endtrans %}
+                </p>
+                <div class="social-icons mt-2">
+                    <a href="#" class="text-light me-2" aria-label="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-light me-2" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-light me-2" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-light" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+                </div>
+            </div>
+
+            <!-- Colonne 2 -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <h5 data-i18n="footerQuickLinks">{% trans %}Liens rapides{% endtrans %}</h5>
+                <ul class="list-unstyled footer-links mb-0">
+                    <li><a href="{{ path('app_home') }}" class="text-light text-decoration-none">{% trans %}Accueil{% endtrans %}</a></li>
+                    <li><a href="{{ path('app_acheter') }}" class="text-light text-decoration-none">{% trans %}Acheter{% endtrans %}</a></li>
+                    <li><a href="{{ path('app_louer') }}" class="text-light text-decoration-none">{% trans %}Louer{% endtrans %}</a></li>
+                    <li><a href="{{ path('app_brocante') }}" class="text-light text-decoration-none">{% trans %}Brocante{% endtrans %}</a></li>
+                    <li><a href="{{ path('app_don') }}" class="text-light text-decoration-none">{% trans %}Don{% endtrans %}</a></li>
+                </ul>
+            </div>
+
+            <!-- Colonne 3 -->
+            <div class="col-12 col-lg-5">
+                <div class="row gy-md-4 gy-3">
+                    <!-- Service client -->
+                    <div class="col-12 col-sm-6">
+                        <h5 data-i18n="footerCustomer">{% trans %}Service client{% endtrans %}</h5>
+                        <ul class="list-unstyled footer-links mb-0">
+                            <li><a href="#" class="text-light text-decoration-none">{% trans %}Aide & FAQ{% endtrans %}</a></li>
+                            <li><a href="{{ path('contact') }}" class="text-light text-decoration-none">{% trans %}Contactez-nous{% endtrans %}</a></li>
+                            <li><a href="{{ path('about') }}" class="text-light text-decoration-none">{% trans %}À propos{% endtrans %}</a></li>
+                        </ul>
+                    </div>
+                    <!-- Newsletter -->
+                    <div class="col-12 col-sm-6">
+                        <h5 data-i18n="footerNewsletter">{% trans %}Newsletter{% endtrans %}</h5>
+                        <p data-i18n="footerNewsletterText" class="mb-2">
+                            {% trans %}Inscrivez-vous pour recevoir nos offres exclusives{% endtrans %}
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row gap-2">
+                            <input type="email" class="form-control" placeholder="{% trans %}Votre email{% endtrans %}" />
+                            <a href="{{ path('app_register') }}" class="btn btn-success btn-sm">{% trans %}S'inscrire{% endtrans %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="border-top mt-md-4 mt-3 mb-md-4 mb-3 pt-md-4 pt-3 pb-md-4 pb-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-center text-md-start small">&copy; 2026 <strong>saraka</strong>. Tous droits réservés.</p>
+                <div class="d-flex flex-wrap justify-content-center gap-3 small">
+                    <a href="#" class="text-light text-decoration-none">Conditions générales</a>
+                    <a href="#" class="text-light text-decoration-none">Politique de confidentialité</a>
+                    <a href="#" class="text-light text-decoration-none">Mentions légales</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </footer>

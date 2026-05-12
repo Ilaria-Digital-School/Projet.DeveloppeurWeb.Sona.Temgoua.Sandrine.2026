@@ -1,0 +1,73 @@
+{# templates/admin/conversation/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversation #{{ conversation.id }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Conversation n°{{ conversation.id }}</h1>
+        <form method="post" action="{{ path('app_admin_conversation_delete', {id: conversation.id}) }}" onsubmit="return confirm('Supprimer définitivement cette conversation ?')">
+            <input type="hidden" name="_token" value="{{ csrf_token('admin_delete_conversation_' ~ conversation.id) }}">
+            <button class="btn btn-danger">🗑️ Supprimer toute la conversation</button>
+        </form>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <strong>Article :</strong>
+            {% if conversation.article %}
+    <a href="{{ path('app_article_show', {slug: conversation.article.slug}) }}" target="_blank">
+        {{ conversation.article.title }}
+    </a>
+{% else %}
+    <span class="text-muted">Article supprimé</span>
+{% endif %}
+            <br>
+            <strong>Acheteur :</strong> {{ conversation.buyer.fullName ?? conversation.buyer.email }}<br>
+            <strong>Vendeur :</strong> {{ conversation.seller.fullName ?? conversation.seller.email }}
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">Historique des messages</h5>
+            <div class="messages-list" style="max-height: 500px; overflow-y: auto;">
+                {% for message in conversation.messages %}
+                    <div class="border rounded p-3 mb-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <strong>{{ message.sender.fullName ?? message.sender.email }}</strong>
+                                <small class="text-muted">le {{ message.createdAt|date('d/m/Y H:i') }}</small>
+                                <div class="mt-1">{{ message.content|nl2br }}</div>
+                                {% if message.imagePath %}
+                                    <div class="mt-2">
+                                        <img src="{{ asset(message.imagePath) }}" alt="image" style="max-width: 200px;" class="img-thumbnail">
+                                    </div>
+                                {% endif %}
+                                {% if message.filePath %}
+                                    <div class="mt-2">
+                                        <a href="{{ asset(message.filePath) }}" target="_blank" class="btn btn-sm btn-outline-secondary">📎 Télécharger fichier</a>
+                                    </div>
+                                {% endif %}
+                                {% if message.audioPath %}
+                                    <div class="mt-2">
+                                        <audio controls src="{{ asset(message.audioPath) }}" style="max-width: 250px;"></audio>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {# Bouton supprimer ce message (admin) #}
+                            <form method="post" action="{{ path('app_admin_message_delete', {id: message.id}) }}" onsubmit="return confirm('Supprimer ce message ?')">
+                                <input type="hidden" name="_token" value="{{ csrf_token('admin_delete_message_' ~ message.id) }}">
+                                <button class="btn btn-sm btn-outline-danger">🗑️</button>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-muted">Aucun message dans cette conversation.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ path('app_admin_conversation_list') }}" class="btn btn-secondary">← Retour à la liste</a>
+</div>
+{% endblock %}

@@ -24,7 +24,6 @@
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                             
                             <div class="position-relative">
-
                                 <img src="{{ asset('images/' ~ image.image) }}"
                                      class="d-block w-100"
                                      style="height: 400px; object-fit: cover;">
@@ -100,7 +99,7 @@
             <div class="d-flex justify-content-between mt-4">
 
                 {% if app.user %}
-                    <a href="{{ path('app_article_index') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                    <a href="{{ path('app_my_articles') }}" class="btn btn-outline-secondary rounded-pill px-4">
                         ← Retour
                     </a>
                 {% else %}

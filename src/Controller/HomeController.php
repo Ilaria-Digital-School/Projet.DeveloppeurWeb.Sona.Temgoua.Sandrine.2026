@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -62,8 +61,6 @@ final class HomeController extends AbstractController
     #[Route('/about', name: 'about')]
     public function about(): Response
     {
-        # Affichage de la vue expliquant le projet
         return $this->render('pages/about.html.twig');
     }
-
 }

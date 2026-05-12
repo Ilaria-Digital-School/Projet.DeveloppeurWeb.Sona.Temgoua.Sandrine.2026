@@ -269,4 +269,133 @@ function handleImageChange(e) {
         reader.readAsDataURL(file);
     });
     }
+    // chat auto scroll
+    const chat = document.getElementById('chat');
+    chat.scrollTop = chat.scrollHeight;
+}
+
+// Initialisation de Quill
+const quill = new Quill('#editor-container', {
+    theme: 'snow',
+    placeholder: 'Rédigez votre article ici...',
+    modules: {
+        toolbar: [
+            [{ 'header': [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link', 'image', 'video'],
+            ['clean']
+        ]
+    }
+});
+
+quill.on('text-change', function() {
+    document.getElementById('content-hidden').value = quill.root.innerHTML;
+});
+
+// Gestion de l'image principale
+const mainDropzone = document.getElementById('dropzone-main');
+const mainInput = document.getElementById('main-image-input');
+const mainPreview = document.getElementById('main-image-preview');
+const mainPreviewImg = document.getElementById('main-preview-img');
+
+mainDropzone.addEventListener('click', () => mainInput.click());
+mainInput.addEventListener('change', (e) => {
+    if (e.target.files.length) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            mainPreviewImg.src = event.target.result;
+            mainPreview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+window.clearMainImage = function() {
+    mainInput.value = '';
+    mainPreview.classList.add('hidden');
+};
+
+// Gestion de la galerie
+const galleryDropzone = document.getElementById('dropzone-gallery');
+const galleryInput = document.getElementById('gallery-images-input');
+const galleryPreview = document.getElementById('gallery-preview');
+
+galleryDropzone.addEventListener('click', () => galleryInput.click());
+galleryInput.addEventListener('change', () => previewGalleryImages(galleryInput.files));
+
+function previewGalleryImages(files) {
+    galleryPreview.innerHTML = '';
+    Array.from(files).forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const div = document.createElement('div');
+            div.className = 'relative group';
+            div.innerHTML = `
+                <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg">
+                <button type="button" class="remove-gallery-img absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" data-index="${index}">
+                    ×
+                </button>
+            `;
+            galleryPreview.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// Suppression d'une image de la galerie (délégation d'événement)
+galleryPreview.addEventListener('click', (e) => {
+    const btn = e.target.closest('.remove-gallery-img');
+    if (!btn) return;
+    const index = parseInt(btn.dataset.index);
+    const dt = new DataTransfer();
+    const files = Array.from(galleryInput.files);
+    files.splice(index, 1);
+    files.forEach(file => dt.items.add(file));
+    galleryInput.files = dt.files;
+    previewGalleryImages(galleryInput.files);
+});
+
+// Drag & Drop amélioré
+function setupDragAndDrop(dropzone, input) {
+    dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('border-blue-500', 'bg-blue-50');
+    });
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('border-blue-500', 'bg-blue-50');
+    });
+    dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('border-blue-500', 'bg-blue-50');
+        if (input.id === 'gallery-images-input') {
+            input.files = e.dataTransfer.files;
+            previewGalleryImages(input.files);
+        } else if (input.id === 'main-image-input') {
+            input.files = e.dataTransfer.files;
+            const changeEvent = new Event('change');
+            input.dispatchEvent(changeEvent);
+        }
+    });
+}
+
+setupDragAndDrop(mainDropzone, mainInput);
+setupDragAndDrop(galleryDropzone, galleryInput);
+
+// Auto-save brouillon (optionnel)
+let autoSaveTimeout;
+const form = document.getElementById('article-form');
+if (form) {
+    form.addEventListener('input', () => {
+        clearTimeout(autoSaveTimeout);
+        autoSaveTimeout = setTimeout(() => {
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            }).catch(err => console.warn('Auto-save failed', err));
+        }, 3000);
+    });
 }

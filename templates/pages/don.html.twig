@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{% trans %}Donner sur Shareo{% endtrans %}
+	{% trans %}Donner sur saraka{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -12,6 +12,7 @@
 			    background-image: url('{{ asset('images/donhero.jpg') }}');
 			    background-size: cover;
 			    background-position: center;
+				height: 60vh;
 			  ">
 		<!-- Overlay -->
 		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
@@ -19,12 +20,12 @@
 		<!-- Contenu -->
 		<div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
 			<div class="col-lg-8">
-				<h1 class="fw-bold mb-4">
+				<h1 class="fw-bold mb-1">
 					{% trans %}Faites un don, changez des vies.{% endtrans %}
 				</h1>
 
-				<p class="lead mb-2">
-					<strong>{% trans %}Donnez une seconde vie à ce que vous n'utilisez plus.{% endtrans %}</strong>
+				<p class="lead mb-4 mt-1">
+					<strong>{% trans %}Donnez une seconde vie à ce que vous n'utilisez plus. Un objet oublié peut faire le bonheur de quelqu'un d'autre.{% endtrans %}</strong>
 				</p>
 
 				<div class="d-flex justify-content-center gap-3 flex-wrap">
@@ -62,7 +63,7 @@
 <section id="how-it-works" class="py-5 bg-light">
 	<div class="container">
 		<h2 class="fw-bold text-center text-dark mb-5">
-			{% trans %}Comment donner sur Shareo ?{% endtrans %}
+			{% trans %}Comment donner sur saraka ?{% endtrans %}
 		</h2>
 
 		<div class="row g-4 text-center">
@@ -109,7 +110,7 @@
 <section class="py-5 bg-light">
 	<div class="container">
 		<h2 class="fw-bold text-center text-dark mb-5">
-			{% trans %}Pourquoi donner sur Shareo ?{% endtrans %}
+			{% trans %}Pourquoi donner sur saraka ?{% endtrans %}
 		</h2>
 
 		<div class="row g-4 text-center">
@@ -149,27 +150,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-
-<!-- CTA -->
-<section class="py-5  bg-dark text-white text-center">
-	<div class="container">
-		<h2 class="fw-bold mb-3">
-			{% trans %}Vous aussi, proposez un don{% endtrans %}
-		</h2>
-		<p class="mb-4">
-			{% trans %}Un objet inutilisé peut faire le bonheur de quelqu'un d'autre.{% endtrans %}
-		</p>
-		{% if app.user %}
-		<a href="{{ path('app_article_new') }}" class="btn btn-outline-warning btn-lg rounded-pill px-5">
-			{% trans %}Déposer un don{% endtrans %}
-		</a>
-		{% else %}
-		<a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-outline-warning btn-lg rounded-pill px-5">
-		{% trans %}Déposer un don{% endtrans %}
-		</a>
-		{% endif %}	
 	</div>
 </section>
 {% endblock %}

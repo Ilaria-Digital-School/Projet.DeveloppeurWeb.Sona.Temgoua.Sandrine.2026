@@ -13,14 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Security\ConversationVoter;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 final class ConversationController extends AbstractController
 {
+    // ==================== UTILISATEUR : ses propres conversations ====================
+
     #[Route('/conversations', name: 'app_conversation_list')]
+    #[IsGranted('ROLE_USER')]
     public function list(ConversationRepository $repo): Response
     {
         $user = $this->getUser();
 
+        // L'utilisateur ne voit que ses conversations (comme acheteur ou vendeur)
         $conversations = $repo->createQueryBuilder('c')
             ->where('c.buyer = :user OR c.seller = :user')
             ->setParameter('user', $user)
@@ -33,161 +39,203 @@ final class ConversationController extends AbstractController
         ]);
     }
 
-   #[Route('/conversation/start/{articleId}', name: 'app_conversation_start')]
-public function start(
-    int $articleId,
-    EntityManagerInterface $em,
-    ArticleRepository $articleRepository,
-    ConversationRepository $conversationRepository
-): Response {
+    #[Route('/conversation/start/{articleId}', name: 'app_conversation_start')]
+    #[IsGranted('ROLE_USER')]
+    public function start(
+        int $articleId,
+        EntityManagerInterface $em,
+        ArticleRepository $articleRepository,
+        ConversationRepository $conversationRepository
+    ): Response {
+        $user = $this->getUser();
+        $article = $articleRepository->find($articleId);
 
-    /** @var \App\Entity\User $user */
-    $user = $this->getUser();
+        if (!$article) {
+            throw $this->createNotFoundException('Article introuvable');
+        }
 
-    if (!$user) {
-        throw $this->createAccessDeniedException();
-    }
+        $seller = $article->getAuthor();
+        if ($seller === $user) {
+            $this->addFlash('danger', 'Vous ne pouvez pas discuter avec votre propre annonce.');
+            // Correction : redirection vers l'article via son slug
+            return $this->redirectToRoute('app_article_show', ['slug' => $article->getSlug()]);
+        }
 
-    $article = $articleRepository->find($articleId);
+        $conversation = $conversationRepository->findOneBy([
+            'article' => $article,
+            'buyer' => $user,
+            'seller' => $seller
+        ]);
 
-    if (!$article) {
-        throw $this->createNotFoundException('Article introuvable');
-    }
+        if (!$conversation) {
+            $conversation = new Conversation();
+            $conversation->setArticle($article);
+            $conversation->setBuyer($user);
+            $conversation->setSeller($seller);
+            $em->persist($conversation);
+        }
 
-    $seller = $article->getAuthor();
+        $conversation->setUpdatedAt(new \DateTimeImmutable());
+        $em->flush();
 
-    if (!$seller) {
-        throw new \LogicException('Seller introuvable');
-    }
-
-    $conversation = $conversationRepository->findOneBy([
-    'article' => $article,
-    'buyer' => $user,
-]);
-
-if (!$conversation) {
-    $conversation = new Conversation();
-    $conversation->setArticle($article);
-    $conversation->setBuyer($user);
-    $conversation->setSeller($seller);
-
-    $em->persist($conversation);
-
-    // 💬 message automatique SIMPLE
-    $message = new Message();
-    $message->setContent("Bonjour, je suis intéressé par votre annonce " . $article->getTitle());
-    $message->setCreatedAt(new \DateTimeImmutable());
-    $message->setConversation($conversation);
-    $message->setSender($user);
-    $message->setIsRead(false);
-    $message->setArticle($article);
-
-    $em->persist($message);
-}
-
-$conversation->setUpdatedAt(new \DateTimeImmutable());
-
-$em->flush();
-
-return $this->redirectToRoute('app_conversation_show', [
-    'id' => $conversation->getId()
-]);
-
+        return $this->redirectToRoute('app_conversation_show', [
+            'id' => $conversation->getId()
+        ]);
     }
 
     #[Route('/conversation/{id}', name: 'app_conversation_show')]
     #[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
-    public function show(
-        Conversation $conversation,
-        EntityManagerInterface $em
-    ): Response {
-
+    public function show(Conversation $conversation, EntityManagerInterface $em): Response
+    {
         $user = $this->getUser();
-        
-        if (
-            $conversation->getBuyer() !== $user &&
-            $conversation->getSeller() !== $user
-        ) {
-            throw $this->createAccessDeniedException();
-        }
-    
-        // ✅ marquer comme lu
+
+        // Marquer les messages comme lus (seulement ceux envoyés par l'autre)
         foreach ($conversation->getMessages() as $msg) {
-            
             if ($msg->getSender() !== $user && !$msg->getReadAt()) {
                 $msg->setReadAt(new \DateTimeImmutable());
             }
         }
-        
         $em->flush();
 
-        $currentUser = $this->getUser();
-
-$otherUser = ($conversation->getBuyer() === $currentUser)
-    ? $conversation->getSeller()
-    : $conversation->getBuyer();
+        $otherUser = ($conversation->getBuyer() === $user)
+            ? $conversation->getSeller()
+            : $conversation->getBuyer();
 
         return $this->render('conversation/show.html.twig', [
             'conversation' => $conversation,
-            'currentUser' => $currentUser,
+            'currentUser' => $user,
             'otherUser' => $otherUser
         ]);
     }
 
     #[Route('/message/send/{id}', name: 'app_message_send', methods: ['POST'])]
-public function send(
-    Conversation $conversation,
+    #[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
+    public function send(Conversation $conversation, Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+
+        $message = new Message();
+        $message->setContent($request->request->get('content'));
+        $message->setCreatedAt(new \DateTimeImmutable());
+        $message->setConversation($conversation);
+        $message->setSender($user);
+        $message->setIsRead(false);
+
+        // Réponse à un message
+        $replyToId = $request->request->get('replyTo');
+        if ($replyToId) {
+            $replyMessage = $em->getRepository(Message::class)->find($replyToId);
+            $message->setReplyTo($replyMessage);
+        }
+
+        // Gestion des fichiers (image, fichier, audio)
+        $uploadsDir = $this->getParameter('uploads_directory');
+        $imageFile = $request->files->get('image');
+        if ($imageFile) {
+            $filename = uniqid() . '.' . $imageFile->guessExtension();
+            $imageFile->move($uploadsDir, $filename);
+            $message->setImagePath('uploads/' . $filename);
+        }
+
+        $fileFile = $request->files->get('file');
+        if ($fileFile) {
+            $filename = uniqid() . '.' . $fileFile->guessExtension();
+            $fileFile->move($uploadsDir, $filename);
+            $message->setFilePath('uploads/' . $filename);
+        }
+
+        $audioFile = $request->files->get('audio');
+        if ($audioFile) {
+            $filename = uniqid() . '.' . $audioFile->guessExtension();
+            $audioFile->move($uploadsDir, $filename);
+            $message->setAudioPath('uploads/' . $filename);
+        }
+
+        $conversation->setUpdatedAt(new \DateTimeImmutable());
+        $em->persist($message);
+        $em->flush();
+
+        return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+    }
+
+    // ==================== ADMIN : gestion complète de toutes les conversations ====================
+
+    #[Route('/admin/conversations', name: 'app_admin_conversation_list')]
+#[IsGranted('ROLE_ADMIN')]
+public function adminList(
     Request $request,
-    EntityManagerInterface $em
+    ConversationRepository $repo,
+    PaginatorInterface $paginator
 ): Response {
+    $search = $request->query->get('search', '');
+    $qb = $repo->createQueryBuilder('c')
+        ->leftJoin('c.article', 'a')
+        ->leftJoin('c.buyer', 'b')
+        ->leftJoin('c.seller', 's');
 
-    $user = $this->getUser();
-
-    $message = new Message();
-    $message->setContent($request->request->get('content'));
-    $message->setCreatedAt(new \DateTimeImmutable());
-    $message->setConversation($conversation);
-    $message->setSender($user);
-    $message->setIsRead(false);
-
-    // 🔁 reply
-    $replyToId = $request->request->get('replyTo');
-    if ($replyToId) {
-        $replyMessage = $em->getRepository(Message::class)->find($replyToId);
-        $message->setReplyTo($replyMessage);
+    if ($search) {
+        $qb->andWhere('a.title LIKE :search OR b.email LIKE :search OR s.email LIKE :search')
+           ->setParameter('search', '%' . $search . '%');
     }
 
-    // 📷 IMAGE
-    $imageFile = $request->files->get('image');
-    if ($imageFile) {
-        $filename = uniqid().'.'.$imageFile->guessExtension();
-        $imageFile->move($this->getParameter('uploads_directory'), $filename);
-        $message->setImagePath('uploads/'.$filename);
+    $qb->orderBy('c.updatedAt', 'DESC');
+
+    $conversations = $paginator->paginate(
+        $qb,
+        $request->query->getInt('page', 1),
+        20
+    );
+
+    return $this->render('admin/conversation/list.html.twig', [
+        'conversations' => $conversations,
+    ]);
+}
+
+   #[Route('/admin/conversation/{id}/delete', name: 'app_admin_conversation_delete', methods: ['POST'])]
+#[IsGranted('ROLE_ADMIN')]
+public function adminDelete(Request $request, Conversation $conversation, EntityManagerInterface $em): Response
+{
+    if ($this->isCsrfTokenValid('admin_delete_conversation_' . $conversation->getId(), $request->request->get('_token'))) {
+        // Supprime tous les messages liés à cette conversation
+        foreach ($conversation->getMessages() as $message) {
+            $em->remove($message);
+        }
+        // Puis supprime la conversation
+        $em->remove($conversation);
+        $em->flush();
+        $this->addFlash('success', 'Conversation supprimée par l\'administrateur.');
+    }
+    return $this->redirectToRoute('app_admin_conversation_list');
+}
+
+    #[Route('/admin/message/{id}/delete', name: 'app_admin_message_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminDeleteMessage(Request $request, Message $message, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('admin_delete_message_' . $message->getId(), $request->request->get('_token'))) {
+            $conversationId = $message->getConversation()->getId();
+            $em->remove($message);
+            $em->flush();
+            $this->addFlash('success', 'Message supprimé par l\'administrateur.');
+            return $this->redirectToRoute('app_admin_conversation_show', ['id' => $conversationId]);
+        }
+        return $this->redirectToRoute('app_admin_conversation_list');
     }
 
-    // 📎 FICHIER
-    $fileFile = $request->files->get('file');
-    if ($fileFile) {
-        $filename = uniqid().'.'.$fileFile->guessExtension();
-        $fileFile->move($this->getParameter('uploads_directory'), $filename);
-        $message->setFilePath('uploads/'.$filename);
+    #[Route('/admin/conversation/{id}', name: 'app_admin_conversation_show')]
+#[IsGranted('ROLE_ADMIN')]
+public function adminShow(Conversation $conversation, EntityManagerInterface $em): Response
+{
+    // Marquer tous les messages comme lus (optionnel)
+    foreach ($conversation->getMessages() as $msg) {
+        if (!$msg->getReadAt()) {
+            $msg->setReadAt(new \DateTimeImmutable());
+        }
     }
-
-    // 🎵 AUDIO
-    $audioFile = $request->files->get('audio');
-    if ($audioFile) {
-        $filename = uniqid().'.'.$audioFile->guessExtension();
-        $audioFile->move($this->getParameter('uploads_directory'), $filename);
-        $message->setAudioPath('uploads/'.$filename);
-    }
-
-    $conversation->setUpdatedAt(new \DateTimeImmutable());
-
-    $em->persist($message);
     $em->flush();
 
-    return $this->redirectToRoute('app_conversation_show', [
-        'id' => $conversation->getId()
+    return $this->render('admin/conversation/show.html.twig', [
+        'conversation' => $conversation,
     ]);
 }
 }

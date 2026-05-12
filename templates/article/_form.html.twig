@@ -16,7 +16,7 @@
         {{ form_row(form.content) }}
     </div>
 
-    {# ✅ AJOUT OBLIGATOIRE #}
+    {#  AJOUT OBLIGATOIRE #}
     <div class="col-md-6">
         {{ form_row(form.cathegory) }}
     </div>
@@ -50,6 +50,9 @@
             }
         }) }}
 
+
+        <div id="previewContainer" class="row mt-3 g-3"></div>
+
     </div>
 
     <div id="preview" class="row mt-4 g-3"></div>
@@ -64,6 +67,52 @@
     </button>
 </div>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('previewContainer');
+
+    fileInput.addEventListener('change', function () {
+
+        previewContainer.innerHTML = '';
+
+        const files = this.files;
+
+        for (let i = 0; i < files.length; i++) {
+
+            const file = files[i];
+
+            if (!file.type.startsWith('image/')) {
+                continue;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-3';
+
+                col.innerHTML = `
+                    <div class="card shadow-sm border-0">
+                        <img src="${e.target.result}" 
+                             class="card-img-top rounded"
+                             style="height: 180px; object-fit: cover;">
+                    </div>
+                `;
+
+                previewContainer.appendChild(col);
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+    });
+
+});
+</script>
 
 {{ form_end(form) }}
 

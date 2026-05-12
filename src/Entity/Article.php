@@ -244,4 +244,6 @@ class Article
 
         return $this;
     }
+
+    
 }

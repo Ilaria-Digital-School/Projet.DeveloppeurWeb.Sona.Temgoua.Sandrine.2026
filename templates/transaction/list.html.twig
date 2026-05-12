@@ -1,4 +1,4 @@
-<section id="products" class="py-5">
+<section id="products" class="py-3">
 	<div class="container">
 
 		{% if pageTitle is not null %}
@@ -7,26 +7,57 @@
 
 		<div class="row">
 			{% for article in articles %}
-				<div class="col-md-3 mb-4 d-flex">
-					<div class="card product-card shadow-sm h-100">
 
-						{% if article.image %}
-							<img src="{{ asset('images/' ~ article.image) }}" class="card-img-top product-image" alt="{{ article.title }}">
-						{% endif %}
+				<div class="col-12 col-sm-6 col-lg-3 mb-4 d-flex">
+					<div class="card product-card shadow-sm h-100 d-flex flex-column">
 
+						{% if article.images|length > 0 %}
+
+    {% for image in article.images|slice(0, 1) %}
+
+        <img 
+            src="{{ asset('images/' ~ image.image) }}"
+            class="card-img-top w-100"
+            alt="{{ article.title }}"
+            style="height: 200px; object-fit: cover;"
+        >
+
+    {% endfor %}
+
+{% endif %}
+
+						{# Contenu de la carte avec résumé et type de transaction #}
 						<div class="card-body">
 							<h6 class="card-title">{{ article.title }}</h6>
+
 							<p class="card-text small text-muted">
 								{{ article.content|slice(0, 60) }}...
 							</p>
 
-							<p style="font-weight: bold;">
-								<span class="badge rounded-pill px-3 py-2 bg-success">
-									{{ article.transactionType|upper }}
-								</span>
-							</p>
+							{% set type = article.transactionType|lower %}
+
+							{# Choix de la classe de couleur selon le type #}
+							{% if type == 'acheter' %}
+								{% set badgeClass = 'bg-danger' %}
+							{% elseif type == 'louer' %}
+								{% set badgeClass = 'bg-primary' %}
+							{% elseif type == 'brocante' %}
+								{% set badgeClass = 'bg-orange' %}
+								{# classe personnalisée pour brocante #}
+							{% elseif type == 'don' %}
+								{% set badgeClass = 'bg-success' %}
+							{% else %}
+								{% set badgeClass = 'bg-success' %}
+								{# valeur par défaut #}
+							{% endif %}
+
+							<span class="badge rounded-pill px-3 py-2 {{ badgeClass }}">
+								{{ article.transactionType|upper }}
+							</span>
 						</div>
 
+
+						{# Footer de la carte avec bouton pour voir le produit et contacter le vendeur #}
 						<div class="card-footer bg-white border-0">
 
 							{% if article.slug %}

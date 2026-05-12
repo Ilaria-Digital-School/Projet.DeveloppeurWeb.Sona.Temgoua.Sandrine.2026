@@ -23,7 +23,9 @@ class TransactionController extends AbstractController
         # Création d'une requête pour récupérer les articles dont le type de transaction est "acheter"
         $query = $articleRepository->createQueryBuilder('a')
             ->where('a.transactionType = :type')
+    
             ->setParameter('type', 'acheter')
+            
             ->orderBy('a.id', 'DESC')
             ->getQuery();
         
@@ -53,6 +55,7 @@ class TransactionController extends AbstractController
         $query = $articleRepository->createQueryBuilder('a')
             ->where('a.transactionType = :type')
             ->setParameter('type', 'louer')
+        
             ->orderBy('a.id', 'DESC')
             ->getQuery();
         
@@ -82,6 +85,7 @@ class TransactionController extends AbstractController
         $query = $articleRepository->createQueryBuilder('a')
             ->where('a.transactionType = :type')
             ->setParameter('type', 'don')
+        
             ->orderBy('a.id', 'DESC')
             ->getQuery();
         
@@ -110,7 +114,7 @@ class TransactionController extends AbstractController
         # Requête pour récupérer les articles dont le type est "brocante"
         $query = $articleRepository->createQueryBuilder('a')
             ->where('a.transactionType = :type')
-            ->setParameter('type', 'brocante')
+            ->setParameter('type', 'brocante')       
             ->orderBy('a.id', 'DESC')
             ->getQuery();
         

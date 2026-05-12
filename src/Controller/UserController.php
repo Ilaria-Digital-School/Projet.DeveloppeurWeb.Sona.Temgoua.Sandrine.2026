@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 # Préfixe de route : toutes les routes de ce contrôleur commenceront par /user
 #[Route('/user')]
@@ -17,6 +18,7 @@ final class UserController extends AbstractController
 {
     # Route permettant d'afficher la liste de tous les utilisateurs
     #[Route(name: 'app_user_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(UserRepository $userRepository): Response
     {
         # Récupération de tous les utilisateurs depuis la base de données

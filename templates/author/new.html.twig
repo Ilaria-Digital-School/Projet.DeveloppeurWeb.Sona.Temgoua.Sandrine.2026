@@ -1,94 +1,53 @@
-{# templates/admin/article/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvel article - Dashboard{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-{% endblock %}
+{% block title %}{% trans %}Créer un auteur{% endtrans %}{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-    <div class="container mx-auto px-4 py-8">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
-                    <h1 class="text-2xl font-bold text-white">Créer un nouvel article</h1>
-                    <p class="text-blue-100 mt-1">Remplissez les informations ci-dessous</p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-success text-white rounded-top-4">
+                    <h1 class="h3 mb-0">{% trans %}Créer un nouvel auteur{% endtrans %}</h1>
                 </div>
 
-                <div class="p-6">
-                    {{ form_start(form, {'attr': {'class': 'space-y-6', 'enctype': 'multipart/form-data', 'id': 'article-form'}}) }}
-                    
-                    <div class="space-y-4">
-                        <div>
-                            {{ form_label(form.title, 'Titre de l\'article', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                            {{ form_widget(form.title, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent', 'placeholder': 'Entrez un titre accrocheur...'}}) }}
-                            {{ form_errors(form.title) }}
-                        </div>
+                <div class="card-body p-4">
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-                        <div>
-                            {{ form_label(form.slug, 'Slug (optionnel)', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                            {{ form_widget(form.slug, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent', 'placeholder': 'slug-personnalise'}}) }}
-                            <p class="text-xs text-gray-500 mt-1">Laissez vide pour génération automatique</p>
-                        </div>
-
-                        <div>
-                            {{ form_label(form.summary, 'Résumé', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                            {{ form_widget(form.summary, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent', 'rows': 3}}) }}
-                        </div>
-
-                        <div>
-                            {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                            <div id="editor-container" style="height: 300px;"></div>
-                            {{ form_widget(form.content, {'attr': {'class': 'hidden', 'id': 'content-hidden'}}) }}
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                {{ form_label(form.category, 'Catégorie', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                                {{ form_widget(form.category, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'}}) }}
-                            </div>
-
-                            <div>
-                                {{ form_label(form.transactionType, 'Type de transaction', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                                {{ form_widget(form.transactionType, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'}}) }}
-                            </div>
-                        </div>
-
-                        <div>
-                            {{ form_label(form.image, 'Image principale', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 transition-colors cursor-pointer" id="dropzone-main">
-                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
-                                <p class="text-gray-600">Glissez-déposez votre image principale ici ou cliquez pour sélectionner</p>
-                                {{ form_widget(form.image, {'attr': {'class': 'hidden', 'id': 'main-image-input'}}) }}
-                            </div>
-                            <div id="main-image-preview" class="mt-4 hidden">
-                                <img id="main-preview-img" class="max-h-48 rounded-lg object-cover">
-                                <button type="button" onclick="clearMainImage()" class="mt-2 text-red-600 text-sm">Supprimer</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            {{ form_label(form.images, 'Images supplémentaires', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
-                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 transition-colors cursor-pointer" id="dropzone-gallery">
-                                <i class="fas fa-images text-4xl text-gray-400 mb-2"></i>
-                                <p class="text-gray-600">Glissez-déposez plusieurs images ici ou cliquez pour sélectionner</p>
-                                {{ form_widget(form.images, {'attr': {'class': 'hidden', 'id': 'gallery-images-input', 'multiple': true}}) }}
-                            </div>
-                            <div id="gallery-preview" class="grid grid-cols-3 gap-4 mt-4"></div>
-                        </div>
+                    <div class="mb-3">
+                        {{ form_label(form.firstName, 'Prénom', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control' ~ (form.firstName.vars.valid ? '' : ' is-invalid')}}) }}
+                        {{ form_errors(form.firstName) }}
                     </div>
 
-                    <div class="flex justify-end space-x-3 pt-6">
-                        <a href="{{ path('app_article_index') }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                            Annuler
+                    <div class="mb-3">
+                        {{ form_label(form.lastName, 'Nom', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control' ~ (form.lastName.vars.valid ? '' : ' is-invalid')}}) }}
+                        {{ form_errors(form.lastName) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.minibio, 'Mini-biographie', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                        {{ form_widget(form.minibio, {'attr': {'class': 'form-control' ~ (form.minibio.vars.valid ? '' : ' is-invalid'), 'rows': 4}}) }}
+                        <div class="form-text">{% trans %}Courte présentation de l'auteur (max 255 caractères).{% endtrans %}</div>
+                        {{ form_errors(form.minibio) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.slug, 'Slug (optionnel)', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                        {{ form_widget(form.slug, {'attr': {'class': 'form-control' ~ (form.slug.vars.valid ? '' : ' is-invalid'), 'placeholder': 'slug-personnalise'}}) }}
+                        <div class="form-text">{% trans %}Laissez vide pour une génération automatique à partir du nom.{% endtrans %}</div>
+                        {{ form_errors(form.slug) }}
+                    </div>
+
+                    {# Ajoute ici d'autres champs si nécessaire, par ex. "photo" #}
+
+                    <div class="d-flex justify-content-between mt-4 pt-2">
+                        <a href="{{ path('app_author_index') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> {% trans %}Retour à la liste{% endtrans %}
                         </a>
-                        <button type="submit" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
-                            <i class="fas fa-save mr-2"></i>Publier l'article
+                        <button type="submit" class="btn btn-success px-4">
+                            <i class="bi bi-save"></i> {% trans %}Enregistrer{% endtrans %}
                         </button>
                     </div>
 
@@ -98,194 +57,4 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-<script src="{{ asset('js/article.js') }}"></script>
-
-<script>
-// Initialisation de l'éditeur riche
-var quill = new Quill('#editor-container', {
-    theme: 'snow',
-    placeholder: 'Rédigez votre article ici...',
-    modules: {
-        toolbar: [
-            [{ 'header': [1, 2, 3, false] }],
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            ['link', 'image', 'video'],
-            ['clean']
-        ]
-    }
-});
-
-quill.on('text-change', function() {
-    document.getElementById('content-hidden').value = quill.root.innerHTML;
-});
-
-// Gestion des images
-const mainDropzone = document.getElementById('dropzone-main');
-const mainInput = document.getElementById('main-image-input');
-
-mainDropzone.addEventListener('click', () => mainInput.click());
-mainInput.addEventListener('change', (e) => previewMainImage(e.target.files[0]));
-
-function previewMainImage(file) {
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('main-preview-img').src = e.target.result;
-            document.getElementById('main-image-preview').classList.remove('hidden');
-        }
-        reader.readAsDataURL(file);
-    }
-}
-
-function clearMainImage() {
-    mainInput.value = '';
-    document.getElementById('main-image-preview').classList.add('hidden');
-}
-
-// Gestion de la galerie
-const galleryDropzone = document.getElementById('dropzone-gallery');
-const galleryInput = document.getElementById('gallery-images-input');
-
-galleryDropzone.addEventListener('click', () => galleryInput.click());
-galleryInput.addEventListener('change', () => previewGalleryImages(galleryInput.files));
-
-function previewGalleryImages(files) {
-    const preview = document.getElementById('gallery-preview');
-    preview.innerHTML = '';
-    
-    Array.from(files).forEach((file, index) => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const div = document.createElement('div');
-            div.className = 'relative group';
-            div.innerHTML = `
-                <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg">
-                <button type="button" onclick="removeGalleryImage(${index})" class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <i class="fas fa-times text-xs"></i>
-                </button>
-            `;
-            preview.appendChild(div);
-        }
-        reader.readAsDataURL(file);
-    });
-}
-
-function removeGalleryImage(index) {
-    const dt = new DataTransfer();
-    const files = Array.from(galleryInput.files);
-    files.splice(index, 1);
-    files.forEach(file => dt.items.add(file));
-    galleryInput.files = dt.files;
-    previewGalleryImages(galleryInput.files);
-}
-</script>
-
-<script>
-    // assets/js/article.js
-
-// Animations et interactions premium
-document.addEventListener('DOMContentLoaded', function() {
-    // Animation des cartes
-    const cards = document.querySelectorAll('.hover\\:shadow-lg');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-
-    // Notifications toast
-    const flashMessages = document.querySelectorAll('.flash-message');
-    flashMessages.forEach(message => {
-        setTimeout(() => {
-            message.style.opacity = '0';
-            setTimeout(() => message.remove(), 300);
-        }, 3000);
-    });
-});
-
-// Gestionnaire de suppression avec confirmation premium
-function confirmDelete(message) {
-    return new Promise((resolve) => {
-        const modal = createConfirmModal(message);
-        document.body.appendChild(modal);
-        
-        const confirmBtn = modal.querySelector('.confirm-btn');
-        const cancelBtn = modal.querySelector('.cancel-btn');
-        
-        confirmBtn.addEventListener('click', () => {
-            modal.remove();
-            resolve(true);
-        });
-        
-        cancelBtn.addEventListener('click', () => {
-            modal.remove();
-            resolve(false);
-        });
-    });
-}
-
-function createConfirmModal(message) {
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn';
-    modal.innerHTML = `
-        <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 transform animate-slideUp">
-            <div class="text-center">
-                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Confirmation</h3>
-                <p class="text-gray-600 mb-6">${message}</p>
-                <div class="flex space-x-3">
-                    <button class="cancel-btn flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                        Annuler
-                    </button>
-                    <button class="confirm-btn flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-                        Confirmer
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    return modal;
-}
-
-// Drag and drop amélioré
-function setupDragAndDrop(dropzone, input) {
-    dropzone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropzone.classList.add('border-blue-500', 'bg-blue-50');
-    });
-    
-    dropzone.addEventListener('dragleave', () => {
-        dropzone.classList.remove('border-blue-500', 'bg-blue-50');
-    });
-    
-    dropzone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropzone.classList.remove('border-blue-500', 'bg-blue-50');
-        const files = e.dataTransfer.files;
-        input.files = files;
-        input.dispatchEvent(new Event('change'));
-    });
-}
-
-// Auto-save brouillon
-let autoSaveTimeout;
-function setupAutoSave(formId, saveUrl) {
-    const form = document.getElementById(formId);
-    if (!form) return;
-    
-    const formData = new FormData(form);
-    form.addEventListener('input', () => {
-        clearTimeout(autoSaveTimeout);
-        autoSaveTimeout = setTimeout(() => {
-           
-</script>
 {% endblock %}
