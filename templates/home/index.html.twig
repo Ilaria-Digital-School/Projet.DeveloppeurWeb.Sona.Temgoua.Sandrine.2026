@@ -43,13 +43,17 @@
 		{# Texte de bienvenue centré sur le carousel #}
 		<div class="position-absolute top-50 start-50 translate-middle text-center text-white z-3 px-3 w-100">
 
-			<h1 class="display-5 display-md-4 fw-bold">
+			<h1 class="display-1 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+
 				{% trans %}Bienvenue sur{% endtrans %}
-				<span class="text-success">Saraka
+
+				<span class="text-success">
+					<span class="s-letter">𝒮</span>araka
 				</span>
 			</h1>
-			<p class="lead mt-3 fs-4 fs-md-5">
-				<strong>{% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.{% endtrans %}</strong>
+
+			<p class="vision-text text-center text-light mx-auto">
+				{% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.{% endtrans %}
 			</p>
 
 			<div class="d-flex flex-column align-items-center gap-3">
@@ -77,7 +81,9 @@
 		</div>
 
 		<!-- Overlay -->
-		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+		<div class="position-absolute top-0 start-0 w-100 h-100"
+     style="background: rgba(0,0,0,0.90);z-index:1;">
+</div>
 
 		<!-- CAROUSEL -->
 		<div id="carouselPromo" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -108,35 +114,31 @@
 	{# Section qui affiche les produits récents récupérés depuis la base de données #}
 
 	<section id="latest-products" class="products py-3">
-    <div class="container">
+		<div class="container">
 
-        <div class="text-center mb-4">
-            <a href="#latest-products" class="btn btn-outline-dark fw-bold fs-5 px-5 py-2 rounded-pill">
-                {% trans %}Découvrez les dernières annonces ↓{% endtrans %}
-            </a>
-        </div>
+			<div class="text-center mb-4">
+				<a href="#latest-products" class="btn btn-outline-dark fw-bold fs-5 px-5 py-2 rounded-pill">
+					{% trans %}Découvrez les dernières annonces ↓{% endtrans %}
+				</a>
+			</div>
 
-        <div class="row">
+			<div
+				class="row">
 				{# Boucle qui parcourt les articles envoyés par le contrôleur #}
 				{% for article in articles %}
 
 					<div class="col-12 col-sm-6 col-lg-3 mb-4 d-flex">
 						<div class="card product-card shadow-sm h-100 d-flex flex-column">
 
-						{% if article.images|length > 0 %}
+							{% if article.images|length > 0 %}
 
-    {% for image in article.images|slice(0, 1) %}
+								{% for image in article.images|slice(0, 1) %}
 
-        <img 
-            src="{{ asset('images/' ~ image.image) }}"
-            class="card-img-top w-100"
-            alt="{{ article.title }}"
-            style="height: 200px; object-fit: cover;"
-        >
+									<img src="{{ asset('images/' ~ image.image) }}" class="card-img-top w-100" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
 
-    {% endfor %}
+								{% endfor %}
 
-{% endif %}
+							{% endif %}
 
 
 							{# Contenu de la carte avec résumé et type de transaction #}

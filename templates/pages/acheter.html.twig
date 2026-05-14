@@ -5,12 +5,12 @@
 {% block body %}
 
 <section
-  class="position-relative text-white py-5"
+  class="position-relative text-white py-4"
   style="
     background-image: url('{{ asset('images/heroacheter.avif') }}');
     background-size: cover;
     background-position: center;
-    height: 60vh;
+    height: 65vh;
     "
  <!-- Overlay -->
   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
@@ -18,30 +18,30 @@
   <!-- Contenu -->
   <div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
     <div class="col-lg-8">
-      <h1 class="fw-bold mb-4">
+      <h1 class="display-3 fw-bold hero-title mb-2" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
         {% trans %}Achetez malin, achetez responsable{% endtrans %}
       </h1>
 
-      <p class="lead mb-4">
-        <strong>{% trans %}Jusqu'à 70% d'économies tout en consommant mieux.{% endtrans %}</strong>
+    <p class="vision-text text-center text-light mx-auto">
+        {% trans %}Jusqu'à 70% d'économies tout en consommant mieux.{% endtrans %}
       </p>
 
-      <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <a href="#products" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
+      <div class="d-flex justify-content-center gap-2 flex-wrap">
+        <a href="#products" class="btn btn-warning btn-lg text-dark rounded-pill px-3">
           {% trans %}Parcourir les produits{% endtrans %}
         </a>
         {# Bouton qui redirige vers la page register si visiteur non connecté #}
 			{% if app.user %}
-    <a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+    <a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-3">
         {% trans %}Publier une annonce{% endtrans %}
     </a>
 {% else %}
-    <a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+    <a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-3">
         {% trans %}Publier une annonce{% endtrans %}
     </a>
 {% endif %}
 
-        <a href="#how-it-works" class="btn btn-outline-light btn-lg rounded-pill px-5">
+        <a href="#how-it-works" class="btn btn-outline-light btn-lg rounded-pill px-3">
           {% trans %}Comment ça marche ?{% endtrans %}
         </a>
       </div>
