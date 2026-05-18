@@ -161,17 +161,8 @@ class ArticleController extends AbstractController
         return $this->render('article/my_articles.html.twig', ['articles' => $articles]);
     }
 
-    #[Route('/{slug}', name: 'app_article_show', methods: ['GET'])]
-    public function show(string $slug, ArticleRepository $repo): Response
-    {
-        $article = $repo->findOneBy(['slug' => $slug]);
-        if (!$article) {
-            throw $this->createNotFoundException('Article non trouvé');
-        }
-        return $this->render('article/show.html.twig', ['article' => $article]);
-    }
 
-    #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id<\d+>}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(ArticleVoter::EDIT, subject: 'article')]
     public function edit(Request $request, Article $article, EntityManagerInterface $em, FileUploader $fileUploader): Response
@@ -201,7 +192,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_article_delete', methods: ['POST'])]
+        #[Route('/{id<\d+>}/delete', name: 'app_article_delete', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(ArticleVoter::DELETE, subject: 'article')]
     public function delete(Request $request, Article $article, EntityManagerInterface $em): Response
@@ -212,5 +203,15 @@ class ArticleController extends AbstractController
             $this->addFlash('success', 'Article supprimé.');
         }
         return $this->redirectToRoute('app_my_articles');
+    }
+
+     #[Route('/show/{slug}', name: 'app_article_show', methods: ['GET'])]
+    public function show(string $slug, ArticleRepository $repo): Response
+    {
+        $article = $repo->findOneBy(['slug' => $slug]);
+        if (!$article) {
+            throw $this->createNotFoundException('Article non trouvé');
+        }
+        return $this->render('article/show.html.twig', ['article' => $article]);
     }
 }

@@ -10,33 +10,29 @@
 		<meta property="og:description" content="Plateforme innovante de location et d'achat de produits.">
 		<meta property="og:image" content="{{ absolute_url(asset('images/saraka-cover.jpg')) }}">
 		<meta property="og:url" content="{{ app.request.uri }}">
-		<meta property="og:type" content="website">
+		<meta
+		property="og:type" content="website">
 
-    <!-- Favicons -->
-<link rel="apple-touch-icon" sizes="180x180"
-      href="{{ asset('images/favicon/apple-touch-saraka-icon.png') }}">
+		<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
 
-<link rel="icon" type="image/png" sizes="32x32"
-      href="{{ asset('images/favicon/favicon-saraka-32x32.png') }}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon/favicon-32x32.png') }}">
 
-<link rel="icon" type="image/png" sizes="16x16"
-      href="{{ asset('images/favicon/favicon-saraka-16x16.png') }}">
+		<link
+		rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon/favicon-16x16.png') }}">
 
-<!--<link rel="icon" type="image/x-icon"
-      href="{{ asset('images/favicon/favicon.ico') }}"> -->
+		<!-- <link rel="icon" type="image/x-icon"
+		      href="{{ asset('images/favicon/favicon.ico') }}"> -->
 
-<link rel="manifest"
-      href="{{ asset('images/favicon/site.webmanifest') }}">
-
+		<link rel="manifest" href="{{ asset('images/favicon/site.webmanifest') }}">
 		<title>
 			{% block title %}𝒮araka | Plateforme de location et d'achat
 			{% endblock %}
 		</title>
 
-		
 
 		{% block stylesheets %}
-		
+
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -57,16 +53,21 @@
 
 	<body class="d-flex flex-column min-vh-100">
 
-		{% include 'partials/header.html.twig' %}
+    <div class="site-layout flex-grow-1 d-flex flex-column">
 
-		{% include 'partials/flash_message.html.twig' %}
+        {% include 'partials/header.html.twig' %}
 
-		<main class="flex-grow-1"> {% block body %}{% endblock %}
-			</main>
+        {% include 'partials/flash_message.html.twig' %}
 
-			{% block footer %}
-				{% include 'partials/footer.html.twig' %}
-			{% endblock %}
+        <main class="flex-grow-1">
+            {% block body %}{% endblock %}
+        </main>
 
-		</body>
-	</html>
+        {% block footer %}
+            {% include 'partials/footer.html.twig' %}
+        {% endblock %}
+
+    </div>
+
+</body>
+</html>

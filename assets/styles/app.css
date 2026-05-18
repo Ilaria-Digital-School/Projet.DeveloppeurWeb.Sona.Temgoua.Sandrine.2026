@@ -3,6 +3,29 @@
     --bs-success-rgb: 34, 139, 34;
 }
 
+/* RESET GLOBAL */
+*{
+    box-sizing: border-box;
+}
+
+html,
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* CONTENEUR PRINCIPAL */
+.site-layout{
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Navbar responsive */
+.navbar{
+    width: 100%;
+}
+
 /* Register & Login section */
 
 .form-control:hover {
@@ -12,13 +35,6 @@
 .form-control:focus {
     border-color: forestgreen;
     box-shadow: 0 0 0 0.25rem rgba(34, 139, 34, 0.25);
-}
-
-
-
-/* Global */
-main {
-    flex: 1;
 }
 
 /* NAV CONTAINER */
@@ -32,6 +48,7 @@ main {
     /* ✅ nécessaire pour le dropdown */
     z-index: 1000;
     /* ✅ s'assure que le dropdown est au-dessus du contenu */
+    
 }
 
 /* NAV LINKS WRAPPER */
@@ -345,43 +362,130 @@ main {
 
 /* Fin Contact section (contact.html.twig) */
 
-/* Footer section (footer.html.twig) */
 
-footer {
+/* FOOTER GLOBAL */
+footer{
+    position: relative;
     width: 100%;
+
     overflow: hidden;
+
     font-size: 0.9rem;
     opacity: 0.95;
 }
 
-footer h5 {
+/* TITRES */
+footer h5{
     font-size: 1rem;
     margin-bottom: 0.8rem;
+    font-weight: 600;
 }
 
+/* TEXTES */
 footer p,
 footer a,
-footer li {
+footer li{
     font-size: 0.85rem;
+    line-height: 1.6;
 }
 
-footer .navbar-brand span {
+/* LOGO */
+footer .navbar-brand span{
     font-size: 1.1rem;
 }
 
-/* Mobile : on remonte un peu pour lisibilité */
-@media (max-width: 576px) {
-    footer {
-        font-size: 0.95rem;
+/* LIENS */
+footer a{
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+footer a:hover{
+    border-bottom: 2px solid currentColor;
+}
+
+/* TABLETTES */
+@media (max-width: 992px){
+
+    footer{
+        padding: 2rem 1.5rem;
     }
 
-    footer h5 {
-        font-size: 1.05rem;
+    footer h5{
+        font-size: 1rem;
+    }
+
+    footer p,
+    footer a,
+    footer li{
+        font-size: 0.83rem;
     }
 }
 
-footer a:hover {
-    border-bottom: 2px solid currentColor;
+/* MOBILE */
+@media (max-width: 768px){
+
+    footer{
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    footer .row{
+        gap: 1.5rem;
+    }
+
+    footer h5{
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    footer p,
+    footer a,
+    footer li{
+        font-size: 0.82rem;
+    }
+
+    footer ul{
+        padding-left: 0;
+        list-style: none;
+    }
+}
+
+/* PETITS MOBILES */
+@media (max-width: 576px){
+
+    footer{
+        padding: 1.5rem 0.8rem;
+        font-size: 0.95rem;
+    }
+
+    footer h5{
+        font-size: 0.95rem;
+    }
+
+    footer p,
+    footer a,
+    footer li{
+        font-size: 0.8rem;
+    }
+
+    footer .navbar-brand span{
+        font-size: 1rem;
+    }
+}
+
+/* TRÈS PETITS ÉCRANS */
+@media (max-width: 360px){
+
+    footer{
+        padding: 1.2rem 0.6rem;
+    }
+
+    footer p,
+    footer a,
+    footer li{
+        font-size: 0.75rem;
+    }
 }
 
 

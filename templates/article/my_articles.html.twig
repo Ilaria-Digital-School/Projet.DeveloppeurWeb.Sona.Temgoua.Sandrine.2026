@@ -34,7 +34,7 @@
                        {% if article.images|length > 0 %}
 
     <img src="{{ asset('images/' ~ article.images.first.image) }}"
-         class="card-img-top"
+         class="product-image"
          alt="{{ article.title }}">
 
 {% endif %}
@@ -69,28 +69,38 @@
 </div>
 
 {# Footer de la carte avec bouton pour voir le produit et contacter le vendeur #}
-                        <div class="card-footer bg-white border-0">
+                        <div class="card-footer bg-white border-0 d-flex gap-2 flex-wrap">
 
+    <a href="{{ path('app_article_show', {'slug': article.slug}) }}"
+       class="btn btn-outline-success btn-sm rounded-pill">
+        Voir
+    </a>
 
-                            <a href="{{ path('app_article_show', {'slug': article.slug}) }}"
-                               class="btn btn-outline-light btn-sm">
+    <a href="{{ path('app_article_edit', {'id': article.id}) }}"
+       class="btn btn-success btn-sm rounded-pill">
+        Modifier
+    </a>
 
-                                Voir
+    <form method="post"
+          action="{{ path('app_article_delete', {'id': article.id}) }}"
+          onsubmit="return confirm('Voulez-vous vraiment supprimer cette annonce ?');">
 
-                            </a>
+        <input type="hidden"
+               name="_token"
+               value="{{ csrf_token('delete' ~ article.id) }}">
 
-                            <a href="{{ path('app_article_edit', {'id': article.id}) }}"
-                               class="btn btn-success btn-sm">
+        <button type="submit"
+                class="btn btn-danger btn-sm rounded-pill">
 
-                                Modifier
+           🗑️ Supprimer
 
-                            </a>
+        </button>
 
-                        </div>
+    </form>
 
-                    </div>
-
-                </div>
+</div>
+     </div>
+ </div>
 
             {% endfor %}
 
@@ -107,12 +117,9 @@
     {% endif %} 
 
 </div>
+
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/app.js') }}"></script>
-{% endblock %}
 
 
 
