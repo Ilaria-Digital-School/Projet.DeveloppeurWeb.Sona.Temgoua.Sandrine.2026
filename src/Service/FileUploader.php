@@ -27,6 +27,17 @@ class FileUploader
 
     public function upload(UploadedFile $file): string
     {
+         $hash = md5_file($file->getPathname());
+         $existingFiles = glob($this->targetDirectory . '/*');
+
+foreach ($existingFiles as $existingFile) {
+
+    if (md5_file($existingFile) === $hash) {
+
+        return basename($existingFile);
+    }
+}
+
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
