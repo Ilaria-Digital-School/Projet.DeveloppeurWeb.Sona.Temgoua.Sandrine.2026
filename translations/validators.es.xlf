@@ -721,6 +721,18 @@
         <source>Please enter your last name.</source>
         <target>__Please enter your last name.</target>
       </trans-unit>
+      <trans-unit id="XCF5juI" resname="Veuillez uploader une image valide (JPEG, PNG, WEBP, AVIF)">
+        <source>Veuillez uploader une image valide (JPEG, PNG, WEBP, AVIF)</source>
+        <target>__Veuillez uploader une image valide (JPEG, PNG, WEBP, AVIF)</target>
+      </trans-unit>
+      <trans-unit id="HNm89yp" resname="Veuillez uploader des images valides (JPEG, PNG, WEBP, AVIF)">
+        <source>Veuillez uploader des images valides (JPEG, PNG, WEBP, AVIF)</source>
+        <target>__Veuillez uploader des images valides (JPEG, PNG, WEBP, AVIF)</target>
+      </trans-unit>
+      <trans-unit id="PMwaFbZ" resname="Le message est obligatoire">
+        <source>Le message est obligatoire</source>
+        <target>__Le message est obligatoire</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

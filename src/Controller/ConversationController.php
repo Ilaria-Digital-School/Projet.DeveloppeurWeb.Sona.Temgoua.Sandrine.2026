@@ -110,12 +110,42 @@ final class ConversationController extends AbstractController
 
     #[Route('/message/send/{id}', name: 'app_message_send', methods: ['POST'])]
     #[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
-    public function send(Conversation $conversation, Request $request, EntityManagerInterface $em): Response
-    {
+    public function send(
+        Conversation $conversation,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+
         $user = $this->getUser();
 
+        // Nettoyage du contenu
+        $content = trim($request->request->get('content', ''));
+
+        // Fichiers
+        $imageFile = $request->files->get('image');
+        $fileFile = $request->files->get('file');
+        $audioFile = $request->files->get('audio');
+
+        $hasImage = $imageFile && $imageFile->getSize() > 0;
+        $hasFile = $fileFile && $fileFile->getSize() > 0;
+        $hasAudio = $audioFile && $audioFile->getSize() > 0;
+
+        // ❌ Empêche l'envoi vide
+        if (
+            empty($content)
+            && !$hasImage
+            && !$hasFile
+            && !$hasAudio
+        ) {
+            $this->addFlash('danger', 'Le message ne peut pas être vide.');
+
+            return $this->redirectToRoute('app_conversation_show', [
+                'id' => $conversation->getId()
+            ]);
+        }
+
         $message = new Message();
-        $message->setContent($request->request->get('content'));
+        $message->setContent($content);
         $message->setCreatedAt(new \DateTimeImmutable());
         $message->setConversation($conversation);
         $message->setSender($user);
@@ -123,90 +153,103 @@ final class ConversationController extends AbstractController
 
         // Réponse à un message
         $replyToId = $request->request->get('replyTo');
+
         if ($replyToId) {
             $replyMessage = $em->getRepository(Message::class)->find($replyToId);
-            $message->setReplyTo($replyMessage);
+
+            if ($replyMessage) {
+                $message->setReplyTo($replyMessage);
+            }
         }
 
-        // Gestion des fichiers (image, fichier, audio)
+        // Gestion des fichiers
         $uploadsDir = $this->getParameter('uploads_directory');
-        $imageFile = $request->files->get('image');
+
+        // IMAGE
         if ($imageFile) {
             $filename = uniqid() . '.' . $imageFile->guessExtension();
+
             $imageFile->move($uploadsDir, $filename);
+
             $message->setImagePath('uploads/' . $filename);
         }
 
-        $fileFile = $request->files->get('file');
+        // FILE
         if ($fileFile) {
             $filename = uniqid() . '.' . $fileFile->guessExtension();
+
             $fileFile->move($uploadsDir, $filename);
+
             $message->setFilePath('uploads/' . $filename);
         }
 
-        $audioFile = $request->files->get('audio');
+        // AUDIO
         if ($audioFile) {
             $filename = uniqid() . '.' . $audioFile->guessExtension();
+
             $audioFile->move($uploadsDir, $filename);
+
             $message->setAudioPath('uploads/' . $filename);
         }
 
         $conversation->setUpdatedAt(new \DateTimeImmutable());
+
         $em->persist($message);
         $em->flush();
 
-        return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+        return $this->redirectToRoute('app_conversation_show', [
+            'id' => $conversation->getId()
+        ]);
     }
-
     // ==================== ADMIN : gestion complète de toutes les conversations ====================
 
     #[Route('/admin/conversations', name: 'app_admin_conversation_list')]
-#[IsGranted('ROLE_ADMIN')]
-public function adminList(
-    Request $request,
-    ConversationRepository $repo,
-    PaginatorInterface $paginator
-): Response {
-    $search = $request->query->get('search', '');
-    $qb = $repo->createQueryBuilder('c')
-        ->leftJoin('c.article', 'a')
-        ->leftJoin('c.buyer', 'b')
-        ->leftJoin('c.seller', 's');
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminList(
+        Request $request,
+        ConversationRepository $repo,
+        PaginatorInterface $paginator
+    ): Response {
+        $search = $request->query->get('search', '');
+        $qb = $repo->createQueryBuilder('c')
+            ->leftJoin('c.article', 'a')
+            ->leftJoin('c.buyer', 'b')
+            ->leftJoin('c.seller', 's');
 
-    if ($search) {
-        $qb->andWhere('a.title LIKE :search OR b.email LIKE :search OR s.email LIKE :search')
-           ->setParameter('search', '%' . $search . '%');
-    }
-
-    $qb->orderBy('c.updatedAt', 'DESC');
-
-    $conversations = $paginator->paginate(
-        $qb,
-        $request->query->getInt('page', 1),
-        20
-    );
-
-    return $this->render('admin/conversation/list.html.twig', [
-        'conversations' => $conversations,
-    ]);
-}
-
-   #[Route('/admin/conversation/{id}/delete', name: 'app_admin_conversation_delete', methods: ['POST'])]
-#[IsGranted('ROLE_ADMIN')]
-public function adminDelete(Request $request, Conversation $conversation, EntityManagerInterface $em): Response
-{
-    if ($this->isCsrfTokenValid('admin_delete_conversation_' . $conversation->getId(), $request->request->get('_token'))) {
-        // Supprime tous les messages liés à cette conversation
-        foreach ($conversation->getMessages() as $message) {
-            $em->remove($message);
+        if ($search) {
+            $qb->andWhere('a.title LIKE :search OR b.email LIKE :search OR s.email LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
         }
-        // Puis supprime la conversation
-        $em->remove($conversation);
-        $em->flush();
-        $this->addFlash('success', 'Conversation supprimée par l\'administrateur.');
+
+        $qb->orderBy('c.updatedAt', 'DESC');
+
+        $conversations = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            20
+        );
+
+        return $this->render('admin/conversation/list.html.twig', [
+            'conversations' => $conversations,
+        ]);
     }
-    return $this->redirectToRoute('app_admin_conversation_list');
-}
+
+    #[Route('/admin/conversation/{id}/delete', name: 'app_admin_conversation_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminDelete(Request $request, Conversation $conversation, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('admin_delete_conversation_' . $conversation->getId(), $request->request->get('_token'))) {
+            // Supprime tous les messages liés à cette conversation
+            foreach ($conversation->getMessages() as $message) {
+                $em->remove($message);
+            }
+            // Puis supprime la conversation
+            $em->remove($conversation);
+            $em->flush();
+            $this->addFlash('success', 'Conversation supprimée par l\'administrateur.');
+        }
+        return $this->redirectToRoute('app_admin_conversation_list');
+    }
 
     #[Route('/admin/message/{id}/delete', name: 'app_admin_message_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
@@ -223,19 +266,19 @@ public function adminDelete(Request $request, Conversation $conversation, Entity
     }
 
     #[Route('/admin/conversation/{id}', name: 'app_admin_conversation_show')]
-#[IsGranted('ROLE_ADMIN')]
-public function adminShow(Conversation $conversation, EntityManagerInterface $em): Response
-{
-    // Marquer tous les messages comme lus (optionnel)
-    foreach ($conversation->getMessages() as $msg) {
-        if (!$msg->getReadAt()) {
-            $msg->setReadAt(new \DateTimeImmutable());
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminShow(Conversation $conversation, EntityManagerInterface $em): Response
+    {
+        // Marquer tous les messages comme lus (optionnel)
+        foreach ($conversation->getMessages() as $msg) {
+            if (!$msg->getReadAt()) {
+                $msg->setReadAt(new \DateTimeImmutable());
+            }
         }
-    }
-    $em->flush();
+        $em->flush();
 
-    return $this->render('admin/conversation/show.html.twig', [
-        'conversation' => $conversation,
-    ]);
-}
+        return $this->render('admin/conversation/show.html.twig', [
+            'conversation' => $conversation,
+        ]);
+    }
 }

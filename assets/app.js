@@ -1,7 +1,10 @@
-// assets/app.js
+// app.js - Fichier principal JavaScript pour l'application
+// Importation des styles et des dépendances
 import './styles/app.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Carousel } from 'bootstrap';
+
+// Initialisation des fonctionnalités après le chargement du DOM
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -47,14 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+// Toggle de la barre de recherche
 const searchBox = document.querySelector('.search-box');
 const toggleBtn = document.getElementById('searchToggle');
 
-toggleBtn.addEventListener('click', () => {
-  searchBox.classList.toggle('active');
-});
+if (toggleBtn && searchBox) {
 
-// assets/app.js
+    toggleBtn.addEventListener('click', () => {
+
+        searchBox.classList.toggle('active');
+
+    });
+
+}
+
+// code pour la page adminarticles  
 
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
@@ -299,7 +310,14 @@ const mainInput = document.getElementById('main-image-input');
 const mainPreview = document.getElementById('main-image-preview');
 const mainPreviewImg = document.getElementById('main-preview-img');
 
-mainDropzone.addEventListener('click', () => mainInput.click());
+// Clic sur la dropzone pour ouvrir le sélecteur de fichiers
+
+if (mainDropzone && mainInput) {
+
+    mainDropzone.addEventListener('click', () => mainInput.click());
+
+}
+
 mainInput.addEventListener('change', (e) => {
     if (e.target.files.length) {
         const file = e.target.files[0];
@@ -397,5 +415,62 @@ if (form) {
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
             }).catch(err => console.warn('Auto-save failed', err));
         }, 3000);
+    });
+}
+   // Supprimer une image de la galerie sans recharger la page 
+
+document.querySelectorAll('.delete-image-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (!confirm("Supprimer cette image ?")) return;
+
+        const url = this.action;
+        const formData = new FormData(this);
+        const card = this.closest('.image-card');
+
+        fetch(url, {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                card.remove();
+                showFlash("Image supprimée ✅", "success");
+            }
+        });
+    });
+});
+
+function showFlash(message, type) {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} position-fixed top-0 end-0 m-4`;
+    alert.innerText = message;
+    document.body.appendChild(alert);
+
+    setTimeout(() => alert.remove(), 3000);
+
+}
+
+// Validation du formulaire de message dans le chat
+const chatForm = document.getElementById('chatForm');
+
+if (chatForm) {
+
+    chatForm.addEventListener('submit', function(e) {
+
+        const message = document.getElementById('messageInput')?.value.trim() || '';
+
+        const image = document.getElementById('imageInput')?.files.length || 0;
+        const file = document.getElementById('fileInput')?.files.length || 0;
+        const audio = document.getElementById('audioInput')?.files.length || 0;
+
+        if (!message && !image && !file && !audio) {
+
+            e.preventDefault();
+
+            alert("Le message ne peut pas être vide.");
+        }
     });
 }

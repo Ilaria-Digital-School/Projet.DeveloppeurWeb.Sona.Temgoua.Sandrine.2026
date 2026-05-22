@@ -4,11 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -16,6 +16,7 @@ class Message
 
     // Contenu du message
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le message est obligatoire")]
     private ?string $content = null;
 
     // Date d'envoi du message
@@ -31,12 +32,6 @@ class Message
     private ?Conversation $conversation = null;
 
     // Utilisateur qui envoie le message
-    // Méthodes getters et setters permettant d'accéder et de modifier les propriétés
-    // de l'entité Message (contenu du message, date de création, statut de lecture,
-    // conversation associée et utilisateur expéditeur). Elles sont utilisées par
-    // Doctrine et par les contrôleurs pour manipuler les données avant leur
-    // enregistrement ou leur récupération depuis la base de données.
-
     #[ORM\ManyToOne(inversedBy: 'sentMessages')]
     private ?User $sender = null;
 
@@ -56,32 +51,14 @@ class Message
     private ?\DateTimeImmutable $readAt = null;
 
     #[ORM\Column(type: 'boolean')]
-private bool $isDeleted = false;
+    private bool $isDeleted = false;
 
-//#[ORM\ManyToOne(targetEntity: Article::class, nullable: true)]
-private ?Article $article = null;
+    #[ORM\ManyToOne(targetEntity: Article::class)]
+    private ?Article $article = null;
 
-public function getArticle(): ?Article
-{
-    return $this->article;
-}
-
-public function setArticle(?Article $article): static
-{
-    $this->article = $article;
-    return $this;
-}
-
-public function isDeleted(): bool
-{
-    return $this->isDeleted;
-}
-
-public function setIsDeleted(bool $isDeleted): static
-{
-    $this->isDeleted = $isDeleted;
-    return $this;
-}
+    // =========================
+    // GETTERS & SETTERS
+    // =========================
 
     public function getId(): ?int
     {
@@ -95,7 +72,7 @@ public function setIsDeleted(bool $isDeleted): static
 
     public function setContent(string $content): static
     {
-        $this->content = $content;
+        $this->content = trim($content);
         return $this;
     }
 
@@ -143,7 +120,6 @@ public function setIsDeleted(bool $isDeleted): static
         return $this;
     }
 
-    // 📎 FILE PATH
     public function getFilePath(): ?string
     {
         return $this->filePath;
@@ -155,8 +131,6 @@ public function setIsDeleted(bool $isDeleted): static
         return $this;
     }
 
-
-    // 🖼 IMAGE PATH
     public function getImagePath(): ?string
     {
         return $this->imagePath;
@@ -168,8 +142,6 @@ public function setIsDeleted(bool $isDeleted): static
         return $this;
     }
 
-
-    // 🎤 AUDIO PATH
     public function getAudioPath(): ?string
     {
         return $this->audioPath;
@@ -181,8 +153,6 @@ public function setIsDeleted(bool $isDeleted): static
         return $this;
     }
 
-
-    // ↩️ REPLY TO MESSAGE
     public function getReplyTo(): ?self
     {
         return $this->replyTo;
@@ -194,8 +164,6 @@ public function setIsDeleted(bool $isDeleted): static
         return $this;
     }
 
-
-    // ✔ READ AT
     public function getReadAt(): ?\DateTimeImmutable
     {
         return $this->readAt;
@@ -207,5 +175,26 @@ public function setIsDeleted(bool $isDeleted): static
         return $this;
     }
 
-   
+    public function isDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): static
+    {
+        $this->isDeleted = $isDeleted;
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): static
+    {
+        $this->article = $article;
+        return $this;
+    }
+    
 }

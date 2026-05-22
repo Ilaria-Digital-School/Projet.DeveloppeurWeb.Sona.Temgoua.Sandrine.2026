@@ -18,7 +18,11 @@ class MessageVoter extends Voter
             && $subject instanceof Message;
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $message, TokenInterface $token): bool
+    protected function voteOnAttribute(
+        string $attribute,
+        mixed $message,
+        TokenInterface $token
+    ): bool
     {
         $user = $token->getUser();
 
@@ -31,14 +35,20 @@ class MessageVoter extends Voter
             return true;
         }
 
-        // auteur du message
-        if ($message->getAuthor() === $user) {
-            return true;
+        // 👀 Voir un message
+        if ($attribute === self::VIEW) {
+
+            return $message->getConversation()
+                ->getParticipants()
+                ->contains($user);
         }
 
-        // 🔥 participant de la conversation
-        return $message->getConversation()
-            ->getParticipants()
-            ->contains($user);
+        // ✏️ Modifier un message
+        if ($attribute === self::EDIT) {
+
+            return $message->getAuthor() === $user;
+        }
+
+        return false;
     }
 }

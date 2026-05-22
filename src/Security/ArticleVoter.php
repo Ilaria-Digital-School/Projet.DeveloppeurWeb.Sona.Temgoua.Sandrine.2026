@@ -4,44 +4,73 @@ namespace App\Security;
 
 use App\Entity\Article;
 use App\Entity\User;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ArticleVoter extends Voter
 {
-    const EDIT = 'ARTICLE_EDIT';
-    const DELETE = 'ARTICLE_DELETE';
-const CREATE = 'ARTICLE_CREATE';
+    public const CREATE = 'ARTICLE_CREATE';
+    public const EDIT = 'ARTICLE_EDIT';
+    public const DELETE = 'ARTICLE_DELETE';
 
     public function __construct(
-        private AuthorizationCheckerInterface $authorizationChecker
+        private Security $security
     ) {}
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::EDIT, self::DELETE]) 
-            && $subject instanceof Article;
+        // Vérifie que l'attribut est supporté
+        if (!in_array($attribute, [
+            self::CREATE,
+            self::EDIT,
+            self::DELETE
+        ])) {
+            return false;
+        }
+
+        // CREATE n'a pas besoin d'article
+        if ($attribute === self::CREATE) {
+            return true;
+        }
+
+        // EDIT et DELETE nécessitent un Article
+        return $subject instanceof Article;
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(
+        string $attribute,
+        mixed $subject,
+        TokenInterface $token
+    ): bool
     {
         $user = $token->getUser();
 
-        // Si pas connecté → aucun droit sauf lecture 
+        // Utilisateur non connecté
         if (!$user instanceof User) {
             return false;
         }
 
-        // L'admin a tous les droits
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+        // Admin = tous les droits
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
         }
-        
 
-        // Vérifier si l'utilisateur est l'auteur
+        // CREATE
+        if ($attribute === self::CREATE) {
+            return true;
+        }
+
         /** @var Article $article */
         $article = $subject;
-        return $user === $article->getAuthor();
+
+        return match ($attribute) {
+
+            self::EDIT,
+            self::DELETE
+                => $article->getAuthor() === $user,
+
+            default => false,
+        };
     }
 }

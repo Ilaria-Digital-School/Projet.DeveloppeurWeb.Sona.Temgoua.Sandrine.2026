@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacter le vendeur{% endblock %}
+
+{% block body %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm border-0 rounded-4">
+
+                <div class="card-body p-4">
+
+                    <h2 class="fw-bold mb-3">
+                        Contacter le vendeur
+                    </h2>
+
+                    <p class="text-muted">
+                        Article :
+                        <strong>{{ article.title }}</strong>
+                    </p>
+
+                    <form method="POST"
+                          action="{{ path('app_conversation_create', {
+                              articleId: article.id
+                          }) }}">
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Votre message
+                            </label>
+
+                            <textarea
+                                name="content"
+                                class="form-control rounded-4"
+                                rows="6"
+                                placeholder="Bonjour, je suis intéressé par votre article..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success rounded-pill px-4"
+                        >
+                            Envoyer le message
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

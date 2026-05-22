@@ -1,200 +1,174 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Conversation{% endblock %}
+{% block title %}Conversation
+{% endblock %}
 
 {% block body %}
 
 
-<div class="container py-4">
+	<div
+		class="container py-4">
 
-    <!-- BACK BUTTON -->
-    <div class="mb-3">
-        <a href="{{ path('app_account') }}"
-           class="btn btn-outline-success rounded-pill">
-            <i class="ri-arrow-left-line me-1"></i>
-            Retour à mon compte
-        </a>
-    </div>
+		<!-- BACK BUTTON -->
+		<div class="mb-3">
+			<a href="{{ path('app_account') }}" class="btn btn-outline-success rounded-pill">
+				<i class="ri-arrow-left-line me-1"></i>
+				Retour à mon compte
+			</a>
+		</div>
 
-    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+		<div
+			class="card border-0 shadow-sm rounded-4 overflow-hidden">
 
-        <!-- HEADER -->
-        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center py-3">
+			<!-- HEADER -->
+			<div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center py-3">
 
-            <div class="fw-semibold fs-5">
-                💬 {{ otherUser.firstname ?? '' }}
-                {{ otherUser.lastname ?? '' }}
-            </div>
+				<div class="fw-semibold fs-5">
+					💬
+					{{ otherUser.firstname ?? '' }}
+					{{ otherUser.lastname ?? '' }}
+				</div>
 
-            <div class="d-flex gap-2">
-                <button class="btn btn-light rounded-circle">
-                    <i class="ri-phone-line text-success"></i>
-                </button>
+				<div class="d-flex gap-2">
+					<button class="btn btn-light rounded-circle">
+						<i class="ri-phone-line text-success"></i>
+					</button>
 
-                <button class="btn btn-light rounded-circle">
-                    <i class="ri-vidicon-line text-success"></i>
-                </button>
-            </div>
+					<button class="btn btn-light rounded-circle">
+						<i class="ri-vidicon-line text-success"></i>
+					</button>
+				</div>
 
-        </div>
+			</div>
 
-        <!-- MESSAGES -->
-        <div class="card-body bg-light"
-             id="chat"
-             style="height: 500px; overflow-y:auto;">
+			<!-- MESSAGES -->
+			<div class="card-body bg-light" id="chat" style="height: 500px; overflow-y:auto;">
 
-            {% for message in conversation.messages %}
+				{% for message in conversation.messages %}
 
-                <div class="d-flex flex-column mb-4
-                    {% if message.sender == app.user %}
-                        align-items-end
-                    {% else %}
-                        align-items-start
-                    {% endif %}">
+					<div class="d-flex flex-column mb-4
+														                    {% if message.sender == app.user %}
+														                        align-items-end
+														                    {% else %}
+														                        align-items-start
+														                    {% endif %}">
 
-                    {% if message.replyTo %}
-                        <div class="small bg-white border rounded-3 px-3 py-2 mb-2 text-muted shadow-sm">
-                            {{ message.replyTo.content|slice(0, 50) }}
-                        </div>
-                    {% endif %}
+						{% if message.replyTo %}
+							<div class="small bg-white border rounded-3 px-3 py-2 mb-2 text-muted shadow-sm">
+								{{ message.replyTo.content|slice(0, 50) }}
+							</div>
+						{% endif %}
 
-                    <div class="
-                        p-3 rounded-4 shadow-sm
-                        {% if message.sender == app.user %}
-                            bg-success text-white
-                        {% else %}
-                            bg-white
-                        {% endif %}
-                    "
-                    style="max-width: 75%;">
+						<div class="
+														                        p-3 rounded-4 shadow-sm
+														                        {% if message.sender == app.user %}
+														                            bg-success text-white
+														                        {% else %}
+														                            bg-white
+														                        {% endif %}
+														                    " style="max-width: 75%;">
 
-                        {{ message.content }}
+							{{ message.content }}
 
-                        {% if message.imagePath %}
-                            <img src="{{ asset(message.imagePath) }}"
-                                 class="img-fluid rounded-3 mt-2">
-                        {% endif %}
+							{% if message.imagePath %}
+								<img src="{{ asset(message.imagePath) }}" class="img-fluid rounded-3 mt-2">
+							{% endif %}
 
-                        {% if message.filePath %}
-                            <div class="mt-2">
-                                <a href="{{ asset(message.filePath) }}"
-                                   class="text-decoration-none">
-                                    📎 Télécharger
-                                </a>
-                            </div>
-                        {% endif %}
+							{% if message.filePath %}
+								<div class="mt-2">
+									<a href="{{ asset(message.filePath) }}" class="text-decoration-none">
+										📎 Télécharger
+									</a>
+								</div>
+							{% endif %}
 
-                        {% if message.audioPath %}
-                            <audio controls class="mt-2 w-100">
-                                <source src="{{ asset(message.audioPath) }}">
-                            </audio>
-                        {% endif %}
-                    </div>
+							{% if message.audioPath %}
+								<audio controls class="mt-2 w-100">
+									<source src="{{ asset(message.audioPath) }}">
+								</audio>
+							{% endif %}
+						</div>
 
-                    <small class="text-muted mt-1">
-                        {% if message.sender == app.user %}
-                            {% if message.readAt %}
-                                ✔✔ Lu
-                            {% else %}
-                                ✔ Envoyé
-                            {% endif %}
-                        {% endif %}
+						<small class="text-muted mt-1">
+							{% if message.sender == app.user %}
+								{% if message.readAt %}
+									✔✔ Lu
+								{% else %}
+									✔ Envoyé
+								{% endif %}
+							{% endif %}
 
-                        {{ message.createdAt|date('d/m H:i') }}
-                    </small>
+							{{ message.createdAt|date('d/m H:i') }}
+						</small>
 
-                    <div class="mt-1">
-                        <button class="btn btn-sm btn-light border rounded-circle"
-                                onclick="replyTo({{ message.id }}, '{{ message.content|e('js') }}')">
+						<div class="mt-1">
+							<button class="btn btn-sm btn-light border rounded-circle" onclick="replyTo({{ message.id }}, '{{ message.content|e('js') }}')">
 
-                            <i class="ri-reply-line"></i>
+								<i class="ri-reply-line"></i>
 
-                        </button>
-                    </div>
+							</button>
+						</div>
 
-                </div>
+					</div>
 
-            {% endfor %}
+				{% endfor %}
 
-        </div>
+			</div>
 
-        <!-- INPUT -->
-        <div class="card-footer bg-white border-0 py-3">
+			<!-- INPUT -->
+			<div class="card-footer bg-white border-0 py-3">
 
-            <form method="post"
-                  action="{{ path('app_message_send', {id: conversation.id}) }}"
-                  enctype="multipart/form-data"
-                  class="d-flex align-items-center gap-2">
+				<form
+					method="post" id="chatForm" action="{{ path('app_message_send', {id: conversation.id}) }}" enctype="multipart/form-data" class="d-flex align-items-center gap-2">
 
-                <!-- IMAGE -->
-                <label for="imageInput"
-                       class="btn btn-light border rounded-circle">
-                    <i class="ri-image-line"></i>
-                </label>
+					<!-- IMAGE -->
+					<label for="imageInput" class="btn btn-light border rounded-circle">
+						<i class="ri-image-line"></i>
+					</label>
 
-                <input type="file"
-                       name="image"
-                       accept="image/*"
-                       class="d-none"
-                       id="imageInput">
+					<input
+					type="file" name="image" accept="image/*" class="d-none" id="imageInput">
 
-                <!-- FILE -->
-                <label for="fileInput"
-                       class="btn btn-light border rounded-circle">
-                    <i class="ri-attachment-2"></i>
-                </label>
+					<!-- FILE -->
+					<label for="fileInput" class="btn btn-light border rounded-circle">
+						<i class="ri-attachment-2"></i>
+					</label>
 
-                <input type="file"
-                       name="file"
-                       class="d-none"
-                       id="fileInput">
+					<input
+					type="file" name="file" class="d-none" id="fileInput">
 
-                <!-- AUDIO -->
-                <label for="audioInput"
-                       class="btn btn-light border rounded-circle">
-                    <i class="ri-mic-line"></i>
-                </label>
+					<!-- AUDIO -->
+					<label for="audioInput" class="btn btn-light border rounded-circle">
+						<i class="ri-mic-line"></i>
+					</label>
 
-                <input type="file"
-                       name="audio"
-                       accept="audio/*"
-                       class="d-none"
-                       id="audioInput">
+					<input
+					type="file" name="audio" accept="audio/*" class="d-none" id="audioInput">
 
-                <!-- MESSAGE -->
-                <input
-                    type="text"
-                    name="content"
-                    id="messageInput"
-                    class="form-control rounded-pill"
+					<!-- MESSAGE -->
+					<textarea name="content" id="messageInput" class="form-control rounded-4" rows="1" placeholder="Message..." autocomplete="off">
+						{% if app.user == conversation.buyer %}Bonjour, je suis intéressé(e) par votre annonce :
+							{{ conversation.article ? conversation.article.title : '' }}
+						{% endif %}
+					</textarea>
 
-                    {% if app.user == conversation.buyer %}
-                        value="Bonjour, je suis intéressé(e) par votre annonce : {{ conversation.article ? conversation.article.title : '' }}"
-                    {% endif %}
+					<!-- REPLY -->
+					<input
+					type="hidden" name="replyTo" id="replyTo">
 
-                    placeholder="Message..."
-                    autocomplete="off">
+					<!-- SEND -->
+					<button type="submit" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center" style="width:48px; height:48px;">
 
-                <!-- REPLY -->
-                <input type="hidden"
-                       name="replyTo"
-                       id="replyTo">
+						<i class="ri-send-plane-fill"></i>
 
-                <!-- SEND -->
-                <button type="submit"
-                        class="btn btn-success rounded-circle d-flex align-items-center justify-content-center"
-                        style="width:48px; height:48px;">
+					</button>
 
-                    <i class="ri-send-plane-fill"></i>
+				</form>
 
-                </button>
+			</div>
 
-            </form>
+		</div>
 
-        </div>
-
-    </div>
-
-</div>
+	</div>
 
 {% endblock %}

@@ -550,7 +550,7 @@ Our mission: to enable everyone to give, rent, or buy easily, while reducing was
       </trans-unit>
       <trans-unit id="mM9b8DT" resname="Un projet en tête ? Une question ? Besoin d'aide ? Nous sommes là pour vous !">
         <source>Un projet en tête ? Une question ? Besoin d'aide ? Nous sommes là pour vous !</source>
-        <target>Un project in mind ? A question ? Need help ? We are here for you !</target>
+        <target>Have a project in mind? Have a question? Need help? We're here for you!</target>
       </trans-unit>
       <trans-unit id="Wki9Y8V" resname="Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.">
         <source>Parlons-en ! Décrivez-nous votre idée et voyons ensemble comment la concrétiser.</source>
@@ -754,7 +754,7 @@ Our mission: to enable everyone to give, rent, or buy easily, while reducing was
         <target>Register</target>
       </trans-unit>
       <trans-unit id="6O3nWZM" resname="Hi! Please confirm your email!">
-        <source>Hello ! Active ton compte en confirmant ton e-mail!</source>
+        <source>Hi! Please confirm your email!</source>
         <target>Hi! Please confirm your email!</target>
       </trans-unit>
       <trans-unit id="53GaMng" resname="Pourquoi choisir Shareo ?">
@@ -788,6 +788,220 @@ Our mission: to enable everyone to give, rent, or buy easily, while reducing was
       <trans-unit id="xWp_5Z_" resname="Explorer les produits">
         <source>Explorer les produits</source>
         <target>Explore products</target>
+      </trans-unit>
+      <trans-unit id="tyJJ7Sa" resname="Créer un auteur">
+        <source>Créer un auteur</source>
+        <target>Create an author</target>
+      </trans-unit>
+      <trans-unit id="U.b714r" resname="Courte présentation de l'auteur (max 255 caractères).">
+        <source>Courte présentation de l'auteur (max 255 caractères).</source>
+        <target>Short presentation of the author (max 255 characters).</target>
+      </trans-unit>
+      <trans-unit id="0IVa15c" resname="Laissez vide pour une génération automatique à partir du nom.">
+        <source>Laissez vide pour une génération automatique à partir du nom.</source>
+        <target>Leave blank for automatic generation from the name.</target>
+      </trans-unit>
+      <trans-unit id="uRHjyVr" resname="Retour à la liste">
+        <source>Retour à la liste</source>
+        <target>Return to the list</target>
+      </trans-unit>
+      <trans-unit id="LkCAYak" resname="Enregistrer">
+        <source>Enregistrer</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="NJbl8fs" resname="Gestion des articles">
+        <source>Gestion des articles</source>
+        <target>Article Management</target>
+      </trans-unit>
+      <trans-unit id="tpUW3WP" resname="Rechercher un article...">
+        <source>Rechercher un article...</source>
+        <target>Search for an article...</target>
+      </trans-unit>
+      <trans-unit id="OfbBkPy" resname="Nouvel article">
+        <source>Nouvel article</source>
+        <target>New article</target>
+      </trans-unit>
+      <trans-unit id="POfoSy_" resname="À propos de saraka">
+        <source>À propos de saraka</source>
+        <target>About saraka</target>
+      </trans-unit>
+      <trans-unit id=".5J57nl" resname="Notre">
+        <source>Notre</source>
+        <target>Our</target>
+      </trans-unit>
+      <trans-unit id="aGaHpDd" resname="Vision">
+        <source>Vision</source>
+        <target>Vision</target>
+      </trans-unit>
+      <trans-unit id="2jhTfyf" resname="est né d'une vision simple: révolutionner notre manière de consommer.&#10;&#9;&#9;&#9;&#9;&#9;&#9;    Un monde où le partage est au cœur de notre quotidien,&#10;&#9;&#9;&#9;&#9;&#9;&#9;    où chaque objet trouve une seconde vie,&#10;&#9;&#9;&#9;&#9;&#9;&#9;    et où les liens humains se tissent à travers la générosité et la confiance.">
+        <source>est né d'une vision simple: révolutionner notre manière de consommer.
+						    Un monde où le partage est au cœur de notre quotidien,
+						    où chaque objet trouve une seconde vie,
+						    et où les liens humains se tissent à travers la générosité et la confiance.</source>
+        <target> was born from a simple vision: to transform the way we consume.
+A world where sharing is part of everyday life,
+where every item gets a second chance,
+and where meaningful connections are built through generosity and trust.</target>
+      </trans-unit>
+      <trans-unit id="f3VgcML" resname="Équipe">
+        <source>Équipe</source>
+        <target>Team</target>
+      </trans-unit>
+      <trans-unit id="GYTBJL7" resname="Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rendre le partage accessible à tous.">
+        <source>Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rendre le partage accessible à tous.</source>
+        <target>A team that, through their own journey, has recognized themselves in our vision and works every day to make sharing accessible to everyone.</target>
+      </trans-unit>
+      <trans-unit id="jrUtKDr" resname="Fondatrice &amp; Développeuse">
+        <source>Fondatrice &amp; Développeuse</source>
+        <target><![CDATA[__Fondatrice & Développeuse]]></target>
+      </trans-unit>
+      <trans-unit id="7GR.zZ2" resname="Administrateur virtuel">
+        <source>Administrateur virtuel</source>
+        <target>Virtual Administrator</target>
+      </trans-unit>
+      <trans-unit id="kgOkZoC" resname="Relation client">
+        <source>Relation client</source>
+        <target>Customer Relations</target>
+      </trans-unit>
+      <trans-unit id="iZ_OgAu" resname="Chef de projet">
+        <source>Chef de projet</source>
+        <target>Project Manager</target>
+      </trans-unit>
+      <trans-unit id="X98VJct" resname="Valeurs">
+        <source>Valeurs</source>
+        <target>Values</target>
+      </trans-unit>
+      <trans-unit id="KJFm76O" resname="Des valeurs qui nous rassemblent et donnent une âme à tout ce que nous construisons.">
+        <source>Des valeurs qui nous rassemblent et donnent une âme à tout ce que nous construisons.</source>
+        <target>Values that unite us and give soul to everything we build.</target>
+      </trans-unit>
+      <trans-unit id="82Ae_Ve" resname="Encourager le partage pour réduire la surconsommation et préserver notre environnement.">
+        <source>Encourager le partage pour réduire la surconsommation et préserver notre environnement.</source>
+        <target>Encourage sharing to reduce overconsumption and preserve our environment.</target>
+      </trans-unit>
+      <trans-unit id="JB49FK0" resname="Créer une communauté basée sur l’entraide et la confiance.">
+        <source>Créer une communauté basée sur l’entraide et la confiance.</source>
+        <target>Create a community based on mutual aid and trust.</target>
+      </trans-unit>
+      <trans-unit id="bwNx57c" resname="Proposer des solutions simples et modernes pour consommer autrement.">
+        <source>Proposer des solutions simples et modernes pour consommer autrement.</source>
+        <target>Propose simple and modern solutions for consuming differently.</target>
+      </trans-unit>
+      <trans-unit id="yV1UsCp" resname="Acheter sur saraka">
+        <source>Acheter sur saraka</source>
+        <target>Buy on saraka</target>
+      </trans-unit>
+      <trans-unit id="2DNeV1R" resname="Jusqu'à 70% d'économies tout en consommant mieux.">
+        <source>Jusqu'à 70% d'économies tout en consommant mieux.</source>
+        <target>Up to 70% savings while consuming better.</target>
+      </trans-unit>
+      <trans-unit id="dB2LGqH" resname="Comment acheter sur saraka ?">
+        <source>Comment acheter sur saraka ?</source>
+        <target>How to buy on saraka?</target>
+      </trans-unit>
+      <trans-unit id="MIKxW1M" resname="Pourquoi acheter sur saraka ?">
+        <source>Pourquoi acheter sur saraka ?</source>
+        <target>Why buy on saraka?</target>
+      </trans-unit>
+      <trans-unit id="tRR12b_" resname="Donner sur saraka">
+        <source>Donner sur saraka</source>
+        <target>Give on saraka</target>
+      </trans-unit>
+      <trans-unit id="9MgEU3T" resname="Faites un don, changez des vies.">
+        <source>Faites un don, changez des vies.</source>
+        <target>Make a donation, change lives.</target>
+      </trans-unit>
+      <trans-unit id="YtnW_Ca" resname="Donnez une seconde vie à ce que vous n'utilisez plus. Un objet oublié peut faire le bonheur de quelqu'un d'autre.">
+        <source>Donnez une seconde vie à ce que vous n'utilisez plus. Un objet oublié peut faire le bonheur de quelqu'un d'autre.</source>
+        <target>Give a second life to what you no longer use. An forgotten item can bring happiness to someone else.</target>
+      </trans-unit>
+      <trans-unit id="V7Ntggr" resname="Comment donner sur saraka ?">
+        <source>Comment donner sur saraka ?</source>
+        <target>How to give on saraka?</target>
+      </trans-unit>
+      <trans-unit id="TdZTzQ6" resname="Pourquoi donner sur saraka ?">
+        <source>Pourquoi donner sur saraka ?</source>
+        <target>Why give on saraka?</target>
+      </trans-unit>
+      <trans-unit id="IQd.fpo" resname="Vendez en gros, libérez votre espace.">
+        <source>Vendez en gros, libérez votre espace.</source>
+        <target>Sell in bulk, free up your space.</target>
+      </trans-unit>
+      <trans-unit id="SIzQFqF" resname="Débarrassez-vous de vos encombrants sans bouger de chez vous.">
+        <source>Débarrassez-vous de vos encombrants sans bouger de chez vous.</source>
+        <target>Get rid of your clutter without leaving your home.</target>
+      </trans-unit>
+      <trans-unit id="0dHJTBZ" resname="Comment organiser votre vide-grenier sur saraka ?">
+        <source>Comment organiser votre vide-grenier sur saraka ?</source>
+        <target>How to organize your garage sale on saraka?</target>
+      </trans-unit>
+      <trans-unit id="kdFZyAG" resname="Pourquoi choisir saraka pour votre vide-grenier ?">
+        <source>Pourquoi choisir saraka pour votre vide-grenier ?</source>
+        <target>Why choose saraka for your garage sale?</target>
+      </trans-unit>
+      <trans-unit id="_3_yVgA" resname="Louer sur saraka">
+        <source>Louer sur saraka</source>
+        <target>Rent on saraka</target>
+      </trans-unit>
+      <trans-unit id="Raflawv" resname="Économisez de l'argent et de l'espace grâce à la location.">
+        <source>Économisez de l'argent et de l'espace grâce à la location.</source>
+        <target>Save money and space with rental.</target>
+      </trans-unit>
+      <trans-unit id="i2KRz_V" resname="Comment louer sur saraka ?">
+        <source>Comment louer sur saraka ?</source>
+        <target>How to rent on saraka?</target>
+      </trans-unit>
+      <trans-unit id="AZoEhyc" resname="Pourquoi louer sur saraka ?">
+        <source>Pourquoi louer sur saraka ?</source>
+        <target>Why rent on saraka?</target>
+      </trans-unit>
+      <trans-unit id="q6oKQDX" resname="Un projet en tête ? Une question ? Nous sommes là pour vous !">
+        <source>Un projet en tête ? Une question ? Nous sommes là pour vous !</source>
+        <target>Got a project in mind? A question? We're here to help!</target>
+      </trans-unit>
+      <trans-unit id=".3FhQwp" resname="Parlons-en ! Décrivez-nous votre idée et voyons ensemble &lt;br&gt; comment la concrétiser.">
+        <source>Parlons-en ! Décrivez-nous votre idée et voyons ensemble &lt;br&gt; comment la concrétiser.</source>
+        <target><![CDATA[ Let's talk about it! Describe your idea to us and let's see together <br> how to make it a reality.]]></target>
+      </trans-unit>
+      <trans-unit id="42NyzyP" resname="Contactez-nous, notre équipe vous répond rapidement.">
+        <source>Contactez-nous, notre équipe vous répond rapidement.</source>
+        <target>Contact us, our team will respond quickly.</target>
+      </trans-unit>
+      <trans-unit id="WoJ931B" resname="À propos de &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka&lt;/strong&gt;">
+        <source>À propos de &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka&lt;/strong&gt;</source>
+        <target><![CDATA[ About <strong><span>𝒮</span>araka</strong>]]></target>
+      </trans-unit>
+      <trans-unit id="yMYKsWr" resname="La plateforme innovante de location et d'achat de produits. Économique, écologique, pratique.">
+        <source>La plateforme innovante de location et d'achat de produits. Économique, écologique, pratique.</source>
+        <target>The innovative rental and purchase platform for products. Economic, ecological, practical.</target>
+      </trans-unit>
+      <trans-unit id="0sTsv6h" resname="Mes articles">
+        <source>Mes articles</source>
+        <target>My Articles</target>
+      </trans-unit>
+      <trans-unit id="08SmkgU" resname="Mon compte">
+        <source>Mon compte</source>
+        <target>My Account</target>
+      </trans-unit>
+      <trans-unit id="aiEAMcF" resname="Saraka|Plateforme de location &amp; d'achat">
+        <source>Saraka|Plateforme de location &amp; d'achat</source>
+        <target><![CDATA[ 𝒮araka|Innovative rental and purchase platform ]]></target>
+      </trans-unit>
+      <trans-unit id="fvo.xbv" resname="Découvrez la mission de &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka&lt;/strong&gt;">
+        <source>Découvrez la mission de &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka&lt;/strong&gt;</source>
+        <target><![CDATA[ Discover the mission of <strong><span>𝒮</span>araka</strong>]]></target>
+      </trans-unit>
+      <trans-unit id="3dmMaAp" resname="Pourquoi choisir &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka ?&lt;/strong&gt;">
+        <source>Pourquoi choisir &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka ?&lt;/strong&gt;</source>
+        <target><![CDATA[ Why choose <strong><span>𝒮</span>araka ?</strong>]]></target>
+      </trans-unit>
+      <trans-unit id=".Fal4yE" resname="Découvrez les dernières annonces ↓">
+        <source>Découvrez les dernières annonces ↓</source>
+        <target>Discover the latest announcements ↓</target>
+      </trans-unit>
+      <trans-unit id="ZtOidjz" resname="Pourquoi choisir Saraka ?">
+        <source>Pourquoi choisir Saraka ?</source>
+        <target>Why choose Saraka?</target>
       </trans-unit>
     </body>
   </file>

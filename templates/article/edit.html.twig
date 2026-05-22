@@ -45,41 +45,4 @@
 </div>
 
 
-{# JS DELETE AJAX          #}
-
-<script>
-document.querySelectorAll('.delete-image-form').forEach(form => {
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        if (!confirm("Supprimer cette image ?")) return;
-
-        const url = this.action;
-        const formData = new FormData(this);
-        const card = this.closest('.image-card');
-
-        fetch(url, {
-            method: "POST",
-            body: formData
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                card.remove();
-                showFlash("Image supprimée ✅", "success");
-            }
-        });
-    });
-});
-
-function showFlash(message, type) {
-    const alert = document.createElement('div');
-    alert.className = `alert alert-${type} position-fixed top-0 end-0 m-4`;
-    alert.innerText = message;
-    document.body.appendChild(alert);
-
-    setTimeout(() => alert.remove(), 3000);
-}
-</script>
-
 {% endblock %}
