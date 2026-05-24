@@ -57,7 +57,7 @@ final class HomeController extends AbstractController
         return $this->render('pages/contact.html.twig');
     }
 
-    # Route de la page à propos du projet
+    # Route de la page à propos (about)
     #[Route('/about', name: 'about')]
     public function about(): Response
     {

@@ -131,4 +131,29 @@ class TransactionController extends AbstractController
             'pageTitle' => 'Brocante',
         ]);
     }
+
+    #[Route('/alimentaire', name: 'app_alimentaire')]
+public function alimentaire(
+    ArticleRepository $articleRepository,
+    Request $request,
+    PaginatorInterface $paginator
+): Response {
+
+    $query = $articleRepository->createQueryBuilder('a')
+        ->where('a.transactionType = :type')
+        ->setParameter('type', 'alimentaire')
+        ->orderBy('a.id', 'DESC')
+        ->getQuery();
+
+    $articles = $paginator->paginate(
+        $query,
+        $request->query->getInt('page', 1),
+        4
+    );
+
+    return $this->render('pages/alimentaires.html.twig', [
+        'articles' => $articles,
+        'pageTitle' => 'Produits alimentaires',
+    ]);
+}
 }

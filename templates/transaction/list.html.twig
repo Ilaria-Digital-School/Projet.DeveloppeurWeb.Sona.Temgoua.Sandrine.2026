@@ -13,18 +13,13 @@
 
 						{% if article.images|length > 0 %}
 
-    {% for image in article.images|slice(0, 1) %}
+							{% for image in article.images|slice(0, 1) %}
 
-        <img 
-            src="{{ asset('images/' ~ image.image) }}"
-            class="card-img-top w-100"
-            alt="{{ article.title }}"
-            style="height: 200px; object-fit: cover;"
-        >
+								<img src="{{ asset('images/' ~ image.image) }}" class="card-img-top w-100" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
 
-    {% endfor %}
+							{% endfor %}
 
-{% endif %}
+						{% endif %}
 
 						{# Contenu de la carte avec résumé et type de transaction #}
 						<div class="card-body">
@@ -39,6 +34,8 @@
 							{# Choix de la classe de couleur selon le type #}
 							{% if type == 'acheter' %}
 								{% set badgeClass = 'bg-danger' %}
+							{% elseif type == 'alimentaire' %}
+								{% set badgeClass = 'bg-warning text-dark' %}
 							{% elseif type == 'louer' %}
 								{% set badgeClass = 'bg-primary' %}
 							{% elseif type == 'brocante' %}

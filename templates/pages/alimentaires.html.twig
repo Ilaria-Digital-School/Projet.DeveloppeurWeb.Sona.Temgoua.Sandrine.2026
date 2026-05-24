@@ -1,0 +1,285 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Produits alimentaires sur Saraka{% endtrans %}{% endblock %}
+
+{% block body %}
+
+<!-- HERO -->
+
+<section
+    class="position-relative text-white py-4"
+    style="
+        background-image: url('{{ asset('images/hero_alimentaire.png') }}');
+        background-size: cover;
+        background-position: center;
+        height: 65vh;
+    ">
+
+    <!-- Overlay -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+    <!-- Contenu -->
+    <div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
+
+        <div class="col-lg-8">
+
+            <h1 class="display-3 fw-bold hero-title mb-2"
+                style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+
+                {% trans %}Partagez les saveurs, le plat du voisin a toujours quelque chose à raconter.{% endtrans %}
+
+            </h1>
+
+            <p class="vision-text text-center text-light mx-auto">
+                {% trans %}
+                Découvrez des produits alimentaires proposés par la communauté :
+                récoltes locales, produits artisanaux, surplus alimentaires
+                et préparations faites avec passion.
+                {% endtrans %}
+            </p>
+
+            <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                <a href="#products"
+                   class="btn btn-warning btn-lg text-dark rounded-pill px-3">
+                    {% trans %}Découvrir les produits{% endtrans %}
+                </a>
+
+                {% if app.user %}
+                    <a href="{{ path('app_article_new') }}"
+                       class="btn btn-success btn-lg text-white rounded-pill px-3">
+                        {% trans %}Publier une annonce{% endtrans %}
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_register', {from: 'publish'}) }}"
+                       class="btn btn-success btn-lg text-white rounded-pill px-3">
+                        {% trans %}Publier une annonce{% endtrans %}
+                    </a>
+                {% endif %}
+
+                <a href="#how-it-works"
+                   class="btn btn-outline-light btn-lg rounded-pill px-3">
+                    {% trans %}Comment ça marche ?{% endtrans %}
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUITS -->
+
+<div id="products">
+
+    {% include 'transaction/list.html.twig' with {
+        articles: articles,
+        pageTitle: null
+    } %}
+
+</div>
+
+<!-- COMMENT ÇA MARCHE -->
+
+<section id="how-it-works" class="py-5 bg-light">
+
+    <div class="container">
+
+        <h2 class="fw-bold text-center text-dark mb-5">
+            {% trans %}Comment échanger des produits alimentaires sur Saraka ?{% endtrans %}
+        </h2>
+
+        <div class="row g-4 text-center">
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <h2 class="fw-bold text-success">1</h2>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Découvrez{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Parcourez les produits disponibles, les publications les plus récentes apparaissent en premier.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <h2 class="fw-bold text-success">2</h2>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Informez-vous{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Consultez les informations fournies concernant l'origine,
+                            la préparation ou les conditions de conservation du produit.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <h2 class="fw-bold text-success">3</h2>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Échangez{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Contactez le vendeur afin de convenir librement des modalités
+                            de remise, de livraison ou de participation.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <h2 class="fw-bold text-success">4</h2>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Partagez{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Récupérez votre produit et participez à une consommation plus locale,
+                            plus responsable et plus humaine.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- AVANTAGES -->
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <h2 class="fw-bold text-center text-dark mb-5">
+            {% trans %}Pourquoi partager des produits alimentaires sur Saraka ?{% endtrans %}
+        </h2>
+
+        <div class="row g-4 text-center">
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <i class="fas fa-seedling fa-2x text-success mb-3"></i>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Moins de gaspillage{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Valorisez vos surplus alimentaires et donnez une nouvelle utilité aux ressources disponibles.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <i class="fas fa-map-marker-alt fa-2x text-success mb-3"></i>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Produits locaux{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Découvrez les récoltes, préparations artisanales et productions proposées près de chez vous.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <i class="fas fa-leaf fa-2x text-success mb-3"></i>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Consommation responsable{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Favorisez les circuits courts et une utilisation plus intelligente des ressources alimentaires.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <i class="fas fa-hands-helping fa-2x text-success mb-3"></i>
+
+                        <h5 class="fw-bold">
+                            {% trans %}Convivialité{% endtrans %}
+                        </h5>
+
+                        <p class="text-muted">
+                            {% trans %}
+                            Chaque échange est aussi l'occasion de rencontrer des personnes
+                            partageant les mêmes valeurs de solidarité et de confiance.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

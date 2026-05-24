@@ -1,150 +1,161 @@
 <!-- templates/partials/header.html.twig -->
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-    <div class="container-fluid">
+	<div class="container-fluid">
 
-        <a class="navbar-brand d-flex align-items-center gap-2"
-   href="{{ path('app_home') }}">
+		<a class="navbar-brand d-flex align-items-center gap-2" href="{{ path('app_home') }}">
 
-    <img src="{{ asset('images/favicon/logo.png') }}"
-         alt="Saraka Logo"
-         width="50"
-         height="50"
-         class="rounded-circle">
+			<img src="{{ asset('images/favicon/logo.png') }}" alt="Saraka Logo" width="50" height="50" class="rounded-circle">
 
-    <span class="saraka-brand">
-    <span class="s-letter">𝒮</span>araka
-</span>
-</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+			<span class="saraka-brand">
+				<span class="s-letter">𝒮</span>araka
+			</span>
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div
+			class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <!-- Liens principaux (gauche) avec me-auto pour pousser le reste à droite -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			<!-- Liens principaux (gauche) avec me-auto pour pousser le reste à droite -->
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">{% trans %}Accueil{% endtrans %}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_acheter' ? 'active' : '' }}" href="{{ path('app_acheter') }}">{% trans %}Acheter{% endtrans %}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_louer' ? 'active' : '' }}" href="{{ path('app_louer') }}">{% trans %}Louer{% endtrans %}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_brocante' ? 'active' : '' }}" href="{{ path('app_brocante') }}">{% trans %}Brocante{% endtrans %}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_don' ? 'active' : '' }}" href="{{ path('app_don') }}">{% trans %}Don{% endtrans %}</a>
+				</li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">{% trans %}Accueil{% endtrans %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_acheter' ? 'active' : '' }}" href="{{ path('app_acheter') }}">{% trans %}Acheter{% endtrans %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_louer' ? 'active' : '' }}" href="{{ path('app_louer') }}">{% trans %}Louer{% endtrans %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_brocante' ? 'active' : '' }}" href="{{ path('app_brocante') }}">{% trans %}Brocante{% endtrans %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_don' ? 'active' : '' }}" href="{{ path('app_don') }}">{% trans %}Don{% endtrans %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'about' ? 'active' : '' }}" href="{{ path('about') }}">{% trans %}À propos{% endtrans %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">{% trans %}Contact{% endtrans %}</a>
-                </li>   
-            </ul>
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_alimentaire' ? 'active' : '' }}" href="{{ path('app_alimentaire') }}">{% trans %}Produits alimentaires{% endtrans %}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'about' ? 'active' : '' }}" href="{{ path('about') }}">{% trans %}À propos{% endtrans %}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">{% trans %}Contact{% endtrans %}</a>
+				</li>
+		
+			</ul>
 
-            <!-- Bloc droite : recherche, langue, boutons (alignés à droite sur desktop) -->
-            <div class="d-flex align-items-center gap-2 flex-lg-row flex-column nav-actions">
+			<!-- Bloc droite : recherche, langue, boutons (alignés à droite sur desktop) -->
+			<div
+				class="d-flex align-items-center gap-2 flex-lg-row flex-column nav-actions">
 
-               
-                <!-- Liens ADMIN (si présents, ils seront aussi à droite, mais vous pouvez les laisser à gauche si besoin) -->
-                {% if is_granted('ROLE_ADMIN') %}
-                    <ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_user_index' ? 'active' : '' }}" href="{{ path('app_user_index') }}">{% trans %}Users{% endtrans %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_cathegory_index' ? 'active' : '' }}" href="{{ path('app_cathegory_index') }}">{% trans %}Categories{% endtrans %}</a>
-                        </li>
-                    </ul>
-                {% endif %}
 
-                <!-- Liens USER (connecté) -->
-                {% if is_granted('ROLE_ADMIN') %}
-                    <ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_my_articles' ? 'active' : '' }}" href="{{ path('app_my_articles') }}">{% trans %}Mes articles{% endtrans %}</a>
-                        </li>
-                    </ul>
-                {% endif %}
-                
-                        {% if is_granted('ROLE_USER') %}
-                        <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">
-                                {% trans %}Mon compte{% endtrans %}
-                            </a>
-                        </li>
-                    </ul>
-                {% endif %}
+				<!-- Liens ADMIN (si présents, ils seront aussi à droite, mais vous pouvez les laisser à gauche si besoin) -->
+				{% if is_granted('ROLE_ADMIN') %}
+					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_user_index' ? 'active' : '' }}" href="{{ path('app_user_index') }}">{% trans %}Users{% endtrans %}</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_cathegory_index' ? 'active' : '' }}" href="{{ path('app_cathegory_index') }}">{% trans %}Categories{% endtrans %}</a>
+						</li>
+					</ul>
+				{% endif %}
 
-                <!-- Recherche (loupe) -->
-                <div class="search-box">
-                    <button id="searchToggle">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <input type="text" id="searchInput" placeholder="Rechercher..."/>
-                </div>
+				<!-- Liens USER (connecté) -->
+				{% if is_granted('ROLE_ADMIN') %}
+					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_my_articles' ? 'active' : '' }}" href="{{ path('app_my_articles') }}">{% trans %}Mes articles{% endtrans %}</a>
+						</li>
+					</ul>
+				{% endif %}
 
-                <!-- Sélecteur de langue -->
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                        {% if app.request.locale == 'fr' %}
-                            <i class="fi fi-fr"></i> FR
-                        {% elseif app.request.locale == 'en' %}
-                            <i class="fi fi-gb"></i> EN
-                        {% elseif app.request.locale == 'es' %}
-                            <i class="fi fi-es"></i> ES
-                        {% elseif app.request.locale == 'it' %}
-                            <i class="fi fi-it"></i> IT
-                        {% else %}
-                            {{ app.request.locale|upper }}
-                        {% endif %}
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow rounded-3">
-                        {% for locale in locales %}
-                            {% if locale != app.request.locale %}
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ path('app_changer_langue', {'locale': locale}) }}">
-                                        {% if locale == 'fr' %}
-                                            <i class="fi fi-fr"></i> {% trans %}Français{% endtrans %}
-                                        {% elseif locale == 'en' %}
-                                            <i class="fi fi-gb"></i> {% trans %}English{% endtrans %}
-                                        {% elseif locale == 'es' %}
-                                            <i class="fi fi-es"></i> {% trans %}Español{% endtrans %}
-                                        {% elseif locale == 'it' %}
-                                            <i class="fi fi-it"></i> {% trans %}Italiano{% endtrans %}
-                                        {% else %}
-                                            {{ locale|upper }}
-                                        {% endif %}
-                                    </a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
+				{% if is_granted('ROLE_USER') %}
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">
+							{% trans %}Mon compte{% endtrans %}
+						</a>
+					</li>
+				</ul>
+			{% endif %}
 
-                <!-- Boutons de connexion / déconnexion -->
-                <div class="d-flex gap-2 flex-lg-row flex-column">
-                    {% if not app.user %}
-                        <a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
-                            {% trans %}S'inscrire{% endtrans %}
-                        </a>
-                        <a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
-                            {% trans %}Se connecter{% endtrans %}
-                        </a>
-                    {% else %}
-                        <a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
-                            {% trans %}Se déconnecter{% endtrans %}
-                        </a>
-                    {% endif %}
-                </div>
+			<!-- Recherche (loupe) -->
+			<div class="search-box">
+				<button id="searchToggle">
+					<i class="fas fa-search"></i>
+				</button>
+				<input type="text" id="searchInput" placeholder="Rechercher..."/>
+			</div>
 
-            </div> <!-- fin nav-actions -->
+			<!-- Sélecteur de langue -->
+			<div class="dropdown">
+				<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+					{% if app.request.locale == 'fr' %}
+						<i class="fi fi-fr"></i>
+						FR
+					{% elseif app.request.locale == 'en' %}
+						<i class="fi fi-gb"></i>
+						EN
+					{% elseif app.request.locale == 'es' %}
+						<i class="fi fi-es"></i>
+						ES
+					{% elseif app.request.locale == 'it' %}
+						<i class="fi fi-it"></i>
+						IT
+					{% else %}
+						{{ app.request.locale|upper }}
+					{% endif %}
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end shadow rounded-3">
+					{% for locale in locales %}
+						{% if locale != app.request.locale %}
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2" href="{{ path('app_changer_langue', {'locale': locale}) }}">
+									{% if locale == 'fr' %}
+										<i class="fi fi-fr"></i>
+										{% trans %}Français{% endtrans %}
+									{% elseif locale == 'en' %}
+										<i class="fi fi-gb"></i>
+										{% trans %}English{% endtrans %}
+									{% elseif locale == 'es' %}
+										<i class="fi fi-es"></i>
+										{% trans %}Español{% endtrans %}
+									{% elseif locale == 'it' %}
+										<i class="fi fi-it"></i>
+										{% trans %}Italiano{% endtrans %}
+									{% else %}
+										{{ locale|upper }}
+									{% endif %}
+								</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
 
-        </div> <!-- fin collapse -->
-    </div> <!-- fin container-fluid -->
-</nav>
+			<!-- Boutons de connexion / déconnexion -->
+			<div class="d-flex gap-2 flex-lg-row flex-column">
+				{% if not app.user %}
+					<a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
+						{% trans %}S'inscrire{% endtrans %}
+					</a>
+					<a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
+						{% trans %}Se connecter{% endtrans %}
+					</a>
+				{% else %}
+					<a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
+						{% trans %}Se déconnecter{% endtrans %}
+					</a>
+				{% endif %}
+			</div>
+
+		</div>
+		<!-- fin nav-actions -->
+
+	</div>
+	<!-- fin collapse -->
+</div>
+<!-- fin container-fluid --></nav>

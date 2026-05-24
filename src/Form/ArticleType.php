@@ -60,6 +60,7 @@ class ArticleType extends AbstractType
                     'Louer' => 'louer',
                     'Brocante' => 'brocante',
                     'Don' => 'don',
+                    'Produits alimentaires' => 'alimentaire',
                 ],
                 'attr' => ['class' => 'form-select']
             ])

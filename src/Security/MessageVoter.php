@@ -35,7 +35,7 @@ class MessageVoter extends Voter
             return true;
         }
 
-        // 👀 Voir un message
+        // Voir un message
         if ($attribute === self::VIEW) {
 
             return $message->getConversation()

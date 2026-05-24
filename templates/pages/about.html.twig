@@ -9,40 +9,25 @@
 	<!-- Hero About -->
 	<section
 		class="position-relative text-white py-4" style="
-												    background-image: url('{{ asset('images/partageheroabout.png') }}');
-												    background-size: cover;
-												    background-position: center;
-													height: 75vh;
-												">
+																		    background-image: url('{{ asset('images/partageheroabout.png') }}');
+																		    background-size: cover;
+																		    background-position: center;
+																			height: 75vh;
+																		">
 
 		<!-- Overlay -->
 		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-		<!-- Contenu -->
+					<!-- valeurs badges -->
+					
 
-		<div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
+				
+		<div class="container position-relative d-flex flex-column align-items-center justify-content-center h-100">
 
-<div class="col-lg-8">
-
-				<h1 class="display-3 fw-bold hero-title mb-2" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+<h1 class="display-1 fw-bold hero-title mb-2" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
 					{% trans %}Notre{% endtrans %}
 					<span class="text-success">{% trans %}Vision{% endtrans %}
 					</h1>
-
-					<p class="vision-text text-center text-light mx-auto">
-						<strong>
-							<span>𝒮</span>araka</strong>
-						{% trans %}
-						est né d'une vision simple: révolutionner notre manière de consommer.
-						    Un monde où le partage est au cœur de notre quotidien,
-						    où chaque objet trouve une seconde vie,
-						    et où les liens humains se tissent à travers la générosité et la confiance.
-						{% endtrans %}
-					</p>
-
-					<!-- valeurs badges -->
-					<p class="text-center mt-4 fs-5 valeurs">
-
 						<span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
 							🟢
 							{% trans %}Partager{% endtrans %}
@@ -69,9 +54,33 @@
 
 		</section>
 
+		<!-- Notre Vision  -->
+
+<section class="py-3 vision-section">
+					<p class="vision-text text-center text-dark mx-auto">
+						<strong class="text-success">
+							<span>𝒮</span>araka</strong>
+
+						{% trans %}
+						est né d'une vision simple :
+						{% endtrans %}
+
+						<span class="fw-bold">
+							{% trans %}les objets ne devraient pas être jetés lorsqu'ils peuvent encore servir.{% endtrans %}
+						</span>
+
+						<span class="d-block mb-2">
+							{% trans %}Nous imaginons un monde où le partage remplace le gaspillage,
+							où chaque bien poursuit son histoire entre de nouvelles mains, où les ressources sont utilisées avec bon sens
+							et où les rencontres naissent naturellement de la générosité et de la confiance.{% endtrans %}
+						</span>
+					</p>
+
+					</section>
+
 		<!-- team section -->
 
-		<section class="pt-2 pb-5 team-section">
+		<section class="py-3 team-section">
 			<div class="container text-center">
 
 				<h2 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
@@ -79,10 +88,12 @@
 					<span class="text-success">{% trans %}Équipe{% endtrans %}</span>
 				</h2>
 				<p class="vision-text text-center text-dark mx-auto">
-					<strong>
+					
 						{% trans %}
-						Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rendre le partage accessible à tous.{% endtrans %}</strong>
+						Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rapprocher les personnes autour d'une économie plus humaine.{% endtrans %}
 				</p>
+
+
 				<div
 					class="row g-4">
 
@@ -198,10 +209,10 @@
 				</div>
 			</div>
 		</section>
-	</div>
+	
 
 	<!-- Section Features -->
-	<section class="py-5">
+	<section class="py-3 features-section">
 		<div class="container text-center">
 			<h2 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
 				{% trans %}Nos{% endtrans %}
@@ -211,7 +222,7 @@
 
 				<strong>
 					{% trans %}Des valeurs qui nous rassemblent et donnent une âme à tout ce que nous construisons.{% endtrans %}
-				</strong>
+				
 			</p>
 			<div class="row g-4">
 				<div class="col-12 col-sm-6 col-md-3 d-flex">

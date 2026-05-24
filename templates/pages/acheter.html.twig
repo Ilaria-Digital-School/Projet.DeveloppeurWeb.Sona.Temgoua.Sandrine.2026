@@ -50,37 +50,40 @@
   </div>
 </section>
 
-<!-- PRODUITS À VENDRE -->
+<!-- Liste paginée des articles de la transaction en cours-->
 
 {% include 'transaction/list.html.twig' with {
     articles: articles,
     pageTitle: null
 } %}
 
-<!-- HOW IT WORKS -->
-<section id="how-it-works" class="py-5 bg-light">
+<!-- HOW IT WORKS (comment ça marche ?) -->
+
+    <section class="py-5 bg-light">
     <div class="container">
         <h2 class="fw-bold text-center text-dark mb-5">
+           
             {% trans %}Comment acheter sur saraka ?{% endtrans %}
         </h2>
 
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="card border-0">
+ <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
-                        <h1 class="fw-bold text-success">1</h1>
+    
+                        <h2 class="fw-bold text-success">1</h2>
                         <h5 class="fw-bold">{% trans %}Trouvez{% endtrans %}</h5>
                         <p class="text-muted">
-                            {% trans %}Parcourez les produits disponibles{% endtrans %}
+                            {% trans %}Parcourez les articles disponibles, les plus récents apparaissent en tête de liste.{% endtrans %}
                         </p>
                     </div>
                 </div>
             </div>
 
- <div class="col-md-4">
-                <div class="card border-0">
+<div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
-                        <h1 class="fw-bold text-success">2</h1>
+                        <h2 class="fw-bold text-success">2</h2>
                         <h5 class="fw-bold">{% trans %}Vérifiez{% endtrans %}</h5>
                         <p class="text-muted">
                             {% trans %}Consultez les détails et avis sur le vendeur{% endtrans %}
@@ -89,13 +92,25 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card border-0">
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
-                        <h1 class="fw-bold text-success">3</h1>
+                        <h2 class="fw-bold text-success">3</h2>
                         <h5 class="fw-bold">{% trans %}Achetez{% endtrans %}</h5>
                         <p class="text-muted">
-                            {% trans %}Paiement sécurisé et livraison rapide{% endtrans %}
+                            {% trans %}Contactez le vendeur et convenez ensemble des modalités de paiement et de remise.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="fw-bold text-success">4</h2>
+                        <h5 class="fw-bold">{% trans %}Récupérez votre article{% endtrans %}</h5>
+                        <p class="text-muted">
+                            {% trans %}Convenez d'un lieu ou d'un mode de livraison avec le vendeur. Derrière chaque objet se cache souvent une belle rencontre.{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -116,7 +131,7 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-shield-alt fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Produits vérifiés{% endtrans %}</h5>
+                        <h5 class="fw-bold">{% trans %}Achat en toute transparence{% endtrans %}</h5>
                         <p class="text-muted">
                             {% trans %}Nous demandons à nos vendeurs de vérifier leurs produits avant la vente{% endtrans %}
                         </p>
@@ -128,7 +143,7 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-euro-sign fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Économies{% endtrans %}</h5>
+                        <h5 class="fw-bold">{% trans %}Économique{% endtrans %}</h5>
                         <p class="text-muted">
                             {% trans %}Vous réalisez jusqu’à 70% moins cher que le neuf{% endtrans %}
                         </p>
@@ -142,7 +157,7 @@
                         <i class="fas fa-leaf fa-2x text-success mb-3"></i>
                         <h5 class="fw-bold">{% trans %}Écologique{% endtrans %}</h5>
                         <p class="text-muted">
-                            {% trans %}Une consommation plus durable{% endtrans %}
+                            {% trans %}Une consommation plus durable et reduction de l'impact environnemental{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -152,9 +167,9 @@
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <i class="fas fa-undo fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Garantie 30 jours{% endtrans %}</h5>
+                        <h5 class="fw-bold">{% trans %}Échanges responsables{% endtrans %}</h5>
                         <p class="text-muted">
-                            {% trans %}Satisfait ou remboursé{% endtrans %}
+                            {% trans %}Transactions entre particuliers. Une plateforme fondée sur le partage et la confiance.{% endtrans %}
                         </p>
                     </div>
                 </div>

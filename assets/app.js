@@ -457,20 +457,58 @@ function showFlash(message, type) {
 const chatForm = document.getElementById('chatForm');
 
 if (chatForm) {
-
     chatForm.addEventListener('submit', function(e) {
-
         const message = document.getElementById('messageInput')?.value.trim() || '';
-
         const image = document.getElementById('imageInput')?.files.length || 0;
-        const file = document.getElementById('fileInput')?.files.length || 0;
-        const audio = document.getElementById('audioInput')?.files.length || 0;
+        const file   = document.getElementById('fileInput')?.files.length || 0;
+        const audio  = document.getElementById('audioInput')?.files.length || 0;
 
         if (!message && !image && !file && !audio) {
-
             e.preventDefault();
-
             alert("Le message ne peut pas être vide.");
         }
     });
 }
+
+
+// Prévisualisation des images avant upload d'un article
+
+document.addEventListener('change', function (e) {
+
+    if (e.target.id !== 'fileInput') {
+        return;
+    }
+
+    const previewContainer = document.getElementById('previewContainer');
+
+    previewContainer.innerHTML = '';
+
+    Array.from(e.target.files).forEach(file => {
+
+        if (!file.type.startsWith('image/')) {
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+
+            previewContainer.insertAdjacentHTML(
+                'beforeend',
+                `
+                <div class="col-6 col-md-3">
+                    <div class="card shadow-sm border-0">
+                        <img
+                            src="${event.target.result}"
+                            class="card-img-top rounded"
+                            style="height:180px;object-fit:cover;"
+                        >
+                    </div>
+                </div>
+                `
+            );
+        };
+
+        reader.readAsDataURL(file);
+    });
+});

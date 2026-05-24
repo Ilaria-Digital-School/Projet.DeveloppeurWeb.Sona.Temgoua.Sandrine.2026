@@ -21,7 +21,9 @@
 			class="card border-0 shadow-sm rounded-4 overflow-hidden">
 
 			<!-- HEADER -->
-			<div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center py-3">
+			<div class="card-header bg-dark bg-gradient
+					
+										 text-white d-flex justify-content-between align-items-center py-3">
 
 				<div class="fw-semibold fs-5">
 					💬
@@ -47,11 +49,11 @@
 				{% for message in conversation.messages %}
 
 					<div class="d-flex flex-column mb-4
-														                    {% if message.sender == app.user %}
-														                        align-items-end
-														                    {% else %}
-														                        align-items-start
-														                    {% endif %}">
+																																			                    {% if message.sender == app.user %}
+																																			                        align-items-end
+																																			                    {% else %}
+																																			                        align-items-start
+																																			                    {% endif %}">
 
 						{% if message.replyTo %}
 							<div class="small bg-white border rounded-3 px-3 py-2 mb-2 text-muted shadow-sm">
@@ -60,13 +62,13 @@
 						{% endif %}
 
 						<div class="
-														                        p-3 rounded-4 shadow-sm
-														                        {% if message.sender == app.user %}
-														                            bg-success text-white
-														                        {% else %}
-														                            bg-white
-														                        {% endif %}
-														                    " style="max-width: 75%;">
+																																			                        p-3 rounded-4 shadow-sm
+																																			                        {% if message.sender == app.user %}
+																																			                            bg-success text-white
+																																			                        {% else %}
+												      bg-white
+													   {% endif %}
+														  " style="max-width: 75%;">
 
 							{{ message.content }}
 
@@ -147,7 +149,8 @@
 
 					<!-- MESSAGE -->
 					<textarea name="content" id="messageInput" class="form-control rounded-4" rows="1" placeholder="Message..." autocomplete="off">
-						{% if app.user == conversation.buyer %}Bonjour, je suis intéressé(e) par votre annonce :
+						{% if isFirstMessage and app.user == conversation.buyer %}
+							Bonjour, je suis intéressé(e) par votre annonce :
 							{{ conversation.article ? conversation.article.title : '' }}
 						{% endif %}
 					</textarea>

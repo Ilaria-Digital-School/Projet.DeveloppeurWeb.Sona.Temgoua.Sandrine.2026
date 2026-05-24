@@ -14,8 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Security\ConversationVoter;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Knp\Component\Pager\PaginatorInterface;
-
-
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Psr\Log\LoggerInterface;
 final class ConversationController extends AbstractController
 {
     // ==================== UTILISATEUR : ses propres conversations ====================
@@ -102,106 +102,117 @@ final class ConversationController extends AbstractController
             : $conversation->getBuyer();
 
         return $this->render('conversation/show.html.twig', [
-            'conversation' => $conversation,
-            'currentUser' => $user,
-            'otherUser' => $otherUser
-        ]);
+    'conversation' => $conversation,
+    'currentUser' => $user,
+    'otherUser' => $otherUser,
+    'isFirstMessage' => $conversation->getMessages()->isEmpty(),
+]);
     }
 
-    #[Route('/message/send/{id}', name: 'app_message_send', methods: ['POST'])]
-    #[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
-    public function send(
-        Conversation $conversation,
-        Request $request,
-        EntityManagerInterface $em
-    ): Response {
+#[Route('/message/send/{id}', name: 'app_message_send', methods: ['POST'])]
+#[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
+public function send(
+    Conversation $conversation,
+    Request $request,
+    EntityManagerInterface $em,
+    LoggerInterface $logger // Injection du logger
+): Response {
+    $user = $this->getUser();
 
-        $user = $this->getUser();
+    // Nettoyage du contenu
+    $content = trim($request->request->get('content', ''));
 
-        // Nettoyage du contenu
-        $content = trim($request->request->get('content', ''));
+    // Fichiers
+    $imageFile = $request->files->get('image');
+    $fileFile   = $request->files->get('file');
+    $audioFile  = $request->files->get('audio');
 
-        // Fichiers
-        $imageFile = $request->files->get('image');
-        $fileFile = $request->files->get('file');
-        $audioFile = $request->files->get('audio');
+    $hasImage = $imageFile && $imageFile->getSize() > 0;
+    $hasFile  = $fileFile && $fileFile->getSize() > 0;
+    $hasAudio = $audioFile && $audioFile->getSize() > 0;
 
-        $hasImage = $imageFile && $imageFile->getSize() > 0;
-        $hasFile = $fileFile && $fileFile->getSize() > 0;
-        $hasAudio = $audioFile && $audioFile->getSize() > 0;
+    // ❌ Empêche l'envoi vide
+    if (empty($content) && !$hasImage && !$hasFile && !$hasAudio) {
+        $this->addFlash('danger', 'Le message ne peut pas être vide.');
+        return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+    }
 
-        // ❌ Empêche l'envoi vide
-        if (
-            empty($content)
-            && !$hasImage
-            && !$hasFile
-            && !$hasAudio
-        ) {
-            $this->addFlash('danger', 'Le message ne peut pas être vide.');
+    $message = new Message();
+    $message->setContent($content);
+    $message->setCreatedAt(new \DateTimeImmutable());
+    $message->setConversation($conversation);
+    $message->setSender($user);
+    $message->setIsRead(false);
 
-            return $this->redirectToRoute('app_conversation_show', [
-                'id' => $conversation->getId()
-            ]);
+    // Réponse à un message
+    $replyToId = $request->request->get('replyTo');
+    if ($replyToId) {
+        $replyMessage = $em->getRepository(Message::class)->find($replyToId);
+        if ($replyMessage) {
+            $message->setReplyTo($replyMessage);
         }
+    }
 
-        $message = new Message();
-        $message->setContent($content);
-        $message->setCreatedAt(new \DateTimeImmutable());
-        $message->setConversation($conversation);
-        $message->setSender($user);
-        $message->setIsRead(false);
+    // ---------- Gestion des fichiers avec sécurisation ----------
+    $uploadsDir = $this->getParameter('uploads_directory');
+    if (!is_dir($uploadsDir)) {
+        mkdir($uploadsDir, 0777, true);
+    }
 
-        // Réponse à un message
-        $replyToId = $request->request->get('replyTo');
+    $uploadSuccess = false; // Indique si au moins un fichier a été correctement déplacé
 
-        if ($replyToId) {
-            $replyMessage = $em->getRepository(Message::class)->find($replyToId);
-
-            if ($replyMessage) {
-                $message->setReplyTo($replyMessage);
-            }
-        }
-
-        // Gestion des fichiers
-        $uploadsDir = $this->getParameter('uploads_directory');
-
-        // IMAGE
-        if ($imageFile) {
-            $filename = uniqid() . '.' . $imageFile->guessExtension();
-
+    // IMAGE
+    if ($hasImage) {
+        try {
+            $filename = uniqid('img_', true) . '.' . $imageFile->guessExtension();
             $imageFile->move($uploadsDir, $filename);
-
             $message->setImagePath('uploads/' . $filename);
+            $uploadSuccess = true;
+        } catch (FileException $e) {
+            $logger->error('Upload image échoué : ' . $e->getMessage());
+            $this->addFlash('warning', "L'image n'a pas pu être téléchargée.");
         }
-
-        // FILE
-        if ($fileFile) {
-            $filename = uniqid() . '.' . $fileFile->guessExtension();
-
-            $fileFile->move($uploadsDir, $filename);
-
-            $message->setFilePath('uploads/' . $filename);
-        }
-
-        // AUDIO
-        if ($audioFile) {
-            $filename = uniqid() . '.' . $audioFile->guessExtension();
-
-            $audioFile->move($uploadsDir, $filename);
-
-            $message->setAudioPath('uploads/' . $filename);
-        }
-
-        $conversation->setUpdatedAt(new \DateTimeImmutable());
-
-        $em->persist($message);
-        $em->flush();
-
-        return $this->redirectToRoute('app_conversation_show', [
-            'id' => $conversation->getId()
-        ]);
     }
-    // ==================== ADMIN : gestion complète de toutes les conversations ====================
+
+    // FILE
+    if ($hasFile) {
+        try {
+            $filename = uniqid('doc_', true) . '.' . $fileFile->guessExtension();
+            $fileFile->move($uploadsDir, $filename);
+            $message->setFilePath('uploads/' . $filename);
+            $uploadSuccess = true;
+        } catch (FileException $e) {
+            $logger->error('Upload document échoué : ' . $e->getMessage());
+            $this->addFlash('warning', "Le fichier n'a pas pu être téléchargé.");
+        }
+    }
+
+    // AUDIO
+    if ($hasAudio) {
+        try {
+            $filename = uniqid('audio_', true) . '.' . $audioFile->guessExtension();
+            $audioFile->move($uploadsDir, $filename);
+            $message->setAudioPath('uploads/' . $filename);
+            $uploadSuccess = true;
+        } catch (FileException $e) {
+            $logger->error('Upload audio échoué : ' . $e->getMessage());
+            $this->addFlash('warning', "L'audio n'a pas pu être téléchargé.");
+        }
+    }
+
+    // ⚠️ Si le seul contenu attendu était un fichier et que tous les uploads ont échoué
+    if (empty($content) && !$uploadSuccess) {
+        $this->addFlash('danger', 'Le message n’a pas été envoyé car aucun fichier n’a pu être téléchargé.');
+        return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+    }
+
+    $conversation->setUpdatedAt(new \DateTimeImmutable());
+    $em->persist($message);
+    $em->flush();
+
+    return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+}
+    //============ ADMIN : gestion complète de toutes les conversations ====================
 
     #[Route('/admin/conversations', name: 'app_admin_conversation_list')]
     #[IsGranted('ROLE_ADMIN')]

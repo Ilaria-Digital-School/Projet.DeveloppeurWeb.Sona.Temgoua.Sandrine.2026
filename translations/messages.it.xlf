@@ -985,8 +985,8 @@ La nostra missione: permettere a tutti di donare, noleggiare o acquistare facilm
         <target></target>
       </trans-unit>
       <trans-unit id="aiEAMcF" resname="Saraka|Plateforme de location &amp; d'achat">
-        <source>𝒮araka|Plateforme de location &amp; d'achat</source>
-        <target><![CDATA[𝒮araka|Piattaforma di noleggio e acquisto]]]></target>
+        <source>Saraka|Plateforme de location &amp; d'achat</source>
+        <target>𝒮araka|Piattaforma di noleggio e acquisto]</target>
       </trans-unit>
       <trans-unit id="fvo.xbv" resname="Découvrez la mission de &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka&lt;/strong&gt;">
         <source>Découvrez la mission de &lt;strong&gt;&lt;span&gt;𝒮&lt;/span&gt;araka&lt;/strong&gt;</source>
@@ -1003,6 +1003,161 @@ La nostra missione: permettere a tutti di donare, noleggiare o acquistare facilm
       <trans-unit id="ZtOidjz" resname="Pourquoi choisir Saraka ?">
         <source>Pourquoi choisir Saraka ?</source>
         <target>Perché scegliere Saraka ?</target>
+      </trans-unit>
+      <trans-unit id="aWvH3O7" resname="Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rapprocher les personnes autour d'une économie plus humaine.">
+        <source>Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rapprocher les personnes autour d'une économie plus humaine.</source>
+        <target>Una Team che, attraverso il suo percorso personale, si è riconosciuta nella nostra visione e lavora ogni giorno per avvicinare le persone intorno a un'economia più umana.</target>
+      </trans-unit>
+      <trans-unit id="fA1DeTt" resname="est né d'une vision simple :">
+        <source>est né d'une vision simple :</source>
+        <target> è nato da una visione semplice :</target>
+      </trans-unit>
+      <trans-unit id="cDHHD81" resname="les objets ne devraient pas être jetés lorsqu'ils peuvent encore servir.">
+        <source>les objets ne devraient pas être jetés lorsqu'ils peuvent encore servir.</source>
+        <target> le cose non dovrebbero essere gettati quando possono ancora essere utilizzati.</target>
+      </trans-unit>
+      <trans-unit id="seqM5lL" resname="Nous imaginons un monde où le partage remplace le gaspillage,&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;où chaque bien poursuit son histoire entre de nouvelles mains, où les ressources sont utilisées avec bon sens&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;et où les rencontres naissent naturellement de la générosité et de la confiance.">
+        <source>Nous imaginons un monde où le partage remplace le gaspillage,
+							où chaque bien poursuit son histoire entre de nouvelles mains, où les ressources sont utilisées avec bon sens
+							et où les rencontres naissent naturellement de la générosité et de la confiance.</source>
+        <target> Immaginiamo un mondo in cui la condivisione sostituisce lo spreco,
+dove ogni bene continua la sua storia passando a nuove mani,
+dove le risorse vengono utilizzate con buon senso
+e dove gli incontri nascono naturalmente dalla generosità e dalla fiducia.</target>
+      </trans-unit>
+      <trans-unit id="VTfqjF7" resname="Parcourez les articles disponibles, les plus récents apparaissent en tête de liste.">
+        <source>Parcourez les articles disponibles, les plus récents apparaissent en tête de liste.</source>
+        <target>Scorri gli articoli disponibili, i più recenti appaiono in cima alla lista.</target>
+      </trans-unit>
+      <trans-unit id="K3KkRPB" resname="Contactez le vendeur et convenez ensemble des modalités de paiement et de remise.">
+        <source>Contactez le vendeur et convenez ensemble des modalités de paiement et de remise.</source>
+        <target>Contatta il venditore e concordate insieme le modalità di pagamento e di sconto.</target>
+      </trans-unit>
+      <trans-unit id="kYfH5Hw" resname="Récupérez votre article">
+        <source>Récupérez votre article</source>
+        <target>Recupera il tuo articolo</target>
+      </trans-unit>
+      <trans-unit id="SNVvMiB" resname="Convenez d'un lieu ou d'un mode de livraison avec le vendeur. Derrière chaque objet se cache souvent une belle rencontre.">
+        <source>Convenez d'un lieu ou d'un mode de livraison avec le vendeur. Derrière chaque objet se cache souvent une belle rencontre.</source>
+        <target> Concorda un luogo o una modalità di consegna con il venditore.Dietro ogni oggetto si nasconde spesso una bella conoscenza.</target>
+      </trans-unit>
+      <trans-unit id="izR5B9Q" resname="Achat en toute transparence">
+        <source>Achat en toute transparence</source>
+        <target>Acquisto in totale trasparenza</target>
+      </trans-unit>
+      <trans-unit id="qu9zWnr" resname="Une consommation plus durable et reduction de l'impact environnemental">
+        <source>Une consommation plus durable et reduction de l'impact environnemental</source>
+        <target>Una consumazione più sostenibile e riduzione dell'impatto ambientale</target>
+      </trans-unit>
+      <trans-unit id="2SQSOx8" resname="Échanges responsables">
+        <source>Échanges responsables</source>
+        <target>Scambi responsabili</target>
+      </trans-unit>
+      <trans-unit id="4VgdnKI" resname="Transactions entre particuliers. Une plateforme fondée sur le partage et la confiance.">
+        <source>Transactions entre particuliers. Une plateforme fondée sur le partage et la confiance.</source>
+        <target>Transazioni tra privati. Una piattaforma fondata sullo scambio e sulla fiducia.</target>
+      </trans-unit>
+      <trans-unit id="T.YokMH" resname="Produits alimentaires sur Saraka">
+        <source>Produits alimentaires sur Saraka</source>
+        <target>Prodotti alimentari su Saraka</target>
+      </trans-unit>
+      <trans-unit id="8fxO6Db" resname="Partagez les saveurs, le plat du voisin a toujours quelque chose à raconter.">
+        <source>Partagez les saveurs, le plat du voisin a toujours quelque chose à raconter.</source>
+        <target>Condividi i sapori, il piatto del vicino ha sempre qualcosa di interessante da raccontare.</target>
+      </trans-unit>
+      <trans-unit id="LhNDOBi" resname="Découvrez des produits alimentaires proposés par la communauté :&#10;                récoltes locales, produits artisanaux, surplus alimentaires&#10;                et préparations faites avec passion.">
+        <source>Découvrez des produits alimentaires proposés par la communauté :
+                récoltes locales, produits artisanaux, surplus alimentaires
+                et préparations faites avec passion.</source>
+        <target> Scopri i prodotti alimentari offerti dalla comunità: raccolti locali, prodotti artigianali, eccedenze alimentari e preparazioni realizzate con passione.</target>
+      </trans-unit>
+      <trans-unit id="64jETmG" resname="Découvrir les produits">
+        <source>Découvrir les produits</source>
+        <target> Scopri i prodotti</target>
+      </trans-unit>
+      <trans-unit id="nnpRhFF" resname="Comment échanger des produits alimentaires sur Saraka ?">
+        <source>Comment échanger des produits alimentaires sur Saraka ?</source>
+        <target> Come scambiare prodotti alimentari su Saraka ?</target>
+      </trans-unit>
+      <trans-unit id=".Fp0IyL" resname="Découvrez">
+        <source>Découvrez</source>
+        <target> Scopri</target>
+      </trans-unit>
+      <trans-unit id="Lc0Dbgr" resname="Parcourez les produits disponibles, les publications les plus récentes apparaissent en premier.">
+        <source>Parcourez les produits disponibles, les publications les plus récentes apparaissent en premier.</source>
+        <target> Scorri i prodotti disponibili, le pubblicazioni più recenti appaiono per prime.</target>
+      </trans-unit>
+      <trans-unit id="Q5g2AIq" resname="Informez-vous">
+        <source>Informez-vous</source>
+        <target> Informatevi</target>
+      </trans-unit>
+      <trans-unit id="lo9HFcR" resname="Consultez les informations fournies concernant l'origine,&#10;                            la préparation ou les conditions de conservation du produit.">
+        <source>Consultez les informations fournies concernant l'origine,
+                            la préparation ou les conditions de conservation du produit.</source>
+        <target>__Consultez les informations fournies concernant l'origine,
+                            la préparation ou les conditions de conservation du produit.</target>
+      </trans-unit>
+      <trans-unit id=".HZjBSr" resname="Échangez">
+        <source>Échangez</source>
+        <target>__Échangez</target>
+      </trans-unit>
+      <trans-unit id="qQzI.RH" resname="Contactez le vendeur afin de convenir librement des modalités&#10;                            de remise, de livraison ou de participation.">
+        <source>Contactez le vendeur afin de convenir librement des modalités
+                            de remise, de livraison ou de participation.</source>
+        <target>__Contactez le vendeur afin de convenir librement des modalités
+                            de remise, de livraison ou de participation.</target>
+      </trans-unit>
+      <trans-unit id="QEjw6nf" resname="Partagez">
+        <source>Partagez</source>
+        <target>__Partagez</target>
+      </trans-unit>
+      <trans-unit id="0XWoTRi" resname="Récupérez votre produit et participez à une consommation plus locale,&#10;                            plus responsable et plus humaine.">
+        <source>Récupérez votre produit et participez à une consommation plus locale,
+                            plus responsable et plus humaine.</source>
+        <target>__Récupérez votre produit et participez à une consommation plus locale,
+                            plus responsable et plus humaine.</target>
+      </trans-unit>
+      <trans-unit id=".4Gr9JK" resname="Pourquoi partager des produits alimentaires sur Saraka ?">
+        <source>Pourquoi partager des produits alimentaires sur Saraka ?</source>
+        <target>__Pourquoi partager des produits alimentaires sur Saraka ?</target>
+      </trans-unit>
+      <trans-unit id="f9daQf0" resname="Moins de gaspillage">
+        <source>Moins de gaspillage</source>
+        <target>__Moins de gaspillage</target>
+      </trans-unit>
+      <trans-unit id="5Z1sJTi" resname="Valorisez vos surplus alimentaires et donnez une nouvelle utilité aux ressources disponibles.">
+        <source>Valorisez vos surplus alimentaires et donnez une nouvelle utilité aux ressources disponibles.</source>
+        <target>__Valorisez vos surplus alimentaires et donnez une nouvelle utilité aux ressources disponibles.</target>
+      </trans-unit>
+      <trans-unit id="uPSqjzq" resname="Produits locaux">
+        <source>Produits locaux</source>
+        <target>__Produits locaux</target>
+      </trans-unit>
+      <trans-unit id="JTdMLLO" resname="Découvrez les récoltes, préparations artisanales et productions proposées près de chez vous.">
+        <source>Découvrez les récoltes, préparations artisanales et productions proposées près de chez vous.</source>
+        <target>__Découvrez les récoltes, préparations artisanales et productions proposées près de chez vous.</target>
+      </trans-unit>
+      <trans-unit id="Lso8mqg" resname="Consommation responsable">
+        <source>Consommation responsable</source>
+        <target>__Consommation responsable</target>
+      </trans-unit>
+      <trans-unit id="CbVckVO" resname="Favorisez les circuits courts et une utilisation plus intelligente des ressources alimentaires.">
+        <source>Favorisez les circuits courts et une utilisation plus intelligente des ressources alimentaires.</source>
+        <target>__Favorisez les circuits courts et une utilisation plus intelligente des ressources alimentaires.</target>
+      </trans-unit>
+      <trans-unit id="0ye9GRI" resname="Convivialité">
+        <source>Convivialité</source>
+        <target>__Convivialité</target>
+      </trans-unit>
+      <trans-unit id="hBBDcl_" resname="Chaque échange est aussi l'occasion de rencontrer des personnes&#10;                            partageant les mêmes valeurs de solidarité et de confiance.">
+        <source>Chaque échange est aussi l'occasion de rencontrer des personnes
+                            partageant les mêmes valeurs de solidarité et de confiance.</source>
+        <target>__Chaque échange est aussi l'occasion de rencontrer des personnes
+                            partageant les mêmes valeurs de solidarité et de confiance.</target>
+      </trans-unit>
+      <trans-unit id="E51RHRL" resname="Produits alimentaires">
+        <source>Produits alimentaires</source>
+        <target>__Produits alimentaires</target>
       </trans-unit>
     </body>
   </file>
