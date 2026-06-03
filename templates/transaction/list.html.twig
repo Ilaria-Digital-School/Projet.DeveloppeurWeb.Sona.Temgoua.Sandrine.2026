@@ -34,8 +34,6 @@
 							{# Choix de la classe de couleur selon le type #}
 							{% if type == 'acheter' %}
 								{% set badgeClass = 'bg-danger' %}
-							{% elseif type == 'alimentaire' %}
-								{% set badgeClass = 'bg-warning text-dark' %}
 							{% elseif type == 'louer' %}
 								{% set badgeClass = 'bg-primary' %}
 							{% elseif type == 'brocante' %}
@@ -43,6 +41,8 @@
 								{# classe personnalisée pour brocante #}
 							{% elseif type == 'don' %}
 								{% set badgeClass = 'bg-success' %}
+								{% elseif type == 'alimentaire' %}
+								{% set badgeClass = 'bg-dark' %}
 							{% else %}
 								{% set badgeClass = 'bg-success' %}
 								{# valeur par défaut #}

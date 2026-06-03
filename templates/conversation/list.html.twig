@@ -1,49 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="conv-container">
+        <h2>💬 Mes conversations</h2>
 
-	<div class="conv-container">
+        {% for conversation in conversations %}
+            {% if is_granted('ROLE_ADMIN')
+                or conversation.buyer == app.user
+                or conversation.seller == app.user %}
 
-		<h2>💬 Mes conversations</h2>
+                {% set otherUser = conversation.buyer == app.user
+                    ? conversation.seller
+                    : conversation.buyer %}
 
-		{% for conversation in conversations %}
+                {% set lastMessage = conversation.messages|last %}
 
-    {% if is_granted('ROLE_ADMIN')
-        or conversation.buyer == app.user
-        or conversation.seller == app.user %}
-
-        {% set otherUser = conversation.buyer == app.user 
-            ? conversation.seller 
-            : conversation.buyer %}
-
-        {% set lastMessage = conversation.messages|last %}
-
-        <a href="{{ path('app_conversation_show', {id: conversation.id}) }}" class="conv-item">
-
-            <div>
-                <div class="conv-title">
-                    {{ otherUser.email }}
-                </div>
-
-                <div class="conv-last">
-                    {{ lastMessage ? lastMessage.content|slice(0,40) : 'Aucun message' }}
-                </div>
-            </div>
-
-            {% if lastMessage 
-                and lastMessage.sender != app.user 
-                and not lastMessage.readAt %}
-
-                <span style="color:green;">●</span>
-
+                <a href="{{ path('app_conversation_show', {id: conversation.id}) }}" class="conv-item">
+                    <div class="conv-title">
+                        {{ otherUser.email }}
+                    </div>
+                    <div class="conv-last">
+                        {{ lastMessage ? lastMessage.content|slice(0, 40) : 'Aucun message' }}
+                    </div>
+                    {% if lastMessage
+                        and lastMessage.sender != app.user
+                        and not lastMessage.readAt %}
+                        <span style="color:green;">●</span>
+                    {% endif %}
+                </a>
             {% endif %}
-
-        </a>
-
-    {% endif %}
-
-{% else %}
-
-    <p>Aucune conversation</p>
-
-{% endfor %}
+        {% else %}
+            <p>Aucune conversation</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -38,9 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message: 'Please enter a valid email address.')]
     private ?string $email = null;
 
-    /**
-     * @var string The hashed password
-     */
+
     #[ORM\Column]
     private ?string $password = null;
 
@@ -70,10 +68,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'author')]
     private Collection $articles;
-    // Conversations where user participates
-    #[ORM\ManyToMany(targetEntity: Conversation::class, mappedBy: 'participants')]
-    private Collection $conversations;
-
+    /**
+     * @var Collection<int, Conversation>
+     */         
     // Messages written by user
     #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class)]
 private Collection $sentMessages;
@@ -84,15 +81,11 @@ private Collection $sentMessages;
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->conversations = new ArrayCollection();
+    
         
         $this->sentMessages = new ArrayCollection();
     }
 
-    public function getConversations(): Collection
-    {
-        return $this->conversations;
-    }
     
 
 public function getSentMessages(): Collection

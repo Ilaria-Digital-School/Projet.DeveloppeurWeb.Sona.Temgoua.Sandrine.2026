@@ -8,24 +8,18 @@ import { Carousel } from 'bootstrap';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 🎠 CAROUSEL
+    //  CAROUSEL
     const heroCarousel = document.querySelector('#carouselPromo');
     if (heroCarousel) {
-        new Carousel(heroCarousel, {
-            interval: 4000,
-            ride: 'carousel',
-            pause: false,
-            wrap: true
-        });
+    new Carousel(heroCarousel, {
+    interval: 12000,
+    ride: 'carousel',
+    pause: false,
+    wrap: true
+});
     }
 
-    // 💬 AUTO SCROLL CHAT
-    const chat = document.querySelector('.chat-messages');
-    if (chat) {
-        chat.scrollTop = chat.scrollHeight;
-    }
-
-    // 📷 IMAGE PREVIEW
+    //  IMAGE PREVIEW
     const imageInput = document.getElementById('imageInput');
     const previewContainer = document.getElementById('previewContainer');
     const imagePreview = document.getElementById('imagePreview');
@@ -50,6 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+ // AUTO SCROLL CHAT
+    const chat = document.querySelector('.chat-messages');
+    if (chat) {
+        chat.scrollTop = chat.scrollHeight;
+    }
 
 // Toggle de la barre de recherche
 const searchBox = document.querySelector('.search-box');
@@ -192,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     attachDeleteEvents();
     attachPaginationEvents();
 });
+
 //article animation
 const input = document.getElementById('fileInput');
 const preview = document.getElementById('preview');
@@ -264,21 +265,21 @@ if (input && preview && dropzone) {
         dropzone.classList.remove('border-success');
         handleFiles(e.dataTransfer.files);
     });
-function handleImageChange(e) {
-    const preview = document.getElementById('preview');
-    preview.innerHTML = "";
+    function handleImageChange(e) {
+        const preview = document.getElementById('preview');
+        preview.innerHTML = "";
 
-    Array.from(e.target.files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const img = document.createElement('img');
-            img.src = event.target.result;
-            img.style.width = "100px";
-            img.style.margin = "5px";
-            preview.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-    });
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                img.style.width = "100px";
+                img.style.margin = "5px";
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
     }
     // chat auto scroll
     const chat = document.getElementById('chat');
@@ -300,7 +301,7 @@ const quill = new Quill('#editor-container', {
     }
 });
 
-quill.on('text-change', function() {
+quill.on('text-change', function () {
     document.getElementById('content-hidden').value = quill.root.innerHTML;
 });
 
@@ -330,7 +331,7 @@ mainInput.addEventListener('change', (e) => {
     }
 });
 
-window.clearMainImage = function() {
+window.clearMainImage = function () {
     mainInput.value = '';
     mainPreview.classList.add('hidden');
 };
@@ -417,10 +418,10 @@ if (form) {
         }, 3000);
     });
 }
-   // Supprimer une image de la galerie sans recharger la page 
+// Supprimer une image de la galerie sans recharger la page 
 
 document.querySelectorAll('.delete-image-form').forEach(form => {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
 
         if (!confirm("Supprimer cette image ?")) return;
@@ -433,13 +434,13 @@ document.querySelectorAll('.delete-image-form').forEach(form => {
             method: "POST",
             body: formData
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                card.remove();
-                showFlash("Image supprimée ✅", "success");
-            }
-        });
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    card.remove();
+                    showFlash("Image supprimée ✅", "success");
+                }
+            });
     });
 });
 
@@ -453,23 +454,33 @@ function showFlash(message, type) {
 
 }
 
+
 // Validation du formulaire de message dans le chat
 const chatForm = document.getElementById('chatForm');
 
 if (chatForm) {
     chatForm.addEventListener('submit', function(e) {
-        const message = document.getElementById('messageInput')?.value.trim() || '';
-        const image = document.getElementById('imageInput')?.files.length || 0;
-        const file   = document.getElementById('fileInput')?.files.length || 0;
-        const audio  = document.getElementById('audioInput')?.files.length || 0;
+        // Fonction utilitaire pour détecter si une chaîne ne contient que des blancs (y compris Unicode)
+        function isBlank(str) {
+            if (!str) return true;
+            // Supprime tous les caractères de type "séparateur" (espaces, insécables, fins, etc.)
+            const cleaned = str.replace(/[\p{Z}\s]/gu, '');
+            return cleaned.length === 0;
+        }
 
-        if (!message && !image && !file && !audio) {
+        const rawMessage = document.getElementById('messageInput')?.value || '';
+        const messageIsBlank = isBlank(rawMessage);
+
+        const image = document.getElementById('imageInput')?.files.length || 0;
+        const file  = document.getElementById('fileInput')?.files.length || 0;
+        const audio = document.getElementById('audioInput')?.files.length || 0;
+
+        if (messageIsBlank && !image && !file && !audio) {
             e.preventDefault();
             alert("Le message ne peut pas être vide.");
         }
     });
 }
-
 
 // Prévisualisation des images avant upload d'un article
 

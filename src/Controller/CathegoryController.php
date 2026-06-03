@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 # Permet de définir les routes grâce aux attributs PHP
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 # Préfixe de route : toutes les routes de ce contrôleur commenceront par /cathegory
 #[Route('/cathegory')]
@@ -42,8 +43,11 @@ final class CathegoryController extends AbstractController
 
     # Route permettant de créer une nouvelle catégorie
     #[Route('/new', name: 'app_cathegory_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function new(
+    Request $request,
+    EntityManagerInterface $entityManager,
+    SluggerInterface $slugger
+): Response {
         # Création d'une nouvelle instance de Cathegory
         $cathegory = new Cathegory();
 
@@ -56,11 +60,15 @@ final class CathegoryController extends AbstractController
         # Vérifie si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
 
-            # Préparation de l'objet pour l'enregistrement en base
-            $entityManager->persist($cathegory);
+    # Génération automatique du slug à partir du nom
+    $slug = $slugger->slug($cathegory->getName())->lower();
+    $cathegory->setSlug($slug);
 
-            # Exécution de la requête pour sauvegarder la catégorie
-            $entityManager->flush();
+    # Préparation de l'objet pour l'enregistrement en base
+    $entityManager->persist($cathegory);
+
+    # Exécution de la requête pour sauvegarder la catégorie
+    $entityManager->flush();
 
             # Redirection vers la liste des catégories
             return $this->redirectToRoute('app_cathegory_index', [], Response::HTTP_SEE_OTHER);

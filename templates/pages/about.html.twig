@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{% trans %}À propos de saraka{% endtrans %}
+	{% trans %}À propos de 𝒮araka{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -9,220 +9,206 @@
 	<!-- Hero About -->
 	<section
 		class="position-relative text-white py-4" style="
-																		    background-image: url('{{ asset('images/partageheroabout.png') }}');
-																		    background-size: cover;
-																		    background-position: center;
-																			height: 75vh;
-																		">
+																					    background-image: url('{{ asset('images/about_hero.png') }}');
+																					    background-size: cover;
+																					    background-position: center;
+																						height: 75vh;
+																					">
 
 		<!-- Overlay -->
 		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-					<!-- valeurs badges -->
-					
-
-				
-		<div class="container position-relative d-flex flex-column align-items-center justify-content-center h-100">
-
-<h1 class="display-1 fw-bold hero-title mb-2" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
-					{% trans %}Notre{% endtrans %}
-					<span class="text-success">{% trans %}Vision{% endtrans %}
-					</h1>
-						<span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
-							🟢
-							{% trans %}Partager{% endtrans %}
-						</span>
-
-						<span class="mx-2 text-muted separator v2">✦</span>
-
-						<span class="badge rounded-pill bg-warning text-dark fs-6 px-3 py-2 valeur v3">
-							🟡
-							{% trans %}Réutiliser{% endtrans %}
-						</span>
-
-						<span class="mx-2 text-muted separator v4">✦</span>
-
-						<span class="badge rounded-pill bg-primary fs-6 px-3 py-2 valeur v5">
-							🔵
-							{% trans %}Créer des liens{% endtrans %}
-						</span>
-
-					</p>
-
-				</div>
-			</div>
-
-		</section>
-
-		<!-- Notre Vision  -->
-
-<section class="py-3 vision-section">
-					<p class="vision-text text-center text-dark mx-auto">
-						<strong class="text-success">
-							<span>𝒮</span>araka</strong>
-
-						{% trans %}
-						est né d'une vision simple :
-						{% endtrans %}
-
-						<span class="fw-bold">
-							{% trans %}les objets ne devraient pas être jetés lorsqu'ils peuvent encore servir.{% endtrans %}
-						</span>
-
-						<span class="d-block mb-2">
-							{% trans %}Nous imaginons un monde où le partage remplace le gaspillage,
-							où chaque bien poursuit son histoire entre de nouvelles mains, où les ressources sont utilisées avec bon sens
-							et où les rencontres naissent naturellement de la générosité et de la confiance.{% endtrans %}
-						</span>
-					</p>
-
-					</section>
-
-		<!-- team section -->
-
-		<section class="py-3 team-section">
-			<div class="container text-center">
-
-				<h2 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
-					{% trans %}Notre{% endtrans %}
-					<span class="text-success">{% trans %}Équipe{% endtrans %}</span>
-				</h2>
-				<p class="vision-text text-center text-dark mx-auto">
-					
-						{% trans %}
-						Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rapprocher les personnes autour d'une économie plus humaine.{% endtrans %}
-				</p>
+		<!-- valeurs badges -->
 
 
-				<div
-					class="row g-4">
+<div class="container min-vh-50 position-relative d-flex align-items-center justify-content-center text-center">
+    <div class="col-lg-8">
+      <h1 class="display-3 fw-bold hero-title mb-2" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
 
-					<!-- Sandrine -->
-					<div class="col-12 col-sm-6 col-md-3">
-						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/Sandrine.jpg') }}');">
+		{% trans %}Les objets ne devraient pas être jetés lorsqu'ils peuvent encore servir.{% endtrans %}
 
-							<div class="overlay"></div>
+      </h1>
 
-							<div class="team-content text-center">
-								<img src="{{ asset('images/Sandrine.jpg') }}" class="rounded-circle mb-3 team-img" alt="Sandrine">
-								<h5 class="fw-bold text-white">Sandrine</h5>
-								<p class="text-success small mb-2">{% trans %}Fondatrice & Développeuse{% endtrans %}</p>
+	  <p class="vision-text text-center text-light mx-auto">
+                {% trans %}
+                Nous imaginons un monde où l'on partage davantage, gaspille moins, préserve les ressources et crée des liens humains durables...
+                {% endtrans %}
+            </p>
 
-								<div class="social-icons">
-									<a href="#">
-										<i class="fab fa-facebook"></i>
-									</a>
-									<a href="#">
-										<i class="bi bi-twitter"></i>
-									</a>
-									<a href="#">
-										<i class="bi bi-github"></i>
-									</a>
+			<div class="d-flex justify-content-center align-items-center flex-wrap gap-1 mt-4 py-1">
 
-								</div>
-							</div>
+<span class="badge rounded-pill bg-success fs-6 px-3 py-2 valeur v1">
+    🎁 {% trans %}Partager{% endtrans %}
+</span>
 
-						</div>
-					</div>
+<span class="text-muted separator v2">✦</span>
 
-					<!-- Christian -->
-					<div class="col-12 col-sm-6 col-md-3">
-						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/Christian.jpg') }}');">
+<span class="badge rounded-pill bg-warning text-dark fs-6 px-3 py-2 valeur v3">
+    ♻️ {% trans %}Réutiliser{% endtrans %}
+</span>
 
-							<div class="overlay"></div>
+<span class="text-muted separator v4">✦</span>
 
-							<div class="team-content text-center">
-								<img src="{{ asset('images/Christian.jpg') }}" class="rounded-circle mb-3 team-img" alt="Christian">
-								<h5 class="fw-bold text-white">Christian</h5>
-								<p class="text-primary small mb-2">{% trans %}Administrateur virtuel{% endtrans %}</p>
+<span class="badge rounded-pill bg-info text-dark fs-6 px-3 py-2 valeur v5">
+    🌱 {% trans %}Préserver les ressources{% endtrans %}
+</span>
 
-								<div class="social-icons">
-									<a href="#">
-										<i class="bi bi-linkedin"></i>
-									</a>
-									<a href="#">
-										<i class="bi bi-twitter"></i>
-									</a>
-									<a href="#">
-										<i class="bi bi-instagram"></i>
-									</a>
-								</div>
-							</div>
+<span class="text-muted separator v6">✦</span>
 
-						</div>
-					</div>
+<span class="badge rounded-pill bg-primary fs-6 px-3 py-2 valeur v7">
+    🔗 {% trans %}Créer des liens{% endtrans %}
+</span>
+</div>
+	</div>
+	</div>
+	</div>
+	</section>
 
-					<!-- Sophie -->
-					<div class="col-12 col-sm-6 col-md-3">
-						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/imgSofie.png') }}');">
 
-							<div class="overlay"></div>
+<!-- team section -->
 
-							<div class="team-content text-center">
-								<img src="{{ asset('images/imgSofie.png') }}" class="rounded-circle mb-3 team-img" alt="Sophie">
-								<h5 class="fw-bold text-white">Sophie</h5>
-								<p class="text-warning small mb-2">{% trans %}Relation client{% endtrans %}</p>
+<section class="py-3 team-section">
+	<div class="container text-center">
 
-								<div class="social-icons">
-									<a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer">
-										<i class="bi bi-linkedin"></i>
-									</a>
-									<a href="https://twitter.com/tonprofil" target="_blank" rel="noopener noreferrer">
-										<i class="bi bi-twitter"></i>
-									</a>
-									<a href="https://instagram.com/tonprofil" target="_blank" rel="noopener noreferrer">
-										<i class="bi bi-instagram"></i>
-									</a>
-								</div>
-							</div>
+		<h2 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+			{% trans %}Notre{% endtrans %}
+			<span class="text-success">{% trans %}Équipe{% endtrans %}</span>
+		</h2>
+		<p class="vision-text text-center text-dark mx-auto">
 
-						</div>
-					</div>
+			{% trans %}
+			Une équipe qui, à travers son propre parcours, s’est reconnue dans notre vision et œuvre chaque jour pour rapprocher les personnes autour d'une économie plus humaine.{% endtrans %}
+		</p>
 
-					<!-- David -->
-					<div class="col-12 col-sm-6 col-md-3">
-						<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/David.jpg') }}');">
 
-							<div class="overlay"></div>
+		<div
+			class="row g-4">
 
-							<div class="team-content text-center">
-								<img src="{{ asset('images/David.jpg') }}" class="rounded-circle mb-3 team-img" alt="David">
-								<h5 class="fw-bold text-white">David</h5>
-								<p class="text-danger small mb-2">{% trans %}Chef de projet{% endtrans %}</p>
+			<!-- Sandrine -->
+			<div class="col-12 col-sm-6 col-md-3">
+				<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/Sandrine.jpg') }}');">
 
-								<div class="social-icons">
-									<a href="#">
-										<i class="bi bi-linkedin"></i>
-									</a>
-									<a href="#">
-										<i class="bi bi-twitter"></i>
-									</a>
-									<a href="#">
-										<i class="bi bi-instagram"></i>
-									</a>
-								</div>
-							</div>
+					<div class="overlay"></div>
+
+					<div class="team-content text-center">
+						<img src="{{ asset('images/Sandrine.jpg') }}" class="rounded-circle mb-3 team-img" alt="Sandrine">
+						<h5 class="fw-bold text-white">Sandrine</h5>
+						<p class="text-success small mb-2">{% trans %}Fondatrice & Développeuse{% endtrans %}</p>
+
+						<div class="social-icons">
+							<a href="#">
+								<i class="fab fa-facebook"></i>
+							</a>
+							<a href="#">
+								<i class="bi bi-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="bi bi-github"></i>
+							</a>
 
 						</div>
 					</div>
 
 				</div>
 			</div>
-		</section>
-	
 
-	<!-- Section Features -->
-	<section class="py-3 features-section">
-		<div class="container text-center">
-			<h2 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
-				{% trans %}Nos{% endtrans %}
-				<span class="text-success">{% trans %}Valeurs{% endtrans %}</span>
-			</h2>
-			<p class="vision-text text-center text-dark mx-auto">
+			<!-- Christian -->
+			<div class="col-12 col-sm-6 col-md-3">
+				<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/Christian.jpg') }}');">
 
-				<strong>
-					{% trans %}Des valeurs qui nous rassemblent et donnent une âme à tout ce que nous construisons.{% endtrans %}
-				
+					<div class="overlay"></div>
+
+					<div class="team-content text-center">
+						<img src="{{ asset('images/Christian.jpg') }}" class="rounded-circle mb-3 team-img" alt="Christian">
+						<h5 class="fw-bold text-white">Christian</h5>
+						<p class="text-primary small mb-2">{% trans %}Administrateur virtuel{% endtrans %}</p>
+
+						<div class="social-icons">
+							<a href="#">
+								<i class="bi bi-linkedin"></i>
+							</a>
+							<a href="#">
+								<i class="bi bi-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="bi bi-instagram"></i>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Sophie -->
+			<div class="col-12 col-sm-6 col-md-3">
+				<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/imgSofie.png') }}');">
+
+					<div class="overlay"></div>
+
+					<div class="team-content text-center">
+						<img src="{{ asset('images/imgSofie.png') }}" class="rounded-circle mb-3 team-img" alt="Sophie">
+						<h5 class="fw-bold text-white">Sophie</h5>
+						<p class="text-warning small mb-2">{% trans %}Relation client{% endtrans %}</p>
+
+						<div class="social-icons">
+							<a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer">
+								<i class="bi bi-linkedin"></i>
+							</a>
+							<a href="https://twitter.com/tonprofil" target="_blank" rel="noopener noreferrer">
+								<i class="bi bi-twitter"></i>
+							</a>
+							<a href="https://instagram.com/tonprofil" target="_blank" rel="noopener noreferrer">
+								<i class="bi bi-instagram"></i>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- David -->
+			<div class="col-12 col-sm-6 col-md-3">
+				<div class="team-card p-4 shadow-sm" style="background-image: url('{{ asset('images/David.jpg') }}');">
+
+					<div class="overlay"></div>
+
+					<div class="team-content text-center">
+						<img src="{{ asset('images/David.jpg') }}" class="rounded-circle mb-3 team-img" alt="David">
+						<h5 class="fw-bold text-white">David</h5>
+						<p class="text-danger small mb-2">{% trans %}Chef de projet{% endtrans %}</p>
+
+						<div class="social-icons">
+							<a href="#">
+								<i class="bi bi-linkedin"></i>
+							</a>
+							<a href="#">
+								<i class="bi bi-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="bi bi-instagram"></i>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+
+<!-- Section Features -->
+<section class="py-3 features-section">
+	<div class="container text-center">
+		<h2 class="display-3 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+			{% trans %}Nos{% endtrans %}
+			<span class="text-success">{% trans %}Valeurs{% endtrans %}</span>
+		</h2>
+		<p class="vision-text text-center text-dark mx-auto">
+
+				{% trans %}Des valeurs qui nous rassemblent et donnent une âme à tout ce que nous construisons.{% endtrans %}
+
 			</p>
 			<div class="row g-4">
 				<div class="col-12 col-sm-6 col-md-3 d-flex">
@@ -265,6 +251,6 @@
 					</div>
 				</div>
 			</p>
-		</div>
+		</p>
 	</div>
-</section>{% endblock %}
+</div></section>{% endblock %}

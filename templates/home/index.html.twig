@@ -3,7 +3,7 @@
 
 {# Bloc qui définit le titre de la page dans l'onglet du navigateur #}
 {% block title %}
-	{% trans %}Saraka|Plateforme de location & d'achat{% endtrans %}
+	{% trans %}𝒮araka|Plateforme de location et d'achat{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -72,7 +72,7 @@
 					{% endif %}
 				</div>
 				<div>
-					<a href="#why-saraka" class="btn btn-outline-light btn-lg rounded-pill px-5">
+					<a href="#why-𝒮araka" class="btn btn-outline-light btn-lg rounded-pill px-5">
 						{% trans %}Pourquoi choisir <strong><span>𝒮</span>araka ?</strong>{% endtrans %}
 					</a>
 				</div>
@@ -161,7 +161,10 @@
 									{# classe personnalisée pour brocante #}
 								{% elseif type == 'don' %}
 									{% set badgeClass = 'bg-success' %}
+									{% elseif type == 'alimentaire' %}
+								{% set badgeClass = 'bg-dark' %}
 								{% else %}
+								
 									{% set badgeClass = 'bg-success' %}
 									{# valeur par défaut #}
 								{% endif %}
@@ -219,12 +222,12 @@
 		</div>
 	</section>
 
-	<!-- WHY SARAKA SECTION -->
-	<section id="why-saraka" class="py-5 bg-light">
+	<!-- WHY 𝒮araka SECTION -->
+	<section id="why-𝒮araka" class="py-5 bg-light">
 		<div class="container">
 
 			<h2 class="text-center mb-5 fw-bold">
-				{% trans %}Pourquoi choisir Saraka ?{% endtrans %}
+				{% trans %}Pourquoi choisir 𝒮araka ?{% endtrans %}
 			</h2>
 
 			<div

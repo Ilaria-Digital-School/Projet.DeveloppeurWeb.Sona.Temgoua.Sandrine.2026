@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\OneToMany;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
 #[ORM\Table(
     name: 'conversation',
@@ -25,6 +26,9 @@ class Conversation
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+#[ORM\Column(length: 12, unique: true, nullable: true)]
+private ?string $publicId = null;
 
     // Date de création de la conversation
     #[ORM\Column]
@@ -72,6 +76,15 @@ private Collection $messages;
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
     }
+
+    #[ORM\PrePersist]
+public function generatePublicId(): void
+{
+    if ($this->publicId === null) {
+        $this->publicId = substr(bin2hex(random_bytes(16)), 0, 12);
+    }
+}
+
     #[ORM\PreUpdate]
     public function updateTimestamps(): void
     {
@@ -81,6 +94,17 @@ private Collection $messages;
     {
         return $this->id;
     }
+    public function getPublicId(): ?string
+{
+    return $this->publicId;
+}
+
+public function setPublicId(?string $publicId): static
+{
+    $this->publicId = $publicId;
+
+    return $this;
+}
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
