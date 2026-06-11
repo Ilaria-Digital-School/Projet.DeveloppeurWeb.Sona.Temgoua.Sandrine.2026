@@ -18,14 +18,25 @@ class ConversationRepository extends ServiceEntityRepository
     }
 
     public function findOneByUsers(User $user1, User $user2): ?Conversation
-{
-    return $this->createQueryBuilder('c')
-        ->where('c.buyer = :user1 AND c.seller = :user2')
-        ->setParameter('user1', $user1)
-        ->setParameter('user2', $user2)
-        ->getQuery()
-        ->getOneOrNullResult();
-}
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.buyer = :user1 AND c.seller = :user2')
+            ->setParameter('user1', $user1)
+            ->setParameter('user2', $user2)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function conversations(User $user)
+    {
+        return $this->createQueryBuilder('c')
+           ->where('c.buyer = :user OR c.seller = :user')
+            ->setParameter('user', $user)
+            ->orderBy('c.updatedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+    }
 
     //    /**
     //     * @return Conversation[] Returns an array of Conversation objects

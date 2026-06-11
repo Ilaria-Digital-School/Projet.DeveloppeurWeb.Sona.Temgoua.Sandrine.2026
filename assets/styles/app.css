@@ -13,6 +13,7 @@ body{
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background: #f8faf8;
 }
 
 /* CONTENEUR PRINCIPAL */
@@ -162,10 +163,7 @@ body{
     animation: fadeSlideDown 1s ease forwards;
 }
 
-/* Soulignement animé */
-.hero-title span {
-    position: relative;
-}
+
 
 .hero-title span::after {
     content: "";
@@ -211,7 +209,7 @@ body{
 
 
 
-/* Hero accueil (index.html.twig) section */
+/* Hero accueil (index.html.twig) section carousel*/
 
 
 #carouselPromo .carousel-item img {
@@ -250,26 +248,7 @@ body{
     z-index: 2;
 }
 
-/* style personnalisé pour la lettre S de Saraka dans le hero   */
-.s-letter {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.3em;
-}
 
-
-/* style personnalisé pour le paragraphe des heros   */
-.vision-text {
-    max-width: 650px;
-    font-size: 1.4rem;
-    line-height: 1.25;
-
-    font-weight: 500;
-    letter-spacing: 0.1px;
-
-    font-family: 'Inter', sans-serif;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.55);
-}
 
 /* Section Cards product-image */
 
@@ -294,9 +273,42 @@ body{
     transform: scale(1.05);
 }
 
+/* HERO DES PAGES INTERNES */
+.hero-page {
+    min-height: 75vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.hero-page-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .5);
+}
+
+.hero-page-content {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4.5rem);
+    text-shadow: 2px 2px 10px rgba(0,0,0,.5);
+}
+
+.hero-page-subtitle {
+    max-width: 700px;
+    margin-inline: auto;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
 /* Contact section (contact.html.twig) */
-
-
 
 /* Google Map full width */
 .contact-map {
@@ -457,57 +469,318 @@ footer a:hover{
 
 /* Fin Footer section (footer.html.twig) */
 
+/* HERO ABOUT */
 
-/* (hero about) valeurs section (about.html.twig) */
-
-
-.valeur,
-.separator {
-    opacity: 0;
-    transform: translateY(15px);
-    animation: apparition 0.6s ease forwards;
+.hero-about {
+    background: #010b15;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* délais pour apparition progressive */
+/* COLONNE TEXTE */
 
-.v1 {
-    animation-delay: 0.2s;
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
-.v2 {
-    animation-delay: 0.5s;
+.hero-text {
+    max-width: 720px;
 }
 
-.v3 {
-    animation-delay: 0.8s;
+/* LABEL */
+
+.hero-label {
+    color: forestgreen;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: .85rem;
 }
 
-.v4 {
-    animation-delay: 1.1s;
+/* TITRE */
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    text-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
-.v5 {
-    animation-delay: 1.4s;
+/* SLOGAN */
+
+.hero-slogan {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,.9);
+    border-left: 4px solid  #043728;
+    padding-left: 1rem;
+    margin-left: 0;
 }
 
-/* animation */
+/* CARTE VISION */
 
-@keyframes apparition {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+.vision-card {
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,.25);
+}
+
+/* TEXTE */
+
+.vision-text {
+    font-size: 1.3rem;
+    line-height: 1.9;
+    color: rgba(255,255,255,.92);
+}
+
+/* PREMIERE LETTRE */
+
+/* style personnalisé pour la lettre S de Saraka dans le hero   */
+
+/* PREMIERE LETTRE pour Saraka */
+.s-letter {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.1em;          /* plus grand pour bien ressortir */
+    display: inline-block;
+    transform: translateY(0.05em);
+    font-weight: normal;       /* éviter un faux gras si jamais */
+}
+/* Soulignement animé */
+.hero-title span {
+    position: relative;
+}
+
+/* IMAGE */
+
+.hero-image {
+    min-height: 100vh;
+    background-image: url('/images/about_hero.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* DEGRADE ENTRE IMAGE ET TEXTE */
+
+.hero-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+    linear-gradient(
+        90deg,
+        #010b15 0%,
+        rgba(1,11,21,.75) 15%,
+        rgba(1,11,21,.20) 40%,
+        transparent 100%
+    );
+}
+
+/* MOBILE */
+
+@media (max-width: 991.98px) {
+
+    .hero-about {
+        min-height: auto;
+    }
+
+    .hero-content {
+        order: 2;
+        padding: 3rem 0;
+    }
+
+    .hero-image {
+        order: 1;
+        min-height: 45vh;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-slogan {
+        font-size: 1.2rem;
+    }
+
+    .vision-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .vision-card {
+        padding: 1.5rem;
     }
 }
 
-/* petit effet transition */
 
-.badge {
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+.section-label{
+    color:#198754;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:.85rem;
+    font-weight:700;
 }
 
-.badge:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+.section-title{
+    font-family:'Playfair Display', serif;
+}
+
+.section-subtitle{
+    max-width:700px;
+    font-size:1.15rem;
+    color:#6c757d;
+}
+
+/* Section team (about.html.twig) */
+
+.section-label{
+    color:#198754;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:.85rem;
+    font-weight:700;
+}
+
+.section-title{
+    font-family:'Playfair Display', serif;
+}
+
+.section-subtitle{
+    max-width:700px;
+    font-size:1.15rem;
+    color:#6c757d;
+}
+
+.team-section {
+    background: #f8fafc;
+}
+
+/* CARTE */
+.team-card {
+    position: relative;        /* nécessaire pour le positionnement absolu du bandeau texte */
+    height: 500px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Effet au survol de la carte */
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* IMAGE */
+.team-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* l'image remplit toute la carte sans déformation */
+    transition: transform 0.8s ease;
+}
+
+/* Zoom image au survol de la carte */
+.team-card:hover .team-img {
+    transform: scale(1.08);
+}
+
+/* BANDEAU DÉGRADÉ (positionné en bas de l'image) */
+.team-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(
+        to top,
+        rgba(1, 11, 21, 0.95) 0%,
+        rgba(1, 11, 21, 0.85) 40%,
+        rgba(1, 11, 21, 0.55) 75%,
+        transparent 100%
+    );
+    color: white;
+}
+
+/* NOM */
+.team-body h5 {
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+/* RÔLE */
+.team-role {
+    color: #20c997;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* DESCRIPTION */
+.team-description {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* MOBILE : hauteur réduite */
+@media (max-width: 768px) {
+    .team-card {
+        height: 420px;
+    }
+    .team-description {
+        font-size: 0.85rem;
+    }
+}
+
+/* Section values (about.html.twig) */
+.values-section{
+    background:#ffffff;
+}
+
+.feature-card{
+    background:#fff;
+    height:100%;
+    border-radius:24px;
+    padding:2rem;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.feature-card::before{
+    content:"";
+    display:block;
+    width:50px;
+    height:4px;
+    border-radius:999px;
+    background:#198754;
+    margin-bottom:1.5rem;
+}
+
+.feature-card h5{
+    font-weight:700;
+    margin-bottom:1rem;
+}
+
+.feature-card p{
+    color:#6c757d;
+    margin-bottom:0;
+}
+
+.about-cta{
+    background:#010b15;
+}
+
+.cta-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(12px);
+    border-radius:30px;
+    padding:4rem 2rem;
+    color:white;
 }
 
 /* Pagination (index.html.twig) */
@@ -575,125 +848,6 @@ footer a:hover{
 .feature-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-}
-
-/* Section team (about.html.twig) */
-
-.team-card {
-    position: relative;
-    border-radius: 20px;
-    overflow: visible;
-    height: 320px;
-    background-size: cover;
-    background-position: top center;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    display: flex;
-    align-items: flex-end;
-    /* pousse le contenu en bas */
-}
-
-/* Overlay sombre */
-.team-card .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom,
-            rgba(0, 0, 0, 0.3),
-            rgba(0, 0, 0, 0.85));
-    z-index: 1;
-}
-
-/* Contenu */
-.team-content {
-    position: relative;
-    z-index: 2;
-    color: white;
-    transform: translateY(0);
-    opacity: 1;
-    padding-top: 40px;
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    width: 100%;
-    padding: 2px;
-    text-align: center;
-
-}
-
-/* Image profil */
-.team-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border: 3px solid white;
-    transition: transform 0.4s ease;
-}
-
-/* Icônes */
-.social-icons a {
-    color: white;
-    margin: 0 5px;
-    font-size: 18px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: #1e58d4;
-    transform: scale(1.2);
-}
-
-/* Hover effect */
-.team-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-.team-card:hover .team-content {
-    transform: translateY(0);
-    opacity: 1;
-    transform: scale(1.05);
-    filter: brightness(1.1);
-}
-
-
-.team-card:hover .team-img {
-    transform: scale(2.2) translateY(-35px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
-    border-radius: 20px;
-}
-
-/* Animation au chargement */
-.team-card {
-    animation: fadeUp 0.8s ease forwards;
-    opacity: 0;
-}
-
-.team-card:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.team-card:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.team-card:nth-child(3) {
-    animation-delay: 0.5s;
-}
-
-.team-card:nth-child(4) {
-    animation-delay: 0.7s;
-}
-
-@keyframes fadeUp {
-    from {
-        transform: translateY(40px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 
 

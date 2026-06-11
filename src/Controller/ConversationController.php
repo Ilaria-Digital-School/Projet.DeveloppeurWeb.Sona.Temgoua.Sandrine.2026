@@ -62,14 +62,14 @@ final class ConversationController extends AbstractController
         }
 
         $conversation = $conversationRepository->findOneBy([
-            'article' => $article,
+            //'article' => $article,
             'buyer' => $user,
             'seller' => $seller
         ]);
 
         if (!$conversation) {
             $conversation = new Conversation();
-            $conversation->setArticle($article);
+            //$conversation->setArticle($article);
             $conversation->setBuyer($user);
             $conversation->setSeller($seller);
             $em->persist($conversation);
@@ -102,11 +102,11 @@ final class ConversationController extends AbstractController
             : $conversation->getBuyer();
 
         return $this->render('conversation/show.html.twig', [
-    'conversation' => $conversation,
-    'currentUser' => $user,
-    'otherUser' => $otherUser,
-    'isFirstMessage' => $conversation->getMessages()->isEmpty(),
-]);
+            'conversation' => $conversation,
+            'currentUser' => $user,
+            'otherUser' => $otherUser,
+            'isFirstMessage' => $conversation->getMessages()->isEmpty(),
+        ]);
     }
 
 #[Route('/message/send/{id}', name: 'app_message_send', methods: ['POST'])]

@@ -68,7 +68,7 @@
                         <td>{{ conv.updatedAt ? conv.updatedAt|date('d/m/Y H:i') : '-' }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ path('app_admin_conversation_show', {id: conv.id}) }}" class="btn btn-outline-primary">Voir</a>
+                                <a href="{{ path('app_admin_conversation_show', {id: conv.id}) }}" class="btn btn-outline-success">Voir</a>
                                 <form method="post" action="{{ path('app_admin_conversation_delete', {id: conv.id}) }}" onsubmit="return confirm('Supprimer définitivement cette conversation et tous ses messages ?');">
                                     <input type="hidden" name="_token" value="{{ csrf_token('admin_delete_conversation_' ~ conv.id) }}">
                                     <button class="btn btn-danger">Supprimer</button>

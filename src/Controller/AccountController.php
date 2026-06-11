@@ -16,13 +16,8 @@ class AccountController extends AbstractController
     {
         $user = $this->getUser();
 
-        $conversations = $conversationRepository->createQueryBuilder('c')
-            ->where('c.buyer = :user OR c.seller = :user')
-            ->setParameter('user', $user)
-            ->orderBy('c.updatedAt', 'DESC')
-            ->getQuery()
-            ->getResult();
-
+        $conversations = $conversationRepository->conversations($user);
+           
         return $this->render('account/index.html.twig', [
             'user' => $user,
             'conversations' => $conversations,

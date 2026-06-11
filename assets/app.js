@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageInput = document.getElementById('imageInput');
     const previewContainer = document.getElementById('previewContainer');
     const imagePreview = document.getElementById('imagePreview');
+    console.log(imageInput, previewContainer, imagePreview);
 
     if (imageInput && previewContainer && imagePreview) {
         imageInput.addEventListener('change', function () {
