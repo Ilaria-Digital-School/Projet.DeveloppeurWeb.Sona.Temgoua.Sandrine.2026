@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Form\FormError;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -51,62 +52,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/articles/{id}/edit', name: 'app_admin_article_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function adminEdit(Request $request, Article $article, EntityManagerInterface $em, FileUploader $fileUploader): Response
-    {
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFiles = $form->get('images')->getData();
-            if ($imageFiles) {
-                foreach ($imageFiles as $imageFile) {
-                    $fileName = $fileUploader->upload($imageFile);
-                    $image = new Image();
-                    $image->setImage($fileName);
-                    $article->addImage($image);
-                    $em->persist($image);
-                }
-            }
-            $em->flush();
-            $this->addFlash('success', 'Article modifié par l\'administrateur.');
-            return $this->redirectToRoute('app_admin_article_index');
-        }
-
-        return $this->render('admin/articles/edit.html.twig', [
-            'form' => $form->createView(),
-            'article' => $article,
-        ]);
-    }
-
-    #[Route('/admin/articles/{id}/delete', name: 'app_admin_article_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function adminDelete(Request $request, Article $article, EntityManagerInterface $em): Response
-    {
-        if ($this->isCsrfTokenValid('admin_delete_article_' . $article->getId(), $request->request->get('_token'))) {
-            $em->remove($article);
-            $em->flush();
-            $this->addFlash('success', 'Article supprimé par l\'administrateur.');
-        }
-        return $this->redirectToRoute('app_admin_article_index');
-    }
-
-    #[Route('/admin/image/{id}/delete', name: 'app_admin_image_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function deleteImage(Request $request, Image $image, EntityManagerInterface $em): Response
-    {
-        if ($this->isCsrfTokenValid('delete_image_' . $image->getId(), $request->request->get('_token'))) {
-            // Supprime physiquement le fichier si tu veux
-            $em->remove($image);
-            $em->flush();
-            $this->addFlash('success', 'Image supprimée.');
-        } else {
-            $this->addFlash('error', 'Token invalide.');
-        }
-        // Redirige vers la page admin précédente (la liste des articles)
-        return $this->redirectToRoute('app_admin_article_index');
-    }
 
     // ==================== UTILISATEUR : Gestion de ses propres articles ====================
 
@@ -118,8 +63,28 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted()) {
+
+            $mainImage = $form->get('image')->getData();
+
+            if (!$mainImage) {
+                $form->get('image')->addError(
+                    new FormError('Veuillez ajouter une image principale.')
+                );
+            }
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $mainImage = $form->get('image')->getData();
+
+            if ($mainImage) {
+                $fileName = $fileUploader->upload($mainImage);
+                $article->setImage($fileName);
+            }
+
             $imageFiles = $form->get('images')->getData();
+
             if ($imageFiles) {
                 foreach ($imageFiles as $imageFile) {
                     $fileName = $fileUploader->upload($imageFile);
@@ -162,37 +127,64 @@ class ArticleController extends AbstractController
     }
 
 
-    #[Route('/{id<\d+>}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_USER')]
-    #[IsGranted(ArticleVoter::EDIT, subject: 'article')]
-    public function edit(Request $request, Article $article, EntityManagerInterface $em, FileUploader $fileUploader): Response
-    {
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
+   #[Route('/{id<\d+>}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
+#[IsGranted('ROLE_USER')]
+#[IsGranted(ArticleVoter::EDIT, subject: 'article')]
+public function edit(
+    Request $request,
+    Article $article,
+    EntityManagerInterface $em,
+    FileUploader $fileUploader
+): Response
+{
+    $form = $this->createForm(ArticleType::class, $article);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFiles = $form->get('images')->getData();
-            if ($imageFiles) {
-                foreach ($imageFiles as $imageFile) {
-                    $fileName = $fileUploader->upload($imageFile);
-                    $image = new Image();
-                    $image->setImage($fileName);
-                    $article->addImage($image);
-                    $em->persist($image);
-                }
-                $em->flush();
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        // ===========================
+        // IMAGE PRINCIPALE
+        // ===========================
+
+        $mainImage = $form->get('image')->getData(); // ← AJOUTÉ
+
+        if ($mainImage) { // ← AJOUTÉ
+            $fileName = $fileUploader->upload($mainImage); // ← AJOUTÉ
+            $article->setImage($fileName); // ← AJOUTÉ
+        } // ← AJOUTÉ
+
+        // ===========================
+        // IMAGES SECONDAIRES
+        // ===========================
+
+        $imageFiles = $form->get('images')->getData();
+
+        if ($imageFiles) {
+            foreach ($imageFiles as $imageFile) {
+                $fileName = $fileUploader->upload($imageFile);
+
+                $image = new Image();
+                $image->setImage($fileName);
+
+                $article->addImage($image);
+
+                $em->persist($image);
             }
-            $this->addFlash('success', 'Article mis à jour avec succès !');
-            return $this->redirectToRoute('app_my_articles');
         }
 
-        return $this->render('article/new.html.twig', [
-            'form' => $form->createView(),
-            'article' => $article,
-        ]);
+        $em->flush(); // ← DÉPLACÉ EN DEHORS DU if($imageFiles)
+
+        $this->addFlash('success', 'Article mis à jour avec succès !');
+
+        return $this->redirectToRoute('app_my_articles');
     }
 
-        #[Route('/{id<\d+>}/delete', name: 'app_article_delete', methods: ['POST'])]
+    return $this->render('article/new.html.twig', [
+        'form' => $form->createView(),
+        'article' => $article,
+    ]);
+}
+    #[Route('/{id<\d+>}/delete', name: 'app_article_delete', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(ArticleVoter::DELETE, subject: 'article')]
     public function delete(Request $request, Article $article, EntityManagerInterface $em): Response
@@ -205,7 +197,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('app_my_articles');
     }
 
-     #[Route('/show/{slug}', name: 'app_article_show', methods: ['GET'])]
+    #[Route('/show/{slug}', name: 'app_article_show', methods: ['GET'])]
     public function show(string $slug, ArticleRepository $repo): Response
     {
         $article = $repo->findOneBy(['slug' => $slug]);

@@ -208,7 +208,6 @@ body{
 }
 
 
-
 /* Hero accueil (index.html.twig) section carousel*/
 
 
@@ -226,7 +225,7 @@ body{
 }
 
 .hero-carousel {
-    height: 75vh;
+    height: 85vh;
     position: relative;
     z-index: 1;
 }
@@ -544,7 +543,7 @@ footer a:hover{
 /* PREMIERE LETTRE pour Saraka */
 .s-letter {
     font-family: 'Great Vibes', cursive;
-    font-size: 2.1em;          /* plus grand pour bien ressortir */
+    font-size: 1.2em;          /* plus grand pour bien ressortir */
     display: inline-block;
     transform: translateY(0.05em);
     font-weight: normal;       /* éviter un faux gras si jamais */

@@ -8,45 +8,66 @@
     <div class="row justify-content-center">
         <div class="col-lg-10">
 
-           {# CARD PRINCIPALE       #}
-            
-            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+           {# CARD PRINCIPALE #}
 
-            
-                {# SLIDER IMAGES        #}
-                
-                {% if article.images|length > 0 %}
-                <div id="articleCarousel" class="carousel slide" data-bs-ride="carousel">
+<div class="card border-0 shadow-lg rounded-4 overflow-hidden">
 
-                    <div class="carousel-inner">
+    {# SLIDER IMAGES #}
 
-                        {% for image in article.images %}
-                        <div class="carousel-item {% if loop.first %}active{% endif %}">
-                            
-                            <div class="position-relative">
-                                <img src="{{ asset('images/' ~ image.image) }}"
-                                     class="d-block w-100"
-                                     style="height: 400px; object-fit: cover;">
+    {% if article.images|length > 0 %}
+    <div id="articleCarousel"
+         class="carousel slide"
+         data-bs-ride="carousel"
+         role="region"
+         aria-label="Galerie d'images de l'annonce">
 
-                                {# BOUTON SUPPRIMER SUR IMAGE (OWNER ONLY) #}
-                                
-                                {% if is_granted('ARTICLE_DELETE', article) %}
-                                    <form method="post"
-                                          action="{{ path('app_image_delete', {'id': image.id}) }}"
-                                          class="position-absolute top-0 end-0 m-3">
+        <div class="carousel-inner">
 
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+            {% for image in article.images %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
 
-                                        <button class="btn btn-danger btn-sm shadow">
-                                            🗑 Supprimer
-                                        </button>
-                                    </form>
-                                {% endif %}
+                <div class="position-relative">
 
-                            </div>
+                    <img
+                        src="{{ asset('images/' ~ image.image) }}"
+                        class="d-block w-100"
+                        style="height: 400px; object-fit: cover;"
 
-                        </div>
-                        {% endfor %}
+                        {# ACCESSIBILITÉ :
+                           Le lecteur d'écran annoncera le titre
+                           de l'annonce associé à l'image. #}
+                        alt="Photo de l'annonce : {{ article.title }}"
+                    >
+
+                    {# BOUTON SUPPRIMER SUR IMAGE (OWNER ONLY) #}
+
+                    {% if is_granted('ARTICLE_DELETE', article) %}
+                        <form method="post"
+                              action="{{ path('app_image_delete', {'id': image.id}) }}"
+                              class="position-absolute top-0 end-0 m-3">
+
+                            <input type="hidden"
+                                   name="_token"
+                                   value="{{ csrf_token('delete' ~ image.id) }}">
+
+                            <button
+                                class="btn btn-danger btn-sm shadow"
+
+                                {# ACCESSIBILITÉ :
+                                   Le lecteur d'écran comprend
+                                   précisément l'action du bouton. #}
+                                aria-label="Supprimer cette image de l'annonce"
+                            >
+                                🗑 Supprimer
+                            </button>
+
+                        </form>
+                    {% endif %}
+
+                </div>
+
+            </div>
+            {% endfor %}
 
                     </div>
 

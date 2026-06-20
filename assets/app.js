@@ -266,22 +266,8 @@ if (input && preview && dropzone) {
         dropzone.classList.remove('border-success');
         handleFiles(e.dataTransfer.files);
     });
-    function handleImageChange(e) {
-        const preview = document.getElementById('preview');
-        preview.innerHTML = "";
-
-        Array.from(e.target.files).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                const img = document.createElement('img');
-                img.src = event.target.result;
-                img.style.width = "100px";
-                img.style.margin = "5px";
-                preview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
+    
+    
     // chat auto scroll
     const chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;
@@ -523,4 +509,26 @@ document.addEventListener('change', function (e) {
 
         reader.readAsDataURL(file);
     });
+});
+
+// Validation du formulaire avec Bootstrap 5    
+document.addEventListener('DOMContentLoaded', function () {
+
+    const forms = document.querySelectorAll('.needs-validation');
+
+    Array.from(forms).forEach(form => {
+
+        form.addEventListener('submit', function(event) {
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+
+        }, false);
+
+    });
+
 });

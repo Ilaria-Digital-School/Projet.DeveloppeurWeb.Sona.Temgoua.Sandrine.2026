@@ -45,45 +45,53 @@
 
 			<h1 class="display-1 fw-bold hero-title mb-3" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
 
-				{% trans %}Bienvenue sur{% endtrans %}
+				{% trans %}Bienvenue sur<br>{% endtrans %}
 
 				<span class="text-success">
 					<span class="s-letter">𝒮</span>araka
 				</span>
 			</h1>
 
-			<p class="vision-text text-center text-light mx-auto">
+			<p class="vision-text text-center text-light mx-auto mb-4" style="max-width: 600px; font-size: 1.25rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
 				{% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.{% endtrans %}
 			</p>
 
 			<div class="d-flex flex-column align-items-center gap-3">
 				<div class="d-flex justify-content-center gap-3 flex-wrap">
-					<a href="{{ path('about') }}" class="btn btn-warning btn-lg text-dark rounded-pill px-5">
-						{% trans %}Découvrez la mission de <strong><span>𝒮</span>araka</strong>{% endtrans %}
+					<a href="{{ path('about') }}" class="btn btn-warning btn-lg text-dark rounded-pill px-5 shadow-slight">
+						{% trans %}Découvrez la mission de
+						<strong>
+							<span>𝒮</span>araka</strong>
+						{% endtrans %}
 					</a>
 					{% if app.user %}
-						<a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+						<a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5 shadow-slight">
 							{% trans %}Publier une annonce{% endtrans %}
 						</a>
 					{% else %}
-						<a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-5">
+						<a href="{{ path('app_register', {from: 'publish'}) }}" class="btn btn-success btn-lg text-white rounded-pill px-5 shadow-slight">
 							{% trans %}Publier une annonce{% endtrans %}
 						</a>
 					{% endif %}
 				</div>
 				<div>
-					<a href="#why-𝒮araka" class="btn btn-outline-light btn-lg rounded-pill px-5">
-						{% trans %}Pourquoi choisir <strong><span>𝒮</span>araka ?</strong>{% endtrans %}
+					<a href="#why-𝒮araka" class="btn btn-outline-light btn-lg rounded-pill px-5 shadow-slight">
+						{% trans %}Pourquoi choisir
+						<strong>
+							<span>𝒮</span>araka?</strong>
+						{% endtrans %}
 					</a>
 				</div>
+
+				<div><a href="#latest-products" class="btn btn-light btn-lg rounded-pill px-5 shadow-slight">
+    {% trans %}Explorez les dernières annonces publiées{% endtrans %}
+</a></div>
 			</div>
 
 		</div>
 
 		<!-- Overlay -->
-		<div class="position-absolute top-0 start-0 w-100 h-100"
-     style="background: rgba(0,0,0,0.90);z-index:1;">
-</div>
+		<div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.90);z-index:1;"></div>
 
 		<!-- CAROUSEL -->
 		<div id="carouselPromo" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -154,10 +162,10 @@
 									{# classe personnalisée pour brocante #}
 								{% elseif type == 'don' %}
 									{% set badgeClass = 'bg-success' %}
-									{% elseif type == 'alimentaire' %}
-								{% set badgeClass = 'bg-dark' %}
+								{% elseif type == 'alimentaire' %}
+									{% set badgeClass = 'bg-dark' %}
 								{% else %}
-								
+
 									{% set badgeClass = 'bg-success' %}
 									{# valeur par défaut #}
 								{% endif %}
@@ -268,4 +276,44 @@
 			</div>
 
 		</div>
+
+		<!-- Call to action -->
+		<section class="about-cta py-5">
+
+			<div class="container">
+
+				<div class="cta-card text-center">
+
+					<div class="section-label">
+						{% trans %}Rejoignez-nous{% endtrans %}
+					</div>
+
+					<h1 class="display-5 fw-bold mb-4">
+
+						{% trans %}
+						Construisons ensemble une économie plus humaine
+						{% endtrans %}
+
+					</h1>
+
+					<p class="lead mb-4">
+
+						{% trans %}
+						Chaque objet partagé, chaque service rendu et chaque rencontre
+						                contribue à bâtir une communauté plus forte.
+						{% endtrans %}
+
+					</p>
+
+					<a href="{{ path('app_register') }}" class="btn btn-success btn-lg rounded-pill px-5">
+
+						{% trans %}Créer un compte{% endtrans %}
+
+					</a>
+
+				</div>
+
+			</div>
+
+		</section>
 	{% endblock %}

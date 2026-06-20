@@ -39,7 +39,8 @@
 		</div>
 
 		<!-- MESSAGES -->
-		<div class="card-body bg-light" id="chat" style="height: 500px; overflow-y:auto;">
+		<div class="card-body bg-light" id="chat" style="height: 500px; overflow-y:auto; "role="log"
+     aria-label="Historique de la conversation">
 
 			{% if conversation.messages|length > 0 %}
 
@@ -68,19 +69,25 @@
 								{{ message.content }}
 
 								{% if message.imagePath %}
-									<img src="{{ asset(message.imagePath) }}" class="img-fluid rounded-3 mt-2">
+									<img src="{{ asset(message.imagePath) }}" class="img-fluid rounded-3 mt-2"
+                             {# ACCESSIBILITÉ :
+                               Description de l'image pour les lecteurs d'écran #} alt="Image envoyée dans la conversation">
 								{% endif %}
 
 								{% if message.filePath %}
 									<div class="mt-2">
-										<a href="{{ asset(message.filePath) }}" class="text-decoration-none">
+										<a href="{{ asset(message.filePath) }}" class="text-decoration-none"  {# ACCESSIBILITÉ :
+                                   Description explicite du lien #}
+                                aria-label="Télécharger le fichier joint envoyé dans cette conversation">
 											📎 Télécharger
 										</a>
 									</div>
 								{% endif %}
 
 								{% if message.audioPath %}
-									<audio controls class="mt-2 w-100">
+									<audio controls class="mt-2 w-100" {# ACCESSIBILITÉ :
+                               Description du message vocal #}
+                            aria-label="Message vocal envoyé dans cette conversation">
 										<source src="{{ asset(message.audioPath) }}">
 									</audio>
 								{% endif %}
@@ -89,8 +96,9 @@
 							<small class="mt-2 {% if message.sender == app.user %}text-success{% else %}text-muted{% endif %}">
 								{% if message.sender == app.user %}
 									{% if message.readAt %}
-										✔✔ Lu
-									{% else %}
+									<span aria-label="Message lu">
+										✔✔ Lu </span>
+									{% else %} <span aria-label="Message envoyé">
 										✔ Envoyé
 									{% endif %}
 								{% endif %}
@@ -99,7 +107,9 @@
 							</small>
 
 							<div class="mt-2 d-flex gap-2">
-								<button class="btn btn-sm btn-light border rounded-circle" onclick="replyTo({{ message.id }}, '{{ message.content|e('js') }}')">
+								<button class="btn btn-sm btn-light border rounded-circle" onclick="replyTo({{ message.id }}, '{{ message.content|e('js') }}')"  {# ACCESSIBILITÉ :
+                           Les lecteurs d'écran comprennent l'action du bouton #}
+                        aria-label="Répondre à ce message">
 
 									<i class="ri-reply-line"></i>
 

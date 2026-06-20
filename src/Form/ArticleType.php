@@ -3,6 +3,7 @@
 
 namespace App\Form;
 
+
 use App\Entity\Article;
 use App\Entity\Cathegory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class ArticleType extends AbstractType
 {
@@ -28,7 +30,7 @@ class ArticleType extends AbstractType
                     'placeholder' => 'Entrez un titre accrocheur...'
                 ]
             ])
-           
+
             ->add('summary', TextareaType::class, [
                 'label' => 'Résumé',
                 'required' => false,
@@ -38,7 +40,7 @@ class ArticleType extends AbstractType
                     'placeholder' => 'Un bref résumé de votre article...'
                 ]
             ])
-            
+
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',
                 'attr' => [
@@ -51,10 +53,16 @@ class ArticleType extends AbstractType
                 'class' => Cathegory::class,
                 'choice_label' => 'name',
                 'label' => 'Catégorie',
-                'attr' => ['class' => 'form-select']
+                'required' => true,
+                'placeholder' => 'Choisissez une catégorie',
+                'attr' => [
+                    'class' => 'form-select'
+                ]
             ])
             ->add('transactionType', ChoiceType::class, [
                 'label' => 'Type de transaction',
+                'required' => true,
+                'placeholder' => 'Choisissez un type de transaction',
                 'choices' => [
                     'Acheter' => 'acheter',
                     'Louer' => 'louer',
@@ -62,24 +70,34 @@ class ArticleType extends AbstractType
                     'Don' => 'don',
                     'Produits alimentaires' => 'alimentaire',
                 ],
-                'attr' => ['class' => 'form-select']
-            ])
-            ->add('image', FileType::class, [
-                'label' => 'Image principale',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new Image([
-                        'maxSize' => '5M',
-                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
-                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, WEBP, AVIF)'
-                    ])
-                ],
                 'attr' => [
-                    'class' => 'form-file',
-                    'accept' => 'image/*'
+                    'class' => 'form-select'
                 ]
             ])
+            ->add('image', FileType::class, [
+    'label' => 'Image principale',
+    'mapped' => false,
+    'required' => false,
+    'constraints' => [
+       // new NotNull([
+         //   'message' => 'Veuillez ajouter une image principale.'
+       // ]),
+        new Image([
+            'maxSize' => '5M',
+            'mimeTypes' => [
+                'image/jpeg',
+                'image/png',
+                'image/webp',
+                'image/avif'
+            ],
+            'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, WEBP, AVIF)'
+        ])
+    ],
+    'attr' => [
+        'class' => 'form-file',
+        'accept' => 'image/*'
+    ]
+])
             ->add('images', FileType::class, [
                 'label' => 'Images supplémentaires',
                 'mapped' => false,

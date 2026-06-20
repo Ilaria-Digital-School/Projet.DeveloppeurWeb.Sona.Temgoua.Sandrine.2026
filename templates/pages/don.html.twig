@@ -156,6 +156,46 @@
 		</div>
 	</div>
 </section>
+<!-- Call to action -->
+<section class="about-cta py-5">
+
+    <div class="container">
+
+        <div class="cta-card text-center">
+
+            <div class="section-label">
+                {% trans %}Rejoignez-nous{% endtrans %}
+            </div>
+
+            <h1 class="display-5 fw-bold mb-4">
+
+                {% trans %}
+                Construisons ensemble une économie plus humaine
+                {% endtrans %}
+
+            </h1>
+
+            <p class="lead mb-4">
+
+                {% trans %}
+                Chaque objet partagé, chaque service rendu et chaque rencontre
+                contribue à bâtir une communauté plus forte.
+                {% endtrans %}
+
+            </p>
+
+            <a href="{{ path('app_register') }}"
+               class="btn btn-success btn-lg rounded-pill px-5">
+
+                {% trans %}Créer un compte{% endtrans %}
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 {% endblock %}
 
  

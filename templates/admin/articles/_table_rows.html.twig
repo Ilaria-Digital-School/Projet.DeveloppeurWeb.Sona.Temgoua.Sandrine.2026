@@ -17,6 +17,10 @@
             <span class="badge rounded-pill bg-orange px-3 py-2">BROCANTE</span>
         {% elseif type == 'don' %}
             <span class="badge rounded-pill bg-success px-3 py-2">DON</span>
+        {% elseif type == 'alimentaire' %}
+            <span class="badge rounded-pill bg-dark px-3 py-2">ALIMENTAIRE</span>
+        {% elseif type == 'autre' %}
+            <span class="badge rounded-pill bg-secondary px-3 py-2">AUTRE
         {% else %}
             <span class="badge rounded-pill bg-secondary px-3 py-2">{{ article.transactionType|upper }}</span>
         {% endif %}

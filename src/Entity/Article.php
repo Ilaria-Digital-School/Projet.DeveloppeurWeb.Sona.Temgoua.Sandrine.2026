@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,7 +21,7 @@ class Article
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -38,12 +39,16 @@ class Article
     // Article.php
     #[ORM\Column(type: 'boolean')]
     private bool $isDeleted = false;
+    
 
+    #[Assert\NotNull(message: 'Veuillez choisir une catégorie.')]
     #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Cathegory $cathegory = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+    #[Assert\NotBlank(message: 'Veuillez choisir un type de transaction.')]
     #[ORM\Column(length: 20)]
     private ?string $transactionType = null;
 
@@ -244,6 +249,4 @@ class Article
 
         return $this;
     }
-
-    
 }
