@@ -8,15 +8,43 @@ On parcourt ici les types de messages : success, error, info, danger.
 Chaque message est affiché avec une classe Bootstrap adaptée.
 #}
 
-{% for type, messages in app.flashes(['success', 'error', 'info', 'danger']) %}
-  {% for message in messages %}
-
-    {# Conversion du type "error" en "danger" pour Bootstrap #}
-    {% set bootstrapClass = type == 'error' ? 'danger' : type %}
-
-    <div role="alert" class="alert alert-{{ bootstrapClass }} text-center shadow-sm">
-      {{ message }}
-    </div>
-
+<div style="position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;">
+  {% for type, messages in app.flashes(['success', 'error', 'info', 'danger']) %}
+    {% for message in messages %}
+      {% set bootstrapClass = type == 'error' ? 'danger' : type %}
+      
+      <div role="alert" 
+           class="alert alert-{{ bootstrapClass }} shadow-sm flash-toast" 
+           style="margin-bottom: 10px; animation: slideIn 0.3s ease-out;">
+        {{ message }}
+        <button type="button" 
+                class="btn-close" 
+                onclick="this.parentElement.remove()"
+                style="float: right;"
+                aria-label="Close"></button>
+      </div>
+    {% endfor %}
   {% endfor %}
-{% endfor %}
+</div>
+
+{# Gestion des toasts de notification : disparition progressive après un délai#}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toasts = document.querySelectorAll('.flash-toast');
+    
+    toasts.forEach(function(toast, index) {
+        // Délai plus court : 2 secondes pour le premier, +300ms pour les suivants
+        const delay = 4000 + (index * 500); // MODIFIÉ ICI
+        
+        setTimeout(function() {
+            toast.style.transition = 'all 0.5s ease-out';
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(100%)';
+            
+            setTimeout(function() {
+                toast.remove();
+            }, 500);
+        }, delay);
+    });
+});
+</script>

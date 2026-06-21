@@ -46,8 +46,9 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private ?Cathegory $cathegory = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    #[ORM\Column(length: 255)]
+    private ?string $image;
+
     #[Assert\NotBlank(message: 'Veuillez choisir un type de transaction.')]
     #[ORM\Column(length: 20)]
     private ?string $transactionType = null;

@@ -131,15 +131,15 @@
 					<div class="col-12 col-sm-6 col-lg-3 mb-4 d-flex">
 						<div class="card product-card shadow-sm h-100 d-flex flex-column">
 
-							{% if article.images|length > 0 %}
+							{# {% if article.images|length > 0 %}
 
-								{% for image in article.images|slice(0, 1) %}
+								{% for image in article.images|slice(0, 1) %} #}
 
-									<img src="{{ asset('images/' ~ image.image) }}" class="card-img-top w-100" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
+									<img src="{{ asset('images/' ~ article.image) }}" class="card-img-top w-100" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
 
-								{% endfor %}
+								{# {% endfor %}
 
-							{% endif %}
+							{% endif %} #}
 
 
 							{# Contenu de la carte avec résumé et type de transaction #}

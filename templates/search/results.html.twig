@@ -1,0 +1,45 @@
+{# templates/search/results.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche : {{ term }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Résultats de recherche pour "{{ term }}"</h1>
+    
+    {% if articles|length > 0 %}
+        <p>{{ articles|length }} résultat(s) trouvé(s)</p>
+        
+        <div class="row">
+       
+            {% for article in articles %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if article.image %}
+                            <img src="{{ asset('/images/' ~ article.image) }}" 
+                                 class="card-img-top" 
+                                 alt="{{ article.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.summary|slice(0, 150) ~ '...' }}</p>
+                            <span class="badge bg-primary">{{ article.cathegory.name }}</span>
+                            <span class="badge bg-success">{{ article.transactionType }}</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ path('app_article_show', {slug: article.slug}) }}" 
+                               class="btn btn-outline-primary">
+                                Voir l'article
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            Aucun résultat trouvé pour "{{ term }}"
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

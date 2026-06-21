@@ -6,24 +6,24 @@
 
             {% set total = article.images|length %}
 
-{% if total > 0 %}
-    
-    {% for image in article.images|slice(0, 5) %}
-        <img src="{{ asset('images/' ~ image.image) }}"
-             class="rounded me-2"
-             style="width:40px; height:40px; object-fit:cover;">
-    {% endfor %}
+                {% if total > 0 %}
+                    
+                    {% for image in article.images|slice(0, 5) %}
+                        <img src="{{ asset('images/' ~ image.image) }}"
+                            class="rounded me-2"
+                            style="width:40px; height:40px; object-fit:cover;">
+                    {% endfor %}
 
-    {% if total > 5 %}
-        <span class="ms-2">+{{ total - 5 }}</span>
-    {% endif %}
+                    {% if total > 5 %}
+                        <span class="ms-2">+{{ total - 5 }}</span>
+                    {% endif %}
 
-{% else %}
-    <div class="bg-light d-flex align-items-center justify-content-center rounded me-3"
-         style="width:40px; height:40px;">
-        N/A
-    </div>
-{% endif %}
+                {% else %}
+                    <div class="bg-light d-flex align-items-center justify-content-center rounded me-3"
+                        style="width:40px; height:40px;">
+                        N/A
+                    </div>
+                {% endif %}
 
                 </div>
 

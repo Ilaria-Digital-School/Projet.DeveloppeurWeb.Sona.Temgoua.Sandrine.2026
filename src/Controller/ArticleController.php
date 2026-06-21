@@ -63,28 +63,23 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-
-            $mainImage = $form->get('image')->getData();
-
-            if (!$mainImage) {
-                $form->get('image')->addError(
-                    new FormError('Veuillez ajouter une image principale.')
-                );
-            }
-        }
-
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
+            // Récupérer l'image principale
             $mainImage = $form->get('image')->getData();
-
-            if ($mainImage) {
-                $fileName = $fileUploader->upload($mainImage);
-                $article->setImage($fileName);
+            
+            // Vérifier si l'image principale est présente
+            if (!$mainImage) {
+                $this->addFlash('danger', 'Veuillez ajouter une image principale.');
+                return $this->render('article/new.html.twig', ['form' => $form->createView()]);
             }
-
+            
+            // Upload de l'image principale
+            $fileName = $fileUploader->upload($mainImage);
+            $article->setImage($fileName);
+            
+            // Gestion des images supplémentaires
             $imageFiles = $form->get('images')->getData();
-
             if ($imageFiles) {
                 foreach ($imageFiles as $imageFile) {
                     $fileName = $fileUploader->upload($imageFile);
@@ -94,21 +89,25 @@ class ArticleController extends AbstractController
                     $em->persist($image);
                 }
             }
-
+            
+            // Configuration de l'article
             $article->setAuthor($this->getUser());
             $article->setPublishedAt(new \DateTimeImmutable());
             $article->setIsVerified(true);
             $slug = $slugger->slug($article->getTitle())->lower();
             $article->setSlug($slug);
-
+            
+            // Sauvegarde
             $em->persist($article);
             $em->flush();
-
+            
             $this->addFlash('success', 'Article publié avec succès !');
             return $this->redirectToRoute('app_my_articles');
         }
-
-        return $this->render('article/new.html.twig', ['form' => $form->createView()]);
+        
+        return $this->render('article/new.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     #[Route('/my-articles', name: 'app_my_articles', methods: ['GET'])]

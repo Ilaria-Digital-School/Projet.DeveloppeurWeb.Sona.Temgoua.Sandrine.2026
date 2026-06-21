@@ -1,0 +1,186 @@
+/* public/css/image-preview.css */
+
+/* Zone de drop */
+#dropzone {
+    border: 2px dashed #dee2e6 !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 200px;
+    position: relative;
+}
+
+#dropzone.dragover {
+    border-color: #198754 !important;
+    background-color: rgba(25, 135, 84, 0.05) !important;
+}
+
+#dropzone:hover {
+    border-color: #198754 !important;
+}
+
+/* Cache l'input file mais le garde fonctionnel */
+#fileInput {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    z-index: 1;
+}
+
+.dropzone-content {
+    position: relative;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Conteneur des prévisualisations */
+#previewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    min-height: 50px;
+}
+
+/* Carte de prévisualisation */
+.preview-card {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f8f9fa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.preview-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.preview-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Bouton de suppression */
+.preview-card .btn-delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+.preview-card .btn-delete:hover {
+    background: #dc3545;
+    transform: scale(1.1);
+}
+
+/* Animation d'apparition */
+.preview-card {
+    animation: fadeInScale 0.3s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animation de suppression */
+.preview-card.removing {
+    animation: fadeOutScale 0.3s ease forwards;
+}
+
+@keyframes fadeOutScale {
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+/* Aperçu de l'image principale */
+.main-image-preview {
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+    max-width: 200px;
+}
+
+.main-image-preview img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.main-image-preview .btn-delete-main {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 28px;
+    height: 28px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.main-image-preview .main-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #198754;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .preview-card {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .main-image-preview img {
+        width: 150px;
+        height: 150px;
+    }
+}

@@ -77,7 +77,7 @@ class ArticleType extends AbstractType
             ->add('image', FileType::class, [
     'label' => 'Image principale',
     'mapped' => false,
-    'required' => false,
+    'required' => true,
     'constraints' => [
        // new NotNull([
          //   'message' => 'Veuillez ajouter une image principale.'

@@ -31,11 +31,11 @@
 
 						<div class="card shadow-sm border-0 h-100">
 
-							{% if article.images|length > 0 %}
+							{# {% if article.images|length > 0 %} #}
 
-								<img src="{{ asset('images/' ~ article.images.first.image) }}" class="product-image" alt="{{ article.title }}">
+								<img src="{{ asset('images/' ~ article.image) }}" class="product-image" alt="{{ article.title }}">
 
-							{% endif %}
+							{# {% endif %} #}
 
 
 							{# Contenu de la carte avec résumé et type de transaction #}

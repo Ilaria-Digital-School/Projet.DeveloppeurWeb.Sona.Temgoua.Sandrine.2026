@@ -52,7 +52,7 @@
 			<div class="d-flex align-items-center gap-4 flex-lg-row flex-column nav-actions ms-auto">
 
 
-				<!-- Liens ADMIN (si présents, ils seront aussi à droite, mais vous pouvez les laisser à gauche si besoin) -->
+				<!-- Liens ADMIN -->
 				{% if is_granted('ROLE_ADMIN') %}
 					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
 						<li class="nav-item">
@@ -65,7 +65,7 @@
 				{% endif %}
 
 				<!-- Liens USER (connecté) -->
-				{% if is_granted('ROLE_ADMIN') %}
+				{% if is_granted('ROLE_USER') %}
 					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
 						<li class="nav-item">
 							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_my_articles' ? 'active' : '' }}" href="{{ path('app_my_articles') }}">{% trans %}Mes articles{% endtrans %}</a>
@@ -85,10 +85,15 @@
 
 			<!-- Recherche (loupe) -->
 			<div class="search-box">
-				<button id="searchToggle">
+				<button id="searchToggle" aria-label="Rechercher">
 					<i class="fas fa-search"></i>
 				</button>
-				<input type="text" id="searchInput" placeholder="Rechercher..."/>
+				<input 
+					type="text" 
+					id="searchInput" 
+					placeholder="{% trans %}Rechercher...{% endtrans %}"
+					autocomplete="off"
+				>
 			</div>
 
 			<!-- Sélecteur de langue -->
@@ -160,3 +165,12 @@
 	<!-- fin collapse -->
 </div>
 <!-- fin container-fluid --></nav>
+
+
+
+	{% block javascripts %}
+   
+    <script src="/js/search.js"></script>
+{% endblock %}
+
+

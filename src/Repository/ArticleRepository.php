@@ -30,4 +30,62 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult(); // Exécution de la requête et récupération des résultats
     }
 
+    /**
+     * Recherche des articles par terme
+     */
+    public function searchByTerm(string $term): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.cathegory', 'c')
+            ->leftJoin('a.author', 'u')
+            ->where('a.isDeleted = :isDeleted')
+            ->andWhere('a.isVerified = :isVerified')
+            ->andWhere('LOWER(a.title) LIKE LOWER(:term)')
+            ->orWhere('LOWER(a.content) LIKE LOWER(:term)')
+            ->orWhere('LOWER(a.summary) LIKE LOWER(:term)')
+            ->orWhere('LOWER(c.name) LIKE LOWER(:term)')
+            ->setParameter('isDeleted', false)
+            ->setParameter('isVerified', true)
+            ->setParameter('term', '%' . $term . '%')
+            ->orderBy('a.publishedAt', 'DESC')
+            ->setMaxResults(10);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Recherche avancée avec filtres
+     */
+    public function advancedSearch(array $criteria): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.cathegory', 'c')
+            ->leftJoin('a.author', 'u')
+            ->where('a.isDeleted = :isDeleted')
+            ->andWhere('a.isVerified = :isVerified')
+            ->setParameter('isDeleted', false)
+            ->setParameter('isVerified', true);
+
+        if (!empty($criteria['term'])) {
+            $qb->andWhere('LOWER(a.title) LIKE LOWER(:term) 
+                OR LOWER(a.content) LIKE LOWER(:term) 
+                OR LOWER(a.summary) LIKE LOWER(:term)')
+                ->setParameter('term', '%' . $criteria['term'] . '%');
+        }
+
+        if (!empty($criteria['category'])) {
+            $qb->andWhere('c.id = :category')
+                ->setParameter('category', $criteria['category']);
+        }
+
+        if (!empty($criteria['transactionType'])) {
+            $qb->andWhere('a.transactionType = :transactionType')
+                ->setParameter('transactionType', $criteria['transactionType']);
+        }
+
+        return $qb->orderBy('a.publishedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

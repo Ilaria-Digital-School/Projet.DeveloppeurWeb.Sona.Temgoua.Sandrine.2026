@@ -1,87 +1,127 @@
-{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+{# templates/article/_form.html.twig #}
+
+{# Ajoutez le CSS dans votre bloc stylesheets #}
+{% block stylesheets %}
+   
+    <link rel="stylesheet" href="/css/image-preview.css">
+{% endblock %}
+
+{{ form_start(form, {'attr': {'enctype': 'multipart/form-data', 'novalidate': 'novalidate'}}) }}
 
 {{ form_errors(form) }}
 
 <div class="row g-3">
 
-	<div class="col-12">
-		{{ form_row(form.title) }}
-	</div>
+    <div class="col-12">
+        {{ form_row(form.title) }}
+    </div>
 
-	<div class="col-12">
-		{{ form_row(form.summary) }}
-	</div>
+    <div class="col-12">
+        {{ form_row(form.summary) }}
+    </div>
 
-	<div class="col-12">
-		{{ form_row(form.content) }}
-	</div>
+    <div class="col-12">
+        {{ form_row(form.content) }}
+    </div>
 
-	{#  AJOUT OBLIGATOIRE #}
-	<div class="col-md-6">
-		<label class="form-label fw-semibold">
-			{{ form_label(form.cathegory) }}
-			<span class="text-danger">*</span>
-		</label>
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">
+            {{ form_label(form.cathegory) }}
+            <span class="text-danger">*</span>
+        </label>
+        {{ form_widget(form.cathegory) }}
+        {{ form_errors(form.cathegory) }}
+    </div>
 
-		{{ form_widget(form.cathegory) }}
-		{{ form_errors(form.cathegory) }}
-	</div>
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">
+            {{ form_label(form.transactionType) }}
+            <span class="text-danger">*</span>
+        </label>
+        {{ form_widget(form.transactionType) }}
+        {{ form_errors(form.transactionType) }}
+    </div>
 
-	<div class="col-md-6">
-		<label class="form-label fw-semibold">
-			{{ form_label(form.transactionType) }}
-			<span class="text-danger">*</span>
-		</label>
+    {# Upload images #}
+    <div class="col-12 mt-3">
+        
+        {# Image principale #}
+        <div class="mb-4">
+            <label class="form-label fw-semibold mb-3">
+                📸 Image principale
+                <span class="text-danger">*</span>
+            </label>
+            
+            <div class="main-image-upload">
+                {{ form_widget(form.image, {
+                    'attr': {
+                        'class': 'form-control',
+                        'accept': 'image/jpeg,image/png,image/webp'
+                    }
+                }) }}
+                {{ form_errors(form.image) }}
+            </div>
+        </div>
 
-		{{ form_widget(form.transactionType) }}
-		{{ form_errors(form.transactionType) }}
-	</div>
+        {# templates/article/_form.html.twig #}
 
+{# ... début du formulaire ... #}
 
-	{# Upload images #}
-	<div class="col-12 mt-3">
-		<label class="form-label fw-semibold mb-3">
-			📸 Image principale
-			<span class="text-danger">*</span>
-		</label>
+{# Images supplémentaires #}
+<div class="mb-4">
+    <label class="form-label fw-semibold mb-3">
+        📸  Images supplémentaires
+        <small class="text-muted">(optionnel)</small>
+    </label>
 
-		{{ form_widget(form.image) }}
-		{{ form_errors(form.image) }}
+    <div id="dropzone" class="border border-2 border-dashed rounded-4 p-5 text-center bg-light position-relative">
+        
+        <div class="dropzone-content">
+            <div class="mb-2 fs-1">📸 </div>
+            <p class="fw-semibold mb-1">Glissez-déposez vos images ici</p>
+            <p class="text-muted small mb-0">ou cliquez pour parcourir</p>
+            <p class="text-muted small mt-2">Formats acceptés : JPEG, PNG, WebP (max 5 Mo)</p>
+        </div>
 
-		<label class="form-label fw-semibold mt-3">
-			📸 Ajouter des images
-		</label>
-
-		<div id="dropzone" class="border border-2 border-dashed rounded-4 p-5 text-center bg-light position-relative">
-
-			<div class="mb-2 fs-4">📸</div>
-			<p class="fw-semibold mb-1">Glissez vos images ici</p>
-			<p class="text-muted small mb-0">ou cliquez pour sélectionner</p>
-
-			{{ form_widget(form.images, {
+        {# IMPORTANT : Ajoutez id="fileInput" ici #}
+        {{ form_widget(form.images, {
             'attr': {
                 'multiple': true,
                 'id': 'fileInput',
+                'accept': 'image/jpeg,image/png,image/webp',
                 'class': 'position-absolute top-0 start-0 w-100 h-100 opacity-0'
             }
         }) }}
 
+        {{ form_errors(form.images) }}
+		{# Conteneur des prévisualisations #}
+    	<div id="previewContainer" class="preview-grid mt-4"></div>
 
-			<div id="previewContainer" class="row mt-3 g-3"></div>
+    </div>
 
-		</div>
+    
+</div>
 
-		<div id="preview" class="row mt-4 g-3"></div>
+{# ... fin du formulaire ... #}
+    </div>
 
-	</div>
+    {{ form_rest(form) }}
 
-	{{ form_rest(form) }}
+    <div class="d-flex justify-content-end mt-4">
+        <a href="{{ path('app_my_articles') }}" class="btn btn-outline-secondary rounded-pill px-4 me-2">
+            Annuler
+        </a>
+        <button type="submit" class="btn btn-success rounded-pill px-4">
+            {{ button_label|default('Publier') }} 🚀
+        </button>
+    </div>
 
-	<div class="d-flex justify-content-end mt-4">
-		<button class="btn btn-success rounded-pill px-4">
-			{{ button_label|default('Enregistrer') }}
-		</button>
-	</div>
+</div>
 
+{{ form_end(form) }}
 
-	{{ form_end(form) }}
+{# Ajoutez le JavaScript dans votre bloc javascripts #}
+{% block javascripts %}
+   
+    <script src="/js/image-preview.js"></script>
+{% endblock %}
