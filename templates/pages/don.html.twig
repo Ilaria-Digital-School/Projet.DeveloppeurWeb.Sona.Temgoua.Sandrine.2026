@@ -63,139 +63,229 @@
     pageTitle: null
 } %}
 
-<!-- HOW IT WORKS DON -->
-<section id="how-it-works" class="py-5 bg-light">
-	<div class="container">
-		<h2 class="fw-bold text-center text-dark mb-5">
-			{% trans %}Comment donner sur 𝒮araka ?{% endtrans %}
-		</h2>
+<!-- HOW IT WORKS -->
 
-		<div class="row g-4 text-center">
-			<div class="col-md-4">
-				<div class="card border-0 h-100">
-					<div class="card-body">
-						<h1 class="fw-bold text-success">1</h1>
-						<h5>{% trans %}Publiez gratuitement{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Ajoutez votre objet à donner avec photos et description, en quelques clics.{% endtrans %}
-						</p>
-					</div>
-				</div>
-			</div>
+<section id="how-it-works" class="how-section py-5">
 
-			<div class="col-md-4">
-				<div class="card border-0 h-100">
-					<div class="card-body">
-						<h1 class="fw-bold text-success">2</h1>
-						<h5>{% trans %}Entrez en contact{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Échangez avec des personnes intéressées près de chez vous.{% endtrans %}
-						</p>
-					</div>
-				</div>
-			</div>
+<div class="container">
 
-			<div class="col-md-4">
-				<div class="card border-0 h-100">
-					<div class="card-body">
-						<h1 class="fw-bold text-success">3</h1>
-						<h5>{% trans %}Transmettez{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Remettez votre objet en main propre et offrez-lui une seconde vie.{% endtrans %}
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+    <div class="text-center mb-5">
 
-<!-- AVANTAGES DON -->
-<section class="py-5 bg-light">
-	<div class="container">
-		<h2 class="fw-bold text-center text-dark mb-5">
-			{% trans %}Pourquoi donner sur 𝒮araka ?{% endtrans %}
-		</h2>
+        <span class="section-label">
+            {% trans %}Comment ça marche{% endtrans %}
+        </span>
 
-		<div class="row g-4 text-center">
-			<div class="col-md-4">
-				<div class="card h-100 border-0 shadow-sm">
-					<div class="card-body">
-						<i class="fas fa-hand-holding-heart fa-2x text-success mb-3"></i>
-						<h5 class="fw-bold">{% trans %}Solidaire{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Aidez des personnes près de chez vous en donnant ce dont vous n'avez plus besoin.{% endtrans %}
-						</p>
-					</div>
-				</div>
-			</div>
+        <h2 class="fw-bold mt-3">
+            {% trans %}Comment donner sur 𝒮araka ?{% endtrans %}
+        </h2>
 
-			<div class="col-md-4">
-				<div class="card h-100 border-0 shadow-sm">
-					<div class="card-body">
-						<i class="fas fa-recycle fa-2x text-success mb-3"></i>
-						<h5 class="fw-bold">{% trans %}Écologique{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Réduisez le gaspillage en offrant une seconde vie à vos objets.{% endtrans %}
-						</p>
-					</div>
-				</div>
-			</div>
+        <p class="text-muted mx-auto how-intro">
+            {% trans %}
+            Offrez une seconde vie à vos objets en quelques étapes simples.
+            {% endtrans %}
+        </p>
 
-			<div class="col-md-4">
-				<div class="card h-100 border-0 shadow-sm">
-					<div class="card-body">
-						<i class="fas fa-smile fa-2x text-success mb-3"></i>
-						<h5 class="fw-bold">{% trans %}Simple & Humain{% endtrans %}</h5>
-						<p class="text-muted">
-							{% trans %}Un geste simple, gratuit et local qui crée du lien dans votre communauté.{% endtrans %}
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Call to action -->
-<section class="about-cta py-5">
+    </div>
 
-    <div class="container">
+    <div class="row g-4">
 
-        <div class="cta-card text-center">
+        <!-- Etape 1 -->
+        <div class="col-md-6 col-lg-4">
 
-            <div class="section-label">
-                {% trans %}Rejoignez-nous{% endtrans %}
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">
+                        1
+                    </div>
+
+                    <h3 class="how-title">
+                        {% trans %}Publiez gratuitement{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Ajoutez votre objet à donner avec quelques photos et une description.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
             </div>
 
-            <h1 class="display-5 fw-bold mb-4">
+        </div>
 
-                {% trans %}
-                Construisons ensemble une économie plus humaine
-                {% endtrans %}
+        <!-- Etape 2 -->
+        <div class="col-md-6 col-lg-4">
 
-            </h1>
+            <div class="card how-card border-0 h-100">
 
-            <p class="lead mb-4">
+                <div class="card-body text-center">
 
-                {% trans %}
-                Chaque objet partagé, chaque service rendu et chaque rencontre
-                contribue à bâtir une communauté plus forte.
-                {% endtrans %}
+                    <div class="step-circle">
+                        2
+                    </div>
 
-            </p>
+                    <h3 class="how-title">
+                        {% trans %}Entrez en contact{% endtrans %}
+                    </h3>
 
-            <a href="{{ path('app_register') }}"
-               class="btn btn-success btn-lg rounded-pill px-5">
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Discutez avec les personnes intéressées directement depuis Saraka. Choisissez le receveur parmi les demandes reçues.
+                        {% endtrans %}
+                    </p>
 
-                {% trans %}Créer un compte{% endtrans %}
+                </div>
 
-            </a>
+            </div>
+
+        </div>
+
+        <!-- Etape 3 -->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">
+                        3
+                    </div>
+
+                    <h3 class="how-title">
+                        {% trans %}Organisez la livraison{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Fixez un rendez-vous avec le receveur ou utilisez des points relais pour livrer votre objet et offrez-lui une nouvelle vie.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
+</div>
 </section>
+
+<!-- AVANTAGES DON -->
+
+<section class="advantages-section py-5">
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <span class="section-label">
+            {% trans %}Les avantages{% endtrans %}
+        </span>
+
+        <h2 class="fw-bold mt-3">
+            {% trans %}Pourquoi donner sur 𝒮araka ?{% endtrans %}
+        </h2>
+
+        <p class="text-muted advantages-intro">
+            {% trans %}
+            Donner sur Saraka, c'est faire un geste simple qui profite à la fois
+            aux personnes, à la planète et à votre communauté.
+            {% endtrans %}
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Solidaire{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Aidez des personnes près de chez vous en donnant ce dont vous n'avez plus besoin.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Écologique{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Réduisez le gaspillage en offrant une seconde vie à vos objets.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-smile"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Simple & Humain{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Un geste simple, gratuit et local qui crée du lien dans votre communauté.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
 {% endblock %}
 
  

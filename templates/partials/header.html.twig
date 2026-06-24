@@ -7,9 +7,9 @@
 
 			<img src="{{ asset('images/favicon/logo.png') }}" alt="𝒮araka Logo" width="50" height="50" class="rounded-circle">
 
-			 <span class="saraka-brand">
-    <span class="s-letter">𝒮</span>araka
-</span>
+			<span class="saraka-brand">
+				<span class="s-letter">𝒮</span>araka
+			</span>
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
 			<span class="navbar-toggler-icon"></span>
@@ -35,8 +35,13 @@
 				<li class="nav-item">
 					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_don' ? 'active' : '' }}" href="{{ path('app_don') }}">{% trans %}Don{% endtrans %}</a>
 				</li>
-                <li class="nav-item">
+				<li class="nav-item">
 					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_alimentaire' ? 'active' : '' }}" href="{{ path('app_alimentaire') }}">{% trans %}Alimentaire{% endtrans %}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.attributes.get('_route') ==  'app_event' ? 'active' : '' }}" href="{{ path('app_event_index') }}">
+						{% trans %}Save The Date{% endtrans %}
+					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {{ app.request.attributes.get('_route') == 'about' ? 'active' : '' }}" href="{{ path('about') }}">{% trans %}À propos{% endtrans %}</a>
@@ -44,12 +49,14 @@
 				<li class="nav-item">
 					<a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">{% trans %}Contact{% endtrans %}</a>
 				</li>
-		
+
 			</ul>
 
+
 			<!-- Bloc droite : recherche, langue, boutons (alignés à droite sur desktop) -->
-			
-			<div class="d-flex align-items-center gap-4 flex-lg-row flex-column nav-actions ms-auto">
+
+			<div
+				class="d-flex align-items-center gap-4 flex-lg-row flex-column nav-actions ms-auto">
 
 
 				<!-- Liens ADMIN -->
@@ -74,103 +81,96 @@
 				{% endif %}
 
 				{% if is_granted('ROLE_USER') %}
-                <ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">
-							{% trans %}Mon compte{% endtrans %}
-						</a>
-					</li>
-				</ul>
-			{% endif %}
-
-			<!-- Recherche (loupe) -->
-			<div class="search-box">
-				<button id="searchToggle" aria-label="Rechercher">
-					<i class="fas fa-search"></i>
-				</button>
-				<input 
-					type="text" 
-					id="searchInput" 
-					placeholder="{% trans %}Rechercher...{% endtrans %}"
-					autocomplete="off"
-				>
-			</div>
-
-			<!-- Sélecteur de langue -->
-			<div class="dropdown">
-				<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-3" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-					{% if app.request.locale == 'fr' %}
-						<i class="fi fi-fr"></i>
-						FR
-					{% elseif app.request.locale == 'en' %}
-						<i class="fi fi-gb"></i>
-						EN
-					{% elseif app.request.locale == 'es' %}
-						<i class="fi fi-es"></i>
-						ES
-					{% elseif app.request.locale == 'it' %}
-						<i class="fi fi-it"></i>
-						IT
-					{% else %}
-						{{ app.request.locale|upper }}
-					{% endif %}
-				</button>
-				<ul class="dropdown-menu dropdown-menu-end shadow rounded-3">
-					{% for locale in locales %}
-						{% if locale != app.request.locale %}
-							<li>
-								<a class="dropdown-item d-flex align-items-center gap-3" href="{{ path('app_changer_langue', {'locale': locale}) }}">
-									{% if locale == 'fr' %}
-										<i class="fi fi-fr"></i>
-										{% trans %}Français{% endtrans %}
-									{% elseif locale == 'en' %}
-										<i class="fi fi-gb"></i>
-										{% trans %}English{% endtrans %}
-									{% elseif locale == 'es' %}
-										<i class="fi fi-es"></i>
-										{% trans %}Español{% endtrans %}
-									{% elseif locale == 'it' %}
-										<i class="fi fi-it"></i>
-										{% trans %}Italiano{% endtrans %}
-									{% else %}
-										{{ locale|upper }}
-									{% endif %}
-								</a>
-							</li>
-						{% endif %}
-					{% endfor %}
-				</ul>
-			</div>
-
-			<!-- Boutons de connexion / déconnexion -->
-			<div class="d-flex gap-3 flex-lg-row flex-column">
-				{% if not app.user %}
-					<a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
-						{% trans %}S'inscrire{% endtrans %}
-					</a>
-					<a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
-						{% trans %}Se connecter{% endtrans %}
-					</a>
-				{% else %}
-					<a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
-						{% trans %}Se déconnecter{% endtrans %}
-					</a>
+					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">
+								{% trans %}Mon compte{% endtrans %}
+							</a>
+						</li>
+					</ul>
 				{% endif %}
+
+				<!-- Recherche (loupe) -->
+				<div class="search-box">
+					<button id="searchToggle" aria-label="Rechercher">
+						<i class="fas fa-search"></i>
+					</button>
+					<input type="text" id="searchInput" placeholder="{% trans %}Rechercher...{% endtrans %}" autocomplete="off">
+				</div>
+
+				<!-- Sélecteur de langue -->
+				<div class="dropdown">
+					<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-3" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+						{% if app.request.locale == 'fr' %}
+							<i class="fi fi-fr"></i>
+							FR
+						{% elseif app.request.locale == 'en' %}
+							<i class="fi fi-gb"></i>
+							EN
+						{% elseif app.request.locale == 'es' %}
+							<i class="fi fi-es"></i>
+							ES
+						{% elseif app.request.locale == 'it' %}
+							<i class="fi fi-it"></i>
+							IT
+						{% else %}
+							{{ app.request.locale|upper }}
+						{% endif %}
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end shadow rounded-3">
+						{% for locale in locales %}
+							{% if locale != app.request.locale %}
+								<li>
+									<a class="dropdown-item d-flex align-items-center gap-3" href="{{ path('app_changer_langue', {'locale': locale}) }}">
+										{% if locale == 'fr' %}
+											<i class="fi fi-fr"></i>
+											{% trans %}Français{% endtrans %}
+										{% elseif locale == 'en' %}
+											<i class="fi fi-gb"></i>
+											{% trans %}English{% endtrans %}
+										{% elseif locale == 'es' %}
+											<i class="fi fi-es"></i>
+											{% trans %}Español{% endtrans %}
+										{% elseif locale == 'it' %}
+											<i class="fi fi-it"></i>
+											{% trans %}Italiano{% endtrans %}
+										{% else %}
+											{{ locale|upper }}
+										{% endif %}
+									</a>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+
+				<!-- Boutons de connexion / déconnexion -->
+				<div class="d-flex gap-3 flex-lg-row flex-column">
+					{% if not app.user %}
+						<a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
+							{% trans %}S'inscrire{% endtrans %}
+						</a>
+						<a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
+							{% trans %}Se connecter{% endtrans %}
+						</a>
+					{% else %}
+						<a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
+							{% trans %}Se déconnecter{% endtrans %}
+						</a>
+					{% endif %}
+				</div>
+
 			</div>
+			<!-- fin nav-actions -->
 
 		</div>
-		<!-- fin nav-actions -->
-
+		<!-- fin collapse -->
 	</div>
-	<!-- fin collapse -->
-</div>
-<!-- fin container-fluid --></nav>
+	<!-- fin container-fluid -->
+</nav>
 
 
+{% block javascripts %}
 
-	{% block javascripts %}
-   
-    <script src="/js/search.js"></script>
+	<script src="/js/search.js"></script>
 {% endblock %}
-
-

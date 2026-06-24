@@ -1,11 +1,49 @@
+<!-- Call to action -->
+<section class="footer-cta py-5">
+
+    <div class="container">
+
+        <div class="cta-card text-center">
+
+            <div class="section-label">
+                {% trans %}Rejoignez-nous{% endtrans %}
+            </div>
+
+            <h3 class="display-5 fw-bold mb-4">
+
+                {% trans %}
+                Construisons ensemble une économie plus humaine
+                {% endtrans %}
+
+            </h3>
+
+            <p class="lead mb-4">
+
+                {% trans %}
+                Chaque objet partagé, chaque service rendu et chaque rencontre
+                contribue à bâtir une communauté plus forte.
+                {% endtrans %}
+
+            </p>
+
+            <a href="{{ path('app_register') }}"
+               class="btn btn-success btn-lg rounded-pill px-5">
+
+                {% trans %}Créer un compte{% endtrans %}
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
 <!-- Footer -->
 <footer class="bg-dark text-light footer-responsive mt-md-5 mt-3 pt-md-4 pt-2" style="overflow-x: visible; width: 100%;">
-    
-
+   
     <div class="container-fluid px-3 px-md-4">
-
-
-    <div class="text-center text-lg-start mb-2 mt-0">
+ <div class="text-center text-lg-start mb-2 mt-0">
 		<a class="navbar-brand d-flex align-items-center gap-1"
    href="{{ path('app_home') }}">
 
@@ -65,7 +103,7 @@
                     <div class="col-12 col-sm-6">
                         <h5 data-i18n="footerNewsletter">{% trans %}Newsletter{% endtrans %}</h5>
                         <p data-i18n="footerNewsletterText" class="mb-2">
-                            {% trans %}Inscrivez-vous pour recevoir nos offres exclusives{% endtrans %}
+                            {% trans %}Inscrivez-vous pour recevoir nos offres ou événements exclusifs{% endtrans %}
                         </p>
                         <div class="d-flex flex-column flex-sm-row gap-2">
                             <input type="email" class="form-control" placeholder="{% trans %}Votre email{% endtrans %}" />

@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Save The Date - Saraka{% endblock %}
+
+{% block body %}
+<section class="std-hero py-5">
+  <div class="container py-4">
+    <div class="text-center mx-auto" style="max-width: 820px;">
+
+      <!-- Badge -->
+      <div class="anim-1">
+        <span class="badge badge-soon rounded-pill px-4 py-2 mb-4 text-white">
+          Bientôt disponible
+        </span>
+      </div>
+
+      <!-- Titre -->
+      <div class="anim-2">
+        <h1 class="std-title mb-4">
+          Save The <span>Date</span>
+        </h1>
+      </div>
+
+      <!-- Lead -->
+      <div class="anim-3">
+        <p class="std-lead mx-auto mb-2">
+          Parce que Saraka n'est pas seulement une plateforme d'annonces.
+          C'est aussi un lieu de rencontre, de partage et de générosité.
+        </p>
+        <p class="text-secondary mx-auto mt-3 mb-5" style="font-size:1rem; max-width:640px;">
+          Imaginez une place de quartier où chacun peut se retrouver autour
+          d'un repas partagé, d'une distribution gratuite ou d'un événement communautaire.
+        </p>
+      </div>
+
+      <!-- Divider -->
+      <div class="anim-3">
+        <hr class="std-divider my-5">
+      </div>
+
+      <!-- Feature Grid -->
+      <div class="anim-4">
+        <div class="row g-3 text-start mb-5">
+
+          {% set features = [
+            'Distribution gratuite de vêtements',
+            'Partage de repas communautaire',
+            'Fête de quartier',
+            'Journée portes ouvertes',
+            'Collecte de dons',
+            'Anniversaire solidaire',
+            'Barbecue ouvert aux voisins',
+            "Journée d'échange de livres"
+          ] %}
+
+          {% for feature in features %}
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-item d-flex align-items-center gap-2">
+                <div class="feature-dot">✓</div>
+                <span class="feature-text">{{ feature }}</span>
+              </div>
+            </div>
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <!-- Spirit Card -->
+      <div class="anim-5">
+        <div class="std-card p-5 text-start mb-5">
+          <div class="std-card-quote">"</div>
+          <h3 class="std-card-title mb-4">L'esprit Saraka</h3>
+          <p>
+            Un donateur qui souhaite offrir avec joie.
+            Un philanthrope qui veut partager davantage que des biens.
+            Une famille qui organise un repas ouvert au voisinage.
+            Une association qui souhaite rassembler les habitants autour d'une action solidaire.
+          </p>
+          <p class="mb-0">
+            Save The Date permettra bientôt à chacun de créer un rendez-vous,
+            d'inviter sa communauté et de faire naître ces moments simples
+            qui rapprochent les gens.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="anim-6 d-flex flex-column flex-sm-row gap-3 justify-content-center">
+        <a href="#" class="btn-std">
+          M'avertir au lancement
+        </a>
+        <a href="{{ path('app_home') }}" class="btn-std-outline">
+          Retour à l'accueil
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
