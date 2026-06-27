@@ -60,97 +60,220 @@
 } %}
 
 <!-- HOW IT WORKS -->
-<section id="how-it-works" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="fw-bold text-center text-dark mb-5">
-            {% trans %}Comment organiser votre vide-grenier sur 𝒮araka ?{% endtrans %}
+
+<section id="how-it-works" class="how-section py-5">
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <span class="section-label">
+            {% trans %}Comment ça marche{% endtrans %}
+        </span>
+
+        <h2 class="fw-bold mt-3">
+            {% trans %}Comment vendre en brocante sur 𝒮araka ?{% endtrans %}
         </h2>
 
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="card border-0 h-100">
-                    <div class="card-body">
-                        <h1 class="fw-bold text-success">1</h1>
-                        <h5 class="fw-bold">{% trans %}Publiez en lot{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Mettez en ligne plusieurs articles à la fois : vêtements, meubles, objets déco ou équipements.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <p class="text-muted mx-auto how-intro">
+            {% trans %}
+            Transformez les objets que vous n'utilisez plus en opportunités, sans contraintes logistiques.
+            {% endtrans %}
+        </p>
 
-            <div class="col-md-4">
-                <div class="card border-0 h-100">
-                    <div class="card-body">
-                        <h1 class="fw-bold text-success">2</h1>
-                        <h5 class="fw-bold">{% trans %}Attirez les acheteurs{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Partagez votre vide-grenier sur les réseaux sociaux et trouvez rapidement des acheteurs intéressés.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card border-0 h-100">
-                    <div class="card-body">
-                        <h1 class="fw-bold text-success">3</h1>
-                        <h5 class="fw-bold">{% trans %}Vendez en quantité{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Écoulez plusieurs articles en une seule opération et libérez de l'espace chez vous.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+    <div class="row g-4">
+
+        <!-- Etape 1 -->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">1</div>
+
+                    <h3 class="how-title">
+                        {% trans %}Publiez vos objets{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Mettez en ligne autant d'articles que vous le souhaitez avec quelques photos et une description. Donnez une seconde vie à ce qui encombre votre maison.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Etape 2 -->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">2</div>
+
+                    <h3 class="how-title">
+                        {% trans %}Échangez avec les acquéreurs{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Répondez aux personnes intéressées, convenez d'un prix si nécessaire et fixez simplement un rendez-vous pour la remise des objets.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Etape 3 -->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">3</div>
+
+                    <h3 class="how-title">
+                        {% trans %}Vendez sans contraintes{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Les acheteurs viennent récupérer les objets directement auprès de vous. Vous vendez plusieurs articles facilement, sans expédition ni logistique, tout en libérant de l'espace chez vous.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </section>
 
-<!-- AVANTAGES VIDE GRENIER -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <h2 class="fw-bold text-center text-dark mb-5">
-            {% trans %}Pourquoi choisir 𝒮araka pour votre vide-grenier ?{% endtrans %}
+<!-- AVANTAGES BROCANTE -->
+
+<section class="advantages-section py-5">
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <span class="section-label">
+            {% trans %}Les avantages{% endtrans %}
+        </span>
+
+        <h2 class="fw-bold mt-3">
+            {% trans %}Pourquoi vendre en brocante sur 𝒮araka ?{% endtrans %}
         </h2>
 
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-boxes fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Vente en masse{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Vendez plusieurs objets en même temps sans créer une annonce pour chaque article.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <p class="text-muted advantages-intro">
+            {% trans %}
+            Faites de la place chez vous, donnez une nouvelle vie à vos objets et vendez simplement, sans vous compliquer la vie.
+            {% endtrans %}
+        </p>
 
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-bolt fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Rapide & Efficace{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Organisez votre vide-grenier en ligne et trouvez preneur plus rapidement.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-home fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Faites de la place{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Désencombrez votre intérieur tout en générant des revenus supplémentaires.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Libérez de l'espace{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Désencombrez votre maison, votre garage ou votre cave en vendant les objets que vous n'utilisez plus.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Aucune logistique{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Pas d'expédition, pas de transport : les acquéreurs viennent récupérer directement leurs achats au lieu convenu.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-coins"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Vendez en toute simplicité{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Publiez plusieurs annonces, trouvez rapidement des acquéreurs près de chez vous et valorisez des objets qui dormaient dans vos placards.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </section>
 
 {% endblock %}

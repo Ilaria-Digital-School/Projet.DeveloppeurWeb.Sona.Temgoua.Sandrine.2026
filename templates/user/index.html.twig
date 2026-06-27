@@ -4,71 +4,100 @@
 
 {% block body %}
 
-<div class="container my-5">
+<div class="container my-3 my-md-5">
 
-    <h1 class="mb-4 text-success fw-bold">User index</h1>
+    <h1 class="mb-3 mb-md-4 text-success fw-bold fs-2 fs-md-1">User index</h1>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle shadow-sm border rounded">
+    <!-- Version mobile : cartes -->
+    <div class="d-md-none">
+        {% for user in users %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-success fw-bold">{{ user.email }}</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted small">{{ user.firstname }} {{ user.lastname }}</span>
+                        <span>
+                            {% if user.isVerified %}
+                                <span class="badge bg-success">Verified</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Not verified</span>
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}"
+                           class="btn btn-outline-success btn-sm flex-grow-1">
+                            Show
+                        </a>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}"
+                           class="btn btn-success btn-sm flex-grow-1">
+                            Edit
+                        </a>
+                        {{ include('user/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="text-center text-muted py-4">
+                no records found
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Version tablette et desktop : tableau -->
+    <div class="d-none d-md-block table-responsive rounded shadow">
+        <table class="table table-striped table-hover align-middle table-sm">
             <thead class="table-success">
                 <tr>
-                    <th>Id</th>
-                    <th>Roles</th>
+                    <th class="d-none d-lg-table-cell">Id</th>
+                    <th class="d-none d-lg-table-cell">Roles</th>
                     <th>Email</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>CreatedAt</th>
-                    <th>UpdatedAt</th>
-                    <th>IsVerified</th>
-                    <th>actions</th>
+                    <th class="d-none d-sm-table-cell">Firstname</th>
+                    <th class="d-none d-sm-table-cell">Lastname</th>
+                    <th class="d-none d-xl-table-cell">CreatedAt</th>
+                    <th class="d-none d-xl-table-cell">UpdatedAt</th>
+                    <th class="d-none d-sm-table-cell">Verified</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
+            
             <tbody>
             {% for user in users %}
                 <tr>
-                    <td class="fw-semibold">{{ user.id }}</td>
-
-                    <td>
+                    <td class="fw-semibold d-none d-lg-table-cell">{{ user.id }}</td>
+                    <td class="d-none d-lg-table-cell">
                         <span class="badge bg-secondary">
                             {{ user.roles ? user.roles|json_encode : '' }}
                         </span>
                     </td>
-
-                    <td class="fw-semibold text-success">
-                        {{ user.email }}
-                    </td>
-
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
-
-                    <td class="text-muted small">
+                    <td class="fw-semibold text-success">{{ user.email }}</td>
+                    <td class="d-none d-sm-table-cell">{{ user.firstname }}</td>
+                    <td class="d-none d-sm-table-cell">{{ user.lastname }}</td>
+                    <td class="text-muted small d-none d-xl-table-cell">
                         {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
                     </td>
-
-                    <td class="text-muted small">
+                    <td class="text-muted small d-none d-xl-table-cell">
                         {{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}
                     </td>
-
-                    <td>
+                    <td class="d-none d-sm-table-cell">
                         {% if user.isVerified %}
                             <span class="badge bg-success">Yes</span>
                         {% else %}
                             <span class="badge bg-secondary">No</span>
                         {% endif %}
                     </td>
-
                     <td>
-                        <a href="{{ path('app_user_show', {'id': user.id}) }}"
-                           class="btn btn-sm btn-outline-success me-2">
-                            show
-                        </a>
-
-                        <a href="{{ path('app_user_edit', {'id': user.id}) }}"
-                           class="btn btn-sm btn-success">
-                            edit
-                        </a>
-
-                        {{ include('user/_delete_form.html.twig') }}
+                        <div class="d-flex gap-1 flex-nowrap">
+                            <a href="{{ path('app_user_show', {'id': user.id}) }}"
+                               class="btn btn-outline-success btn-sm">
+                                Show
+                            </a>
+                            <a href="{{ path('app_user_edit', {'id': user.id}) }}"
+                               class="btn btn-success btn-sm">
+                                Edit
+                            </a>
+                            {{ include('user/_delete_form.html.twig') }}
+                        </div>
                     </td>
                 </tr>
             {% else %}
@@ -83,8 +112,8 @@
     </div>
 
     <a href="{{ path('app_user_new') }}"
-       class="btn btn-success mt-3">
-       Create new
+       class="btn btn-success mt-3 w-100 w-md-auto">
+       + Create new
     </a>
 
 </div>

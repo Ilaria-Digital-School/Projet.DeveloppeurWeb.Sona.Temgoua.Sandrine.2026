@@ -223,57 +223,114 @@
 	</section>
 
 	<!-- WHY 𝒮araka SECTION -->
-	<section id="why-𝒮araka" class="py-5 bg-light">
-		<div class="container">
+<section id="why-saraka" class="advantages-section py-5">
+    <div class="container">
 
-			<h2 class="text-center mb-5 fw-bold">
-				{% trans %}Pourquoi choisir 𝒮araka ?{% endtrans %}
-			</h2>
+        <div class="text-center mb-5">
+            <span class="section-label">
+                {% trans %}Pourquoi 𝒮araka ?{% endtrans %}
+            </span>
+            <h2 class="fw-bold mt-3">
+                {% trans %}Pourquoi choisir 𝒮araka ?{% endtrans %}
+            </h2>
+            <p class="text-muted mt-2">
+                {% trans %}Une plateforme qui révolutionne la consommation responsable et solidaire{% endtrans %}
+            </p>
+        </div>
 
-			<div
-				class="row text-center">
+        <div class="row g-4">
 
-				<!-- Argument 1 -->
-				<div class="col-md-4 mb-4">
-					<div class="p-4 shadow-sm h-100 rounded bg-white">
-						<i class="bi bi-cash-coin display-5 text-success"></i>
-						<h5 class="mt-3 fw-bold">
-							{% trans %}Des prix avantageux{% endtrans %}
-						</h5>
-						<p class="text-muted">
-							{% trans %}Achetez ou louez à des prix bien plus bas que le marché traditionnel.{% endtrans %}
-						</p>
-					</div>
-				</div>
+            <!-- Argument 1 : Prix avantageux -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card advantage-card border-0 h-100">
+                    <div class="card-body text-center">
+                        <div class="advantage-circle">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <h3 class="advantage-title">
+                            {% trans %}Des prix avantageux{% endtrans %}
+                        </h3>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Achetez ou louez à des prix bien plus bas que le marché traditionnel. 
+                            Faites des affaires tout en soutenant l'économie circulaire.
+                            {% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-				<!-- Argument 2 -->
-				<div class="col-md-4 mb-4">
-					<div class="p-4 shadow-sm h-100 rounded bg-white">
-						<i class="bi bi-recycle display-5 text-success"></i>
-						<h5 class="mt-3 fw-bold">
-							{% trans %}Un geste écologique{% endtrans %}
-						</h5>
-						<p class="text-muted">
-							{% trans %}Donnez une seconde vie aux produits et réduisez le gaspillage.{% endtrans %}
-						</p>
-					</div>
-				</div>
+            <!-- Argument 2 : Écologique -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card advantage-card border-0 h-100">
+                    <div class="card-body text-center">
+                        <div class="advantage-circle">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <h3 class="advantage-title">
+                            {% trans %}Un geste écologique{% endtrans %}
+                        </h3>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Donnez une seconde vie aux produits et réduisez le gaspillage. 
+                            Chaque échange est un pas vers un avenir plus durable.
+                            {% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-				<!-- Argument 3 -->
-				<div class="col-md-4 mb-4">
-					<div class="p-4 shadow-sm h-100 rounded bg-white">
-						<i class="bi bi-lightning-charge display-5 text-success"></i>
-						<h5 class="mt-3 fw-bold">
-							{% trans %}Simple et rapide{% endtrans %}
-						</h5>
-						<p class="text-muted">
-							{% trans %}Trouvez ce dont vous avez besoin en quelques clics seulement.{% endtrans %}
-						</p>
-					</div>
-				</div>
+            <!-- Argument 3 : Simple et rapide -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card advantage-card border-0 h-100">
+                    <div class="card-body text-center">
+                        <div class="advantage-circle">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="advantage-title">
+                            {% trans %}Simple et rapide{% endtrans %}
+                        </h3>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Trouvez ce dont vous avez besoin en quelques clics seulement. 
+                            Une interface intuitive pour une expérience fluide.
+                            {% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-			</div>
+            <!-- Argument 4 : Communauté -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card advantage-card border-0 h-100">
+                    <div class="card-body text-center">
+                        <div class="advantage-circle">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="advantage-title">
+                            {% trans %}Une communauté solidaire{% endtrans %}
+                        </h3>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Rejoignez une communauté de personnes partageant les mêmes valeurs 
+                            de confiance, de partage et de solidarité.
+                            {% endtrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-		</div>
+        </div>
+
+        <!-- Bouton d'appel à l'action (optionnel) -->
+        <div class="text-center mt-5">
+            <a href="{{ path('app_acheter') }}" class="btn btn-success btn-lg px-5">
+                <i class="fas fa-shopping-bag me-2"></i>
+                {% trans %}Découvrir les annonces{% endtrans %}
+            </a>
+        </div>
+
+    </div>
+</section>
 
 	{% endblock %}

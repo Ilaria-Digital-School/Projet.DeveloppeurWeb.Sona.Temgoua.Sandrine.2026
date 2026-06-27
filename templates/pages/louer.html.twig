@@ -58,100 +58,221 @@
     articles: articles,
     pageTitle: null
 } %}
-
 <!-- HOW IT WORKS -->
 
-<section id="how-it-works" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="fw-bold text-center text-dark mb-5">
-            {% trans %}Comment louer sur 𝒮araka ?{% endtrans %}
+<section id="how-it-works" class="how-section py-5">
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <span class="section-label">
+            {% trans %}Comment ça marche{% endtrans %}
+        </span>
+
+        <h2 class="fw-bold mt-3">
+            {% trans %}Comment vendre ou acheter en brocante sur 𝒮araka ?{% endtrans %}
         </h2>
 
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="card border-0 h-100">
-                    <div class="card-body">
-                        <h1 class="fw-bold text-success">1</h1>
-                        <h5 class="fw-bold">{% trans %}Choisissez{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Sélectionnez votre produit et la durée{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <p class="text-muted mx-auto how-intro">
+            {% trans %}
+            Donnez une seconde vie aux objets grâce à la brocante entre particuliers.
+            {% endtrans %}
+        </p>
 
-            <div class="col-md-4">
-                <div class="card border-0 h-100">
-                    <div class="card-body">
-                        <h1 class="fw-bold text-success">2</h1>
-                        <h5 class="fw-bold">{% trans %}Réservez{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Paiement sécurisé et contrat en ligne{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card border-0 h-100">
-                    <div class="card-body">
-                        <h1 class="fw-bold text-success">3</h1>
-                        <h5 class="fw-bold">{% trans %}Profitez{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Livraison ou retrait selon votre choix{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+    <div class="row g-4">
+
+        <!-- Etape 1 -->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">1</div>
+
+                    <h3 class="how-title">
+                        {% trans %}Parcourez les annonces{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Découvrez des objets d'occasion proposés par des particuliers et trouvez la bonne affaire près de chez vous.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Etape 2 -->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">2</div>
+
+                    <h3 class="how-title">
+                        {% trans %}Contactez le vendeur{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Échangez via la messagerie Saraka afin de poser vos questions, convenir du prix et organiser la remise de l'objet.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Etape 3 -->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card how-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="step-circle">3</div>
+
+                    <h3 class="how-title">
+                        {% trans %}Finalisez l'échange{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Rencontrez le vendeur, vérifiez l'état de l'objet et repartez avec votre achat en toute simplicité.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </section>
 
-<!-- AVANTAGES -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <h2 class="fw-bold text-center text-dark mb-5">
-            {% trans %}Pourquoi louer sur 𝒮araka ?{% endtrans %}
+<!-- AVANTAGES BROCANTE -->
+
+<section class="advantages-section py-5">
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <span class="section-label">
+            {% trans %}Les avantages{% endtrans %}
+        </span>
+
+        <h2 class="fw-bold mt-3">
+            {% trans %}Pourquoi choisir la brocante sur 𝒮araka ?{% endtrans %}
         </h2>
 
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-euro-sign fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Économique{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Payez uniquement le temps d'utilisation, jusqu'à 80% moins cher que l'achat.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <p class="text-muted advantages-intro">
+            {% trans %}
+            Acheter ou vendre en brocante sur Saraka, c'est faire des économies tout en donnant une seconde vie aux objets.
+            {% endtrans %}
+        </p>
 
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-leaf fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Écologique{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Moins de surconsommation, plus de partage et moins de déchets.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-tools fa-2x text-success mb-3"></i>
-                        <h5 class="fw-bold">{% trans %}Pratique{% endtrans %}</h5>
-                        <p class="text-muted">
-                            {% trans %}Accédez à des produits spécialisés sans engagement.{% endtrans %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-tags"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Bonnes affaires{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Achetez ou vendez des objets d'occasion à des prix attractifs.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Écoresponsable{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Offrez une nouvelle vie aux objets et réduisez le gaspillage.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card advantage-card border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="advantage-circle">
+                        <i class="fas fa-users"></i>
+                    </div>
+
+                    <h3 class="advantage-title">
+                        {% trans %}Convivial et Local{% endtrans %}
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        {% trans %}
+                        Favorisez les échanges entre particuliers et participez à une économie de proximité.
+                        {% endtrans %}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </section>
 
 {% endblock %}

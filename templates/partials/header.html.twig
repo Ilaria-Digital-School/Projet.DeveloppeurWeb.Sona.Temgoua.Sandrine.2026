@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 	<div class="container-fluid">
 
-		<a class="navbar-brand d-flex align-items-center gap-3" href="{{ path('app_home') }}">
+		<a class="navbar-brand d-flex align-items-center gap-0" href="{{ path('app_home') }}">
 
 			<img src="{{ asset('images/favicon/logo.png') }}" alt="𝒮araka Logo" width="50" height="50" class="rounded-circle">
 
@@ -19,7 +19,7 @@
 			class="collapse navbar-collapse" id="navbarSupportedContent">
 
 			<!-- Liens principaux (gauche) avec me-auto pour pousser le reste à droite -->
-			<ul class="navbar-nav mb-2 mb-lg-0">
+			<ul class="navbar-nav mb-2 mb-lg-0 fs-6">
 				<li class="nav-item">
 					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">{% trans %}Accueil{% endtrans %}</a>
 				</li>
@@ -52,43 +52,10 @@
 
 			</ul>
 
-
 			<!-- Bloc droite : recherche, langue, boutons (alignés à droite sur desktop) -->
 
 			<div
-				class="d-flex align-items-center gap-4 flex-lg-row flex-column nav-actions ms-auto">
-
-
-				<!-- Liens ADMIN -->
-				{% if is_granted('ROLE_ADMIN') %}
-					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_user_index' ? 'active' : '' }}" href="{{ path('app_user_index') }}">{% trans %}Users{% endtrans %}</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_cathegory_index' ? 'active' : '' }}" href="{{ path('app_cathegory_index') }}">{% trans %}Categories{% endtrans %}</a>
-						</li>
-					</ul>
-				{% endif %}
-
-				<!-- Liens USER (connecté) -->
-				{% if is_granted('ROLE_USER') %}
-					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_my_articles' ? 'active' : '' }}" href="{{ path('app_my_articles') }}">{% trans %}Mes articles{% endtrans %}</a>
-						</li>
-					</ul>
-				{% endif %}
-
-				{% if is_granted('ROLE_USER') %}
-					<ul class="navbar-nav flex-lg-row flex-column mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">
-								{% trans %}Mon compte{% endtrans %}
-							</a>
-						</li>
-					</ul>
-				{% endif %}
+				class="d-flex align-items-center gap-0 flex-lg-row flex-column nav-actions ms-auto">
 
 				<!-- Recherche (loupe) -->
 				<div class="search-box">
@@ -98,42 +65,71 @@
 					<input type="text" id="searchInput" placeholder="{% trans %}Rechercher...{% endtrans %}" autocomplete="off">
 				</div>
 
+				{% if is_granted('ROLE_USER') %}
+					<div class="dropdown">
+						<button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-user-circle me-0"></i>
+							{% trans %}Mon espace{% endtrans %}
+						</button>
+
+						<ul
+							class="dropdown-menu dropdown-menu-end">
+
+							<!-- Visible pour tous les utilisateurs connectés -->
+							<li>
+								<a class="dropdown-item {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">
+									<i class="fas fa-user me-0"></i>
+									{% trans %}Mon compte{% endtrans %}
+								</a>
+							</li>
+
+							<!-- Visible uniquement pour les administrateurs -->
+							{% if is_granted('ROLE_ADMIN') %}
+								<li><hr class="dropdown-divider"></li>
+
+								<li>
+									<a class="dropdown-item {{ app.request.attributes.get('_route') == 'app_user_index' ? 'active' : '' }}" href="{{ path('app_user_index') }}">
+										<i class="fas fa-users me-0"></i>
+										{% trans %}Users{% endtrans %}
+									</a>
+								</li>
+
+								<li>
+									<a class="dropdown-item {{ app.request.attributes.get('_route') == 'app_cathegory_index' ? 'active' : '' }}" href="{{ path('app_cathegory_index') }}">
+										<i class="fas fa-folder-open me-0"></i>
+										{% trans %}Categories{% endtrans %}
+									</a>
+								</li>
+							{% endif %}
+
+						</ul>
+					</div>
+				{% endif %}
+
 				<!-- Sélecteur de langue -->
 				<div class="dropdown">
-					<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-3" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+					<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-0" type="button" data-bs-toggle="dropdown">
 						{% if app.request.locale == 'fr' %}
 							<i class="fi fi-fr"></i>
-							FR
 						{% elseif app.request.locale == 'en' %}
 							<i class="fi fi-gb"></i>
-							EN
 						{% elseif app.request.locale == 'es' %}
 							<i class="fi fi-es"></i>
-							ES
 						{% elseif app.request.locale == 'it' %}
 							<i class="fi fi-it"></i>
-							IT
 						{% else %}
-							{{ app.request.locale|upper }}
+							{{ app.request.locale|upper|slice(0,2) }}
 						{% endif %}
 					</button>
-					<ul class="dropdown-menu dropdown-menu-end shadow rounded-3">
+					<ul class="dropdown-menu dropdown-menu-end">
 						{% for locale in locales %}
 							{% if locale != app.request.locale %}
 								<li>
-									<a class="dropdown-item d-flex align-items-center gap-3" href="{{ path('app_changer_langue', {'locale': locale}) }}">
-										{% if locale == 'fr' %}
-											<i class="fi fi-fr"></i>
-											{% trans %}Français{% endtrans %}
-										{% elseif locale == 'en' %}
-											<i class="fi fi-gb"></i>
-											{% trans %}English{% endtrans %}
-										{% elseif locale == 'es' %}
-											<i class="fi fi-es"></i>
-											{% trans %}Español{% endtrans %}
-										{% elseif locale == 'it' %}
-											<i class="fi fi-it"></i>
-											{% trans %}Italiano{% endtrans %}
+									<a class="dropdown-item" href="{{ path('app_changer_langue', {'locale': locale}) }}">
+										{% if locale == 'fr' %}🇫🇷 Français
+											{% elseif locale == 'en' %}🇬🇧 English
+											{% elseif locale == 'es' %}🇪🇸 Español
+											{% elseif locale == 'it' %}🇮🇹 Italiano
 										{% else %}
 											{{ locale|upper }}
 										{% endif %}
@@ -145,16 +141,16 @@
 				</div>
 
 				<!-- Boutons de connexion / déconnexion -->
-				<div class="d-flex gap-3 flex-lg-row flex-column">
+				<div class="d-flex gap-0 flex-lg-row flex-column">
 					{% if not app.user %}
-						<a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-1">
+						<a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-0">
 							{% trans %}S'inscrire{% endtrans %}
 						</a>
 						<a href="{{ path('app_login') }}" class="btn btn-outline-primary btn">
 							{% trans %}Se connecter{% endtrans %}
 						</a>
 					{% else %}
-						<a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn">
+						<a href="{{ path('app_logout') }}" class="btn btn-outline-danger btn">
 							{% trans %}Se déconnecter{% endtrans %}
 						</a>
 					{% endif %}

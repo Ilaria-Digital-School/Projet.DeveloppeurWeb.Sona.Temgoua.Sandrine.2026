@@ -6,6 +6,7 @@ use App\Entity\Conversation;
 use App\Entity\Message;
 use App\Repository\ArticleRepository;
 use App\Repository\ConversationRepository;
+use App\Repository\MessageRepository; // Ajoutez cette ligne
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Psr\Log\LoggerInterface;
+
 final class ConversationController extends AbstractController
 {
     // ==================== UTILISATEUR : ses propres conversations ====================
@@ -57,19 +59,16 @@ final class ConversationController extends AbstractController
         $seller = $article->getAuthor();
         if ($seller === $user) {
             $this->addFlash('danger', 'Vous ne pouvez pas discuter avec votre propre annonce.');
-            // Correction : redirection vers l'article via son slug
             return $this->redirectToRoute('app_article_show', ['slug' => $article->getSlug()]);
         }
 
         $conversation = $conversationRepository->findOneBy([
-            //'article' => $article,
             'buyer' => $user,
             'seller' => $seller
         ]);
 
         if (!$conversation) {
             $conversation = new Conversation();
-            //$conversation->setArticle($article);
             $conversation->setBuyer($user);
             $conversation->setSeller($seller);
             $em->persist($conversation);
@@ -85,8 +84,12 @@ final class ConversationController extends AbstractController
 
     #[Route('/conversation/{id}', name: 'app_conversation_show')]
     #[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
-    public function show(Conversation $conversation, EntityManagerInterface $em): Response
-    {
+    public function show(
+        Conversation $conversation, 
+        EntityManagerInterface $em,
+        Request $request, // Ajoutez Request
+        MessageRepository $messageRepository // Ajoutez MessageRepository
+    ): Response {
         $user = $this->getUser();
 
         // Marquer les messages comme lus (seulement ceux envoyés par l'autre)
@@ -101,118 +104,137 @@ final class ConversationController extends AbstractController
             ? $conversation->getSeller()
             : $conversation->getBuyer();
 
+        // === GESTION DE LA RÉPONSE SANS JS ===
+        $replyToId = $request->query->get('replyTo');
+        $replyToMessage = null;
+        
+        if ($replyToId) {
+            $replyToMessage = $messageRepository->find($replyToId);
+            // Vérifier que le message appartient bien à cette conversation
+            if ($replyToMessage && $replyToMessage->getConversation() !== $conversation) {
+                $replyToMessage = null;
+                $replyToId = null;
+            }
+        }
+
         return $this->render('conversation/show.html.twig', [
             'conversation' => $conversation,
             'currentUser' => $user,
             'otherUser' => $otherUser,
             'isFirstMessage' => $conversation->getMessages()->isEmpty(),
+            'replyTo' => $replyToId, // Ajoutez cette ligne
+            'replyToMessage' => $replyToMessage, // Ajoutez cette ligne
         ]);
     }
 
-#[Route('/message/send/{id}', name: 'app_message_send', methods: ['POST'])]
-#[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
-public function send(
-    Conversation $conversation,
-    Request $request,
-    EntityManagerInterface $em,
-    LoggerInterface $logger // Injection du logger
-): Response {
-    $user = $this->getUser();
+    #[Route('/message/send/{id}', name: 'app_message_send', methods: ['POST'])]
+    #[IsGranted(ConversationVoter::VIEW, subject: 'conversation')]
+    public function send(
+        Conversation $conversation,
+        Request $request,
+        EntityManagerInterface $em,
+        LoggerInterface $logger
+    ): Response {
+        $user = $this->getUser();
 
-    // Nettoyage du contenu
-    $content = trim($request->request->get('content', ''));
+        // Nettoyage du contenu
+        $content = trim($request->request->get('content', ''));
 
-    // Fichiers
-    $imageFile = $request->files->get('image');
-    $fileFile   = $request->files->get('file');
-    $audioFile  = $request->files->get('audio');
+        // Fichiers
+        $imageFile = $request->files->get('image');
+        $fileFile   = $request->files->get('file');
+        $audioFile  = $request->files->get('audio');
 
-    $hasImage = $imageFile && $imageFile->getSize() > 0;
-    $hasFile  = $fileFile && $fileFile->getSize() > 0;
-    $hasAudio = $audioFile && $audioFile->getSize() > 0;
+        $hasImage = $imageFile && $imageFile->getSize() > 0;
+        $hasFile  = $fileFile && $fileFile->getSize() > 0;
+        $hasAudio = $audioFile && $audioFile->getSize() > 0;
 
-    // ❌ Empêche l'envoi vide
-    if (empty($content) && !$hasImage && !$hasFile && !$hasAudio) {
-        $this->addFlash('danger', 'Le message ne peut pas être vide.');
+        // ❌ Empêche l'envoi vide
+        if (empty($content) && !$hasImage && !$hasFile && !$hasAudio) {
+            $this->addFlash('danger', 'Le message ne peut pas être vide.');
+            return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+        }
+
+        $message = new Message();
+        $message->setContent($content);
+        $message->setCreatedAt(new \DateTimeImmutable());
+        $message->setConversation($conversation);
+        $message->setSender($user);
+        $message->setIsRead(false);
+
+        // Réponse à un message
+        $replyToId = $request->request->get('replyTo');
+        if ($replyToId) {
+            $replyMessage = $em->getRepository(Message::class)->find($replyToId);
+            if ($replyMessage && $replyMessage->getConversation() === $conversation) {
+                $message->setReplyTo($replyMessage);
+            }
+        }
+
+        // ---------- Gestion des fichiers avec sécurisation ----------
+        $uploadsDir = $this->getParameter('uploads_directory');
+        if (!is_dir($uploadsDir)) {
+            mkdir($uploadsDir, 0777, true);
+        }
+
+        $uploadSuccess = false;
+
+        // IMAGE
+        if ($hasImage) {
+            try {
+                $filename = uniqid('img_', true) . '.' . $imageFile->guessExtension();
+                $imageFile->move($uploadsDir, $filename);
+                $message->setImagePath('uploads/' . $filename);
+                $uploadSuccess = true;
+            } catch (FileException $e) {
+                $logger->error('Upload image échoué : ' . $e->getMessage());
+                $this->addFlash('warning', "L'image n'a pas pu être téléchargée.");
+            }
+        }
+
+        // FILE
+        if ($hasFile) {
+            try {
+                $filename = uniqid('doc_', true) . '.' . $fileFile->guessExtension();
+                $fileFile->move($uploadsDir, $filename);
+                $message->setFilePath('uploads/' . $filename);
+                $uploadSuccess = true;
+            } catch (FileException $e) {
+                $logger->error('Upload document échoué : ' . $e->getMessage());
+                $this->addFlash('warning', "Le fichier n'a pas pu être téléchargé.");
+            }
+        }
+
+        // AUDIO
+        if ($hasAudio) {
+            try {
+                $filename = uniqid('audio_', true) . '.' . $audioFile->guessExtension();
+                $audioFile->move($uploadsDir, $filename);
+                $message->setAudioPath('uploads/' . $filename);
+                $uploadSuccess = true;
+            } catch (FileException $e) {
+                $logger->error('Upload audio échoué : ' . $e->getMessage());
+                $this->addFlash('warning', "L'audio n'a pas pu être téléchargé.");
+            }
+        }
+
+        // ⚠️ Si le seul contenu attendu était un fichier et que tous les uploads ont échoué
+        if (empty($content) && !$uploadSuccess) {
+            $this->addFlash('danger', 'Le message n’a pas été envoyé car aucun fichier n’a pu être téléchargé.');
+            return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+        }
+
+        $conversation->setUpdatedAt(new \DateTimeImmutable());
+        $em->persist($message);
+        $em->flush();
+
+        // Redirection avec un flash de succès
+        $this->addFlash('success', 'Message envoyé avec succès !');
+        
         return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
     }
 
-    $message = new Message();
-    $message->setContent($content);
-    $message->setCreatedAt(new \DateTimeImmutable());
-    $message->setConversation($conversation);
-    $message->setSender($user);
-    $message->setIsRead(false);
-
-    // Réponse à un message
-    $replyToId = $request->request->get('replyTo');
-    if ($replyToId) {
-        $replyMessage = $em->getRepository(Message::class)->find($replyToId);
-        if ($replyMessage) {
-            $message->setReplyTo($replyMessage);
-        }
-    }
-
-    // ---------- Gestion des fichiers avec sécurisation ----------
-    $uploadsDir = $this->getParameter('uploads_directory');
-    if (!is_dir($uploadsDir)) {
-        mkdir($uploadsDir, 0777, true);
-    }
-
-    $uploadSuccess = false; // Indique si au moins un fichier a été correctement déplacé
-
-    // IMAGE
-    if ($hasImage) {
-        try {
-            $filename = uniqid('img_', true) . '.' . $imageFile->guessExtension();
-            $imageFile->move($uploadsDir, $filename);
-            $message->setImagePath('uploads/' . $filename);
-            $uploadSuccess = true;
-        } catch (FileException $e) {
-            $logger->error('Upload image échoué : ' . $e->getMessage());
-            $this->addFlash('warning', "L'image n'a pas pu être téléchargée.");
-        }
-    }
-
-    // FILE
-    if ($hasFile) {
-        try {
-            $filename = uniqid('doc_', true) . '.' . $fileFile->guessExtension();
-            $fileFile->move($uploadsDir, $filename);
-            $message->setFilePath('uploads/' . $filename);
-            $uploadSuccess = true;
-        } catch (FileException $e) {
-            $logger->error('Upload document échoué : ' . $e->getMessage());
-            $this->addFlash('warning', "Le fichier n'a pas pu être téléchargé.");
-        }
-    }
-
-    // AUDIO
-    if ($hasAudio) {
-        try {
-            $filename = uniqid('audio_', true) . '.' . $audioFile->guessExtension();
-            $audioFile->move($uploadsDir, $filename);
-            $message->setAudioPath('uploads/' . $filename);
-            $uploadSuccess = true;
-        } catch (FileException $e) {
-            $logger->error('Upload audio échoué : ' . $e->getMessage());
-            $this->addFlash('warning', "L'audio n'a pas pu être téléchargé.");
-        }
-    }
-
-    // ⚠️ Si le seul contenu attendu était un fichier et que tous les uploads ont échoué
-    if (empty($content) && !$uploadSuccess) {
-        $this->addFlash('danger', 'Le message n’a pas été envoyé car aucun fichier n’a pu être téléchargé.');
-        return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
-    }
-
-    $conversation->setUpdatedAt(new \DateTimeImmutable());
-    $em->persist($message);
-    $em->flush();
-
-    return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
-}
-    //============ ADMIN : gestion complète de toutes les conversations ====================
+    // ============ ADMIN : gestion complète de toutes les conversations ====================
 
     #[Route('/admin/conversations', name: 'app_admin_conversation_list')]
     #[IsGranted('ROLE_ADMIN')]
@@ -223,12 +245,11 @@ public function send(
     ): Response {
         $search = $request->query->get('search', '');
         $qb = $repo->createQueryBuilder('c')
-            ->leftJoin('c.article', 'a')
             ->leftJoin('c.buyer', 'b')
             ->leftJoin('c.seller', 's');
 
         if ($search) {
-            $qb->andWhere('a.title LIKE :search OR b.email LIKE :search OR s.email LIKE :search')
+            $qb->andWhere('b.email LIKE :search OR s.email LIKE :search')
                 ->setParameter('search', '%' . $search . '%');
         }
 

@@ -23,7 +23,6 @@
 					{% trans %}
 					Achetez ou faites découvrir des produits locaux, des plats maison, 
 					                 ainsi que les récoltes de votre potager ou les surplus de votre cuisine. 
-					                 Chaque saveur raconte une histoire de partage, d'amour, de proximité et de solidarité.
 					{% endtrans %}
 				</p>
 
@@ -68,204 +67,267 @@
 
 	</div>
 
-	<!-- COMMENT ÇA MARCHE -->
+	
+<!-- COMMENT ÇA MARCHE -->
 
-	<section id="how-it-works" class="py-5 bg-light">
+<section id="how-it-works" class="how-section py-5">
 
-		<div class="container">
+    <div class="container">
 
-			<h2 class="fw-bold text-center text-dark mb-5">
-				{% trans %}Comment échanger des produits alimentaires sur 𝒮araka ?{% endtrans %}
-			</h2>
+        <div class="text-center mb-5">
 
-			<div class="row g-4 text-center">
+            <span class="section-label">
+                {% trans %}Comment ça marche{% endtrans %}
+            </span>
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+            <h2 class="fw-bold mt-3">
+                {% trans %}Comment échanger des produits alimentaires sur 𝒮araka ?{% endtrans %}
+            </h2>
 
-							<h2 class="fw-bold text-success">1</h2>
+        </div>
 
-							<h5 class="fw-bold">
-								{% trans %}Découvrez{% endtrans %}
-							</h5>
+        <div class="row g-4">
 
-							<p class="text-muted">
-								{% trans %}
-								Parcourez les produits disponibles, les publications les plus récentes apparaissent en premier.
-								{% endtrans %}
-							</p>
+            <!-- Étape 1 -->
+            <div class="col-md-6 col-lg-3">
 
-						</div>
-					</div>
-				</div>
+                <div class="card how-card border-0 h-100">
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+                    <div class="card-body text-center">
 
-							<h2 class="fw-bold text-success">2</h2>
+                        <div class="step-circle">1</div>
 
-							<h5 class="fw-bold">
-								{% trans %}Informez-vous{% endtrans %}
-							</h5>
+                        <h3 class="how-title">
+                            {% trans %}Découvrez{% endtrans %}
+                        </h3>
 
-							<p class="text-muted">
-								{% trans %}
-								Consultez les informations fournies concernant l'origine,
-								                            la préparation ou les conditions de conservation du produit.
-								{% endtrans %}
-							</p>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Parcourez les produits disponibles, les publications les plus récentes apparaissent en premier.
+                            {% endtrans %}
+                        </p>
 
-						</div>
-					</div>
-				</div>
+                    </div>
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+                </div>
 
-							<h2 class="fw-bold text-success">3</h2>
+            </div>
 
-							<h5 class="fw-bold">
-								{% trans %}Échangez{% endtrans %}
-							</h5>
+            <!-- Étape 2 -->
+            <div class="col-md-6 col-lg-3">
 
-							<p class="text-muted">
-								{% trans %}
-								Contactez le vendeur afin de convenir librement des modalités
-								                            de remise, de livraison ou de participation.
-								{% endtrans %}
-							</p>
+                <div class="card how-card border-0 h-100">
 
-						</div>
-					</div>
-				</div>
+                    <div class="card-body text-center">
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+                        <div class="step-circle">2</div>
 
-							<h2 class="fw-bold text-success">4</h2>
+                        <h3 class="how-title">
+                            {% trans %}Informez-vous{% endtrans %}
+                        </h3>
 
-							<h5 class="fw-bold">
-								{% trans %}Partagez{% endtrans %}
-							</h5>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Consultez les informations fournies concernant l'origine,
+                            la préparation ou les conditions de conservation du produit.
+                            {% endtrans %}
+                        </p>
 
-							<p class="text-muted">
-								{% trans %}
-								Récupérez votre produit et participez à une consommation plus locale,
-								                            plus responsable et plus humaine.
-								{% endtrans %}
-							</p>
+                    </div>
 
-						</div>
-					</div>
-				</div>
+                </div>
 
-			</div>
+            </div>
 
-		</div>
+            <!-- Étape 3 -->
+            <div class="col-md-6 col-lg-3">
 
-	</section>
+                <div class="card how-card border-0 h-100">
 
-	<!-- AVANTAGES -->
+                    <div class="card-body text-center">
 
-	<section class="py-5 bg-light">
+                        <div class="step-circle">3</div>
 
-		<div class="container">
+                        <h3 class="how-title">
+                            {% trans %}Échangez{% endtrans %}
+                        </h3>
 
-			<h2 class="fw-bold text-center text-dark mb-5">
-				{% trans %}Pourquoi partager des produits alimentaires sur 𝒮araka ?{% endtrans %}
-			</h2>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Contactez le vendeur afin de convenir librement des modalités
+                            de remise, de livraison ou de participation.
+                            {% endtrans %}
+                        </p>
 
-			<div class="row g-4 text-center">
+                    </div>
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+                </div>
 
-							<i class="fas fa-seedling fa-2x text-success mb-3"></i>
+            </div>
 
-							<h5 class="fw-bold">
-								{% trans %}Moins de gaspillage{% endtrans %}
-							</h5>
+            <!-- Étape 4 -->
+            <div class="col-md-6 col-lg-3">
 
-							<p class="text-muted">
-								{% trans %}
-								Valorisez vos surplus alimentaires et donnez une nouvelle utilité aux ressources disponibles.
-								{% endtrans %}
-							</p>
+                <div class="card how-card border-0 h-100">
 
-						</div>
-					</div>
-				</div>
+                    <div class="card-body text-center">
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+                        <div class="step-circle">4</div>
 
-							<i class="fas fa-map-marker-alt fa-2x text-success mb-3"></i>
+                        <h3 class="how-title">
+                            {% trans %}Partagez{% endtrans %}
+                        </h3>
 
-							<h5 class="fw-bold">
-								{% trans %}Produits locaux{% endtrans %}
-							</h5>
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Récupérez votre produit et participez à une consommation plus locale,
+                            plus responsable et plus humaine.
+                            {% endtrans %}
+                        </p>
 
-							<p class="text-muted">
-								{% trans %}
-								Découvrez les récoltes, préparations artisanales et productions proposées près de chez vous.
-								{% endtrans %}
-							</p>
+                    </div>
 
-						</div>
-					</div>
-				</div>
+                </div>
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+            </div>
 
-							<i class="fas fa-leaf fa-2x text-success mb-3"></i>
+        </div>
 
-							<h5 class="fw-bold">
-								{% trans %}Consommation responsable{% endtrans %}
-							</h5>
+    </div>
 
-							<p class="text-muted">
-								{% trans %}
-								Favorisez les circuits courts et une utilisation plus intelligente des ressources alimentaires.
-								{% endtrans %}
-							</p>
+</section>
 
-						</div>
-					</div>
-				</div>
 
-				<div class="col-md-3">
-					<div class="card h-100 border-0 shadow-sm">
-						<div class="card-body">
+<!-- AVANTAGES -->
 
-							<i class="fas fa-hands-helping fa-2x text-success mb-3"></i>
+<section class="advantages-section py-5">
 
-							<h5 class="fw-bold">
-								{% trans %}Convivialité{% endtrans %}
-							</h5>
+    <div class="container">
 
-							<p class="text-muted">
-								{% trans %}
-								Chaque échange est aussi l'occasion de rencontrer des personnes
-								                            partageant les mêmes valeurs de solidarité et de confiance.
-								{% endtrans %}
-							</p>
+        <div class="text-center mb-5">
 
-						</div>
-					</div>
-				</div>
+            <span class="section-label">
+                {% trans %}Les avantages{% endtrans %}
+            </span>
 
-			</div>
+            <h2 class="fw-bold mt-3">
+                {% trans %}Pourquoi partager des produits alimentaires sur 𝒮araka ?{% endtrans %}
+            </h2>
 
-		</div>
+        </div>
 
-	</section>
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card advantage-card border-0 h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="advantage-circle">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+
+                        <h3 class="advantage-title">
+                            {% trans %}Moins de gaspillage{% endtrans %}
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Valorisez vos surplus alimentaires et donnez une nouvelle utilité aux ressources disponibles.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card advantage-card border-0 h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="advantage-circle">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+
+                        <h3 class="advantage-title">
+                            {% trans %}Produits locaux{% endtrans %}
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Découvrez les récoltes, préparations artisanales et productions proposées près de chez vous.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card advantage-card border-0 h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="advantage-circle">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+
+                        <h3 class="advantage-title">
+                            {% trans %}Consommation responsable{% endtrans %}
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Favorisez les circuits courts et une utilisation plus intelligente des ressources alimentaires.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card advantage-card border-0 h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="advantage-circle">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+
+                        <h3 class="advantage-title">
+                            {% trans %}Convivialité{% endtrans %}
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            {% trans %}
+                            Chaque échange est aussi l'occasion de rencontrer des personnes
+                            partageant les mêmes valeurs de solidarité et de confiance.
+                            {% endtrans %}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 {% endblock %}

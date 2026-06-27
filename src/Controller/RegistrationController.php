@@ -93,7 +93,7 @@ $user->setSlug($slug);
             return $this->redirectToRoute('app_article_new');
         }
 
-        return $this->redirectToRoute('app_home_page');
+        return $this->redirectToRoute('app_home');
     }
 
     return $this->render('registration/register.html.twig', [

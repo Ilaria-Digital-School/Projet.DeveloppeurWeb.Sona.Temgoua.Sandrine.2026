@@ -35,19 +35,7 @@
 
 						<div class="mb-3">
 							{{ form_row(registrationForm.email, {
-                                attr: { class: 'form-control focus-ring focus-ring-success border-success' }
-                            }) }}
-						</div>
-
-						<!-- 🔥 NOUVEAU CHAMP MINIBIO AJOUTÉ ICI -->
-						<div class="mb-3">
-							{{ form_row(registrationForm.minibio, {
-                                label: 'Mini-bio',
-                                attr: { 
-                                    class: 'form-control focus-ring focus-ring-success border-success',
-                                    rows: 3,
-                                    placeholder: 'Parle-nous un peu de toi... (optionnel)'
-                                }
+                                attr: { class: 'form-controlfocus-ring focus-ring-success border-success' }
                             }) }}
 						</div>
 
@@ -58,7 +46,7 @@
                             }) }}
 						</div>
 
-						<div class="form-check mb-3">
+						<div class="form-check mb-3-">
 							{{ form_widget(registrationForm.agreeTerms, {
                                 attr: { class: 'form-check-input' }
                             }) }}
@@ -68,7 +56,7 @@
 						</div>
 
 						<button type="submit" class="btn btn-success w-100">
-							{% trans %}S'inscrire{% endtrans %}
+							{% trans %}S’inscrire{% endtrans %}
 						</button>
 
 						{{ form_end(registrationForm) }}

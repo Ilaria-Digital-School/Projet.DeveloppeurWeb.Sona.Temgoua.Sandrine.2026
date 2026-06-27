@@ -1,184 +1,164 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Conversation
-{% endblock %}
+{% block title %}Conversation{% endblock %}
 
 {% block body %}
 
+<div class="container py-2 py-md-4 px-2 px-md-3">
 
-	<div
-		class="container py-4">
+	<!-- BACK BUTTON -->
+	<div class="mb-2 mb-md-3">
+		<a href="{{ path('app_account') }}" class="btn btn-outline-success rounded-pill btn-sm btn-md">
+			<i class="ri-arrow-left-line me-1"></i>
+			Retour
+		</a>
+	</div>
 
-		<!-- BACK BUTTON -->
-		<div class="mb-3">
-			<a href="{{ path('app_account') }}" class="btn btn-outline-success rounded-pill">
-				<i class="ri-arrow-left-line me-1"></i>
-				Retour à mon compte
-			</a>
+	<!-- HEADER -->
+	<div class="card-header bg-dark bg-gradient text-white d-flex justify-content-between align-items-center py-2 py-md-3 px-3 rounded-top">
+		<div class="fw-semibold fs-6 fs-md-5 text-truncate" style="max-width: 60%;">
+			💬 {{ otherUser.firstname ?? '' }} {{ otherUser.lastname ?? '' }}
 		</div>
-
-		<!-- HEADER -->
-		<div class="card-header bg-dark bg-gradient text-white d-flex justify-content-between align-items-center py-3">
-
-			<div class="fw-semibold fs-5">
-				💬
-				{{ otherUser.firstname ?? '' }}
-				{{ otherUser.lastname ?? '' }}
-			</div>
-
-			<div class="d-flex gap-2">
-				<button class="btn btn-light rounded-circle">
-					<i class="ri-phone-line text-success"></i>
-				</button>
-
-				<button class="btn btn-light rounded-circle">
-					<i class="ri-vidicon-line text-success"></i>
-				</button>
-			</div>
-
+		<div class="d-flex gap-1 gap-md-2">
+			<button class="btn btn-light rounded-circle btn-sm" aria-label="Appel téléphonique">
+				<i class="ri-phone-line text-success"></i>
+			</button>
+			<button class="btn btn-light rounded-circle btn-sm" aria-label="Appel vidéo">
+				<i class="ri-vidicon-line text-success"></i>
+			</button>
 		</div>
+	</div>
 
-		<!-- MESSAGES -->
-		<div class="card-body bg-light" id="chat" style="height: 500px; overflow-y:auto; "role="log"
-     aria-label="Historique de la conversation">
+	<!-- MESSAGES -->
+	<div class="card-body bg-light p-2 p-md-3" id="chat" style="height: 55vh; min-height: 300px; max-height: 600px; overflow-y: auto;" role="log" aria-label="Historique de la conversation">
 
-			{% if conversation.messages|length > 0 %}
-
-				{% for message in conversation.messages %}
-
-
-					{% if message.sender == app.user %}
-						<div class="d-flex flex-column mb-4 align-items-end">
-						{% else %}
-							<div class="d-flex flex-column mb-4 align-items-start">
-							{% endif %}
-
-							{% if message.replyTo %}
-								<div class="small bg-white border rounded-3 px-3 py-2 mb-2 text-muted shadow-sm">
-									{{ message.replyTo.content|slice(0, 50) }}
-								</div>
-							{% endif %}
-
-							<div class="p-3 rounded-4 shadow-sm
-								    {% if message.sender == app.user %}
-								        bg-success text-white
-								    {% else %}
-								        bg-white text-dark border
-								    {% endif %}" style="max-width:75%;">
-
-								{{ message.content }}
-
-								{% if message.imagePath %}
-									<img src="{{ asset(message.imagePath) }}" class="img-fluid rounded-3 mt-2"
-                             {# ACCESSIBILITÉ :
-                               Description de l'image pour les lecteurs d'écran #} alt="Image envoyée dans la conversation">
-								{% endif %}
-
-								{% if message.filePath %}
-									<div class="mt-2">
-										<a href="{{ asset(message.filePath) }}" class="text-decoration-none"  {# ACCESSIBILITÉ :
-                                   Description explicite du lien #}
-                                aria-label="Télécharger le fichier joint envoyé dans cette conversation">
-											📎 Télécharger
-										</a>
-									</div>
-								{% endif %}
-
-								{% if message.audioPath %}
-									<audio controls class="mt-2 w-100" {# ACCESSIBILITÉ :
-                               Description du message vocal #}
-                            aria-label="Message vocal envoyé dans cette conversation">
-										<source src="{{ asset(message.audioPath) }}">
-									</audio>
-								{% endif %}
-							</div>
-
-							<small class="mt-2 {% if message.sender == app.user %}text-success{% else %}text-muted{% endif %}">
-								{% if message.sender == app.user %}
-									{% if message.readAt %}
-									<span aria-label="Message lu">
-										✔✔ Lu </span>
-									{% else %} <span aria-label="Message envoyé">
-										✔ Envoyé
-									{% endif %}
-								{% endif %}
-
-								{{ message.createdAt|date('d/m H:i') }}
-							</small>
-
-							<div class="mt-2 d-flex gap-2">
-								<button class="btn btn-sm btn-light border rounded-circle" onclick="replyTo({{ message.id }}, '{{ message.content|e('js') }}')"  {# ACCESSIBILITÉ :
-                           Les lecteurs d'écran comprennent l'action du bouton #}
-                        aria-label="Répondre à ce message">
-
-									<i class="ri-reply-line"></i>
-
-								</button>
-							</div>
-
-						</div>
-
-					{% endfor %}
-
+		{% if conversation.messages|length > 0 %}
+			{% for message in conversation.messages %}
+				{% if message.sender == app.user %}
+					<div class="d-flex flex-column mb-3 align-items-end">
+				{% else %}
+					<div class="d-flex flex-column mb-3 align-items-start">
 				{% endif %}
 
-			</div>
+				{% if message.replyTo %}
+					<div class="small bg-white border rounded-3 px-2 px-md-3 py-1 py-md-2 mb-1 text-muted shadow-sm" style="max-width: 80%; font-size: 0.75rem;">
+						{{ message.replyTo.content|slice(0, 50) }}{% if message.replyTo.content|length > 50 %}...{% endif %}
+					</div>
+				{% endif %}
 
-			<!-- INPUT -->
-			<div class="card-footer bg-white border-0 py-3">
+				<div class="p-2 p-md-3 rounded-4 shadow-sm 
+					{% if message.sender == app.user %}
+						bg-success text-white
+					{% else %}
+						bg-white text-dark border
+					{% endif %}" style="max-width: 85%; word-wrap: break-word;">
+					
+					{{ message.content }}
 
-				<form
-					method="post" id="chatForm" action="{{ path('app_message_send', {id: conversation.id}) }}" enctype="multipart/form-data" class="d-flex align-items-center gap-2">
+					{% if message.imagePath %}
+						<img src="{{ asset(message.imagePath) }}" class="img-fluid rounded-3 mt-2" alt="Image envoyée dans la conversation">
+					{% endif %}
 
-					<!-- IMAGE -->
-					<label for="imageInput" class="btn btn-light border rounded-circle">
-						<i class="ri-image-line"></i>
-					</label>
+					{% if message.filePath %}
+						<div class="mt-2">
+							<a href="{{ asset(message.filePath) }}" class="text-decoration-none" aria-label="Télécharger le fichier joint">
+								📎 Télécharger
+							</a>
+						</div>
+					{% endif %}
 
-					<input
-					type="file" name="image" accept="image/*" class="d-none" id="imageInput">
+					{% if message.audioPath %}
+						<audio controls class="mt-2 w-100" aria-label="Message vocal">
+							<source src="{{ asset(message.audioPath) }}">
+						</audio>
+					{% endif %}
+				</div>
 
-					<!-- FILE -->
-					<label for="fileInput" class="btn btn-light border rounded-circle">
-						<i class="ri-attachment-2"></i>
-					</label>
-
-					<input
-					type="file" name="file" class="d-none" id="fileInput">
-
-					<!-- AUDIO -->
-					<label for="audioInput" class="btn btn-light border rounded-circle">
-						<i class="ri-mic-line"></i>
-					</label>
-
-					<input
-					type="file" name="audio" accept="audio/*" class="d-none" id="audioInput">
-
-					<!-- MESSAGE -->
-					<textarea name="content" id="messageInput" class="form-control rounded-4" rows="1" placeholder="Message..." autocomplete="off">
-						{% if isFirstMessage and app.user == conversation.buyer %}
-							Bonjour, je suis intéressé(e) par votre annonce :
-							{{ conversation.article ? conversation.article.title : '' }}
+				<small class="mt-1 {% if message.sender == app.user %}text-success{% else %}text-muted{% endif %}" style="font-size: 0.65rem;">
+					{% if message.sender == app.user %}
+						{% if message.readAt %}
+							<span aria-label="Message lu">✔✔ Lu</span>
+						{% else %}
+							<span aria-label="Message envoyé">✔ Envoyé</span>
 						{% endif %}
-					</textarea>
+					{% endif %}
+					{{ message.createdAt|date('d/m H:i') }}
+				</small>
 
-					<!-- REPLY -->
-					<input
-					type="hidden" name="replyTo" id="replyTo">
+				<!-- Bouton de réponse avec paramètre GET -->
+				<a href="{{ path('app_conversation_show', {id: conversation.id, replyTo: message.id}) }}" 
+				   class="btn btn-sm btn-light border rounded-circle mt-1" 
+				   aria-label="Répondre à ce message" 
+				   style="width: 28px; height: 28px; padding: 0; font-size: 0.7rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+					<i class="ri-reply-line"></i>
+				</a>
+			</div>
+			{% endfor %}
+		{% else %}
+			<div class="text-center text-muted py-5">
+				<p class="mb-0">Aucun message pour l'instant</p>
+				<small>Soyez le premier à envoyer un message !</small>
+			</div>
+		{% endif %}
+	</div>
 
-					<!-- SEND -->
-					<button type="submit" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center" style="width:48px; height:48px;">
-
-						<i class="ri-send-plane-fill"></i>
-
-					</button>
-
-				</form>
-
+	<!-- INPUT -->
+	<div class="card-footer bg-white border-0 py-2 py-md-3 px-2 px-md-3 rounded-bottom">
+		<form method="post" id="chatForm" action="{{ path('app_message_send', {id: conversation.id}) }}" enctype="multipart/form-data" class="d-flex align-items-end gap-1 gap-md-2">
+			
+			<!-- Boutons d'attachement en colonne sur mobile -->
+			<div class="d-flex flex-column gap-1">
+				<label for="imageInput" class="btn btn-light border rounded-circle btn-sm" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+					<i class="ri-image-line" style="font-size: 1rem;"></i>
+				</label>
+				<input type="file" name="image" accept="image/*" class="d-none" id="imageInput">
+				
+				<label for="fileInput" class="btn btn-light border rounded-circle btn-sm" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+					<i class="ri-attachment-2" style="font-size: 1rem;"></i>
+				</label>
+				<input type="file" name="file" class="d-none" id="fileInput">
+				
+				<label for="audioInput" class="btn btn-light border rounded-circle btn-sm" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+					<i class="ri-mic-line" style="font-size: 1rem;"></i>
+				</label>
+				<input type="file" name="audio" accept="audio/*" class="d-none" id="audioInput">
 			</div>
 
-		</div>
+			<!-- Zone de texte agrandie -->
+			<div class="flex-grow-1 position-relative">
+				<textarea name="content" id="messageInput" class="form-control rounded-4" rows="2" placeholder="Écrire un message..." autocomplete="off" style="min-height: 60px; max-height: 120px; resize: none; font-size: 0.95rem; padding: 10px 12px;">{% if replyToMessage %}
+					{{ replyToMessage.content }}
+				{% elseif isFirstMessage and app.user == conversation.buyer %}
+					Bonjour, je suis intéressé(e) par votre annonce : {{ conversation.article ? conversation.article.title : '' }}
+				{% endif %}</textarea>
+				
+				<!-- Indicateur de réponse (affiché si replyTo est présent) -->
+				{% if replyTo %}
+					<div class="bg-light border rounded-3 px-2 py-1 m-1" style="font-size: 0.7rem; z-index: 10; position: absolute; top: 0; left: 0;">
+						↳ Réponse à : {{ replyToMessage.content|slice(0, 40) }}{% if replyToMessage.content|length > 40 %}...{% endif %}
+						<a href="{{ path('app_conversation_show', {id: conversation.id}) }}" class="ms-2 text-decoration-none" aria-label="Annuler la réponse">✕</a>
+					</div>
+				{% endif %}
+			</div>
 
+			<input type="hidden" name="replyTo" id="replyTo" value="{{ replyTo }}">
+
+			<!-- Bouton d'envoi -->
+			<button type="submit" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px; min-width: 48px;" aria-label="Envoyer le message">
+				<i class="ri-send-plane-fill" style="font-size: 1.2rem;"></i>
+			</button>
+		</form>
+		
+		<!-- Affichage des noms de fichiers sélectionnés (affichage conditionnel avec PHP) -->
+		{% if app.request.files is defined and app.request.files|length > 0 %}
+			<div class="mt-2 small text-muted">
+				{% for file in app.request.files %}
+					📎 {{ file.name }}
+				{% endfor %}
+			</div>
+		{% endif %}
 	</div>
+
+</div>
 
 {% endblock %}
