@@ -56,16 +56,16 @@
 				{% trans %}La plateforme innovante de location et d'achat de produits. Économique, écologique et pratique.{% endtrans %}
 			</p>
 
-			<div class="d-flex flex-column align-items-center gap-3">
-				<div class="d-flex justify-content-center gap-3 flex-wrap">
-					<a href="{{ path('about') }}" class="btn btn-warning btn-lg text-dark rounded-pill px-5 shadow-slight">
+			<div class="d-flex flex-column align-items-center gap-2">
+				<div class="d-flex justify-content-center gap-2 flex-wrap">
+					<a href="{{ path('about') }}" class="btn btn-warning btn-lg text-dark rounded-pill px-3 shadow-slight">
 						{% trans %}Découvrez la mission de
 						<strong>
 							<span>𝒮</span>araka</strong>
 						{% endtrans %}
 					</a>
 					{% if app.user %}
-						<a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-5 shadow-slight">
+						<a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg text-white rounded-pill px-3 shadow-slight">
 							{% trans %}Publier une annonce{% endtrans %}
 						</a>
 					{% else %}
@@ -73,20 +73,15 @@
 							{% trans %}Publier une annonce{% endtrans %}
 						</a>
 					{% endif %}
-				</div>
-				<div>
-					<a href="#why-𝒮araka" class="btn btn-outline-light btn-lg rounded-pill px-5 shadow-slight">
-						{% trans %}Pourquoi choisir
-						<strong>
-							<span>𝒮</span>araka?</strong>
-						{% endtrans %}
-					</a>
+					<div><a href="#latest-products"  class="btn btn-outline-light btn-lg rounded-pill px-3">
+                <i class="fas fa-shopping-bag me-2"></i>
+                {% trans %}Découvrir les annonces{% endtrans %}
+            </a></div>
+			</div>
+
 				</div>
 
-				<div><a href="#latest-products" class="btn btn-light btn-lg rounded-pill px-5 shadow-slight">
-    {% trans %}Explorez les dernières annonces publiées{% endtrans %}
-</a></div>
-			</div>
+				
 
 		</div>
 
@@ -321,15 +316,6 @@
             </div>
 
         </div>
-
-        <!-- Bouton d'appel à l'action (optionnel) -->
-        <div class="text-center mt-5">
-            <a href="{{ path('app_acheter') }}" class="btn btn-success btn-lg px-5">
-                <i class="fas fa-shopping-bag me-2"></i>
-                {% trans %}Découvrir les annonces{% endtrans %}
-            </a>
-        </div>
-
     </div>
 </section>
 

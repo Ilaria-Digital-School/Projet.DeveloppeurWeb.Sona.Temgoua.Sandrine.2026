@@ -55,7 +55,7 @@
 			<!-- Bloc droite : recherche, langue, boutons (alignés à droite sur desktop) -->
 
 			<div
-				class="d-flex align-items-center gap-0 flex-lg-row flex-column nav-actions ms-auto">
+				class="d-flex align-items-center gap-2 flex-lg-row flex-column nav-actions ms-auto">
 
 				<!-- Recherche (loupe) -->
 				<div class="search-box">
@@ -108,7 +108,7 @@
 
 				<!-- Sélecteur de langue -->
 				<div class="dropdown">
-					<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-0" type="button" data-bs-toggle="dropdown">
+					<button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
 						{% if app.request.locale == 'fr' %}
 							<i class="fi fi-fr"></i>
 						{% elseif app.request.locale == 'en' %}
@@ -141,7 +141,7 @@
 				</div>
 
 				<!-- Boutons de connexion / déconnexion -->
-				<div class="d-flex gap-0 flex-lg-row flex-column">
+				<div class="d-flex gap-2 flex-lg-row flex-column">
 					{% if not app.user %}
 						<a href="{{ path('app_register') }}" class="btn btn-outline-warning btn me-0">
 							{% trans %}S'inscrire{% endtrans %}

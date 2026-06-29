@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //  CAROUSEL
     const heroCarousel = document.querySelector('#carouselPromo');
     if (heroCarousel) {
-    new Carousel(heroCarousel, {
-    interval: 12000,
-    ride: 'carousel',
-    pause: false,
-    wrap: true
-});
+        new Carousel(heroCarousel, {
+            interval: 12000,
+            ride: 'carousel',
+            pause: false,
+            wrap: true
+        });
     }
 
     //  IMAGE PREVIEW
@@ -46,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
- // AUTO SCROLL CHAT
-    const chat = document.querySelector('.chat-messages');
-    if (chat) {
-        chat.scrollTop = chat.scrollHeight;
-    }
+// AUTO SCROLL CHAT
+const chat = document.querySelector('.chat-messages');
+if (chat) {
+    chat.scrollTop = chat.scrollHeight;
+}
 
 // Toggle de la barre de recherche
 const searchBox = document.querySelector('.search-box');
@@ -266,8 +266,8 @@ if (input && preview && dropzone) {
         dropzone.classList.remove('border-success');
         handleFiles(e.dataTransfer.files);
     });
-    
-    
+
+
     // chat auto scroll
     const chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;
@@ -446,7 +446,7 @@ function showFlash(message, type) {
 const chatForm = document.getElementById('chatForm');
 
 if (chatForm) {
-    chatForm.addEventListener('submit', function(e) {
+    chatForm.addEventListener('submit', function (e) {
         // Fonction utilitaire pour détecter si une chaîne ne contient que des blancs (y compris Unicode)
         function isBlank(str) {
             if (!str) return true;
@@ -459,7 +459,7 @@ if (chatForm) {
         const messageIsBlank = isBlank(rawMessage);
 
         const image = document.getElementById('imageInput')?.files.length || 0;
-        const file  = document.getElementById('fileInput')?.files.length || 0;
+        const file = document.getElementById('fileInput')?.files.length || 0;
         const audio = document.getElementById('audioInput')?.files.length || 0;
 
         if (messageIsBlank && !image && !file && !audio) {
@@ -518,7 +518,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     Array.from(forms).forEach(form => {
 
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
 
             if (!form.checkValidity()) {
                 event.preventDefault();
@@ -549,7 +549,7 @@ class SearchManager {
         this.debounceTimer = null;
         this.isSearching = false;
         this.searchUrl = '/search/ajax';
-        
+
         this.init();
     }
 
@@ -571,10 +571,10 @@ class SearchManager {
             </div>
             <div class="search-results-body"></div>
         `;
-        
+
         // Insérer après l'input de recherche
         this.searchInput.parentNode.appendChild(this.resultsContainer);
-        
+
         // Écouteur pour fermer les résultats
         const closeBtn = this.resultsContainer.querySelector('.close-results');
         closeBtn.addEventListener('click', () => this.hideResults());
@@ -591,7 +591,7 @@ class SearchManager {
         this.searchInput.addEventListener('input', (e) => {
             clearTimeout(this.debounceTimer);
             const term = e.target.value.trim();
-            
+
             if (term.length >= 2) {
                 this.debounceTimer = setTimeout(() => {
                     this.performSearch(term);
@@ -621,7 +621,7 @@ class SearchManager {
 
     toggleSearch() {
         this.searchInput.classList.toggle('active');
-        
+
         if (this.searchInput.classList.contains('active')) {
             this.searchInput.focus();
         } else {
@@ -632,19 +632,19 @@ class SearchManager {
 
     async performSearch(term) {
         if (this.isSearching) return;
-        
+
         this.isSearching = true;
         this.showLoading();
-        
+
         try {
             const response = await fetch(`${this.searchUrl}?q=${encodeURIComponent(term)}`);
-            
+
             if (!response.ok) {
                 throw new Error('Erreur réseau');
             }
-            
+
             const data = await response.json();
-            
+
             if (data.success) {
                 this.displayResults(data.results, data.term);
             } else {
@@ -660,7 +660,7 @@ class SearchManager {
 
     displayResults(results, term) {
         const resultsBody = this.resultsContainer.querySelector('.search-results-body');
-        
+
         if (!results || results.length === 0) {
             resultsBody.innerHTML = `
                 <div class="search-no-results">
@@ -671,14 +671,14 @@ class SearchManager {
         } else {
             resultsBody.innerHTML = results.map(item => this.createResultItem(item)).join('');
         }
-        
+
         this.resultsContainer.classList.add('show');
     }
 
     createResultItem(item) {
         const imageUrl = item.image || '/images/default-article.jpg';
         const priceHtml = item.price ? `<span class="result-price">${item.price}</span>` : '';
-        
+
         return `
             <a href="${item.url}" class="search-result-item">
                 <img src="${imageUrl}" 
@@ -745,19 +745,19 @@ document.addEventListener('turbo:load', () => {
 });
 
 // Gestion des toasts de notification
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const toasts = document.querySelectorAll('.flash-toast');
-    
-    toasts.forEach(function(toast, index) {
+
+    toasts.forEach(function (toast, index) {
         // Délai progressif pour éviter que tous disparaissent en même temps
         const delay = 2000 + (index * 300);
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
             toast.style.transition = 'all 0.5s ease-out';
             toast.style.opacity = '0';
             toast.style.transform = 'translateX(100%)';
-            
-            setTimeout(function() {
+
+            setTimeout(function () {
                 toast.remove();
             }, 500);
         }, delay);
