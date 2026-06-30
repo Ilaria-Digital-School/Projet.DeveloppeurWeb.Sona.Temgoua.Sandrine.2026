@@ -1,6 +1,6 @@
-// public/js/image-preview.js
+// assets/js/article/image-preview.js
 
-class ImagePreviewManager {
+export class ImagePreviewManager {
     constructor() {
         this.dropzone = document.getElementById('dropzone');
         this.previewContainer = document.getElementById('previewContainer');
@@ -46,7 +46,6 @@ class ImagePreviewManager {
         
         console.log('Setup dropzone');
 
-        // Empêcher le comportement par défaut
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             this.dropzone.addEventListener(eventName, (e) => {
                 e.preventDefault();
@@ -54,7 +53,6 @@ class ImagePreviewManager {
             });
         });
 
-        // Effets visuels
         this.dropzone.addEventListener('dragenter', () => {
             this.dropzone.classList.add('dragover');
         });
@@ -78,7 +76,6 @@ class ImagePreviewManager {
             }
         });
 
-        // Clic sur la zone
         this.dropzone.addEventListener('click', (e) => {
             if (e.target === this.dropzone || e.target.closest('.dropzone-content')) {
                 console.log('Clic sur dropzone, ouverture input');
@@ -107,7 +104,6 @@ class ImagePreviewManager {
         this.mainImageInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             
-            // Supprimer l'ancien aperçu
             const oldPreview = document.querySelector('.main-image-preview');
             if (oldPreview) oldPreview.remove();
             
@@ -237,8 +233,8 @@ class ImagePreviewManager {
     }
 }
 
-// Initialisation
+// Initialisation automatique
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM chargé');
+    console.log('DOM chargé - Initialisation ImagePreviewManager');
     new ImagePreviewManager();
 });

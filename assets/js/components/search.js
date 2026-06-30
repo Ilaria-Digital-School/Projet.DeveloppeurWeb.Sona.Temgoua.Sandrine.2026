@@ -1,5 +1,6 @@
+// assets/js/components/search.js
 
-class SearchManager {
+export class SearchManager {
     constructor() {
         this.searchToggle = document.getElementById('searchToggle');
         this.searchInput = document.getElementById('searchInput');
@@ -17,7 +18,11 @@ class SearchManager {
     }
 
     createResultsContainer() {
-        // Créer le conteneur de résultats
+        if (!this.searchInput) {
+            console.warn('Search input not found');
+            return;
+        }
+
         this.resultsContainer = document.createElement('div');
         this.resultsContainer.className = 'search-results-container';
         this.resultsContainer.innerHTML = `
@@ -30,22 +35,22 @@ class SearchManager {
             <div class="search-results-body"></div>
         `;
         
-        // Insérer après l'input de recherche
         this.searchInput.parentNode.appendChild(this.resultsContainer);
         
-        // Écouteur pour fermer les résultats
         const closeBtn = this.resultsContainer.querySelector('.close-results');
-        closeBtn.addEventListener('click', () => this.hideResults());
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.hideResults());
+        }
     }
 
     setupEventListeners() {
-        // Toggle de la barre de recherche
+        if (!this.searchToggle || !this.searchInput) return;
+
         this.searchToggle.addEventListener('click', (e) => {
             e.preventDefault();
             this.toggleSearch();
         });
 
-        // Recherche en temps réel avec debounce
         this.searchInput.addEventListener('input', (e) => {
             clearTimeout(this.debounceTimer);
             const term = e.target.value.trim();
@@ -59,7 +64,6 @@ class SearchManager {
             }
         });
 
-        // Touche Entrée pour la recherche
         this.searchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const term = this.searchInput.value.trim();
@@ -69,7 +73,6 @@ class SearchManager {
             }
         });
 
-        // Fermer les résultats en cliquant ailleurs
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-box')) {
                 this.hideResults();
@@ -117,13 +120,14 @@ class SearchManager {
     }
 
     displayResults(results, term) {
-        const resultsBody = this.resultsContainer.querySelector('.search-results-body');
+        const resultsBody = this.resultsContainer?.querySelector('.search-results-body');
+        if (!resultsBody) return;
         
         if (!results || results.length === 0) {
             resultsBody.innerHTML = `
                 <div class="search-no-results">
                     <i class="fas fa-search"></i>
-                    <p>Aucun résultat pour "${term}"</p>
+                    <p>Aucun résultat pour "${this.escapeHtml(term)}"</p>
                 </div>
             `;
         } else {
@@ -133,40 +137,34 @@ class SearchManager {
         this.resultsContainer.classList.add('show');
     }
 
-    // Dans la méthode createResultItem
-createResultItem(item) {
-    // Vérifiez que le chemin correspond à votre configuration
-    const imageUrl = item.image ? item.image : '/images/default.jpg';
-    
-    // OU si vos images sont dans uploads
-    // const imageUrl = item.image ? '/images/' + item.image : '/images/default-article.jpg';
-    
-    console.log('URL de l\'image:', imageUrl); // Pour déboguer
-    
-    const priceHtml = item.price ? '<span class="result-price">' + this.escapeHtml(item.price) + '</span>' : '';
-    
-    return `
-        <a href="${item.url}" class="search-result-item">
-            <img src="${imageUrl}" 
-                 alt="${this.escapeHtml(item.title)}" 
-                 class="result-image"
-                 onerror="this.src='/images/default.jpg'">
-            <div class="result-content">
-                <div class="result-title">${this.escapeHtml(item.title)}</div>
-                ${item.summary ? '<div class="result-summary">' + this.escapeHtml(item.summary) + '</div>' : ''}
-                <div class="result-meta">
-                    ${item.category ? '<span class="result-badge badge-category">' + this.escapeHtml(item.category) + '</span>' : ''}
-                    ${item.transactionType ? '<span class="result-badge badge-transaction">' + this.escapeHtml(item.transactionType) + '</span>' : ''}
-                    ${priceHtml}
-                    ${item.publishedAt ? '<span>' + item.publishedAt + '</span>' : ''}
+    createResultItem(item) {
+        const imageUrl = item.image ? item.image : '/images/default.jpg';
+        const priceHtml = item.price ? '<span class="result-price">' + this.escapeHtml(item.price) + '</span>' : '';
+        
+        return `
+            <a href="${item.url}" class="search-result-item">
+                <img src="${imageUrl}" 
+                     alt="${this.escapeHtml(item.title)}" 
+                     class="result-image"
+                     onerror="this.src='/images/default.jpg'">
+                <div class="result-content">
+                    <div class="result-title">${this.escapeHtml(item.title)}</div>
+                    ${item.summary ? '<div class="result-summary">' + this.escapeHtml(item.summary) + '</div>' : ''}
+                    <div class="result-meta">
+                        ${item.category ? '<span class="result-badge badge-category">' + this.escapeHtml(item.category) + '</span>' : ''}
+                        ${item.transactionType ? '<span class="result-badge badge-transaction">' + this.escapeHtml(item.transactionType) + '</span>' : ''}
+                        ${priceHtml}
+                        ${item.publishedAt ? '<span>' + item.publishedAt + '</span>' : ''}
+                    </div>
                 </div>
-            </div>
-        </a>
-    `;
-}
+            </a>
+        `;
+    }
 
     showLoading() {
-        const resultsBody = this.resultsContainer.querySelector('.search-results-body');
+        const resultsBody = this.resultsContainer?.querySelector('.search-results-body');
+        if (!resultsBody) return;
+        
         resultsBody.innerHTML = `
             <div class="search-loading">
                 <div class="spinner-border text-primary" role="status">
@@ -179,7 +177,9 @@ createResultItem(item) {
     }
 
     showError(message) {
-        const resultsBody = this.resultsContainer.querySelector('.search-results-body');
+        const resultsBody = this.resultsContainer?.querySelector('.search-results-body');
+        if (!resultsBody) return;
+        
         resultsBody.innerHTML = `
             <div class="search-no-results">
                 <i class="fas fa-exclamation-triangle"></i>
@@ -190,7 +190,7 @@ createResultItem(item) {
     }
 
     hideResults() {
-        this.resultsContainer.classList.remove('show');
+        this.resultsContainer?.classList.remove('show');
     }
 
     escapeHtml(text) {
@@ -200,12 +200,12 @@ createResultItem(item) {
     }
 }
 
-// Initialisation au chargement de la page
+// Initialisation automatique
 document.addEventListener('DOMContentLoaded', () => {
     new SearchManager();
 });
 
-// Réinitialisation après les requêtes Turbo (si vous utilisez Turbo)
+// Réinitialisation après Turbo
 document.addEventListener('turbo:load', () => {
     new SearchManager();
 });

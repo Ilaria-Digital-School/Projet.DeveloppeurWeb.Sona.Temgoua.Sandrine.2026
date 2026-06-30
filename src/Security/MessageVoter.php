@@ -43,7 +43,7 @@ class MessageVoter extends Voter
                 ->contains($user);
         }
 
-        // ✏️ Modifier un message
+        //  Modifier un message
         if ($attribute === self::EDIT) {
 
             return $message->getAuthor() === $user;
